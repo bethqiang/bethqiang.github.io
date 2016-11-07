@@ -67,6 +67,7 @@ Lastly, it was very interesting and enlightening to be able to talk to a wide va
 ### Some Thank Yous
 
 I definitely owe thank yous to the following:
+
 * Women Who Code Austin, for organizing all of this.
 * All of the volunteers and sponsors who made this weekend and delicious tacos possible.
 * My teammates, who were incredibly patient with me, helped and supported me in any way they could, and gave me sanity checks and trips to Starbucks when needed.

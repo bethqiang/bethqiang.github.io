@@ -38,6 +38,7 @@ var playButton = document.getElementById("play_btn");
 We were able to get it working without much trouble, but then quickly realized we didn’t have a way to stop it once it started. Our attempt at implementing the `clearInterval` method ended up completely breaking our play button, so that’s still a work in progress.
 
 There’s still a lot of work to be done on this project, including, but definitely not limited to:
+
 * Fixing our autoplay function, and being able to stop it.
 * Allowing the user to specify a width and height for the board.
 * Creating a random pattern on the board to start, in case the user doesn’t want to initially click a bunch of boxes.

@@ -1,0 +1,28 @@
+title: Beth Qiang
+email: your-email@domain.com
+description: A developer's thoughts on life, code, and the pursuit of happiness.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: bethqiang
+github_username:  bethqiang
+
+# Build settings
+timezone: "America/Chicago"
+permalink: pretty
+markdown: kramdown
+gems:
+  - jekyll-feed
+  - jekyll-paginate
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+paginate: 10
+
+#Excerpt Word Length
+excerpt_length: 40
+
+collections:
+    portfolio:
+        output: true
+        permalink: /portfolio/:path/

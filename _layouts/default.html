@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+    {% include head.html %}
+
+    <body>
+
+        {% include header.html %}
+
+        <div class="page-content">
+            <div class="wrapper">
+                {{ content }}
+            </div>
+        </div>
+
+        <a href="javascript:"><div id="return-to-top"><i class="fa fa-chevron-up"></i></div></a>
+
+        {% include footer.html %}
+
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+        <script src="/scripts/script.js"></script>
+
+    </body>
+
+</html>

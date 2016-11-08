@@ -13,7 +13,7 @@ With a day on compiler theory and building our own parsers on Saturday, week 1 o
 
 ### Feelings
 
-I’m a little overwhelmed. We’re learning A LOT every single day, and I haven’t felt like I’ve truly absorbed (or even understand!) all of it yet. What’s more, Fullstack deliberately makes its workshops challenging, and it’s very rare that we completely finish one and feel like we 110% understand what was going on. It’s really nice to know that everyone feels this way though, and it’s not just me. And as someone in our class said on Friday when we were reflecting on the week — “nothing that’s worth it is easy.”
+I’m a little overwhelmed. We’re learning A LOT every single day, and I haven’t felt like I’ve truly absorbed (or even understood!) all of it yet. What’s more, Fullstack deliberately makes its workshops challenging, and it’s very rare that we completely finish one and feel like we 110% understand what was going on. It’s really nice to know that everyone feels this way though, and it’s not just me. And as someone in our class said on Friday when we were reflecting on the week — “nothing that’s worth it is easy.”
 
 My list of things to go back over and/or re-do is a billion miles long and I’m not quite sure it’s ever going to become much shorter as the weeks go by. This isn't a bad thing at all - it contributes slightly to the "feeling overwhelmed" thing; however, one of my primary goals in attending Fullstack was to learn as much as possibly can, and that's definitely happening. There just aren’t quite enough hours in a day!
 

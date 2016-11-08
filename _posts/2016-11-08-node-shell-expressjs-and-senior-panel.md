@@ -42,9 +42,21 @@ A few main points from the lecture that I found useful and/or funny:
 * “Every request gets exactly one response”—no more, no less. (Geoff, our instructor, asked us to repeat that out loud a couple of times—it’s that important.)
 * “Your server is somewhere in Norway.” It can be confusing sometimes that your server and client are on the same machine when you’re developing, so just imagine your server sits somewhere far, far away.
 * Tools to help improve workflow: `--save-dev`, [`nodemon`](http://nodemon.io/){:target="_blank"}
-* The `express.Router` class is useful if you want to handle routing for a small subset of routes. It’s basically like creating a “mini-app.” An example: if you’ve defined `app.use('/docs/', router)`, when you send a `router.get` request, you don’t need to specify `/docs/` in your path—just the subdirectory within that.
+* Express Router is like a mini Express application that allows you to make applications more modular and flexible by creating multiple instances of the Router and applying them accordingly. A visual example of how to use it:
+
+{% highlight javascript %}
+const router = express.Router();
+app.use('/docs', router)
+// When you send a `get` request, you don’t need to specify `/docs/`
+// in your path — just the subdirectory within that.
+router.get('/important', function(req, res) {
+  res.send("Some VIP docs");
+})
+{% endhighlight %}
+
+* Route middleware allows you to do things before a request is processed — for example, logging to the console the `method` and `url` of each request. The order you place your middleware and routes matters greatly — if you place your middleware after a route, then the route will happen before the middleware and the request will end there, and your middleware won't run.
 * Having the `next` parameter in a CRUD operation and calling `next()` will allow your code to go to the next function with the same verb and URI.
-* Router parameters (e.g., ‘/users/:id’) and using `req.params` allows you to get the object with the parameters you passed in. `Req.query` allows you to pass in a query string in the URL.
+* Route parameters (e.g., ‘/users/:id’) and using `req.params` allows you to get the object with the parameters you passed in. In our example, you can do validation of the user ID number in the route middleware to make sure the user exists when they log in. `Req.query` allows you to pass in a query string in the URL.
 
 After class, we attended a panel made up of Seniors (those in the “project-based” phase) and had the opportunity to hear about their experiences and get some advice from students who have been where we are and came out the other side relatively unscathed. Some of the tidbits I found the most important were:
 

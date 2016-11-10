@@ -89,6 +89,7 @@ li {
 h1, h2, h3, h4, h5, h6 {
     font-family: $base-header-family;
     font-weight: $base-header-weight;
+    letter-spacing: -1px;
 }
 
 h1 {
@@ -147,9 +148,11 @@ blockquote {
  */
 pre,
 code {
+    font-family: Fira Mono;
     font-size: 15px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
+    color: $brand-color;
 }
 
 code {

@@ -15,7 +15,7 @@ permalink: /tags/
     </ul>
 
     {% for tag in sortedTags %}
-        <h3 id="{{ tag | cgi_escape }}">{{ tag }}</h3>
+        <h3 id="{{ tag | cgi_escape }}" class="tag-title">{{ tag }}</h3>
         <ul class="taglist">
             {% for post in site.tags[tag] %}
                 <li>

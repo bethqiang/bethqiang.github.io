@@ -152,6 +152,7 @@
 .footer {
     font-size: $small-font-size;
     line-height: $small-font-size;
+    font-weight: 300;
 }
 
 
@@ -168,6 +169,7 @@
         color: $head-link-color;
         font-size: 3.25em;
         line-height: 1em;
+        letter-spacing: 0;
     }
     
     h2 {
@@ -176,6 +178,7 @@
         color: #555555;
         font-size: 1.75em;
         line-height: 1.25em;
+        letter-spacing: 0;
     }
 }
 
@@ -199,7 +202,7 @@
 .post-description {
     font-family: $base-font-family;
     font-size: 1.125em;
-    font-weight: 200;
+    font-weight: 300;
     margin-top: -1em;
     margin-bottom: 1em;
     color: #A3A3A3;
@@ -210,6 +213,7 @@
     font-style: italic;
     color: $grey-color-light;
     margin-top: 1em;
+    font-weight: 300;
 }
 
 .post-list {
@@ -234,10 +238,6 @@
  */
 .page-content {
     padding: $spacing-unit 0;
-}
-
-.page-heading {
-    font-size: 20px;
 }
 
 .post-link {
@@ -455,9 +455,11 @@
 }
 
 .post-title {
-    font-size: 2.5em;
-    letter-spacing: -1px;
     line-height: 1;
+}
+
+.tagged-text {
+    font-weight: 300;
 }
 
 
@@ -483,8 +485,18 @@
     color: white;
     padding: 0.125em 0.25em;
     border-radius: 0.25em;
+    font-weight: 300;
 }
 
 .taglist {
     list-style: none;
+}
+
+.tag-title {
+    font-weight: 300;
+}
+
+time {
+    font-weight: 300;
+    color: $grey-color-light;
 }

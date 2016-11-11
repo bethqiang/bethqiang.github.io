@@ -4,7 +4,7 @@ comments: true
 title: "Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js"
 date: 2016-11-09 15:00:00 -0500
 description: 
-tags: [fullstack academy, junior phase, node.js, express.js, projects]
+tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]
 ---
 
 We built a Twitter clone app with Node and Express, and wanted it to have the following:

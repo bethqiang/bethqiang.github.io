@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone"
+title: "Week 6, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone"
 date: 2016-11-10 20:00:00 -0500
 description: 
 tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]
@@ -24,7 +24,7 @@ In the afternoon, we learned about schema design. Most of my past work with data
 
 I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for [HackerRank’s Women’s CodeSprint](https://www.hackerrank.com/womens-codesprint-2){:target="_blank"} that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between `forEach` and `map` for probably the fourteenth time...it’ll sink in eventually, right?!)
 
-We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our [Twitter clone]({{ base.url }}/2016/11/09/week-2-day-2-building-a-twitter-clone-with-nodejs-and-expressjs/){:target="_blank"} again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.
+We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our [Twitter clone]({{ base.url }}/2016/11/09/twitter-clone-with-nodejs-and-expressjs/){:target="_blank"} again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.
 
 First, we created a new database module, where we used the [node-postgres](https://github.com/brianc/node-postgres){:target="_blank"} library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our `tweetBank.js` module and accompanying simple-array database, we were querying our database for the information that we wanted.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 2, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing"
+title: "Week 6, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing"
 date: 2016-11-08 00:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, node.js, express.js]

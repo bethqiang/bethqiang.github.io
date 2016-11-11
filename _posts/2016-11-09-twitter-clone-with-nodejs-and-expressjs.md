@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js"
+title: "Week 6, Day 2: Building a Twitter Clone with Node.js and Express.js"
 date: 2016-11-09 15:00:00 -0500
 description: 
 tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]

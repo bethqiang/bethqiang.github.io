@@ -105,6 +105,7 @@ return promisifiedReadFile('poem-one/stanza-03.txt');
 ### Error Handling
 
 Another one of the advantages of using promises is error handling. Let’s see what our promise chain would look like if we included an error handler. We can do this one of three ways:
+
 * Create a new `then` statement with the first argument as null and the second being the error function
 * Attach our error handler to our last `then` statement
 * Use `catch`

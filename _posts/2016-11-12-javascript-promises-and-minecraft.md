@@ -256,6 +256,7 @@ Promise.each(filenames, function(filename) {
 After we have our array of filenames, we pass the filename and a callback function into `Promise.each`. The callback function returns a new promise for the first file, then prints it, then returns a new promise for the second file, then prints it, and so on until it runs through all eight files. Once it does, then it console.logs “everything successfully done.” If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.
 
 So, in summary, promises allow for:
+
 * Portable code/functions
 * “Linear”/“flat” chains
 * Multiple handlers
@@ -268,6 +269,7 @@ So, in summary, promises allow for:
 Friday evening, we had our first Game Night. Because hacking and using VR in Minecraft will both be a part the upcoming weeks, we used Game Night this week to start learning how to play. Fullstack actually built their New York campuses (Fullstack and Grace Hopper) in Minecraft – the end result is seriously impressive. We were also each given a plot of land in front of the building to build whatever we wanted to.
 
 A lot of mishaps were had, but a lot of fun was as well. A few of our more notable events include:
+
 * We didn’t quite get the settings right for people to be able to build or destroy or do anything except walk/fly around and whack each other... so that’s what we did for 45 minutes, until staff did a hack to work around the issue.
 * A few of our cohort kept getting lost in the forest, or stuck outside, and more than a few fell off of the world multiple times.
 * A classmate was building a lava moat around his plot (because you know, why not?) and at one point, his lava spilled over to someone else’s plot. It was quite the effort to contain the lava before it spread.

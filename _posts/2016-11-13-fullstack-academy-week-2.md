@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Thoughts on Week 2 of Junior Phase"
+title: "Week 2: Thoughts and Reflections"
 date: 2016-11-13 16:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, full stack reflections]
@@ -15,7 +15,7 @@ Miles ran: 5.25
 
 Current length of to-do list: 32
 
-Hours spent in front of a computer: more than I'd like to admit (I didn't actually keep track of this, but I think it'd be interesting and possibly slightly terrifying)
+Hours spent in front of a computer: more than I'd like to admit (I didn't actually keep track of this, but I think it'd be interesting and/or possibly slightly terrifying)
 
 [Number of times I fell off the world or died in Minecraft]({{ site.url }}/2016/11/12/javascript-promises-and-minecraft/){:target="_blank"}: 0
 

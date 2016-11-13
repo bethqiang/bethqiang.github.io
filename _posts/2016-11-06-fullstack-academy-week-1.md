@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Thoughts on Week 1 of Junior Phase"
+title: "Week 1: Thoughts and Reflections"
 date: 2016-11-06 20:00:00 -0500
 description: 
 tags: [fullstack academy, junior phase, fullstack reflections]

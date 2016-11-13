@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 6, Day 2: Building a Twitter Clone with Node.js and Express.js"
+title: "Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js"
 date: 2016-11-09 15:00:00 -0500
 description: 
 tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]
@@ -85,7 +85,7 @@ app.use('/', function(req, res, next) {
 
 Not only does this help in debugging, it also helped me in visualizing a little bit of what’s going on in what can sometimes be a nebulous world. Unlike front-end work, where you can see things changing as you work (or not, depending on if you’re doing things right!), it can be hard to really understand what’s happening when you're working on the back-end.
 
-Our logging middleware also is passed a `next` parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned [during the Express lecture]({{ base.url }}/2016/11/07/node-shell-expressjs-and-senior-panel/){:target="_blank"}: every request gets exactly one response, and that the order of your routes is important. 
+Our logging middleware also is passed a `next` parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned [during the Express lecture]({{ site.url }}/2016/11/07/node-shell-expressjs-and-senior-panel/){:target="_blank"}: every request gets exactly one response, and that the order of your routes is important. 
 
 <br/>
 

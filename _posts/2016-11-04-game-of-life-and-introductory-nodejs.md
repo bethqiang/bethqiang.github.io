@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 5, Day 5: Game of Life and Introductory Node.js"
+title: "Week 1, Day 5: Game of Life and Introductory Node.js"
 date: 2016-11-04 18:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, game of life, node.js]

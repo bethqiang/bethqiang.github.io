@@ -1,19 +1,19 @@
 ---
 layout: post
 comments: true
-title: "Week 5, Days 1 and 2: Introductions, Make Your Own Adventure Game, Data Structures, and Hot Seat"
+title: "Week 1, Days 1 and 2: Introductions, Make Your Own Adventure Game, Data Structures, and Hot Seat"
 date: 2016-11-01 18:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, data structures]
 ---
 
-October 31, 2016 marks my first day of Fullstack Academy's Remote Immersive. The first half of the day was dedicated to introductions from everyone and an orientation outlining everything to come.
+Though our cohort technically started at the end of September with 4 weeks of Foundations, October 31, 2016, marks my first day of Fullstack Academy's Remote Immersive.
 
-I'm excited to get to know everyone in my cohort better, and I'm interested to see if Fullstack can replicate their in-person experience and if so, how they do it. I'm a little nervous about everything being online - that in and of itself typically adds a little bit of distance when trying to connect with people - but I'm very hopeful that they can succeed, at least to a great degree.
+The first half of the day was dedicated to introductions from everyone and an orientation outlining everything to come. I'm excited to get to know everyone in my cohort better, and I'm interested to see if Fullstack can replicate their in-person experience and if so, how they do it. I'm a little nervous about everything being online - that in and of itself typically adds a little bit of distance when trying to connect with people - but I'm very hopeful that they can succeed, at least to a great degree.
 
 David, one of the founders of Fullstack, was our primary instructor today, although we did get to meet our actual full-time instructors. We also have two fellows, who can be likened to teaching assistants. They're students who have gone through the program previously, succeeded, and elected to stay on for another 13 weeks to mentor and help us navigate both the world of coding and the world of Fullstack.
 
-The second half of the day, we split into pairs work on a simple Make Your Own Adventure Game in the command line. The only pair programming experience I had previously was in [my bootcamp interviews]({{ base.url }}/2016/10/17/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/){:target="_blank"}, so it was a completely new experience for me, but I was a huge fan - after months of coding on my own, it was really nice to have someone to bounce ideas off of and gain a different perspective from.
+The second half of the day, we split into pairs work on a simple Make Your Own Adventure Game in the command line. The only pair programming experience I had previously was in [my bootcamp interviews]({{ site.url }}/2016/10/17/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/){:target="_blank"}, so it was a completely new experience for me, but I was a huge fan - after months of coding on my own, it was really nice to have someone to bounce ideas off of and gain a different perspective from.
 
 After spending a few hours on that, we dove right into abstract data types and data structures. Nimit, Fullstack's other co-founder, led the evening's session. We talked about information theory and hardware when it comes to the storage of physical bits, as well as abstraction and encoding with text (morse code, the binary system, hexadecimal notation, UTF-8), images, and audio.
 

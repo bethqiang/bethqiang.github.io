@@ -1,13 +1,13 @@
 ---
 layout: post
 comments: true
-title: "Week 6, Day 5: JavaScript Promises and Minecraft"
+title: "Week 2, Day 5: JavaScript Promises and Minecraft"
 date: 2016-11-12 12:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, promises, minecraft]
 ---
 
-After the [callback hell we experienced yesterday]({{ base.url }}/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/){:target="_blank"}, we learned about promises today. A promise, according to my instructor and [the Promises/A+ Spec](https://promisesaplus.com/){:target="_blank"} and basically any other legitimate source, represents the **eventual result of an asynchronous operation**.
+After the [callback hell we experienced yesterday]({{ site.url }}/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/){:target="_blank"}, we learned about promises today. A promise, according to my instructor and [the Promises/A+ Spec](https://promisesaplus.com/){:target="_blank"} and basically any other legitimate source, represents the **eventual result of an asynchronous operation**.
 
 Let’s bring back our (slightly refactored, with the `insertIntoTable` function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:
 

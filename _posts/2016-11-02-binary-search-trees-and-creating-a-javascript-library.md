@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 5, Day 3: Binary Search Trees and Creating a JavaScript Library"
+title: "Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library"
 date: 2016-11-02 18:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, data structures]

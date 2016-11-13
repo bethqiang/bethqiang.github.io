@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Week 6, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing"
+title: "Week 2, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing"
 date: 2016-11-08 00:30:00 -0500
 description: 
 tags: [fullstack academy, junior phase, node.js, express.js]
@@ -35,7 +35,7 @@ One of the biggest challenges we faced, and I’m now starting to realize is a w
 
 ### Express.js
 
-We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after [my initial interest in learning back-end development]({{ base.url }}/2016/10/24/react-git-and-working-with-developers/){:target="_blank"}, so I was somewhat familiar with the basic concepts of starting a server and setting routes.
+We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after [my initial interest in learning back-end development]({{ site.url }}/2016/10/24/react-git-and-working-with-developers/){:target="_blank"}, so I was somewhat familiar with the basic concepts of starting a server and setting routes.
 
 A few main points from the lecture that I found useful and/or funny:
 

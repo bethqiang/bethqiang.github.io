@@ -4,7 +4,7 @@ comments: true
 title: "Week 2: Thoughts and Reflections"
 date: 2016-11-13 16:30:00 -0500
 description: 
-tags: [fullstack academy, junior phase, full stack reflections]
+tags: [fullstack academy, junior phase, fullstack reflections]
 ---
 
 ### The Week By the Numbers:

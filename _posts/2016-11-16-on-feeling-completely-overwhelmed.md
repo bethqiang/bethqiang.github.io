@@ -4,7 +4,7 @@ comments: true
 title: "Week 3, Days 2 and 3: On Feeling Completely Overwhelmed"
 date: 2016-11-16 23:45:00 -0500
 description: "Also: testing, promises, and Game Night round 2"
-tags: [fullstack academy, junior phase, sequelize, testing, promises, game night, minecraft, fullstack reflections]
+tags: [fullstack academy, junior phase, sequelize, testing, promises, minecraft, fullstack reflections]
 ---
 
 Let’s talk about feelings for a second. I’m generally a very optimistic person with a decent amount of confidence in myself, my critical-thinking and problem-solving abilities, and my ability to stick with something when it’s challenging. I don’t like to dwell on the negatives, and I generally try not to let myself get too down.

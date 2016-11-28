@@ -32,7 +32,7 @@ This workshop also made me realize that I need to get better at architecting and
 
 ---
 
-We've subsequently had the last four days off, although I've been working ahead in an effort to not fall behind in the two days I'll be missing this week for [Node.js Interactive North America]({{ site.url }}/2016/11/22/scriptcraft-hackathon-jquery-and-es6/){:target="_blank"}.
+We've subsequently had the last four days off, although I've been working ahead in an effort to not fall behind in the two days I'll be missing this week for [Node.js Interactive North America]({{ site.url }}/2016/11/20/fullstack-academy-week-3/){:target="_blank"}.
 
 I learned about TCP vs. IP protocols, event emitters, websockets, and rooms and namespaces, and then built a "World Wide Whiteboard" – an app that allows a user to "draw" something on a Microsoft Paint-like interface, and the drawing appears in real-time for all of the other users connected to the server. After the basic functionality was built, I added in the ability to join rooms, so that you could go into a specific room and whatever was drawn would only be broadcasted to other users in that room.
 

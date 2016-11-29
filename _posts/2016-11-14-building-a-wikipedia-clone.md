@@ -133,7 +133,7 @@ We eliminated `page.save` entirely by using `Page.create` instead of `Page.build
 
 We then set up routes to `/users` and `/users/:id` for an individual's page. For the later, we used a `Promise.all` statement because we needed to do two lookups, one to the user table to get the user ID, and the second to the page table to match the `authorId` – something that Sequelize created for us as the foreign key.
 
-Back in our wiki page route, we added in the author of each page with an `include`:
+Back in our wiki page route, we added in the author of each page via eager loading:
 
 {% highlight javascript %}
 router.get('/:urlTitle', function(req, res, next) {

@@ -83,7 +83,7 @@ describe('findByTag', function () { // no done being passed
 });
 {% endhighlight %}
 
-On Tuesday, my pair and I were working on tests for our [Wikipedia clone]({{ site.url }}/2016/11/14/building-a-wikipedia-clone/){:target="_blank"}, and for one of them, we were creating an instance that pulled from two models, `User` and `Page`. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – something called eager loading/eager creation. Here’s what we worked through to come up with:
+On Tuesday, my pair and I were working on tests for our [Wikipedia clone]({{ site.url }}/2016/11/14/building-a-wikipedia-clone/){:target="_blank"}, and for one of them, we were creating an instance that pulled from two models, `User` and `Page`. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:
 
 {% highlight javascript %}
 // in models > index.js, set associations:

@@ -4,7 +4,7 @@ comments: true
 title: "Week 4, Day 3 and Break: More JQuery, WebSockets, and React"
 date: 2016-11-27 22:30:00 -0500
 description: "Also: lots of food, Fantastic Beasts, and TV"
-tags: [fullstack academy, junior phase, jquery, es6, react]
+tags: [fullstack academy, junior phase, jquery, projects, trip planner app, es6, react]
 ---
 
 We ended class early on Wednesday because of the holiday. Given the couple of hours that we had, my pair and I primarily worked on figuring out how to "persist" (at least until the server is reset) the hotels, restaurants, and activities that the user chooses on the days that they add them to – so, for example, if the user chooses a hotel and three restaurants on Day 2, that hotel and those restaurants will populate the itinerary every time the user switches to Day 2. We ended up doing this using arrays inside of objects inside of an object:

@@ -3,8 +3,8 @@ layout: post
 comments: true
 title: "Week 1, Day 5: Game of Life and Introductory Node.js"
 date: 2016-11-04 18:30:00 -0500
-description: 
-tags: [fullstack academy, junior phase, game of life, node.js]
+description:
+tags: [fullstack academy, junior phase, node.js]
 ---
 
 We spent the first half of the day working on [Conway’s Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life){:target="_blank"}, which is probably one of the more widely known examples of cellular automaton. In this “game,” the player’s only interaction with the game is at the very beginning, when the board is first set. (It can also be set randomly, requiring no user input at all.) Each round after, cells “live” or “die” according to predetermined rules.

@@ -4,7 +4,7 @@ comments: true
 title: "Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro"
 date: 2016-11-22 23:00:00 -0500
 description:
-tags: [fullstack academy, junior phase, minecraft, hackathon, jquery, projects, trip planner app, es6]
+tags: [fullstack academy, junior phase, minecraft, hackathons, jquery, es6]
 ---
 
 Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!

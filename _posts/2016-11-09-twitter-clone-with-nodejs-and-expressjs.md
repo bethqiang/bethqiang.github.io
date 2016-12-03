@@ -3,8 +3,8 @@ layout: post
 comments: true
 title: "Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js"
 date: 2016-11-09 15:00:00 -0500
-description: 
-tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]
+description:
+tags: [fullstack academy, junior phase, node.js, express.js]
 ---
 
 We built a Twitter clone app with Node and Express, and wanted it to have the following:
@@ -18,7 +18,7 @@ We built a Twitter clone app with Node and Express, and wanted it to have the fo
 
 ### Initializing the Project
 
-First, we set up a `twitter-js` directory, and ran `git init` and `npm init`. 
+First, we set up a `twitter-js` directory, and ran `git init` and `npm init`.
 
 We also created a directory tree, which looked like this:
 
@@ -85,7 +85,7 @@ app.use('/', function(req, res, next) {
 
 Not only does this help in debugging, it also helped me in visualizing a little bit of what’s going on in what can sometimes be a nebulous world. Unlike front-end work, where you can see things changing as you work (or not, depending on if you’re doing things right!), it can be hard to really understand what’s happening when you're working on the back-end.
 
-Our logging middleware also is passed a `next` parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned [during the Express lecture]({{ site.url }}/2016/11/07/node-shell-expressjs-and-senior-panel/){:target="_blank"}: every request gets exactly one response, and that the order of your routes is important. 
+Our logging middleware also is passed a `next` parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned [during the Express lecture]({{ site.url }}/2016/11/07/node-shell-expressjs-and-senior-panel/){:target="_blank"}: every request gets exactly one response, and that the order of your routes is important.
 
 <br/>
 
@@ -205,7 +205,7 @@ This is a bare-bones template.
 
 Next, we set up a `tweetBank.js` module, which holds all of our tweets as well as our methods to interact with them. Our data was stored in a simple array – nothing too fancy yet.
 
-We used the [Lodash](https://lodash.com/docs/4.16.6){:target="_blank"} library to create three methods: 
+We used the [Lodash](https://lodash.com/docs/4.16.6){:target="_blank"} library to create three methods:
 
 * add, which would add a name and text into our data array
 * list, which just returned a deep clone of our data array
@@ -398,6 +398,6 @@ app.use( '/', routes(io));
 
 To complete the functionality of our app, we incorporated the ability for new tweets to load dynamically – that is, whenever someone posted a tweet, that tweet will automatically show up in every client connected to the server. Though this sounds relatively difficult, it was mostly a matter of emitting a `new_tweet` event server-side, and then adding some new HTML and attaching it to the DOM client-side when the client detects a `new_tweet` event.
 
-As for future steps, I want to make the interface look a little prettier (it's pretty bare-bones right now), maybe come up with a better name than “Twitter clone,” and maybe also populate the database with other tweets — inspiring quotes or funny pictures, perhaps? I also want to figure out how to have new tweets dynamically show up at the beginning of the list, rather than the end – which is easy for all of the other clients (`prepend` vs `append` in the DOM) but I haven’t quite figured out how to do for the client that actually posts the tweet, since the order seems to be dependent upon IDs. Lastly, I want to eventually upload the project to Heroku so that there’s an actual live demo, but the whole there’s-only-24-hours-in-a-day-thing isn't necessarily agree with me right now. (#bootcamplife) All of these have been added to my ever-growing to-do list. 
+As for future steps, I want to make the interface look a little prettier (it's pretty bare-bones right now), maybe come up with a better name than “Twitter clone,” and maybe also populate the database with other tweets — inspiring quotes or funny pictures, perhaps? I also want to figure out how to have new tweets dynamically show up at the beginning of the list, rather than the end – which is easy for all of the other clients (`prepend` vs `append` in the DOM) but I haven’t quite figured out how to do for the client that actually posts the tweet, since the order seems to be dependent upon IDs. Lastly, I want to eventually upload the project to Heroku so that there’s an actual live demo, but the whole there’s-only-24-hours-in-a-day-thing isn't necessarily agree with me right now. (#bootcamplife) All of these have been added to my ever-growing to-do list.
 
 In the meantime, you can check out the current state of the project [here](https://github.com/bethqiang/twitter-js){:target="_blank"}.

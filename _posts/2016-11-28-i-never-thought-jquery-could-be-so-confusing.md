@@ -4,7 +4,7 @@ comments: true
 title: "Week 5, Day 1: I Never Thought JQuery Could Be So Confusing"
 date: 2016-11-28 23:30:00 -0500
 description:
-tags: [fullstack academy, junior phase, node.js, express.js, sequelize, jquery, projects, trip planner app]
+tags: [fullstack academy, junior phase, jquery]
 ---
 
 We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: [here]({{ site.url }}/2016/11/22/scriptcraft-hackathon-jquery-and-es6/){:target="_blank"} and [here]({{ site.url }}/2016/11/27/more-jquery-websockets-and-react/){:target="_blank"}), this time with the goal of making it persistent – that is, making the user's trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.

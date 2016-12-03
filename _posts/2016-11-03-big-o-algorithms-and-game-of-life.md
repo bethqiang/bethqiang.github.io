@@ -3,8 +3,8 @@ layout: post
 comments: true
 title: "Week 1, Day 4: Big O, Algorithms, and Game of Life"
 date: 2016-11-03 18:30:00 -0500
-description: 
-tags: [fullstack academy, junior phase, algorithms, projects, game of life]
+description:
+tags: [fullstack academy, junior phase, algorithms]
 ---
 
 Today, we went over our [selector/DOM traversal exercise from yesterday]({{ site.url }}/2016/11/02/binary-search-trees-and-creating-a-javascript-library/){:target="_blank"}, and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:

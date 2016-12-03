@@ -3,8 +3,8 @@ layout: post
 comments: true
 title: "Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone"
 date: 2016-11-10 20:00:00 -0500
-description: 
-tags: [fullstack academy, junior phase, node.js, express.js, projects, twitter clone]
+description:
+tags: [fullstack academy, junior phase, node.js, express.js, sql]
 ---
 
 I don’t understand how it’s almost the end of the week already. Time is literally flying. We've spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it's been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:
@@ -39,7 +39,7 @@ router.post('/tweets', function(req, res, next){
   let content = req.body.content;
   client.query('SELECT id FROM users WHERE name = $1', [name], function(err, result) {
     if (err) return next(err);
-    
+
     if (result.rows.length === 0) {
       client.query('INSERT INTO users (name) VALUES ($1)', [name], function(err, result) {
         if (err) return next(err);
@@ -54,7 +54,7 @@ router.post('/tweets', function(req, res, next){
           });
         });
       });
-    
+
     } else {
       userName = result.rows[0].id;
       client.query('INSERT INTO tweets (userid, content) VALUES ($1, $2)', [userName, content], function(err, result) {
@@ -74,7 +74,7 @@ router.post('/tweets', function(req, res, next){
 
     io.sockets.emit('new_tweet', newTweet);
     res.redirect('/');
-    
+
 });
 {% endhighlight %}
 

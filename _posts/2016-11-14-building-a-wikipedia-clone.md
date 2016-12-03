@@ -4,7 +4,7 @@ comments: true
 title: "Week 3, Day 1: Building a Wikipedia Clone"
 date: 2016-11-14 23:30:00 -0500
 description: 'Or, our introduction to what Fullstack affectionately calls "Sequelize magic"'
-tags: [fullstack academy, junior phase, node.js, express.js, sequelize, projects, wikipedia clone]
+tags: [fullstack academy, junior phase, node.js, express.js, sequelize]
 ---
 
 The past day has been a complete whirlwind of learning and figuring out why things are going wrong. We built a Wikipedia clone with the following features:

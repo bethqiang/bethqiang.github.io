@@ -194,7 +194,7 @@ Not going to lie, we struggled a fair bit at first to figure out what was going 
 
 #### Router Basics
 
-React Router is a handy way to okeep your UI in sync with your URL. It ties into URL and history to allow for easy navigation to and between different parts of your application, and it easily integrates the nesting of components.
+React Router is a handy way to keep your UI in sync with your URL. It ties into URL and history to allow for easy navigation to and between different parts of your application, and it easily integrates the nesting of components.
 
 A route is composed of a URL and a React component. When the URL bar matches the one specified in the route, React Router causes the specific component's render function to execute.
 

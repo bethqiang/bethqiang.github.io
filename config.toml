@@ -1,0 +1,36 @@
+baseurl = "http://bethqiang.com"
+languageCode = "en-us"
+title = "Beth Qiang"
+disqusShortname = "bethqiang"
+googleAnalytics = "UA-85574806-1"
+paginate = 10
+favicon = "favicon.ico"
+
+[params]
+  # General info
+  title = "Beth Qiang"
+  subtitle = "A developer's thoughts on life, code, and the pursuit of happiness."
+
+  # Theme color
+  themecolor = "blue"
+
+  # Search engine metadata & about section in footer
+  name = "Beth Qiang"
+  bio = "developer - runner - animal lover - food enthusiast"
+  description = "A developer's thoughts on life, code, and the pursuit of happiness."
+
+  # Social networks
+  location = "Austin, TX"
+  twitter = "bethqiang"
+  linkedin = "bethanyqiang"
+  github = "bethqiang"
+  email = "you@example.com"
+
+  # Site-wide strings
+  keepReadingStr = "Keep reading"
+  backtotopStr = "Back to top"
+  shareStr = "Share"
+  pageNotFoundTitle = "404 - Page not found"
+
+[blackfriday]
+  hrefTargetBlank = true

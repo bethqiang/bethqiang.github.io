@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+  <div class="site-head">
+    <h1>I'm Beth.</h1>
+    <div class="description">
+      <h2>I'm a </h2>
+      <h2 id="description">developer</h2>
+    </div>
+    <h2>trying to change the world.</h2>
+  </div>
+
+  {{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
+  {{ range $paginator.Pages }}
+    {{ if not .Params.hide }}
+      {{ .Render "summary" }}
+    {{ end }}
+  {{ end }}
+
+  {{ partial "pagination" . }}
+
+<div class="center">
+  <a href="{{ .Site.BaseURL }}/tags/" class="archive-link">Post Archives</a>
+</div>
+
+{{ end }}

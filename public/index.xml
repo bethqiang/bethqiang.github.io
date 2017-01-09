@@ -6,8 +6,54 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Dec 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New Year, New Blog, Same Git Bewilderment</title>
+      <link>http://bethqiang.com/post/new-year-new-blog-same-git-bewilderment/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/new-year-new-blog-same-git-bewilderment/</guid>
+      <description>
+
+&lt;p&gt;Big things have been happening in the past three weeks!&lt;/p&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s talk about this site. I started getting annoyed a while ago because my Jekyll site would build somewhat slowly — it&amp;rsquo;d take about two seconds each time. Now, two seconds isn&amp;rsquo;t a huge amount. But, in the larger scheme of things, I &lt;em&gt;only&lt;/em&gt; have about 30 posts so far, and it would take two seconds &lt;em&gt;every time I made any kind of change and wanted to see it&lt;/em&gt;. Jekyll&amp;rsquo;s speed (or lack thereof) once posts start accumulating is something that&amp;rsquo;s pretty well-documented, and I wanted to give this space a little bit of a facelift anyway, so I decided to explore a few alternatives and see what I could find. Plus, playing with new technology is always fun!&lt;/p&gt;
+
+&lt;p&gt;I first considered &lt;a href=&#34;https://github.com/gatsbyjs/gatsby&#34; target=&#34;_blank&#34;&gt;Gatsby&lt;/a&gt;, a React-based static site generator. It&amp;rsquo;s no secret that I&amp;rsquo;m a huge fan of React, but I was a little put off by this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Gatsby is not yet stable. APIs will break. Functionality is missing. It&amp;rsquo;s usable but if you plan on building with it, expect a rocky road for some time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;ll definitely be following Gatsby along its journey, but I figured I might as well try to not make my life too much harder right now.&lt;/p&gt;
+
+&lt;p&gt;I meandered around the static site generator world for a short period of time, but nothing really stuck out to me. Until a few days ago, when I stumbled upon a post about migrating from Jekyll to &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt;. I remembered, in some distant part of my brain, what I thought Hugo was (&lt;em&gt;&amp;ldquo;just another static site generator&amp;rdquo;&lt;/em&gt;). But hey, this site actually looked kinda nifty. And it could be fun to learn Go (templates, not the real thing, but still). And it&amp;rsquo;s supposed to be &lt;em&gt;WILDLY BLAZING FAST&lt;/em&gt;?!&lt;/p&gt;
+
+&lt;p&gt;After perusing themes and others&amp;rsquo; sites, I was convinced. I coded a &lt;em&gt;super&lt;/em&gt; basic &amp;ldquo;theme&amp;rdquo; (I&amp;rsquo;m not sure I can even call it that) from scratch to get a sense of the overall structure, the templating engine, and how the pieces worked together. Then, I found &lt;a href=&#34;https://github.com/digitalcraftsman/hugo-steam-theme&#34; target=&#34;_blank&#34;&gt;a theme I liked&lt;/a&gt; and set about customizing it and incorporating my own elements, like the navigation bar, the post summaries, the back to top button, the tag cloud/archives page, etc.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-git-rabbit-hole&#34;&gt;The Git Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;Everything was going rather swimmingly — I struggled a little bit with figuring out the nested-loop structure of the archives page, and it took me way too long to remember that VSCode has a handy &amp;ldquo;replace all&amp;rdquo; feature, but overall, it wasn&amp;rsquo;t terribly painful.&lt;/p&gt;
+
+&lt;p&gt;Until I attempted to deploy this to my GitHub User Page. That went a little something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So&amp;hellip;in order for GitHub pages to do anything, it needs an &lt;code&gt;index.html&lt;/code&gt; in the root directory. But when Hugo builds my site, my &lt;code&gt;index.html&lt;/code&gt; is sent to the public directory.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The documentation, and most of the (admittedly limited) tutorials out there say that I should create two different repositories — one for the source code, and one that would just serve the compiled &lt;code&gt;public&lt;/code&gt; directory. Worst comes to worst, I can deal with that, but there has to be a better way&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;[Insert furious Googling here.]&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Oh look, &lt;a href=&#34;https://hjdskes.github.io/blog/deploying-hugo-on-personal-gh-pages/&#34; target=&#34;_blank&#34;&gt;this guy&lt;/a&gt; created separate branches, and is just serving the &lt;code&gt;public&lt;/code&gt; folder on the &lt;code&gt;master&lt;/code&gt; branch! I can do that.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I made sure to make at least four copies of everything I had, just in case something went terribly wrong. Then, I started taking trips down various git rabbit holes — first, not having the correct access rights, then subtrees and submodules, and then updates being rejected for various reasons. I learned the hard way what &lt;code&gt;git push origin &#39;git subtree split --prefix public master&#39;:master --force&lt;/code&gt; does. (Spoiler alert: it deletes your &lt;code&gt;master&lt;/code&gt; branch.)&lt;/p&gt;
+
+&lt;p&gt;Luckily, my &lt;code&gt;hugo&lt;/code&gt; branch still has my entire commit history, so if in the future, I want a &lt;code&gt;master&lt;/code&gt; branch with the history, I think I could just rename that branch. One more &lt;code&gt;git subtree push --prefix public origin master&lt;/code&gt; command later, my &lt;code&gt;master&lt;/code&gt; branch was populated with my &lt;code&gt;public&lt;/code&gt; directory, and everything seemed to be working as it should!&lt;/p&gt;
+
+&lt;p&gt;I want to eventually create a script to automate these pushes, but given that Fullstack is starting again after a long and relaxing break, I suppose those will have to wait until I manage to get some free time again. At the very least, the site is up and running, it looks a little snazzier, and I learned some Go and Git!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Game of Life with React and Redux: The Hard Parts</title>
@@ -1490,48 +1536,6 @@ app.use(&#39;/jquery&#39;, express.static(__dirname + &#39;/node_modules/jquery/
 &lt;p&gt;We also enabled the ability for the user to search for a specific tag in an HTML form with a &lt;code&gt;/search&lt;/code&gt; route. One of the mistakes I made here, was one that I mentioned above for the &lt;code&gt;/add&lt;/code&gt; route: I tried putting the &lt;code&gt;/search&lt;/code&gt; route below &lt;code&gt;/:urlTitle&lt;/code&gt;, so I was given a few error messages before I realized what was happening.&lt;/p&gt;
 
 &lt;p&gt;We specified the search form&amp;rsquo;s method as &lt;code&gt;get&lt;/code&gt;, which meant that we had to pull data in through &lt;code&gt;req.query&lt;/code&gt; instead of &lt;code&gt;req.body&lt;/code&gt;. We created a class method on our model to &lt;code&gt;findByTag&lt;/code&gt; using the &lt;code&gt;$overlap&lt;/code&gt; operator, and used it to find all of the pages with a single tag. We also created a &lt;code&gt;findSimilar&lt;/code&gt; instance method, and added a link on each page to a list of &amp;ldquo;similar&amp;rdquo; pages (or, pages with the same tag[s] as the page that you were on).&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 2: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-2/</link>
-      <pubDate>Sun, 13 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/fullstack-academy-week-2/</guid>
-      <description>
-
-&lt;h2 id=&#34;the-week-by-the-numbers&#34;&gt;The Week By the Numbers:&lt;/h2&gt;
-
-&lt;p&gt;Cups of coffee had: 4&lt;/p&gt;
-
-&lt;p&gt;Miles ran: 5.25&lt;/p&gt;
-
-&lt;p&gt;Current length of to-do list: 32&lt;/p&gt;
-
-&lt;p&gt;Hours spent in front of a computer: more than I&amp;rsquo;d like to admit (I didn&amp;rsquo;t actually keep track of this, but I think it&amp;rsquo;d be interesting and/or possibly slightly terrifying)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;Number of times I fell off the world or died in Minecraft&lt;/a&gt;: 0&lt;/p&gt;
-
-&lt;h2 id=&#34;overall-thoughts&#34;&gt;Overall Thoughts&lt;/h2&gt;
-
-&lt;p&gt;The running theme this week was back-end work: Node, Express, and SQL. Most of my work in the past has been entirely on the front-end, with a week of learning back-end on my own right before Foundations started. It&amp;rsquo;s an entirely different side of things, but I really enjoy it — most of the time. It can be sometimes be really frustrating being unable to see the changes that you&amp;rsquo;re making without console logging &lt;em&gt;everything&lt;/em&gt;, but I like the unique challenges that it presents. (Although I did go back to my Game of Life on Saturday night purely because I needed a small break from the back-end altogether, and just wanted to go back to making pretty colors go certain places for a bit.)&lt;/p&gt;
-
-&lt;p&gt;Pairing this week was a somewhat interesting, and different, experience for me. I felt like a couple of the people I paired with in the first week were more comfortable with the material than I was, so I was the one who needed to slow my pair down occasionally to really grasp what was going on. This week, I felt like I had a better understanding of the material than some of my pairs, and so I felt like I did more explaining than I did last week. This far from a bad thing; teaching someone else definitely forces you to &lt;em&gt;really&lt;/em&gt; know what you&amp;rsquo;re talking about, and I discovered in some of those cases that I didn&amp;rsquo;t understand something as well as I thought I did. In other cases, it really cemented the concept in my mind, and I was able to more clearly think through and articulate solutions.&lt;/p&gt;
-
-&lt;p&gt;One of the things I need to try to do better going forward is time management and prioritization. It&amp;rsquo;s not that I waste a lot of time (I&amp;rsquo;d like to think that four years at Rice made me &lt;em&gt;very&lt;/em&gt; efficient with my time), but there&amp;rsquo;s just a very long list of things I want to do regularly and unless I make them a priority and make an effort to actually do them, they won&amp;rsquo;t happen. There are a few (just like my to-do list, this list is also growing) personal projects that I want to build, and I haven&amp;rsquo;t really reserved any time each day to do so. Likewise with Code Wars: I&amp;rsquo;ve used our hour in the morning sometimes to work on the challenges, but sometimes I opt to do other things, like finishing up the previous day&amp;rsquo;s blog post or reviewing for the upcoming day&amp;rsquo;s lecture and workshops. I also missed a meet up last week that I had been wanting to go to because I convinced myself that I was too tired and that I wanted to study — which I&amp;rsquo;m a little sad about.&lt;/p&gt;
-
-&lt;p&gt;Besides the time machine that I&amp;rsquo;m planning on building as my capstone project, I haven&amp;rsquo;t yet found a good solution or system to be able to accommodate everything I want to do. I hope to sort out some of those things this week and start establishing a system, now that we&amp;rsquo;re in a little more of a rhythm.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-fullstack-remote-experiences&#34;&gt;The Fullstack &amp;amp; Remote Experiences&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m no longer referring to this section as just &amp;ldquo;the Remote Experience,&amp;rdquo; because I feel like what we&amp;rsquo;ve been experiencing transcends that — I&amp;rsquo;m not sure anybody in our cohort denies that we&amp;rsquo;re really getting the Fullstack experience.&lt;/p&gt;
-
-&lt;p&gt;To start, quite possibly one of the biggest events in our lives happened this week — the election of Donald Trump to the American presidency. Instead of glossing over it and pretending like it was a typical Wednesday the day afterwards, Fullstack made some time in the day to allow us to openly discuss amongst each other our thoughts and feelings and hopes and fears, without any mention of code whatsoever. I enormously appreciated Fullstack&amp;rsquo;s commitment to creating an open, non-judgmental, safe environment for every single student, whether in New York, Chicago, or online. The &amp;ldquo;Ladies of Fullstack&amp;rdquo; group has also been a great support system — sometimes, it&amp;rsquo;s just really nice to be among a group of women.&lt;/p&gt;
-
-&lt;p&gt;In other news, Pieter DePree, Recruiting Lead at Stack Overflow, came to campus to talk about how Stack Overflow hires developers, and more specifically, what we can do to start preparing ourselves and our online presence for the job hunt in a couple of months. Though some of his points didn&amp;rsquo;t necessarily apply at this point in time, it did make us aware of what we need to start doing when, and gave us the knowledge of how to prepare ourselves for when it did. It was also really interesting to get a detailed look into the hiring process at company like Stack Overflow.&lt;/p&gt;
-
-&lt;p&gt;And lastly, who could forget about our Minecraft adventure on Friday? &lt;a href=&#34;http://bethqiang.com/post/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve written a bit on it before&lt;/a&gt;, so I&amp;rsquo;m not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack&amp;rsquo;s co-founders. I haven&amp;rsquo;t yet been back into our server to see if people have built anything this weekend, but I&amp;rsquo;m excited to check in later tonight and see what&amp;rsquo;s been happening.&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js &middot; Beth Qiang</title>
+  <meta name="author" content="Beth Qiang">
+  <meta name="description" content="A developer&#39;s thoughts on life, code, and the pursuit of happiness.">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- RSS autodiscovery -->
+  
+
+  <link rel="shortcut icon" href="http://bethqiang.com/img/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="http://bethqiang.com/css/main.css">
+  <link rel="stylesheet" href="http://bethqiang.com/css/github.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+  
+
+  <!-- Stylesheet for theme color -->
+  <style type="text/css">
+  a {color: #3498db;}
+  .pagination a {color: #3498db;}
+  .gist .gist-file .gist-meta {color: #3498db !important;}
+  a:focus, a:hover {color: #2079b4;}
+  h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+  .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+  <div class="site-header">
+  <nav class="site-nav">
+    <a href="#" id="menu-icon" class="menu-icon">
+      <svg viewBox="0 0 18 15">
+        <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"
+        />
+        <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"
+        />
+        <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"
+        />
+      </svg>
+    </a>
+
+    <div class="trigger">
+      <div class="social">
+        
+          <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+        
+        
+          <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+        
+        
+          <a href="//www.linkedin.com/in/bethanyqiang" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+        
+        
+          <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+        
+        
+      </div>
+
+      <div class="main-nav">
+        <a href="http://bethqiang.com/" class="page-link">Blog</a>
+        
+          <a href="about/" class="page-link">About</a>
+        
+          <a href="portfolio/" class="page-link">Portfolio</a>
+        
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+  <main class="content" role="main">
+    
+  <article class="post">
+    <header>
+      <h1 class="post-title">Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js</h1>
+      <div class="post-meta">
+        
+          <time datetime="November 9, 2016">
+            November 9, 2016
+          </time>
+        
+      </div>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>We built a Twitter clone app with Node and Express, and wanted it to have the following:</p>
+
+<ul>
+<li>A place to store data (nothing fancy yet – just an object will do)</li>
+<li>A homepage that lists all tweets from all users</li>
+<li>A profile page that displays a specific user’s tweets</li>
+<li>A form to post new tweets (and as an extra bonus, enable it to update in real-time for all clients connected to the server at the time)</li>
+</ul>
+
+<h2 id="initializing-the-project">Initializing the Project</h2>
+
+<p>First, we set up a <code>twitter-js</code> directory, and ran <code>git init</code> and <code>npm init</code>.</p>
+
+<p>We also created a directory tree, which looked like this:</p>
+
+<pre><code>├── app.js
+├── package.json
+├── public
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   └── index.js
+└── views
+    ├── index.html
+    └── layout.html
+</code></pre>
+
+<p><code>app.js</code> will be our main application. The <code>public</code> folder will store our static files, to be automatically served when requested. The files in our routes and views directories will allow us to define dynamic content.</p>
+
+<p>We used <code>npm install express --save</code> to download Express to our <code>node_modules</code> directory and ensure Express is also saved as a dependency in our <code>package.json</code> file. Lastly, we set up a <code>.gitignore</code> file to exclude <code>node_modules</code> and <code>.DS_Store</code> (an annoying Mac-specific thing).</p>
+
+<h2 id="workflow">Workflow</h2>
+
+<p>We installed Nodemon and saved it as a dev dependency instead of an app dependency. <a href="http://nodemon.io/" target="_blank">Nodemon</a> essentially watches our files and restarts the app when we save changes, preventing us from having to constantly stop (<code>CTRL + C</code>) and restart (<code>node app.js</code>) the server whenever we make a change.</p>
+
+<p>We also defined a start script in our <code>package.json</code>, which allows us to plug in a pre-determined command (in our case, <code>nodemon app.js</code>) when we run <code>npm start</code>.</p>
+
+<h2 id="configure-express">Configure Express</h2>
+
+<p>In our <code>app.js</code> file, we installed Express, required it, and created a new app.</p>
+
+<pre><code>var express = require('express');
+var app = express();
+</code></pre>
+
+<p>We started a small server on the port <code>3000</code> with a <code>get</code> handler that sends a welcome message when the browser requests the root URI.</p>
+
+<pre><code>app.get('/', function (req, res) {
+  res.send('Hello, friend!')
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+});
+</code></pre>
+
+<h2 id="logging-middleware">Logging Middleware</h2>
+
+<p>We also created our own logging middleware, although the same (well, let’s be honest, better) functionality is also offered by already-created tools such as <a href="https://github.com/glebec/volleyball" target="_blank">volleyball</a> and <a href="https://github.com/expressjs/morgan" target="_blank">morgan</a>. Middleware is a pretty broad term, but in the context of logging middleware, we wanted ours to fire for every incoming request and log every verb and route that is requested from the server, as well as the response&rsquo;s status code.</p>
+
+<pre><code>app.use('/', function(req, res, next) {
+  console.log(req.method, req.path, res.statusCode);
+  next();
+});
+</code></pre>
+
+<p>Not only does this help in debugging, it also helped me in visualizing a little bit of what’s going on in what can sometimes be a nebulous world. Unlike front-end work, where you can see things changing as you work (or not, depending on if you’re doing things right!), it can be hard to really understand what’s happening when you&rsquo;re working on the back-end.</p>
+
+<p>Our logging middleware also is passed a <code>next</code> parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned <a href="http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/" target="_blank">during the Express lecture</a>: every request gets exactly one response, and that the order of your routes is important.</p>
+
+<h2 id="templating-engine">Templating Engine</h2>
+
+<p>Templates are essentially outlines for a document, which can be combined with data to complete it. Templating engines allow us to include JavaScript and programming logic directly in HTML and render it as documents that can be sent to the client.</p>
+
+<p><code>template file + locals object -&gt; rendering function -&gt; complete html</code></p>
+
+<p>We used <a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a> for our templating engine. After installing and requiring the module, we created a dummy HTML file to play with the templating syntax.</p>
+
+<pre><code>&lt;h1&gt;// title //&lt;/h1&gt;
+&lt;p&gt;This is a bare-bones template.&lt;/p&gt;
+&lt;ul&gt;
+/% for person in people %/
+  &lt;li&gt;// person.name //&lt;/li&gt;
+/% endfor %/
+&lt;/ul&gt;
+</code></pre>
+
+<p>(In this code above, pretend like all of the slashes are actually opening and closing brackets – Jekyll tries to render this as HTML rather than as straight code.)</p>
+
+<p>Our template file is looking for a title and people to put into the HTML. Initially, I didn&rsquo;t notice there was a title at all (how important are titles, anyway?), just saw that it wanted people, and tried to pass in an array with people, like this:</p>
+
+<pre><code>const people = [
+  name: 'Gandalf',
+  name: 'Frodo',
+  name: 'Hermione',
+];
+</code></pre>
+
+<p>And when that didn’t work, we tried an array of objects:</p>
+
+<pre><code>const people = [
+  {name: 'Gandalf'},
+  {name: 'Frodo'},
+  {name: 'Hermione'},
+];
+</code></pre>
+
+<p>And when that didn’t work, we caved to our workshop’s hints and put objects inside of an array inside of an object:</p>
+
+<pre><code>const locals = {
+  people: [
+  {name: 'Gandalf'},
+  {name: 'Frodo'},
+  {name: 'Hermione'}
+]};
+</code></pre>
+
+<p>Our first couple of attempts didn’t work because if we’re passing the people array into the <code>render</code> function, then what the template <em>actually</em> gets is just that, an array – without the “people” name. It can’t locate “people,” and therefore just won’t put anything into the HTML. And that’s not what we want.</p>
+
+<p>Our template file is looking for the people <em>key</em> on the object that we pass into our render function. So, we needed to construct our locals object so that our <code>index.js</code> file has access to this key. (Also, if we had remembered that our template also wanted a title, that might have been a good hint in and of itself that we needed something that could hold multiple keys with corresponding values.)</p>
+
+<p>We used <code>nunjucks.configure</code> to tell our engine to look in the <code>views</code> folder for our file. Then, we used <code>nunjucks.render</code> to take our <code>index.html</code> template file and our <code>locals</code> object, and then execute a callback function to log our <code>html</code> to the console when the rendering was done.</p>
+
+<pre><code>nunjucks.configure('views');
+nunjucks.render('index.html', locals, function(err, output) {
+  if (err) throw err;
+  console.log(output);
+});
+</code></pre>
+
+<p>Our console then had an HTML string with Gandalf, Frodo, and Hermione in the list – just as we wanted.</p>
+
+<pre><code>&lt;h1&gt;&lt;/h1&gt;
+&lt;p&gt;This is a bare-bones template.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gandalf&lt;/li&gt;
+  &lt;li&gt;Frodo&lt;/li&gt;
+  &lt;li&gt;Hermione&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<h2 id="integration-of-nunjucks-and-express-rendering">Integration of Nunjucks and Express &amp; Rendering</h2>
+
+<p>So we were able to get a single <code>html</code> file rendered via the Nunjucks templating engine – great! But, now we wanted to use the engine for <em>every</em> <code>html</code> file.</p>
+
+<p>Integrating Nunjucks into Express is a fairly simple and boilerplate process. Back in our <code>app.js</code> file, we first used <code>app.set</code> to prevent HTML from rendering on the browser and do it on the server instead. Then, we used <code>app.engine</code> so that when we give <code>html</code> files to <code>res.render</code>, it’ll use Nunjucks. Lastly, we needed to include our <code>nunjucks.configure</code> from above to continue telling Nunjucks to look in the <code>views</code> directory for its templates.</p>
+
+<pre><code>app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
+nunjucks.configure('views');
+</code></pre>
+
+<p>To actually render our HTML, now that we’ve set up our app to use Nunjucks, we just used a relatively simple <code>res.render</code> and set a route for it with the <code>get</code> handler:</p>
+
+<pre><code>app.get('/people/', function(req, res){
+  res.render( 'index', {people: locals.people}, function(err, html) {
+    res.send(html);
+  });
+});
+</code></pre>
+
+<p>Now, when we visit <code>localhost:3000/people/</code>, we see:</p>
+
+<pre><code>This is a bare-bones template.
+* Gandalf
+* Frodo
+* Hermione
+</code></pre>
+
+<h2 id="the-tweetbank-js-module">The tweetBank.js Module</h2>
+
+<p>Next, we set up a <code>tweetBank.js</code> module, which holds all of our tweets as well as our methods to interact with them. Our data was stored in a simple array – nothing too fancy yet.</p>
+
+<p>We used the <a href="https://lodash.com/docs/4.16.6" target="_blank">Lodash</a> library to create three methods:</p>
+
+<ul>
+<li>add, which would add a name and text into our data array</li>
+<li>list, which just returned a deep clone of our data array</li>
+<li>and find, which used <code>_.cloneDeep</code> and <code>_.filter</code> to find tweets in our data array with a specified property</li>
+</ul>
+
+<p><code>_.cloneDeep</code> allowed us to make deep copies of our data array so that we could perform operations on them without mutating our original “database.” Though this wasn’t as important for this workshop because we weren’t doing anything major, it’ll be important for the future when we’re altering data but want to preserve our original store.</p>
+
+<h3 id="small-side-tangent-shallow-vs-deep-copies">Small Side Tangent: Shallow vs. Deep Copies</h3>
+
+<p>Lodash provides a <code>_.clone</code> functionality, which creates a shallow copy of the value you pass into it, and a <code>_.deepClone</code> functionality, which recursively clones the value and produces a deep copy.</p>
+
+<p>I struggled with this concept, because I had initially thought that a shallow copy meant that the value it contained was just pointing to the original value, and that a deep copy was an entirely new value in a new place in memory that just happened to look like the old object. One of our instructors spent a little bit of time walking me through this, explaining that with a shallow copy, the &ldquo;shallowest&rdquo; level of the object itself would be passed by value and be a &ldquo;new&rdquo; copy, but if the value <em>contained</em> objects, <em>those</em> objects would be referenced, not newly created. However, because a deep copy clones the value recursively, those objects inside of our value will be entirely <em>new</em> objects, and not references to the original object in memory.</p>
+
+<pre><code>let objects = {obj: {key: 'val'}, obj2: {key2: 'val2'}};
+let shallow = _.clone(objects);
+objects.obj.key = 'newVal';
+console.log(shallow);
+// =&gt; {obj: {key: 'newVal'}, obj2: {key2: 'val2'}}
+</code></pre>
+
+<p>We can see in the example above that when we change the value of <code>key</code> in <code>obj</code>, the shallow copy’s value of <code>key</code> changes as well. However, in a deep copy, we’d see this instead:</p>
+
+<pre><code>let objects = {obj: {key: 'val'}, obj2: {key2: 'val2'}};
+let deep = _.deepClone(objects);
+objects.obj.key = 'newVal';
+console.log(deep);
+// =&gt; {obj: {key: 'val'}, obj2: {key2: 'val2'}}
+</code></pre>
+
+<p>Because entirely new objects in memory are created for the inner objects, the value of <code>key</code> doesn’t change if we change the original array. I then started playing around with this on my own, and came across a somewhat confusing phenomenon:</p>
+
+<pre><code>let objects = [1, { 'a': 1 }, { 'b': 2 }];
+let shallow = _.clone(objects);
+objects = [1, { 'a': 2 }, { 'b': 3 }];
+console.log(shallow);
+// =&gt; [1, { 'a': 1 }, { 'b': 2 }];
+</code></pre>
+
+<p>At this point in my understanding, I would have expected the console log to produce <code>[1, { 'a': 2 }, { 'b': 3 }]</code>. After seeking more help, I learned that in line 3, we’re actually assigning objects to an entirely new object instead of mutating the current object.</p>
+
+<p>If we did this instead:</p>
+
+<pre><code>var objects = [1, { 'a': 1 }, { 'b': 2 }];
+var shallow = _.clone(objects);
+objects[1].a = 2;
+console.log(shallow);
+// =&gt; [1, { 'a': 2 }, { 'b': 2 }];
+</code></pre>
+
+<p>We&rsquo;d only be mutating the object and not <em>completely</em> reassigning it, so that results in what we’d expect.</p>
+
+<h3 id="okay-back-to-tweetbank-js">Okay, Back to tweetBank.js</h3>
+
+<p>At the end of our module, we exported our <code>add</code>, <code>list</code>, and <code>find</code> functions. We didn’t want our “database” to be accessible from other parts of the application, and therefore excluded it from our export. Our app would be incredibly boring (and hard to work with) if we didn’t have any data, so we created a bunch of random seed data composed of names and tweets. Values for each were stored in arrays and put together via random number generators.</p>
+
+<h2 id="routing-and-views">Routing and Views</h2>
+
+<p>In attempt to keep our code modular and clean, we removed our dummy routes from <code>app.js</code>, but kept all of our middleware and configuration calls. Rather than including all of our routing and business logic in <code>app.js</code>, we placed our routes in a module that we simply called <code>routes</code>. In order to do this, we needed to <code>require</code> and then <code>use</code> our <code>routes</code> directory:</p>
+
+<pre><code>const routes = require('./routes/');
+app.use('/', routes);
+</code></pre>
+
+<p>In <code>index.js</code> (inside of the <code>routes</code> folder), we needed to <code>require</code> a few modules:</p>
+
+<pre><code>const express = require('express');
+const router = express.Router();
+const tweetBank = require('../tweetBank');
+</code></pre>
+
+<p>Then, we set up a route for the root URI that just showed a list of all of the tweets in our tweetBank.</p>
+
+<pre><code>router.get('/', function (req, res) {
+  let tweets = tweetBank.list();
+  res.render( 'index', { tweets: tweets } );
+});
+</code></pre>
+
+<p>Instead of using <code>app.get</code> this time, we’re using <code>router.get</code>. Essentially, the Express module creates a <code>router</code> entity that is configurable outside of any application instance – it’s like a box of routes; a “mini-application” capable of performing middleware and routing functions. At the end of our <code>index.js</code> file, we export <code>router</code>, which &ldquo;hands&rdquo; <code>app.js</code> this box to use.</p>
+
+<p>For our views, we included some super simple HTML and CSS – we figured we could save the fancy styling for later.</p>
+
+<h3 id="static-routing">Static Routing</h3>
+
+<p>Now, we wanted to set up static routing. We could have set this up manually, by creating a <code>get</code> handler for each file, such as our <code>stylesheet</code>, to a URI that corresponded to its file path. But, what if we had a folder of a bunch of images that we wanted to serve? Or a folder of JavaScript files, so that code could be downloaded and run on the client side?</p>
+
+<p>For this, we used static routing instead. This was as simple as adding one line to our <code>app.js</code> code:</p>
+
+<pre><code>app.use(express.static('public'));
+</code></pre>
+
+<p>So, instead of doing it manually now, if we drop a file into <code>public</code>, Express will automatically route requests to URIs that match the file’s path.</p>
+
+<h3 id="dynamic-routing">Dynamic Routing</h3>
+
+<p>To set up routes that lets users see the tweets of a specific user or make new tweets, we needed to have dynamic routes – routes that changed depending on a few factors.</p>
+
+<p>Instead of specificying a certain name, we used <code>:name</code>, which Express uses to define certain portions of the URI string as variables. These parameters are then stored as properties of the <code>req.params</code> object, so we needed to access that, find the tweets in the list of tweets with that name as its name, and then render our HTML to show only tweets from that user.</p>
+
+<pre><code>router.get('/users/:name', function(req, res) {
+  let name = req.params.name;
+  let tweetsForUser = tweetBank.find( {name: name} );
+  res.render( 'index', { tweets: tweetsForUser } );
+});
+</code></pre>
+
+<p>We also changed our <code>tweetBank.js</code> code so that in the <code>add</code> function, a unique ID would also be generated and stored with the user’s name and the text of the tweet. Using this, we could then set up a dynamic route to view just a single tweet in much the same manner:</p>
+
+<pre><code>router.get('/tweets/:id', function(req, res) {
+  let id = Number(req.params.id);
+  let tweetByID = tweetBank.find( {id: id} );
+  res.render( 'index', { tweets: tweetByID } );
+});
+</code></pre>
+
+<p>In our HTML, we linked the user’s name and the tweet’s text in each tweet to the page that corresponded with the user’s page, and the single-tweet view, as follows:</p>
+
+<pre><code>/% for tweet in tweets %/
+  &lt;li&gt;&lt;a href=&quot;/users/{{tweet.name}}&quot; class=&quot;tweet-name&quot;&gt;{{tweet.name}}&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/tweets/{{tweet.id}}&quot;&gt;{{tweet.text}}&lt;/a&gt;&lt;/li&gt;
+/% endfor %/
+</code></pre>
+
+<p>(Again, pretend the slashes are curly brackets.)</p>
+
+<h2 id="posting-a-tweet">Posting a Tweet</h2>
+
+<p>To post a tweet, we created a basic HTML form. However, we were then presented with a problem: Express doesn’t have any way to digest an HTTP body. So, we used the body-parser module to add URL-encoded and JSON body-parsing middleware to our <code>app.js</code> file. By including these, every request body will be transformed into a body object and attached to the <code>request</code> object, so we can access properties with variables like <code>request.body.name</code> and <code>request.body.text</code>.</p>
+
+<p>We created our HTML form specifically with <code>method=“POST”</code> and attribute <code>action=“/tweets”</code> so that when we set up our route, we can use the method and the URI specified for our POST request.</p>
+
+<pre><code>router.post('/tweets', function(req, res) {
+  let name = req.body.name;
+  let text = req.body.text;
+  let newTweet = tweetBank.add(name, text);
+res.redirect('/');
+});
+</code></pre>
+
+<p>We pulled data out of the <code>request.body</code> properties and into our data store. Once the new tweet is added, we redirect the client to make a request for the index page so they can immediately see the new tweet they submitted.</p>
+
+<h2 id="real-time-updating-with-websockets">Real-Time Updating with WebSockets</h2>
+
+<p>Because we wanted to generate and show posted tweets in real-time, bi-directionally, and simultaneously, we used the WebSockets protocol via the <a href="http://socket.io/" target="_blank">Socket.io</a> library. We added the client library and script to the bottom of <code>layout.html</code>:</p>
+
+<pre><code>&lt;script src=&quot;/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+const socket = io.connect();
+  socket.on('connect', function(){
+    console.log('connected to server via WebSockets!');
+  });
+&lt;/script&gt;
+</code></pre>
+
+<p>After requiring Socket.io in our <code>app.js</code> file and then giving it a server instance (stored in a variable <code>io</code>), the challenge we faced here was that we wanted <code>io</code> to emit an event in our routes, but those are in a separate module from <code>app.js</code>. But, we couldn’t require <code>app.js</code> in our router module, because we already required the router module in <code>app.js</code>! (Not only are circular dependencies confusing, but they&rsquo;re also hard to maintain and keep track of.)</p>
+
+<p>We used a functional programming technique to resolve this. We refactored our <code>routes</code> module so that instead of exporting <code>router</code>, it exports a function that takes <code>io</code> and returns <code>router</code>:</p>
+
+<pre><code>module.exports = function (io) {
+  // all of our routes here
+  return router;
+};
+</code></pre>
+
+<p>We also need to reconfigure our <code>app.js</code> module now since it no longer exports a router. We need to call <code>routes</code>, passing in <code>io</code>, to get the router:</p>
+
+<pre><code>app.use( '/', routes(io));
+</code></pre>
+
+<p>To complete the functionality of our app, we incorporated the ability for new tweets to load dynamically – that is, whenever someone posted a tweet, that tweet will automatically show up in every client connected to the server. Though this sounds relatively difficult, it was mostly a matter of emitting a <code>new_tweet</code> event server-side, and then adding some new HTML and attaching it to the DOM client-side when the client detects a <code>new_tweet</code> event.</p>
+
+<p>As for future steps, I want to make the interface look a little prettier (it&rsquo;s pretty bare-bones right now), maybe come up with a better name than “Twitter clone,” and maybe also populate the database with other tweets — inspiring quotes or funny pictures, perhaps? I also want to figure out how to have new tweets dynamically show up at the beginning of the list, rather than the end – which is easy for all of the other clients (<code>prepend</code> vs <code>append</code> in the DOM) but I haven’t quite figured out how to do for the client that actually posts the tweet, since the order seems to be dependent upon IDs. Lastly, I want to eventually upload the project to Heroku so that there’s an actual live demo, but the whole there’s-only-24-hours-in-a-day-thing isn&rsquo;t necessarily agree with me right now. (#bootcamplife) All of these have been added to my ever-growing to-do list.</p>
+
+<p>In the meantime, you can check out the current state of the project <a href="https://github.com/bethqiang/twitter-js" target="_blank">here</a>.</p>
+
+    </section>
+
+    
+      <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+          <i class="fa fa-fw fa-tag"></i>
+          
+            
+            <a href="http://bethqiang.com/tags/fullstack-academy" class="tag-comma-separate">fullstack academy</a>
+          
+            
+            <a href="http://bethqiang.com/tags/junior-phase" class="tag-comma-separate">junior phase</a>
+          
+            
+            <a href="http://bethqiang.com/tags/node.js" class="tag-comma-separate">node.js</a>
+          
+            
+            <a href="http://bethqiang.com/tags/express.js" class="tag-comma-separate">express.js</a>
+          
+        </div>
+      </section>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/post\/twitter-clone-with-nodejs-and-expressjs\/';
+    var disqus_title = 'Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js';
+    var disqus_url = 'http:\/\/bethqiang.com\/post\/twitter-clone-with-nodejs-and-expressjs\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      <section class="share">
+  <p class="info prompt">Share</p>
+  <a href="http://twitter.com/share?text=Week%202%2c%20Day%202%3a%20Building%20a%20Twitter%20Clone%20with%20Node.js%20and%20Express.js&url=http%3a%2f%2fbethqiang.com%2fpost%2ftwitter-clone-with-nodejs-and-expressjs%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fpost%2ftwitter-clone-with-nodejs-and-expressjs%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fpost%2ftwitter-clone-with-nodejs-and-expressjs%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+      <footer class="post-footer">
+        <section class="author">
+  <div class="authorimage" style="background: url(http://bethqiang.com/img/avatar.jpg)"></div>
+  <h4>Beth Qiang</h4>
+  <p class="bio">developer - runner - animal lover - food enthusiast</p>
+  <p class="meta">
+    <i class="fa fa-fw fa-map-marker"></i> Austin, TX
+  </p>
+</section>
+      </footer>
+    
+  </article>
+
+  </main>
+
+  <a href="javascript:">
+  <div id="back-to-top">
+    <p class="backtotop">
+      <i class="fa fa-lg fa-angle-double-up"></i>
+      <a class="backtotoptext">Back to top</a>
+    </p>
+  </div>
+</a>
+
+  <footer class="site-footer">
+  <div class="inner">
+    <section class="copyright">A developer&rsquo;s thoughts on life, code, and the pursuit of happiness.</section>
+  </div>
+</footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bethqiang.com/js/index.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>

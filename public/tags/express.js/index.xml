@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Express.Js on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/express.js/index.xml</link>
+    <description>Recent content in Express.Js on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/express.js/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 3, Day 1: Building a Wikipedia Clone</title>
+      <link>http://bethqiang.com/post/building-a-wikipedia-clone/</link>
+      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/building-a-wikipedia-clone/</guid>
+      <description>&lt;p&gt;The past day has been a complete whirlwind of learning and figuring out why things are going wrong. We built a Wikipedia clone with the following features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A homepage that lists all the pages in the Wiki&lt;/li&gt;
+&lt;li&gt;The ability to create new pages&lt;/li&gt;
+&lt;li&gt;Page searching&lt;/li&gt;
+&lt;li&gt;Tagging&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We started from the very beginning – a blank text editor, in which we required a bunch of modules, set up our middleware, enabled our Nunjucks rendering engine and created simple templates, and created and connected to our Postgres database.&lt;/p&gt;
+
+&lt;p&gt;After all of the initial set up was done, we started creating our model schemas and synched them to our database. We used  &lt;a href=&#34;http://docs.sequelizejs.com/en/v3&#34; target=&#34;_blank&#34;&gt;Sequelize&lt;/a&gt; for all of our database communication. In our schemas, we had two relations: &lt;code&gt;Page&lt;/code&gt;, which contained fields like title, the URL, content, etc., and &lt;code&gt;User&lt;/code&gt;, which just contained name and email. We created validation rules – the primary ones were that most fields weren&amp;rsquo;t allowed to be null, the user email went through Sequelize&amp;rsquo;s email validation, and the status had to be open or closed and not anything else.&lt;/p&gt;
+
+&lt;p&gt;We initially started by creating &lt;code&gt;get&lt;/code&gt; routes to &lt;code&gt;/wiki&lt;/code&gt; and &lt;code&gt;/wiki/add&lt;/code&gt;, and a &lt;code&gt;post&lt;/code&gt; route to &lt;code&gt;/wiki&lt;/code&gt; in a &lt;code&gt;wiki.js&lt;/code&gt; module in our &lt;code&gt;routes&lt;/code&gt; directory. The first, &lt;code&gt;get(&#39;/wiki&#39;)&lt;/code&gt;, would just be a list of all of the articles – a simple query to our database for all of the posts it contains. The second, &lt;code&gt;/wiki/add&lt;/code&gt;, would present the user with an HTML form to create a new article. Once a post was added, we wanted to redirect the user to the newly created page, which meant that we needed a route for our newly created page! (More on this in a second.)&lt;/p&gt;
+
+&lt;p&gt;The last one, &lt;code&gt;post(&#39;/wiki&#39;)&lt;/code&gt;, required us to set our form with &lt;code&gt;action=&#39;/wiki/&#39;&lt;/code&gt; and &lt;code&gt;method=&#39;POST&#39;&lt;/code&gt;. When we set this up, one of the challenges that we faced was that a URL for each page couldn&amp;rsquo;t be null, but we didn&amp;rsquo;t want to create a field in the form where the user would have to manually create a URL-compatible string for it. (And you know there&amp;rsquo;s a subset of users who would do it wrong too&amp;hellip;) To address this, we set up a hook, &lt;code&gt;beforeValidate&lt;/code&gt;, in our model to transform the page&amp;rsquo;s title into a usable URL string programmatically.&lt;/p&gt;
+
+&lt;p&gt;We used dynamic routing (&lt;code&gt;/wiki/:urlTitle&lt;/code&gt;) for each page to have its own route. One of the things we had to remember here was to keep this route above our &lt;code&gt;/wiki/add&lt;/code&gt; route, or else every time we went to the &lt;code&gt;/add&lt;/code&gt; route, our server will think that add is the &lt;code&gt;urlTitle&lt;/code&gt; and will try to send back an article called &amp;ldquo;add.&amp;rdquo; This also meant that we can&amp;rsquo;t actually have a page called &amp;ldquo;add,&amp;rdquo; but that&amp;rsquo;s a small price to pay. :)&lt;/p&gt;
+
+&lt;p&gt;To make our lives easier and much less repetitive, we set up a virtual field called &lt;code&gt;route&lt;/code&gt;, which would add &lt;code&gt;&#39;/wiki/&#39;&lt;/code&gt; to each urlTitle to create the route that it would eventually be associated with. We created a virtual field for this because it&amp;rsquo;s always derived, so we don&amp;rsquo;t really need to store it anywhere, and we don&amp;rsquo;t want to keep having to create &lt;code&gt;res.redirect&lt;/code&gt;s in our routes, either.&lt;/p&gt;
+
+&lt;p&gt;Now, having the ability to author a page is great. But authors probably want some credit for their contributions, right? And, we&amp;rsquo;d want to see each author&amp;rsquo;s page and the pages that they&amp;rsquo;ve written. This is where our &lt;code&gt;User&lt;/code&gt; model came in. We created a Sequelize association between our &lt;code&gt;Page&lt;/code&gt; model and our &lt;code&gt;User&lt;/code&gt; model – &lt;code&gt;Page.belongsTo(User, { as: &#39;author&#39; })&lt;/code&gt;. We later learned that this does a number of things under the hood, including changing the schema (so we had to force the schema to re-make itself) and placing instance methods on our page objects to manage the association between these two.&lt;/p&gt;
+
+&lt;p&gt;We updated our &lt;code&gt;post&lt;/code&gt; method route with &lt;code&gt;findOrCreate&lt;/code&gt; so that if that user already existed, we&amp;rsquo;d use that user, but if it didn&amp;rsquo;t, we&amp;rsquo;d add him/her. Then, we would associate that user with the new page. This required the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+  User.findOrCreate({
+    where: {
+      name: req.body.name,
+      email: req.body.email
+    }
+  })
+  .then(function(values) {
+    const user = values[0];
+    const page = Page.build({
+      title: req.body.title,
+      content: req.body.content
+    });
+    return page.save().then(function(page) {
+      return page.setAuthor(user);
+    };
+  })
+  .then(function(page) {
+    res.redirect(page.route);
+  })
+  .catch(next);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My partner and I were &lt;em&gt;really&lt;/em&gt; confused about this for a &lt;em&gt;really&lt;/em&gt; long time. First off, we didn&amp;rsquo;t realize that Sequelize&amp;rsquo;s &lt;code&gt;belongsTo&lt;/code&gt; does a lot of things behind-the-scenes, and had no concept of the &lt;code&gt;setAuthor&lt;/code&gt; method. Second, we no idea what was going on with the nested &lt;code&gt;then&lt;/code&gt;s – why were they nested? In what order were things happening? What was being passed where? Why was everything being returned?&lt;/p&gt;
+
+&lt;p&gt;So to tackle the first – if they weren&amp;rsquo;t nested, and more clearly defined, they would look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+  .then(function(values) {
+    const user = values[0];
+    const page = Page.build({
+      title: req.body.title,
+      content: req.body.content
+    });
+    return page.save() // resolves to a page object
+  })
+  .then(function(page) { // receives that page object
+    return page.setAuthor(user); // &amp;lt;== ERROR: user is not defined
+  };
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To help us understand what was going on, our instructor broke it down a little further:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+  .then(function(values) {
+    const user = values[0];
+    const page = Page.build({
+      title: req.body.title,
+      content: req.body.content
+    });
+    var pageSavePromise = page.save();
+    var pageSaveAndOtherStuff = pageSavePromise.then(function(page) {
+      var settingAuthorPromise = page.setAuthor(user); // start setting author
+      return settingAuthorPromise; // make paveSaveAndOtherStuff promise wait for this to resolve before IT resolves
+    });
+    return pageSaveAndOtherStuff; // this now resolves BEFORE the author setting is completed
+  })
+  .then(function(page) {
+    return page.setAuthor(user);
+  };
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;code&gt;settingAuthorPromise&lt;/code&gt;, we &lt;em&gt;start&lt;/em&gt; setting the author. Then, we make the &lt;code&gt;pageSaveAndOtherStuff&lt;/code&gt; promise wait for &lt;code&gt;settingAuthorPromise&lt;/code&gt; to resolve before it resolves. But, &lt;code&gt;return pageSaveAndOtherStuff&lt;/code&gt; resolves &lt;strong&gt;&lt;em&gt;before&lt;/em&gt;&lt;/strong&gt; the author setting is completed.&lt;/p&gt;
+
+&lt;p&gt;Having understood this now, instead of going with our solution-provided code, we refactored it to make it slightly more intuitive to us:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+  User.findOrCreate({
+    where: {
+      name: name,
+      email: email
+    }
+  })
+  .then(function(values) {
+    const user = values[0];
+    return Page.create({
+      title: title,
+      content: content,
+      status: status,
+      tags: tags
+    })
+    .then(function(addedPage) {
+      return addedPage.setAuthor(user);
+    })
+  })
+  .then(function(addedPage) {
+    res.redirect(addedPage.route);
+  })
+  .catch(next);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We eliminated &lt;code&gt;page.save&lt;/code&gt; entirely by using &lt;code&gt;Page.create&lt;/code&gt; instead of &lt;code&gt;Page.build&lt;/code&gt;, and made the layout a little more linear. &lt;code&gt;Page.create&lt;/code&gt; resolves to a page object and passes it to the &lt;code&gt;page.setAuthor&lt;/code&gt; method. This takes the ID of the user and sets it as the authorId of the page. Once all of that is done, the redirect happens, and our catch clause is last.&lt;/p&gt;
+
+&lt;p&gt;We then set up routes to &lt;code&gt;/users&lt;/code&gt; and &lt;code&gt;/users/:id&lt;/code&gt; for an individual&amp;rsquo;s page. For the later, we used a &lt;code&gt;Promise.all&lt;/code&gt; statement because we needed to do two lookups, one to the user table to get the user ID, and the second to the page table to match the &lt;code&gt;authorId&lt;/code&gt; – something that Sequelize created for us as the foreign key.&lt;/p&gt;
+
+&lt;p&gt;Back in our wiki page route, we added in the author of each page via eager loading:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/:urlTitle&#39;, function(req, res, next) {
+  Page.findOne({
+    where: {
+      urlTitle: req.params.urlTitle
+    },
+    include: [
+      {model: User, as: &#39;author&#39;}
+    ]
+  })
+  .then(function(page) {
+    if (page === null) {
+      return next(new Error(&#39;That page was not found!&#39;));
+    }
+    res.render(&#39;wikipage&#39;, {
+      page: page
+    });
+  })
+  .catch(next);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which, in another feat of magic, is Sequelize&amp;rsquo;s way of basically doing a join between those two tables, and then making everything on &lt;code&gt;User&lt;/code&gt; available on &lt;code&gt;Page&lt;/code&gt; under the property &lt;code&gt;author&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The last thing I ended up doing after class was setting up tags, which involved first setting a new tags field on our model (using &lt;code&gt;Sequelize.ARRAY(Sequelize.TEXT)&lt;/code&gt;), and then using &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;this.setDataValue&lt;/code&gt; to re-set the incoming tag string as an array. Then, we modified the locals object to render in our controller, and rendered the view to include our tags on each page.&lt;/p&gt;
+
+&lt;p&gt;We also enabled the ability for the user to search for a specific tag in an HTML form with a &lt;code&gt;/search&lt;/code&gt; route. One of the mistakes I made here, was one that I mentioned above for the &lt;code&gt;/add&lt;/code&gt; route: I tried putting the &lt;code&gt;/search&lt;/code&gt; route below &lt;code&gt;/:urlTitle&lt;/code&gt;, so I was given a few error messages before I realized what was happening.&lt;/p&gt;
+
+&lt;p&gt;We specified the search form&amp;rsquo;s method as &lt;code&gt;get&lt;/code&gt;, which meant that we had to pull data in through &lt;code&gt;req.query&lt;/code&gt; instead of &lt;code&gt;req.body&lt;/code&gt;. We created a class method on our model to &lt;code&gt;findByTag&lt;/code&gt; using the &lt;code&gt;$overlap&lt;/code&gt; operator, and used it to find all of the pages with a single tag. We also created a &lt;code&gt;findSimilar&lt;/code&gt; instance method, and added a link on each page to a list of &amp;ldquo;similar&amp;rdquo; pages (or, pages with the same tag[s] as the page that you were on).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</title>
+      <link>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</link>
+      <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</guid>
+      <description>&lt;p&gt;I don’t understand how it’s almost the end of the week already. Time is literally flying. We&amp;rsquo;ve spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it&amp;rsquo;s been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;what indexing was: a data structure that stores the values for a specific column in a table&lt;/li&gt;
+&lt;li&gt;why we should care about it: it makes searching much faster if you have a lot of data, as the database software no longer has to look at literally every single row in the table&lt;/li&gt;
+&lt;li&gt;how it works: it uses data structures like B-trees or hash tables&lt;/li&gt;
+&lt;li&gt;and why and when we wouldn’t want to use them willy nilly: they take up space, and are slightly less ideal for applications that require more frequent insert/delete/update operations because the indexes also have to be inserted/deleted/updated every time the tables are&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Right before lunch, President Obama was set to speak about the election results, and we took a break from anything code-related to listen to him, then had an hour-long conversation about what had happened the night before as a cohort and as a community.&lt;/p&gt;
+
+&lt;p&gt;Though I’m pretty sure I never actually said anything, and no one was pressured by any means to stay in the chat (and some people did leave), I really appreciated the open communication, the vulnerability that was shown, and Fullstack’s continued dedication to making sure that Fullstack was a safe environment for everyone to express their views and feel what they feel without fear of being judged, harassed, or a variety of other terrible things that happen in the real world. As a group of extremely different people from a variety of walks of life, our cohort didn’t necessarily agree on some points, but it was enlightening to hear everyone’s opinions and experiences.&lt;/p&gt;
+
+&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for &lt;a href=&#34;https://www.hackerrank.com/womens-codesprint-2&#34; target=&#34;_blank&#34;&gt;HackerRank’s Women’s CodeSprint&lt;/a&gt; that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between &lt;code&gt;forEach&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt; for probably the fourteenth time&amp;hellip;it’ll sink in eventually, right?!)&lt;/p&gt;
+
+&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
+
+&lt;p&gt;First, we created a new database module, where we used the &lt;a href=&#34;https://github.com/brianc/node-postgres&#34; target=&#34;_blank&#34;&gt;node-postgres&lt;/a&gt; library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our &lt;code&gt;tweetBank.js&lt;/code&gt; module and accompanying simple-array database, we were querying our database for the information that we wanted.&lt;/p&gt;
+
+&lt;p&gt;One of the biggest sources of confusion came when we were testing our Socket.io real-time updates via two incognito Chrome browsers – when we posted a tweet via one of the browsers, the browser that &lt;em&gt;didn’t&lt;/em&gt; post the tweet would be updated in real-time, but the browser that posted the tweet wouldn’t show the tweet until we manually refreshed the page.&lt;/p&gt;
+
+&lt;p&gt;This was our original code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.post(&#39;/tweets&#39;, function(req, res, next){
+  let userName;
+  let name = req.body.name;
+  let content = req.body.content;
+  client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
+    if (err) return next(err);
+
+    if (result.rows.length === 0) {
+      client.query(&#39;INSERT INTO users (name) VALUES ($1)&#39;, [name], function(err, result) {
+        if (err) return next(err);
+        client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
+          if (err) return next(err);
+          userName = result.rows[0].id;
+          client.query(&#39;INSERT INTO tweets (userid, content) VALUES ($1, $2)&#39;, [userName, content], function(err, result) {
+            if (err) return next(err);
+            client.query(&#39;SELECT id FROM tweets WHERE userid = $1 AND content = $2&#39;, [userName, content], function(err, result) {
+              if (err) return next(err);
+            });
+          });
+        });
+      });
+
+    } else {
+      userName = result.rows[0].id;
+      client.query(&#39;INSERT INTO tweets (userid, content) VALUES ($1, $2)&#39;, [userName, content], function(err, result) {
+        if (err) return next(err);
+        client.query(&#39;SELECT id FROM tweets WHERE userid = $1 AND content = $2&#39;, [userName, content], function(err, result) {
+          if (err) return next(err);
+        });
+      });
+    }
+  });
+
+  let newTweet = {
+      name: name,
+      content: content,
+      id: result.rows[0].id
+    };
+
+    io.sockets.emit(&#39;new_tweet&#39;, newTweet);
+    res.redirect(&#39;/&#39;);
+
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Can we just take a moment to appreciate how much of a hot mess that code is? We’ll be learning how to make this not such a mess tomorrow, or so we’ve been &lt;em&gt;promised&lt;/em&gt;. (Geddit?! Promises? &amp;hellip;well, I thought it was clever.)&lt;/p&gt;
+
+&lt;p&gt;Anyway, what was happening was that Node was being typical Node and its asynchronous nature was starting the first &lt;code&gt;query&lt;/code&gt;, then jumping straight down to our &lt;code&gt;newTweet&lt;/code&gt; object and the &lt;code&gt;res.redirect&lt;/code&gt; that would automatically reload the page. So, the page would actually redirect and reload before the tweet was in the database. We didn’t realize this initially, as the &lt;code&gt;newTweet&lt;/code&gt; object wasn’t pulling from the database at all, and most of it (the &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;content&lt;/code&gt;) could be populated without the database. (We didn’t realize our &lt;code&gt;id&lt;/code&gt; link, which required information from the database, wasn’t working until after fixing this issue.) We put the creation of the newTweet object, the Socket.io &lt;code&gt;emit&lt;/code&gt; event, and the &lt;code&gt;redirect&lt;/code&gt; inside the innermost callback functions, did some refactoring, and everything in our fake Twitter world was peaceful again, albeit a bit messy.&lt;/p&gt;
+
+&lt;p&gt;I also had an office hour/1-on-1 check-in with one of our fellows, Dani, during lunch. I was able to get her advice on how to start on a project that had been an idea floating around in my brain for a while now that I just haven’t really had the time to put into place, but I’m going to try to start carving out at least 30 minutes each day for it. I also realized today, while thinking about different ways to go about it, that I feel &lt;strong&gt;a lot&lt;/strong&gt; more confident in my coding ability than I did a week and a half ago. Which is a little crazy to say, because it’s literally only been a week and a half, but we’ve also learned and done so much in that time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js</title>
+      <link>http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/</link>
+      <pubDate>Wed, 09 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/</guid>
+      <description>
+
+&lt;p&gt;We built a Twitter clone app with Node and Express, and wanted it to have the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A place to store data (nothing fancy yet – just an object will do)&lt;/li&gt;
+&lt;li&gt;A homepage that lists all tweets from all users&lt;/li&gt;
+&lt;li&gt;A profile page that displays a specific user’s tweets&lt;/li&gt;
+&lt;li&gt;A form to post new tweets (and as an extra bonus, enable it to update in real-time for all clients connected to the server at the time)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;initializing-the-project&#34;&gt;Initializing the Project&lt;/h2&gt;
+
+&lt;p&gt;First, we set up a &lt;code&gt;twitter-js&lt;/code&gt; directory, and ran &lt;code&gt;git init&lt;/code&gt; and &lt;code&gt;npm init&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We also created a directory tree, which looked like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;├── app.js
+├── package.json
+├── public
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   └── index.js
+└── views
+    ├── index.html
+    └── layout.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;app.js&lt;/code&gt; will be our main application. The &lt;code&gt;public&lt;/code&gt; folder will store our static files, to be automatically served when requested. The files in our routes and views directories will allow us to define dynamic content.&lt;/p&gt;
+
+&lt;p&gt;We used &lt;code&gt;npm install express --save&lt;/code&gt; to download Express to our &lt;code&gt;node_modules&lt;/code&gt; directory and ensure Express is also saved as a dependency in our &lt;code&gt;package.json&lt;/code&gt; file. Lastly, we set up a &lt;code&gt;.gitignore&lt;/code&gt; file to exclude &lt;code&gt;node_modules&lt;/code&gt; and &lt;code&gt;.DS_Store&lt;/code&gt; (an annoying Mac-specific thing).&lt;/p&gt;
+
+&lt;h2 id=&#34;workflow&#34;&gt;Workflow&lt;/h2&gt;
+
+&lt;p&gt;We installed Nodemon and saved it as a dev dependency instead of an app dependency. &lt;a href=&#34;http://nodemon.io/&#34; target=&#34;_blank&#34;&gt;Nodemon&lt;/a&gt; essentially watches our files and restarts the app when we save changes, preventing us from having to constantly stop (&lt;code&gt;CTRL + C&lt;/code&gt;) and restart (&lt;code&gt;node app.js&lt;/code&gt;) the server whenever we make a change.&lt;/p&gt;
+
+&lt;p&gt;We also defined a start script in our &lt;code&gt;package.json&lt;/code&gt;, which allows us to plug in a pre-determined command (in our case, &lt;code&gt;nodemon app.js&lt;/code&gt;) when we run &lt;code&gt;npm start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-express&#34;&gt;Configure Express&lt;/h2&gt;
+
+&lt;p&gt;In our &lt;code&gt;app.js&lt;/code&gt; file, we installed Express, required it, and created a new app.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var express = require(&#39;express&#39;);
+var app = express();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We started a small server on the port &lt;code&gt;3000&lt;/code&gt; with a &lt;code&gt;get&lt;/code&gt; handler that sends a welcome message when the browser requests the root URI.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;Hello, friend!&#39;)
+});
+
+app.listen(3000, function () {
+  console.log(&#39;Example app listening on port 3000!&#39;)
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;logging-middleware&#34;&gt;Logging Middleware&lt;/h2&gt;
+
+&lt;p&gt;We also created our own logging middleware, although the same (well, let’s be honest, better) functionality is also offered by already-created tools such as &lt;a href=&#34;https://github.com/glebec/volleyball&#34; target=&#34;_blank&#34;&gt;volleyball&lt;/a&gt; and &lt;a href=&#34;https://github.com/expressjs/morgan&#34; target=&#34;_blank&#34;&gt;morgan&lt;/a&gt;. Middleware is a pretty broad term, but in the context of logging middleware, we wanted ours to fire for every incoming request and log every verb and route that is requested from the server, as well as the response&amp;rsquo;s status code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.use(&#39;/&#39;, function(req, res, next) {
+  console.log(req.method, req.path, res.statusCode);
+  next();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not only does this help in debugging, it also helped me in visualizing a little bit of what’s going on in what can sometimes be a nebulous world. Unlike front-end work, where you can see things changing as you work (or not, depending on if you’re doing things right!), it can be hard to really understand what’s happening when you&amp;rsquo;re working on the back-end.&lt;/p&gt;
+
+&lt;p&gt;Our logging middleware also is passed a &lt;code&gt;next&lt;/code&gt; parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;during the Express lecture&lt;/a&gt;: every request gets exactly one response, and that the order of your routes is important.&lt;/p&gt;
+
+&lt;h2 id=&#34;templating-engine&#34;&gt;Templating Engine&lt;/h2&gt;
+
+&lt;p&gt;Templates are essentially outlines for a document, which can be combined with data to complete it. Templating engines allow us to include JavaScript and programming logic directly in HTML and render it as documents that can be sent to the client.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;template file + locals object -&amp;gt; rendering function -&amp;gt; complete html&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;We used &lt;a href=&#34;https://mozilla.github.io/nunjucks/&#34; target=&#34;_blank&#34;&gt;Nunjucks&lt;/a&gt; for our templating engine. After installing and requiring the module, we created a dummy HTML file to play with the templating syntax.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;// title //&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;This is a bare-bones template.&amp;lt;/p&amp;gt;
+&amp;lt;ul&amp;gt;
+/% for person in people %/
+  &amp;lt;li&amp;gt;// person.name //&amp;lt;/li&amp;gt;
+/% endfor %/
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(In this code above, pretend like all of the slashes are actually opening and closing brackets – Jekyll tries to render this as HTML rather than as straight code.)&lt;/p&gt;
+
+&lt;p&gt;Our template file is looking for a title and people to put into the HTML. Initially, I didn&amp;rsquo;t notice there was a title at all (how important are titles, anyway?), just saw that it wanted people, and tried to pass in an array with people, like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const people = [
+  name: &#39;Gandalf&#39;,
+  name: &#39;Frodo&#39;,
+  name: &#39;Hermione&#39;,
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And when that didn’t work, we tried an array of objects:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const people = [
+  {name: &#39;Gandalf&#39;},
+  {name: &#39;Frodo&#39;},
+  {name: &#39;Hermione&#39;},
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And when that didn’t work, we caved to our workshop’s hints and put objects inside of an array inside of an object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const locals = {
+  people: [
+  {name: &#39;Gandalf&#39;},
+  {name: &#39;Frodo&#39;},
+  {name: &#39;Hermione&#39;}
+]};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our first couple of attempts didn’t work because if we’re passing the people array into the &lt;code&gt;render&lt;/code&gt; function, then what the template &lt;em&gt;actually&lt;/em&gt; gets is just that, an array – without the “people” name. It can’t locate “people,” and therefore just won’t put anything into the HTML. And that’s not what we want.&lt;/p&gt;
+
+&lt;p&gt;Our template file is looking for the people &lt;em&gt;key&lt;/em&gt; on the object that we pass into our render function. So, we needed to construct our locals object so that our &lt;code&gt;index.js&lt;/code&gt; file has access to this key. (Also, if we had remembered that our template also wanted a title, that might have been a good hint in and of itself that we needed something that could hold multiple keys with corresponding values.)&lt;/p&gt;
+
+&lt;p&gt;We used &lt;code&gt;nunjucks.configure&lt;/code&gt; to tell our engine to look in the &lt;code&gt;views&lt;/code&gt; folder for our file. Then, we used &lt;code&gt;nunjucks.render&lt;/code&gt; to take our &lt;code&gt;index.html&lt;/code&gt; template file and our &lt;code&gt;locals&lt;/code&gt; object, and then execute a callback function to log our &lt;code&gt;html&lt;/code&gt; to the console when the rendering was done.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nunjucks.configure(&#39;views&#39;);
+nunjucks.render(&#39;index.html&#39;, locals, function(err, output) {
+  if (err) throw err;
+  console.log(output);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our console then had an HTML string with Gandalf, Frodo, and Hermione in the list – just as we wanted.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;This is a bare-bones template.&amp;lt;/p&amp;gt;
+&amp;lt;ul&amp;gt;
+  &amp;lt;li&amp;gt;Gandalf&amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;Frodo&amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;Hermione&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;integration-of-nunjucks-and-express-rendering&#34;&gt;Integration of Nunjucks and Express &amp;amp; Rendering&lt;/h2&gt;
+
+&lt;p&gt;So we were able to get a single &lt;code&gt;html&lt;/code&gt; file rendered via the Nunjucks templating engine – great! But, now we wanted to use the engine for &lt;em&gt;every&lt;/em&gt; &lt;code&gt;html&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Integrating Nunjucks into Express is a fairly simple and boilerplate process. Back in our &lt;code&gt;app.js&lt;/code&gt; file, we first used &lt;code&gt;app.set&lt;/code&gt; to prevent HTML from rendering on the browser and do it on the server instead. Then, we used &lt;code&gt;app.engine&lt;/code&gt; so that when we give &lt;code&gt;html&lt;/code&gt; files to &lt;code&gt;res.render&lt;/code&gt;, it’ll use Nunjucks. Lastly, we needed to include our &lt;code&gt;nunjucks.configure&lt;/code&gt; from above to continue telling Nunjucks to look in the &lt;code&gt;views&lt;/code&gt; directory for its templates.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.set(&#39;view engine&#39;, &#39;html&#39;);
+app.engine(&#39;html&#39;, nunjucks.render);
+nunjucks.configure(&#39;views&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To actually render our HTML, now that we’ve set up our app to use Nunjucks, we just used a relatively simple &lt;code&gt;res.render&lt;/code&gt; and set a route for it with the &lt;code&gt;get&lt;/code&gt; handler:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.get(&#39;/people/&#39;, function(req, res){
+  res.render( &#39;index&#39;, {people: locals.people}, function(err, html) {
+    res.send(html);
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, when we visit &lt;code&gt;localhost:3000/people/&lt;/code&gt;, we see:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This is a bare-bones template.
+* Gandalf
+* Frodo
+* Hermione
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the-tweetbank-js-module&#34;&gt;The tweetBank.js Module&lt;/h2&gt;
+
+&lt;p&gt;Next, we set up a &lt;code&gt;tweetBank.js&lt;/code&gt; module, which holds all of our tweets as well as our methods to interact with them. Our data was stored in a simple array – nothing too fancy yet.&lt;/p&gt;
+
+&lt;p&gt;We used the &lt;a href=&#34;https://lodash.com/docs/4.16.6&#34; target=&#34;_blank&#34;&gt;Lodash&lt;/a&gt; library to create three methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;add, which would add a name and text into our data array&lt;/li&gt;
+&lt;li&gt;list, which just returned a deep clone of our data array&lt;/li&gt;
+&lt;li&gt;and find, which used &lt;code&gt;_.cloneDeep&lt;/code&gt; and &lt;code&gt;_.filter&lt;/code&gt; to find tweets in our data array with a specified property&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;_.cloneDeep&lt;/code&gt; allowed us to make deep copies of our data array so that we could perform operations on them without mutating our original “database.” Though this wasn’t as important for this workshop because we weren’t doing anything major, it’ll be important for the future when we’re altering data but want to preserve our original store.&lt;/p&gt;
+
+&lt;h3 id=&#34;small-side-tangent-shallow-vs-deep-copies&#34;&gt;Small Side Tangent: Shallow vs. Deep Copies&lt;/h3&gt;
+
+&lt;p&gt;Lodash provides a &lt;code&gt;_.clone&lt;/code&gt; functionality, which creates a shallow copy of the value you pass into it, and a &lt;code&gt;_.deepClone&lt;/code&gt; functionality, which recursively clones the value and produces a deep copy.&lt;/p&gt;
+
+&lt;p&gt;I struggled with this concept, because I had initially thought that a shallow copy meant that the value it contained was just pointing to the original value, and that a deep copy was an entirely new value in a new place in memory that just happened to look like the old object. One of our instructors spent a little bit of time walking me through this, explaining that with a shallow copy, the &amp;ldquo;shallowest&amp;rdquo; level of the object itself would be passed by value and be a &amp;ldquo;new&amp;rdquo; copy, but if the value &lt;em&gt;contained&lt;/em&gt; objects, &lt;em&gt;those&lt;/em&gt; objects would be referenced, not newly created. However, because a deep copy clones the value recursively, those objects inside of our value will be entirely &lt;em&gt;new&lt;/em&gt; objects, and not references to the original object in memory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let objects = {obj: {key: &#39;val&#39;}, obj2: {key2: &#39;val2&#39;}};
+let shallow = _.clone(objects);
+objects.obj.key = &#39;newVal&#39;;
+console.log(shallow);
+// =&amp;gt; {obj: {key: &#39;newVal&#39;}, obj2: {key2: &#39;val2&#39;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see in the example above that when we change the value of &lt;code&gt;key&lt;/code&gt; in &lt;code&gt;obj&lt;/code&gt;, the shallow copy’s value of &lt;code&gt;key&lt;/code&gt; changes as well. However, in a deep copy, we’d see this instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let objects = {obj: {key: &#39;val&#39;}, obj2: {key2: &#39;val2&#39;}};
+let deep = _.deepClone(objects);
+objects.obj.key = &#39;newVal&#39;;
+console.log(deep);
+// =&amp;gt; {obj: {key: &#39;val&#39;}, obj2: {key2: &#39;val2&#39;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Because entirely new objects in memory are created for the inner objects, the value of &lt;code&gt;key&lt;/code&gt; doesn’t change if we change the original array. I then started playing around with this on my own, and came across a somewhat confusing phenomenon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let objects = [1, { &#39;a&#39;: 1 }, { &#39;b&#39;: 2 }];
+let shallow = _.clone(objects);
+objects = [1, { &#39;a&#39;: 2 }, { &#39;b&#39;: 3 }];
+console.log(shallow);
+// =&amp;gt; [1, { &#39;a&#39;: 1 }, { &#39;b&#39;: 2 }];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point in my understanding, I would have expected the console log to produce &lt;code&gt;[1, { &#39;a&#39;: 2 }, { &#39;b&#39;: 3 }]&lt;/code&gt;. After seeking more help, I learned that in line 3, we’re actually assigning objects to an entirely new object instead of mutating the current object.&lt;/p&gt;
+
+&lt;p&gt;If we did this instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var objects = [1, { &#39;a&#39;: 1 }, { &#39;b&#39;: 2 }];
+var shallow = _.clone(objects);
+objects[1].a = 2;
+console.log(shallow);
+// =&amp;gt; [1, { &#39;a&#39;: 2 }, { &#39;b&#39;: 2 }];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;d only be mutating the object and not &lt;em&gt;completely&lt;/em&gt; reassigning it, so that results in what we’d expect.&lt;/p&gt;
+
+&lt;h3 id=&#34;okay-back-to-tweetbank-js&#34;&gt;Okay, Back to tweetBank.js&lt;/h3&gt;
+
+&lt;p&gt;At the end of our module, we exported our &lt;code&gt;add&lt;/code&gt;, &lt;code&gt;list&lt;/code&gt;, and &lt;code&gt;find&lt;/code&gt; functions. We didn’t want our “database” to be accessible from other parts of the application, and therefore excluded it from our export. Our app would be incredibly boring (and hard to work with) if we didn’t have any data, so we created a bunch of random seed data composed of names and tweets. Values for each were stored in arrays and put together via random number generators.&lt;/p&gt;
+
+&lt;h2 id=&#34;routing-and-views&#34;&gt;Routing and Views&lt;/h2&gt;
+
+&lt;p&gt;In attempt to keep our code modular and clean, we removed our dummy routes from &lt;code&gt;app.js&lt;/code&gt;, but kept all of our middleware and configuration calls. Rather than including all of our routing and business logic in &lt;code&gt;app.js&lt;/code&gt;, we placed our routes in a module that we simply called &lt;code&gt;routes&lt;/code&gt;. In order to do this, we needed to &lt;code&gt;require&lt;/code&gt; and then &lt;code&gt;use&lt;/code&gt; our &lt;code&gt;routes&lt;/code&gt; directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const routes = require(&#39;./routes/&#39;);
+app.use(&#39;/&#39;, routes);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;code&gt;index.js&lt;/code&gt; (inside of the &lt;code&gt;routes&lt;/code&gt; folder), we needed to &lt;code&gt;require&lt;/code&gt; a few modules:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const express = require(&#39;express&#39;);
+const router = express.Router();
+const tweetBank = require(&#39;../tweetBank&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, we set up a route for the root URI that just showed a list of all of the tweets in our tweetBank.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/&#39;, function (req, res) {
+  let tweets = tweetBank.list();
+  res.render( &#39;index&#39;, { tweets: tweets } );
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instead of using &lt;code&gt;app.get&lt;/code&gt; this time, we’re using &lt;code&gt;router.get&lt;/code&gt;. Essentially, the Express module creates a &lt;code&gt;router&lt;/code&gt; entity that is configurable outside of any application instance – it’s like a box of routes; a “mini-application” capable of performing middleware and routing functions. At the end of our &lt;code&gt;index.js&lt;/code&gt; file, we export &lt;code&gt;router&lt;/code&gt;, which &amp;ldquo;hands&amp;rdquo; &lt;code&gt;app.js&lt;/code&gt; this box to use.&lt;/p&gt;
+
+&lt;p&gt;For our views, we included some super simple HTML and CSS – we figured we could save the fancy styling for later.&lt;/p&gt;
+
+&lt;h3 id=&#34;static-routing&#34;&gt;Static Routing&lt;/h3&gt;
+
+&lt;p&gt;Now, we wanted to set up static routing. We could have set this up manually, by creating a &lt;code&gt;get&lt;/code&gt; handler for each file, such as our &lt;code&gt;stylesheet&lt;/code&gt;, to a URI that corresponded to its file path. But, what if we had a folder of a bunch of images that we wanted to serve? Or a folder of JavaScript files, so that code could be downloaded and run on the client side?&lt;/p&gt;
+
+&lt;p&gt;For this, we used static routing instead. This was as simple as adding one line to our &lt;code&gt;app.js&lt;/code&gt; code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.use(express.static(&#39;public&#39;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, instead of doing it manually now, if we drop a file into &lt;code&gt;public&lt;/code&gt;, Express will automatically route requests to URIs that match the file’s path.&lt;/p&gt;
+
+&lt;h3 id=&#34;dynamic-routing&#34;&gt;Dynamic Routing&lt;/h3&gt;
+
+&lt;p&gt;To set up routes that lets users see the tweets of a specific user or make new tweets, we needed to have dynamic routes – routes that changed depending on a few factors.&lt;/p&gt;
+
+&lt;p&gt;Instead of specificying a certain name, we used &lt;code&gt;:name&lt;/code&gt;, which Express uses to define certain portions of the URI string as variables. These parameters are then stored as properties of the &lt;code&gt;req.params&lt;/code&gt; object, so we needed to access that, find the tweets in the list of tweets with that name as its name, and then render our HTML to show only tweets from that user.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/users/:name&#39;, function(req, res) {
+  let name = req.params.name;
+  let tweetsForUser = tweetBank.find( {name: name} );
+  res.render( &#39;index&#39;, { tweets: tweetsForUser } );
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also changed our &lt;code&gt;tweetBank.js&lt;/code&gt; code so that in the &lt;code&gt;add&lt;/code&gt; function, a unique ID would also be generated and stored with the user’s name and the text of the tweet. Using this, we could then set up a dynamic route to view just a single tweet in much the same manner:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/tweets/:id&#39;, function(req, res) {
+  let id = Number(req.params.id);
+  let tweetByID = tweetBank.find( {id: id} );
+  res.render( &#39;index&#39;, { tweets: tweetByID } );
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In our HTML, we linked the user’s name and the tweet’s text in each tweet to the page that corresponded with the user’s page, and the single-tweet view, as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/% for tweet in tweets %/
+  &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/users/{{tweet.name}}&amp;quot; class=&amp;quot;tweet-name&amp;quot;&amp;gt;{{tweet.name}}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;/tweets/{{tweet.id}}&amp;quot;&amp;gt;{{tweet.text}}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+/% endfor %/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Again, pretend the slashes are curly brackets.)&lt;/p&gt;
+
+&lt;h2 id=&#34;posting-a-tweet&#34;&gt;Posting a Tweet&lt;/h2&gt;
+
+&lt;p&gt;To post a tweet, we created a basic HTML form. However, we were then presented with a problem: Express doesn’t have any way to digest an HTTP body. So, we used the body-parser module to add URL-encoded and JSON body-parsing middleware to our &lt;code&gt;app.js&lt;/code&gt; file. By including these, every request body will be transformed into a body object and attached to the &lt;code&gt;request&lt;/code&gt; object, so we can access properties with variables like &lt;code&gt;request.body.name&lt;/code&gt; and &lt;code&gt;request.body.text&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We created our HTML form specifically with &lt;code&gt;method=“POST”&lt;/code&gt; and attribute &lt;code&gt;action=“/tweets”&lt;/code&gt; so that when we set up our route, we can use the method and the URI specified for our POST request.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.post(&#39;/tweets&#39;, function(req, res) {
+  let name = req.body.name;
+  let text = req.body.text;
+  let newTweet = tweetBank.add(name, text);
+res.redirect(&#39;/&#39;);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We pulled data out of the &lt;code&gt;request.body&lt;/code&gt; properties and into our data store. Once the new tweet is added, we redirect the client to make a request for the index page so they can immediately see the new tweet they submitted.&lt;/p&gt;
+
+&lt;h2 id=&#34;real-time-updating-with-websockets&#34;&gt;Real-Time Updating with WebSockets&lt;/h2&gt;
+
+&lt;p&gt;Because we wanted to generate and show posted tweets in real-time, bi-directionally, and simultaneously, we used the WebSockets protocol via the &lt;a href=&#34;http://socket.io/&#34; target=&#34;_blank&#34;&gt;Socket.io&lt;/a&gt; library. We added the client library and script to the bottom of &lt;code&gt;layout.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;/socket.io/socket.io.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;
+const socket = io.connect();
+  socket.on(&#39;connect&#39;, function(){
+    console.log(&#39;connected to server via WebSockets!&#39;);
+  });
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After requiring Socket.io in our &lt;code&gt;app.js&lt;/code&gt; file and then giving it a server instance (stored in a variable &lt;code&gt;io&lt;/code&gt;), the challenge we faced here was that we wanted &lt;code&gt;io&lt;/code&gt; to emit an event in our routes, but those are in a separate module from &lt;code&gt;app.js&lt;/code&gt;. But, we couldn’t require &lt;code&gt;app.js&lt;/code&gt; in our router module, because we already required the router module in &lt;code&gt;app.js&lt;/code&gt;! (Not only are circular dependencies confusing, but they&amp;rsquo;re also hard to maintain and keep track of.)&lt;/p&gt;
+
+&lt;p&gt;We used a functional programming technique to resolve this. We refactored our &lt;code&gt;routes&lt;/code&gt; module so that instead of exporting &lt;code&gt;router&lt;/code&gt;, it exports a function that takes &lt;code&gt;io&lt;/code&gt; and returns &lt;code&gt;router&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = function (io) {
+  // all of our routes here
+  return router;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also need to reconfigure our &lt;code&gt;app.js&lt;/code&gt; module now since it no longer exports a router. We need to call &lt;code&gt;routes&lt;/code&gt;, passing in &lt;code&gt;io&lt;/code&gt;, to get the router:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.use( &#39;/&#39;, routes(io));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To complete the functionality of our app, we incorporated the ability for new tweets to load dynamically – that is, whenever someone posted a tweet, that tweet will automatically show up in every client connected to the server. Though this sounds relatively difficult, it was mostly a matter of emitting a &lt;code&gt;new_tweet&lt;/code&gt; event server-side, and then adding some new HTML and attaching it to the DOM client-side when the client detects a &lt;code&gt;new_tweet&lt;/code&gt; event.&lt;/p&gt;
+
+&lt;p&gt;As for future steps, I want to make the interface look a little prettier (it&amp;rsquo;s pretty bare-bones right now), maybe come up with a better name than “Twitter clone,” and maybe also populate the database with other tweets — inspiring quotes or funny pictures, perhaps? I also want to figure out how to have new tweets dynamically show up at the beginning of the list, rather than the end – which is easy for all of the other clients (&lt;code&gt;prepend&lt;/code&gt; vs &lt;code&gt;append&lt;/code&gt; in the DOM) but I haven’t quite figured out how to do for the client that actually posts the tweet, since the order seems to be dependent upon IDs. Lastly, I want to eventually upload the project to Heroku so that there’s an actual live demo, but the whole there’s-only-24-hours-in-a-day-thing isn&amp;rsquo;t necessarily agree with me right now. (#bootcamplife) All of these have been added to my ever-growing to-do list.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, you can check out the current state of the project &lt;a href=&#34;https://github.com/bethqiang/twitter-js&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 2, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing</title>
+      <link>http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/</guid>
+      <description>
+
+&lt;p&gt;I started off my day with watching &lt;a href=&#34;https://youtu.be/8aGhZQkoFbQ&#34; target=&#34;_blank&#34;&gt;a fantastic talk about event loops&lt;/a&gt;, and then briefly looking at a &lt;a href=&#34;https://www.codewars.com&#34; target=&#34;_blank&#34;&gt;Code Wars&lt;/a&gt; problem. I’ve done a few Code Wars problems in the past, but we’ve now been incentivized — if we reach 4 kyu (for those who aren’t familiar, that just refers to a certain level) by the end of Junior Phase, we get a cool shirt. And a lot of knowledge and practice. But I’m obviously only doing it for the shirt. ;)&lt;/p&gt;
+
+&lt;p&gt;We officially kicked off our day with three hours of Node.js. Our task in our workshop was to implement the following common &lt;code&gt;bash&lt;/code&gt; commands with Node.js:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pwd&lt;/code&gt; to print the working directory, using the process global&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt; to print the current date-timestamp&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls&lt;/code&gt; to print the names of all of the files in a directory, using the &lt;code&gt;fs&lt;/code&gt; module&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;echo&lt;/code&gt; to print whatever you specify after it, including environment variables (such as &lt;code&gt;$PATH&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cat&lt;/code&gt; to print the entire contents of a file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;head&lt;/code&gt; to print the first x lines of a file (we somewhat arbitrarily did 5)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tail&lt;/code&gt; to print the last x lines of a file (again, 5)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sort&lt;/code&gt; to sort the lines of a file lexicographically&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wc&lt;/code&gt; to count the number of lines in a file (although the original &lt;code&gt;bash&lt;/code&gt; command counts more than just lines)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;uniq&lt;/code&gt; to remove lines if they’re the same as the one above it&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;curl&lt;/code&gt; to print out the HTTP response body, using the &lt;code&gt;request&lt;/code&gt; module&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;grep&lt;/code&gt; to search and return all of the lines of the input that have a specified word or phrase. The real version uses regular expressions, which we briefly tried to do, and instead ended up using the &lt;code&gt;includes&lt;/code&gt; method on the string prototype for simplicity and the interest of time.&lt;/li&gt;
+&lt;li&gt;piping to combine these to accomplish slightly more complicated tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One of the biggest things I took away from this was a thorough understanding of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Unix_philosophy&#34; target=&#34;_blank&#34;&gt;Unix Philosophy&lt;/a&gt;: every command is a really small, single-purpose program. The &lt;code&gt;stdout&lt;/code&gt; stream of one program can be &lt;code&gt;piped&lt;/code&gt; (via &lt;code&gt;|&lt;/code&gt;) to the &lt;code&gt;stdin&lt;/code&gt; of another program, allowing you to combine each of these programs in powerful ways.&lt;/p&gt;
+
+&lt;p&gt;For example, if you wanted to show only the unique lines on a file called &lt;code&gt;something.js&lt;/code&gt; (it’s 1am as I’m writing this — don’t judge me for my filenames!), you could call &lt;code&gt;sort something.js | uniq | wc&lt;/code&gt;. If instead you wanted to find the number of times that the word &lt;code&gt;function&lt;/code&gt; showed up in our &lt;code&gt;something.js&lt;/code&gt; file, we can call &lt;code&gt;cat something.js | grep function | wc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;One of the biggest challenges we faced, and I’m now starting to realize is a weakness of mine in general, was creating our modules in such a way that they were, well, modular and non-repetitive (a la the &lt;a href=&#34;https://en.wikipedia.org/wiki/Don%27t_repeat_yourself&#34; target=&#34;_blank&#34;&gt;DRY principle&lt;/a&gt;). Once all code is written out, it’s relatively easy to go back and refactor, but it’s a lot harder for me personally to start from the very beginning and design it with the intention of having both characteristics. Sometimes, having a less-than-ideal initial design also makes refactoring harder — we had to change a significant portion of our code and its structure so that we had reusable components that had the same functionality as our original code. Researching whether someone is capable of deliberately practicing this (vs. whether it’s something that just comes from experience) has made it onto my ever-expanding to-do list.&lt;/p&gt;
+
+&lt;h2 id=&#34;express-js&#34;&gt;Express.js&lt;/h2&gt;
+
+&lt;p&gt;We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my initial interest in learning back-end development&lt;/a&gt;, so I was somewhat familiar with the basic concepts of starting a server and setting routes.&lt;/p&gt;
+
+&lt;p&gt;A few main points from the lecture that I found useful and/or funny:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;“Every request gets exactly one response”—no more, no less. (Geoff, our instructor, asked us to repeat that out loud a couple of times—it’s that important.)&lt;/li&gt;
+&lt;li&gt;“Your server is somewhere in Norway.” It can be confusing sometimes that your server and client are on the same machine when you’re developing, so just imagine your server sits somewhere far, far away.&lt;/li&gt;
+&lt;li&gt;Tools to help improve workflow: &lt;code&gt;--save-dev&lt;/code&gt;, &lt;a href=&#34;http://nodemon.io/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;nodemon&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Express Router is like a mini Express application that allows you to make applications more modular and flexible by creating multiple instances of the Router and applying them accordingly. A visual example of how to use it:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;const router = express.Router();
+app.use(&#39;/docs&#39;, router)
+// When you send a `get` request, you don’t need to specify `/docs/`
+// in your path — just the subdirectory within that.
+router.get(&#39;/important&#39;, function(req, res) {
+  res.send(&amp;quot;Some VIP docs&amp;quot;);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Route middleware allows you to do things before a request is processed — for example, logging to the console the &lt;code&gt;method&lt;/code&gt; and &lt;code&gt;url&lt;/code&gt; of each request. The order you place your middleware and routes matters greatly — if you place your middleware after a route, then the route will happen before the middleware and the request will end there, and your middleware won&amp;rsquo;t run.&lt;/li&gt;
+&lt;li&gt;Having the &lt;code&gt;next&lt;/code&gt; parameter in a CRUD operation and calling &lt;code&gt;next()&lt;/code&gt; will allow your code to go to the next function with the same verb and URI.&lt;/li&gt;
+&lt;li&gt;Route parameters (e.g., ‘/users/:id’) and using &lt;code&gt;req.params&lt;/code&gt; allows you to get the object with the parameters you passed in. In our example, you can do validation of the user ID number in the route middleware to make sure the user exists when they log in. &lt;code&gt;Req.query&lt;/code&gt; allows you to pass in a query string in the URL.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After class, we attended a panel made up of Seniors (those in the “project-based” phase) and had the opportunity to hear about their experiences and get some advice from students who have been where we are and came out the other side relatively unscathed. Some of the tidbits I found the most important were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We’ll have even less time than we do now once we’re in the Senior Phase. Aka, if we have personal projects that we want to do, we should hop on those ASAP. (“Even if you only work on them for 30 minutes a day, that’s still something.”)&lt;/li&gt;
+&lt;li&gt;I’m not the only one who feels as if “OMG I didn’t finish this workshop I need to stay late to finish and completely understand it.” That maybe doesn’t mean I’ll stop staying up late to finish and completely understand workshops&amp;hellip;but it makes me feel better about having that feeling, at least.&lt;/li&gt;
+&lt;li&gt;Don’t try to learn everything — get really, really good at the fundamentals, learn &lt;em&gt;how&lt;/em&gt; things work and &lt;em&gt;why&lt;/em&gt; they work, and then you can expand upon that.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note to self: you use a lot of bullet points when your brain has been looking at code for the better part of 16 hours (I spent a lot of time after class today reviewing a couple of concepts from last week and trying to catch up a bit, doing the whole “OMG I didn’t finish this workshop last week I need to stay up late to finish and completely understand it” thing). TBD on if a lot of bullet points are a good thing or a bad thing. Also TBD on if it’ll be a continuing trend.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

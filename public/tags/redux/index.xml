@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redux on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/redux/index.xml</link>
+    <description>Recent content in Redux on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/redux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Game of Life with React and Redux: The Hard Parts</title>
+      <link>http://bethqiang.com/post/game-of-life-with-react-and-redux/</link>
+      <pubDate>Thu, 22 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/game-of-life-with-react-and-redux/</guid>
+      <description>
+
+&lt;p&gt;For the past few days, I&amp;rsquo;ve spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There&amp;rsquo;s actually really not that much Sass – starting out, I wanted to practice it, although now that I&amp;rsquo;m halfway through, I&amp;rsquo;m realizing that I really don&amp;rsquo;t need it. I probably should have just saved it for another project – but anyway.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/post/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
+
+&lt;h2 id=&#34;the-webpack-rabbit-hole&#34;&gt;The Webpack Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;The first roadblock I ran into was trying to run and deploy a front-end-only React app via GitHub Pages. (I didn&amp;rsquo;t want to bother with any kind of back-end, even a little mini server to serve static files, because I recently discovered that Heroku makes you give them your credit card information if you want to deploy more than five apps. Which is fine, and I&amp;rsquo;m sure I&amp;rsquo;ll do it eventually, but if I can avoid it, I totally will.) So, I couldn&amp;rsquo;t serve static files. Which meant that my main &lt;code&gt;index.html&lt;/code&gt; file had to be in my root directory. Okay, that&amp;rsquo;s annoying, but that&amp;rsquo;s not &lt;em&gt;too&lt;/em&gt; bad. (Yet.)&lt;/p&gt;
+
+&lt;p&gt;After pondering a couple of different possibilities, including just linking CDNs to React and Redux in the index.html, I decided to go the Webpack route. I&amp;rsquo;d then be able to throw Sass into the mixture. I set up a basic version of Webpack, along with React and Redux, coded a quick &amp;ldquo;Hello World,&amp;rdquo; and deployed it under a repo titled &amp;ldquo;experiment.&amp;rdquo; I told Webpack to output my &lt;code&gt;bundle.js&lt;/code&gt; in a &lt;code&gt;public&lt;/code&gt; folder. And&amp;hellip;then I realized I had no idea how to open my app locally.&lt;/p&gt;
+
+&lt;p&gt;As a result, I ended up diving into and spending hours in a Webpack rabbit hole learning how to set up the Webpack dev server and a production Webpack configuration. Webpack can do &lt;em&gt;a lot&lt;/em&gt; of things, and I&amp;rsquo;m sure I didn&amp;rsquo;t even come across half of them. After a few more rounds of experimentally uploading and deploying, I finally settled on a configuration that would deploy without errors, and had a colorful &amp;ldquo;Hello World!&amp;rdquo; to prove it!&lt;/p&gt;
+
+&lt;p&gt;So, that was a fun day 1 of this project.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-beginning-aka-the-starting-grid&#34;&gt;The Beginning (aka, the Starting Grid)&lt;/h2&gt;
+
+&lt;p&gt;My next major hurdle came when I started adding files I thought I&amp;rsquo;d need (action creators, reducers, components, containers, etc.). I started by trying to create rough outlines of the components, and then I&amp;rsquo;d think about everything I&amp;rsquo;d need the component&amp;rsquo;s containers to do, and then I tried writing functions in containers, and then I forgot entirely how Redux worked, and then I got really overwhelmed.&lt;/p&gt;
+
+&lt;p&gt;So. Deep breath.&lt;/p&gt;
+
+&lt;p&gt;I deleted my rough outlines in attempt to start from a clean slate. I started again, this time with the &lt;em&gt;sole goal&lt;/em&gt; of just getting some kind of grid to show up. I wasn&amp;rsquo;t sure where to put this magical &lt;code&gt;makeGrid&lt;/code&gt; function, and stuck it in a &lt;code&gt;utils.js&lt;/code&gt; file for the moment, figuring I could move it later. I needed to represent the board&amp;rsquo;s cells and their status in some way. I made a giant array of objects, each of which would have properties like an &lt;code&gt;id&lt;/code&gt; and a &lt;code&gt;status&lt;/code&gt;, which is what my pair and I did when we did this in vanilla JavaScript.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (width, height) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; width; yCoord++) {
+    for (let xCoord = 0; xCoord &amp;lt; height; xCoord++) {
+      grid.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      })
+    }
+  }
+  return grid;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I passed this through the &lt;code&gt;BoardContainer&lt;/code&gt; down to the &lt;code&gt;Board&lt;/code&gt; component, I didn&amp;rsquo;t see a way I could easily map over the array in a way that would give me a board with a certain number of rows and columns, instead of a board that consisted of one row with many, many columns. I revisited my &lt;code&gt;makeGrid&lt;/code&gt; function and instead, made an array that had rows that were also arrays that held objects, that were each of the individual cells.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (height, width) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let row = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      row.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      });
+    }
+    grid.push(row);
+  }
+  return grid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later. Anyway, in my &lt;code&gt;Board&lt;/code&gt; component, I could map over each row, and within each row, map over each cell, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const Board = props =&amp;gt; {
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;table&amp;gt;
+        &amp;lt;tbody&amp;gt;
+          {props.board.grid.map((row, yCoord) =&amp;gt; (
+            &amp;lt;tr key={yCoord}&amp;gt;
+              {row.map((cell, xCoord) =&amp;gt; (
+                &amp;lt;Cell key={xCoord}
+                  id={props.id}
+                  status={props.board.grid[xCoord][yCoord].status}
+                  handleClick={() =&amp;gt; props.toggleCell(xCoord, yCoord)} /&amp;gt;
+              ))}
+            &amp;lt;/tr&amp;gt;
+          ))}
+        &amp;lt;/tbody&amp;gt;
+      &amp;lt;/table&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then set up a very basic cell component, added in some styling, and voila, I had a grid!&lt;/p&gt;
+
+&lt;p&gt;Making the board have a random configuration upon the initial render wasn&amp;rsquo;t difficult; I just added a &lt;code&gt;randomize&lt;/code&gt; parameter with a default value of &lt;code&gt;true&lt;/code&gt; to the &lt;code&gt;makeGrid&lt;/code&gt; function and a conditional:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (randomize) {
+  if (Math.random() &amp;gt; 0.75) status = &#39;alive&#39;;
+  else status = &#39;dead&#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;counting-living-neighbors&#34;&gt;Counting Living Neighbors&lt;/h2&gt;
+
+&lt;p&gt;Cool! Next goal: advance to the next generation, given the number of dead or alive neighbors around each cell.&lt;/p&gt;
+
+&lt;p&gt;After creating actions, I needed to create a new function that would &amp;ldquo;calculate&amp;rdquo; the new statuses of each cell. This ended up looking like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const stepForward = (grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+  const newGrid = [];
+  let status;
+
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let newRow = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      let currStatus = grid[xCoord][yCoord].status;
+      let count = getLivingNeighbors(xCoord, yCoord, grid);
+      if (currStatus === &#39;alive&#39; &amp;amp;&amp;amp; (count === 2 || count === 3)) {
+        status = &#39;alive&#39;;
+      } else if (currStatus === &#39;dead&#39; &amp;amp;&amp;amp; count === 3) {
+        status = &#39;alive&#39;;
+      } else {
+        status = &#39;dead&#39;;
+      }
+      newRow.push({
+        xCoord,
+        yCoord,
+        status
+      });
+    }
+    newGrid.push(newRow);
+  }
+  return newGrid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yes, there&amp;rsquo;s a lot of repetition in there&amp;hellip;I&amp;rsquo;m essentially recreating the &lt;code&gt;makeGrid&lt;/code&gt; function, with some extra stuff in between. Refactoring these huge functions is definitely on the to-do list.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;getLivingNeighbors&lt;/code&gt; was a function that consisted of nested &lt;code&gt;for&lt;/code&gt; loops, to loop through each cell that surrounded the current cell, checked if the &lt;code&gt;className&lt;/code&gt; on the cell DOM element was &lt;code&gt;&#39;alive&#39;&lt;/code&gt;, and if so, incremented the &lt;code&gt;count&lt;/code&gt;.
+I was quite proud of myself for figuring out all of this, and ran my code&amp;hellip;only to realize that all of the cells would immediately die on the first &amp;ldquo;step.&amp;rdquo; After puzzling and Googling, it turns out, &lt;code&gt;document.getElementById&lt;/code&gt; doesn&amp;rsquo;t work in React – you can&amp;rsquo;t directly manipulate the DOM! Well, that&amp;rsquo;s something. A few Stack Overflow answers suggested trying the &lt;code&gt;ref&lt;/code&gt; property that React provides, but even though it was a possibility, it didn&amp;rsquo;t seem like what the &lt;code&gt;ref&lt;/code&gt; property was intended for. (I didn&amp;rsquo;t have a callback function to provide within it; I just wanted to access the DOM element&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Instead, I took a somewhat roundabout way of getting the surrounding cells and their status. To make this work, I also had to change the values of the &lt;code&gt;status&lt;/code&gt; field from &lt;code&gt;&#39;alive&#39;&lt;/code&gt; or &lt;code&gt;&#39;dead&#39;&lt;/code&gt; to 1s and 0s so that I could just increment the count based on neighboring statuses instead of trying to deal with conditionals for each neighbor.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const getLivingNeighbors = (xCoord, yCoord, grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+
+  // If a cell is at the edge of the grid, the cell on the opposite edge will be its neighbor
+  const left = xCoord - 1 &amp;lt; 0 ? (width - 1) : (xCoord - 1);
+  const right = xCoord + 1 === width ? 0 : (xCoord + 1);
+  const up = yCoord - 1 &amp;lt; 0 ? (height - 1) : (yCoord - 1);
+  const down = yCoord + 1 === height ? 0 : (yCoord + 1);
+
+  let count = 0;
+
+  count += grid[left][up].status;
+  count += grid[xCoord][up].status;
+  count += grid[right][up].status;
+  count += grid[left][yCoord].status;
+  count += grid[right][yCoord].status;
+  count += grid[left][down].status;
+  count += grid[xCoord][down].status;
+  count += grid[right][down].status;
+
+  return count;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;non-intuitive-grid-positioning&#34;&gt;Non-Intuitive Grid Positioning&lt;/h2&gt;
+
+&lt;p&gt;So, remember when I said, &amp;ldquo;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Well, once I had the &lt;code&gt;stepForward&lt;/code&gt; function coded out and triggering with a click on the corresponding button, I discovered that though my Game of Life was doing &lt;em&gt;something&lt;/em&gt; in the next generation, the common patterns weren&amp;rsquo;t behaving quite as expected. (Although, they weren&amp;rsquo;t disappearing, at least.)&lt;/p&gt;
+
+&lt;p&gt;After a lot of state-examining (thanks, &lt;code&gt;redux-logger&lt;/code&gt;!) and clicking around on boxes, I discovered that there was a conflict between the way I had set up my grid and the way I was referencing positions in it. Because I set it up so that each row is its own array and the rows were the y coordinates, this actually meant that whenever I wanted to reference a position on the grid, I&amp;rsquo;d have to specify the y coordinate first. (e.g. &lt;code&gt;grid[y][x]&lt;/code&gt; – until this point, I had been doing the opposite.)&lt;/p&gt;
+
+&lt;p&gt;After changing this in every place I was referencing a grid position, everything worked as expected! I could now advance generations on the click of a button, as well as click to toggle a cell to be &lt;code&gt;alive&lt;/code&gt; or &lt;code&gt;dead&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;Now that I have at least the basic core functionality down of moving from generation to generation, I have a couple of smaller things to add:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;setInterval&lt;/code&gt; or &lt;code&gt;requestAnimationFrame&lt;/code&gt; so that the game will automatically advance generations on initial render or on the press of the play button&lt;/li&gt;
+&lt;li&gt;A counter to show the number of generations that have passed&lt;/li&gt;
+&lt;li&gt;Functionality of the rest of the buttons (play, stop, random)&lt;/li&gt;
+&lt;li&gt;Some styling and pretty colors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Possibly one the more intensive and time-consuming things will be refactoring – right now, most of my core functionality is in a massive &lt;code&gt;utils.js&lt;/code&gt; file with two large and repetitive functions. It&amp;rsquo;d be nice to see if I could also make it so that when I&amp;rsquo;m referencing positions in the grid, I can specify the x coordinate first instead of the y.&lt;/p&gt;
+
+&lt;p&gt;In case you&amp;rsquo;re curious, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; the GitHub repo for this project. It&amp;rsquo;s not deployed yet, but I do plan on it after I&amp;rsquo;m done!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Rest of Week 6: Redux, Authentication, and Social Activities</title>
+      <link>http://bethqiang.com/post/redux-authentication-and-social-activities/</link>
+      <pubDate>Sun, 11 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/redux-authentication-and-social-activities/</guid>
+      <description>
+
+&lt;p&gt;So, I’ve kind of fallen off the face of this blog for the past week. Apologies for that – it’s been an incredibly busy week. Tomorrow is our Senior Checkpoint; it’s kind of like our final exam to make sure that we’re sufficiently prepared to move on to Senior Phase. I’ve spent the pretty much all of my free time (of which we have little to begin with) this past week gearing up for that and attempting to review everything we’ve learned in the past six weeks, which isn’t really an easy feat by any means, given the amount of material we’ve covered!&lt;/p&gt;
+
+&lt;p&gt;Since my last blog post, we’ve covered Redux, Redux with React, and authentication. It took me a little more time and effort to wrap my head around Redux and how everything is working than it has for the other topics we’ve covered, but after completely re-doing the entirety of the 5-day workshop we did in class, I think I have a decent grasp of it now. (If you’re interested, you can see the result of my solo work in &lt;a href=&#34;https://github.com/bethqiang/juke&#34; target=&#34;_blank&#34;&gt;this GitHub repo&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;With Redux and the help of one of my fellows, I’ve formed a little workflow and mental checklist for myself for handling Redux:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create constants for action types. (It’s been suggested to us, instead of using strings for action types, to use variables that have values of strings instead – our linter can pick up on spelling mistakes if they happen, which has been super useful when my tired brain forgets how to spell “receive.”)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create synchronous action creators. Synchronous action creators are functions that return objects, called actions, that are formatted to be sent into the Redux state. These typically have a type, which will be the action type that we created in the previous step, and sometimes a payload.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create asynchronous action creators, or dispatchers, or “thunks” using &lt;code&gt;thunkMiddleware&lt;/code&gt; from &lt;code&gt;redux-thunk&lt;/code&gt;. Instead of dispatching an action object, this allows us to dispatch a new function! Basically, it says, “Oh, it looks like this person is trying to do something asynchronous. Instead of giving it to the reducer, let me invoke it and pass the store’s dispatch method on it, so whenever the side effect completes or the action resolves, they can use it to dispatch a new action with the data they get.”&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create reducers. We pass an &lt;code&gt;action&lt;/code&gt; to the store&amp;rsquo;s &lt;code&gt;dispatch&lt;/code&gt; method, and the store executes its &lt;code&gt;reducer&lt;/code&gt; function. Typically, the reducer consists of a &lt;code&gt;switch&lt;/code&gt; statement that describes a different update depending on the action&amp;rsquo;s type. It&amp;rsquo;s super important that the reducer is a pure function, which means that there&amp;rsquo;s no side effects like AJAX calls. (That&amp;rsquo;s what #3 is for!)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the actual components and containers needed. Set local state, pass down props, and create functions as needed. If we’re using &lt;code&gt;react-redux&lt;/code&gt;, we can use &lt;code&gt;mapStateToProps&lt;/code&gt; and &lt;code&gt;mapStateToDispatch&lt;/code&gt; and &lt;code&gt;connect&lt;/code&gt; to do this in a less boilerplate-y fashion. If we need a local state (for forms and stuff) as well as access to the global store, we can create a container and put a container inside of that that will then render the presentational component. Also in &lt;code&gt;react-redux&lt;/code&gt;, if we need to access a component’s own props, we can use &lt;code&gt;ownProps&lt;/code&gt; in either or both of those functions as the second argument. &lt;code&gt;connect&lt;/code&gt; also does a couple of other super useful things for us, which I won’t repeat here in the interest of typing and space and not being repetitive, but needless to say that I’m a big fan.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fix up your routes if you need to.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I still haven’t yet implemented Redux or &lt;code&gt;react-redux&lt;/code&gt; straight out of the box. I&amp;rsquo;ve so far just built out a normal React app and then refactored to use Redux/&lt;code&gt;react-redux&lt;/code&gt;. One of my to-dos over break will be to try to get the hang of doing it from scratch without an existing React component.&lt;/p&gt;
+
+&lt;p&gt;We also talked about and used the &lt;code&gt;Provider&lt;/code&gt; component and initial/route-specific loading, where we can use React Router’s &lt;code&gt;&amp;lt;Route&amp;gt;&lt;/code&gt; element prop &lt;code&gt;onEnter&lt;/code&gt;. This allows us to set the next router state and do things like load data from an AJAX call upon entering a route.&lt;/p&gt;
+
+&lt;p&gt;We spent about a day on authentication, but to be honest, most of my group&amp;rsquo;s attempt at implementing authentication was stymied because we were still trying to wrap our heads around Redux. Learning more about and understanding authentication to at least some degree has been put on the to-do list for winter break!&lt;/p&gt;
+
+&lt;h2 id=&#34;other-things&#34;&gt;Other Things&lt;/h2&gt;
+
+&lt;h3 id=&#34;review-month-game-night-and-the-reign-of-dj-rumba-and-hot-seat&#34;&gt;Review Month, Game Night (and the Reign of DJ Rumba), and Hot Seat&lt;/h3&gt;
+
+&lt;p&gt;Speaking of which, we also talked about Review “Month” (for most cohorts, there’s only a week, but we have all of winter break as well!) and what we should be doing during that time – not only should we go through some of the material that we may be shaky on, but it’ll be a good time to explore the programming world and start some projects and start our tech talks, as well. I’ve been putting together a list of things I want to do over break and prioritizing them (because I honestly don’t think three weeks is enough to do everything I want to do!). I’ll post that soon&amp;hellip;once I have it figured out for myself. (Creating the list of things I want to do isn’t terribly difficult. It’s prioritizing them that will be&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Sometime in the middle of the week (days blur together after a while), we also did a short little Game Night. We played &lt;a href=&#34;http://agamari.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, which is a game developed by a group from the recently graduated cohort at Fullstack. Everyone&amp;rsquo;s a ball and you roll around a spherical world eating other balls, which makes you bigger. You can also eat other players, which, depending on their size, can make you &lt;em&gt;a lot&lt;/em&gt; bigger. One of our fellows became absolutely massive and was basically taking over our world.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-12/agamari.png&#34; class=&#34;center-img&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;She was so big that she couldn&amp;rsquo;t really see where she was rolling, and kept eating us by accident, even when she was trying to avoid eating people! I had a lot of fun and the game itself is quite impressive, both graphically and the amount of thought and work that was put into it. (They even took physics laws into account!)&lt;/p&gt;
+
+&lt;p&gt;We also finished up with our Hot Seat in our cohort and learned about one of our fellow’s previous lives, which included going door-to-door selling $3500 vacuums. I think we’re going to be doing Hot Seat Round 2 in Senior Phase, as a way to just find out more about each other, because how else do you find out that one of your fellows once was a vacuum salesman?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

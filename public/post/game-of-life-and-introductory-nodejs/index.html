@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Week 1, Day 5: Game of Life and Introductory Node.js &middot; Beth Qiang</title>
+  <meta name="author" content="Beth Qiang">
+  <meta name="description" content="A developer&#39;s thoughts on life, code, and the pursuit of happiness.">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- RSS autodiscovery -->
+  
+
+  <link rel="shortcut icon" href="http://bethqiang.com/img/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="http://bethqiang.com/css/main.css">
+  <link rel="stylesheet" href="http://bethqiang.com/css/github.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+  
+
+  <!-- Stylesheet for theme color -->
+  <style type="text/css">
+  a {color: #3498db;}
+  .pagination a {color: #3498db;}
+  .gist .gist-file .gist-meta {color: #3498db !important;}
+  a:focus, a:hover {color: #2079b4;}
+  h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+  .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+  <div class="site-header">
+  <nav class="site-nav">
+    <a href="#" id="menu-icon" class="menu-icon">
+      <svg viewBox="0 0 18 15">
+        <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"
+        />
+        <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"
+        />
+        <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"
+        />
+      </svg>
+    </a>
+
+    <div class="trigger">
+      <div class="social">
+        
+          <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+        
+        
+          <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+        
+        
+          <a href="//www.linkedin.com/in/bethanyqiang" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+        
+        
+          <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+        
+        
+      </div>
+
+      <div class="main-nav">
+        <a href="http://bethqiang.com/" class="page-link">Blog</a>
+        
+          <a href="about/" class="page-link">About</a>
+        
+          <a href="portfolio/" class="page-link">Portfolio</a>
+        
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+  <main class="content" role="main">
+    
+  <article class="post">
+    <header>
+      <h1 class="post-title">Week 1, Day 5: Game of Life and Introductory Node.js</h1>
+      <div class="post-meta">
+        
+          <time datetime="November 4, 2016">
+            November 4, 2016
+          </time>
+        
+      </div>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>We spent the first half of the day working on <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">Conway’s Game of Life</a>, which is probably one of the more widely known examples of cellular automaton. In this “game,” the player’s only interaction with the game is at the very beginning, when the board is first set. (It can also be set randomly, requiring no user input at all.) Each round after, cells “live” or “die” according to predetermined rules.</p>
+
+<p>My first introduction to the Game of Life was actually through <a href="https://www.freecodecamp.com/" target="_blank">Free Code Camp</a>, as it’s one of their “Data Visualization” projects to be implemented via React. So, I had seen it before and knew generally what it did, but I had never thought before of how to actually create it.</p>
+
+<p>We were given a hint that a <code>forEachCell</code> function would be useful, as we would be iterating through the board (we started with a 12x12 board) multiple times. It was set up to take an iterator function, and my partner and I had some trouble understanding how to implement it, which meant we put it off, which meant that we didn’t use it quite as much as we should have.</p>
+
+<p>We knew the biggest challenge was going to be a function that stores the number of alive neighbors around each cell, then is able to correlate that number with a future state, without changing its present state. Then, once the next state for each cell was determined, and only then, we’d change the state of every cell at once. If we changed the state at the same time we determined it (and not after every cell was determined), we would have a board that didn’t have distinct states and would literally always be in flux.</p>
+
+<p>We brainstormed two primary ways to solve this: either create a 2-D array, or store states in objects. (When we reviewed this with our instructor, we also learned that we could have stored the next state by adding an attribute on the HTML element.) We also briefly debated attempting promises, but in the end, went with storing them in objects and creating separate functions. This would allow us to attach any number of properties we wanted to our cells, and seemed a little simpler.</p>
+
+<p>Each of our objects had three properties: the cell (the HTML element ID), the count of that cell’s alive neighbors, and an array of the cell’s neighbors. (The array of its neighbors was introduced during the debugging process; it won’t be in the final version.) Each cell had an object, and all 144 objects were pushed into an array.</p>
+
+<p>We ended up using nested <code>for</code> loops to find the number of alive neighbors — this would have been a great place to use our <code>forEachCell</code> function, but again, we hadn’t written it yet. (Another thing to go back and do in the refactoring/cleaning up process!)</p>
+
+<p>We also had some difficulty getting the number of alive cells for all of the cells surrounding a cell without taking into consideration the cell itself. We attempted to use an if statement, but we were doing <code>if (i !== xcoordinate &amp;&amp; j !== ycoordinate)</code> — and we figured out that it was only counting the diagonals, which makes sense. However, we couldn’t figure out how to structure our if statement so that it would exclude the current cell, so we created a hack and if the cell was alive at the time, decrement the number of alive cells by one before storing it in the object. (Another thing to go back and actually do properly!)</p>
+
+<p>We ran the <code>forEach</code> method (again, a great place for that <code>forEachCell</code> function!) on our game array containing all of the objects to then set its class and attribute to alive or dead based on the rules given.</p>
+
+<p>The last step that we attempted to work on was enabling autoplay — that is, at the press of a button, change the state every pre-specified time interval. In order for the <code>setInterval</code> method to be called on the game itself and not the button that it was clicked on, we needed to bind (literally by using the <code>bind</code> method) the function to our game.</p>
+
+<pre><code>var playButton = document.getElementById(&quot;play_btn&quot;);
+    playButton.onclick = function() {
+      var autoplay = setInterval(
+      gameOfLife.step.bind(gameOfLife)
+}, 1000);
+</code></pre>
+
+<p>We were able to get it working without much trouble, but then quickly realized we didn’t have a way to stop it once it started. Our attempt at implementing the <code>clearInterval</code> method ended up completely breaking our play button, so that’s still a work in progress.</p>
+
+<p>There’s still a lot of work to be done on this project, including, but definitely not limited to:</p>
+
+<ul>
+<li>Fixing our autoplay function, and being able to stop it.</li>
+<li>Allowing the user to specify a width and height for the board.</li>
+<li>Creating a random pattern on the board to start, in case the user doesn’t want to initially click a bunch of boxes.</li>
+<li>Possibly creating pre-determined patterns?</li>
+<li>Refactoring and cleaning up. Lots and lots and lots of both.</li>
+</ul>
+
+<p>I’m excited to continue working on it independent of the program. I’ve wanted to create a vanilla JavaScript app for a while now, and just haven’t gotten around to it, so this gave me some great practice with that. Eventually, I want to re-implement it using React to submit to Free Code Camp. (Even though I am in a full-time, immersive program, I’d still like to complete Free Code Camp’s curriculum.)</p>
+
+<h2 id="introduction-to-node-js">Introduction to Node.js</h2>
+
+<p>We also did a brief introduction to Node.js, where we talked about what it was and what it did, came up with a pretty great analogy between JavaScript/Node.js and cooking, and talked about concurrency, asynchronicity, and callback functions. Having done a little bit of self-learning about Node.js and some of its intricacies, not all of it was entirely new to me, but I was able to learn nuggets like this:</p>
+
+<pre><code>var start = new Date;
+setTimeout(function() {
+  var end = new Date;
+  console.log(&quot;Time elapsed:&quot;, end - start, &quot;ms&quot;);
+}, 500);
+
+while (new Date - start &lt; 1000) {};
+</code></pre>
+
+<p>What does this print out?  Various answers included <code>Time elapsed: 500 ms</code>, <code>Time elapsed: 1000 ms</code>, <code>Time elapsed: 1500 ms</code>, among a few others. The answer was 1000ms — what happens in this block of code is that the <code>start</code> variable will be set with a date and time. The <code>setTimeout</code> function will begin, and wait for 500 ms. While it’s waiting (before it completes), it’ll jump straight down to the <code>while</code> loop. The loop is blocking, which means that even though the <code>setTimeout</code> function is yelling at Node because it’s done at 500ms, Node won’t interrupt the <code>while</code> loop. So, 1000 ms after the start, the loop will complete, and then Node will complete the <code>setTimeout</code> and console log <code>Time elapsed: 1000 ms</code>.</p>
+
+<p>We ran into an interesting problem while starting our Node.js workshop today that was related to this, but we weren’t able to find an answer yet — I’ll report back on Monday with what we’ve found!</p>
+
+<p>We also heard about what’s planned in our VR Lab and I’m SO excited. Part of our homework for next week consists of learning how to play Minecraft, and we’ll eventually be using ScriptCraft to hack in VR as well as building out VR projects. I have very little experience with VR, but I&rsquo;m excited to explore the possibilities!</p>
+
+    </section>
+
+    
+      <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+          <i class="fa fa-fw fa-tag"></i>
+          
+            
+            <a href="http://bethqiang.com/tags/fullstack-academy" class="tag-comma-separate">fullstack academy</a>
+          
+            
+            <a href="http://bethqiang.com/tags/junior-phase" class="tag-comma-separate">junior phase</a>
+          
+            
+            <a href="http://bethqiang.com/tags/game-of-life" class="tag-comma-separate">game of life</a>
+          
+            
+            <a href="http://bethqiang.com/tags/node.js" class="tag-comma-separate">node.js</a>
+          
+        </div>
+      </section>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/post\/game-of-life-and-introductory-nodejs\/';
+    var disqus_title = 'Week 1, Day 5: Game of Life and Introductory Node.js';
+    var disqus_url = 'http:\/\/bethqiang.com\/post\/game-of-life-and-introductory-nodejs\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      <section class="share">
+  <p class="info prompt">Share</p>
+  <a href="http://twitter.com/share?text=Week%201%2c%20Day%205%3a%20Game%20of%20Life%20and%20Introductory%20Node.js&url=http%3a%2f%2fbethqiang.com%2fpost%2fgame-of-life-and-introductory-nodejs%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fpost%2fgame-of-life-and-introductory-nodejs%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fpost%2fgame-of-life-and-introductory-nodejs%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+      <footer class="post-footer">
+        <section class="author">
+  <div class="authorimage" style="background: url(http://bethqiang.com/img/avatar.jpg)"></div>
+  <h4>Beth Qiang</h4>
+  <p class="bio">developer - runner - animal lover - food enthusiast</p>
+  <p class="meta">
+    <i class="fa fa-fw fa-map-marker"></i> Austin, TX
+  </p>
+</section>
+      </footer>
+    
+  </article>
+
+  </main>
+
+  <a href="javascript:">
+  <div id="back-to-top">
+    <p class="backtotop">
+      <i class="fa fa-lg fa-angle-double-up"></i>
+      <a class="backtotoptext">Back to top</a>
+    </p>
+  </div>
+</a>
+
+  <footer class="site-footer">
+  <div class="inner">
+    <section class="copyright">A developer&rsquo;s thoughts on life, code, and the pursuit of happiness.</section>
+  </div>
+</footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bethqiang.com/js/index.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>

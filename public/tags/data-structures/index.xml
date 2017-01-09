@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Structures on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/data-structures/index.xml</link>
+    <description>Recent content in Data Structures on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/data-structures/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library</title>
+      <link>http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/</guid>
+      <description>
+
+&lt;p&gt;We started off the day attempting to implement binary search trees and hash tables. We implemented our binary search tree with a linked list. We started by creating two constructor functions, one called &lt;code&gt;BinarySearchTree&lt;/code&gt; and one called &lt;code&gt;Node&lt;/code&gt; - our original approach was to create the root node as an instance of &lt;code&gt;BinarySearchTree&lt;/code&gt;, and then for each node off of it to be an instance of &lt;code&gt;Node&lt;/code&gt;. However, we didn’t realize that each node of the tree should also effectively its own tree, so we were getting errors left and write about how things couldn’t be found. Our test specs were looking for instances of the &lt;code&gt;BinarySearchTree&lt;/code&gt;, and we were trying to give it objects that had completely different properties.&lt;/p&gt;
+
+&lt;p&gt;With recursion, we implemented a method on the tree prototype to insert a value into our tree, and then to check if the tree already contained a given value. It was with the latter that we were enlightened to a fundamental principle of recursion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BinarySearchTree.prototype.contains = function(value) {
+  if (value === this.value){
+    return true;
+  } else {
+    if (value &amp;lt; this.value) {
+      if (this.left === null) {
+        return false;
+      }
+      this.left.contains(value);
+    } else {
+      if (this.right === null) {
+        return false;
+      }
+      this.right.contains(value);
+    }
+  }
+  return false;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our function was continually returning false, even when we put in test cases that used the numbers we knew we had added to the tree. We then changed our final return statement to &lt;code&gt;return foo&lt;/code&gt;, and we’d always get foo. So, we needed to figure out why our function seemed to completely disregard, well, everything that was in it.&lt;/p&gt;
+
+&lt;p&gt;We started by console logging each number as it was compared, and found that our program was finding matches — but still seemed to be skipping straight down to the bottom. After much struggling and finally asking for help, our instructor gave us a simple example to demonstrate what was happening.&lt;/p&gt;
+
+&lt;p&gt;If we have a simple tree that looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  1 &amp;lt;=a
+2 3 &amp;lt;= b, c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where 1, 2, and 3 are the values of each node and a, b, and c are the names of each node. If we’re trying to find the number “3,” and we called &lt;code&gt;a.contains(3)&lt;/code&gt;, the program would first check a to see if it was 3. It’s not, and 3 is greater than 1, so it’ll check c. &lt;code&gt;c.contains(3)&lt;/code&gt; IS 3, so it would return true — except we never returned that value, so the program skips directly to the bottom and returns &lt;code&gt;a.contains(3)&lt;/code&gt; instead (which is false!).&lt;/p&gt;
+
+&lt;p&gt;After a small adjustment in the form of adding return statements and a lesson in recursion principles, we had a working program!&lt;/p&gt;
+
+&lt;p&gt;We didn’t have time to complete the breadth-first and depth-first search methods in our tree, nor did we get to the part about hash tables. There’s also an entire world of other data structures out there that we didn’t cover, so I’m definitely planning on looking into those on my own!&lt;/p&gt;
+
+&lt;h2 id=&#34;dom-traversal&#34;&gt;DOM Traversal&lt;/h2&gt;
+
+&lt;p&gt;We also created our own mini JavaScript library of sorts, in which we wrote three functions:
+* The first would take in a selector (ex. an ID like &lt;code&gt;#pagetitle&lt;/code&gt;, a class like &lt;code&gt;.image&lt;/code&gt;, a tag.class like &lt;code&gt;img.thumbnail&lt;/code&gt;, or a tag like &lt;code&gt;div&lt;/code&gt;) and return what kind of selector it was.
+* The second would test an element to see if it matches the user’s selector.
+* The third would traverse the entire DOM tree and collect the elements that had the selector specified.&lt;/p&gt;
+
+&lt;p&gt;It was during the last part that my partner and I learned two more fundamental facts.&lt;/p&gt;
+
+&lt;p&gt;We learned that the &lt;code&gt;childNodes&lt;/code&gt; attribute (vs. &lt;code&gt;children&lt;/code&gt;) gives you text nodes, comment nodes, and whitespaces, in addition to actual HTML elements. And those text nodes, comment nodes, and whitespaces don’t have attributes like ID and class. And that was interfering with our ability to get the HTML nodes.&lt;/p&gt;
+
+&lt;p&gt;We also learned that the &lt;code&gt;concat&lt;/code&gt; method on the array prototype doesn’t work how we thought it did. We were trying to use recursion in the third function — if an element had children, to run through the same function on the children as well. Because we wanted to ultimately return an array with all of the elements that matched the input selector, we wanted to concatenate the children results with the primary node results, but the concat method we were using just wasn’t working.&lt;/p&gt;
+
+&lt;p&gt;After an hour and a half of going in circles and trying everything we could think of and Google (including using the &lt;code&gt;childNodes&lt;/code&gt; attribute — that’s how we ended up down that rabbit hole&amp;hellip;), we were informed that the &lt;code&gt;concat&lt;/code&gt; method on the array prototype returns a new array&amp;hellip;but the original array remains unchanged.&lt;/p&gt;
+
+&lt;p&gt;Sigh. Isn’t programming great?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 1, Days 1 and 2: Introductions, Make Your Own Adventure Game, Data Structures, and Hot Seat</title>
+      <link>http://bethqiang.com/post/introductions-make-your-own-adventure-game-and-data-structures/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/introductions-make-your-own-adventure-game-and-data-structures/</guid>
+      <description>
+
+&lt;p&gt;Though our cohort technically started at the end of September with 4 weeks of Foundations, October 31, 2016, marks my first day of Fullstack Academy&amp;rsquo;s Remote Immersive.&lt;/p&gt;
+
+&lt;p&gt;The first half of the day was dedicated to introductions from everyone and an orientation outlining everything to come. I&amp;rsquo;m excited to get to know everyone in my cohort better, and I&amp;rsquo;m interested to see if Fullstack can replicate their in-person experience and if so, how they do it. I&amp;rsquo;m a little nervous about everything being online - that in and of itself typically adds a little bit of distance when trying to connect with people - but I&amp;rsquo;m very hopeful that they can succeed, at least to a great degree.&lt;/p&gt;
+
+&lt;p&gt;David, one of the founders of Fullstack, was our primary instructor today, although we did get to meet our actual full-time instructors. We also have two fellows, who can be likened to teaching assistants. They&amp;rsquo;re students who have gone through the program previously, succeeded, and elected to stay on for another 13 weeks to mentor and help us navigate both the world of coding and the world of Fullstack.&lt;/p&gt;
+
+&lt;p&gt;The second half of the day, we split into pairs work on a simple Make Your Own Adventure Game in the command line. The only pair programming experience I had previously was in &lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;my bootcamp interviews&lt;/a&gt;, so it was a completely new experience for me, but I was a huge fan - after months of coding on my own, it was really nice to have someone to bounce ideas off of and gain a different perspective from.&lt;/p&gt;
+
+&lt;p&gt;After spending a few hours on that, we dove right into abstract data types and data structures. Nimit, Fullstack&amp;rsquo;s other co-founder, led the evening&amp;rsquo;s session. We talked about information theory and hardware when it comes to the storage of physical bits, as well as abstraction and encoding with text (morse code, the binary system, hexadecimal notation, UTF-8), images, and audio.&lt;/p&gt;
+
+&lt;h2 id=&#34;day-2&#34;&gt;Day 2&lt;/h2&gt;
+
+&lt;p&gt;We started off the next day by finishing up the general lecture with topics like machine code, assembly, compilers, and operating systems.&lt;/p&gt;
+
+&lt;p&gt;The rest of the day was entirely devoted to certain kinds of abstract data types and data structures. An abstract data type is a description of information, how that information is connected, and performable operations on that information. If you think that&amp;rsquo;s a little vague, that&amp;rsquo;s because it is. A few (slightly more) concrete examples of abstract data types are lists, which are ordered collections of elements, and dictionaries, which are sets of key-value pairs.&lt;/p&gt;
+
+&lt;p&gt;A data structure is a specific programmatic solution for storing, referencing, and accessing data in computer memory. Their purpose is to implement some kind of abstract data type - so, for example, you can implement a binary search tree (an abstract data type) with a linked list (a data structure).&lt;/p&gt;
+
+&lt;p&gt;In the afternoon, we implemented queues and linked lists in JavaScript. We implemented a queue using a simple array with the ability to add and remove a elements to the queue and find the size of the queue. We were expressly forbidden from using any &lt;code&gt;Array.prototype&lt;/code&gt; methods (including, but not limited to, &lt;code&gt;push&lt;/code&gt;, &lt;code&gt;shift&lt;/code&gt;, &lt;code&gt;length&lt;/code&gt;, etc.) Instead, we used &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;tail&lt;/code&gt; indices. Every time an element was added to the queue in our &lt;code&gt;enqueue&lt;/code&gt; method, we incremented the tail index by one so that whatever element we added after would be placed at the end. We did something similar in our &lt;code&gt;dequeue&lt;/code&gt; method - we returned the head index of the array, and incremented the head index by one. To find the size, we&amp;rsquo;d subtract the head index from the tail index, making sure that they could never cross and the size of the queue could never be less than 0.&lt;/p&gt;
+
+&lt;p&gt;Next, we created a linked list using two constructor functions: &lt;code&gt;LinkedList&lt;/code&gt;, which was empty, but necessary so that we could place methods on the prototype, and &lt;code&gt;Node&lt;/code&gt;, which represented each “element” in the linked list. Ours was bi-directional, so the &lt;code&gt;Node&lt;/code&gt; constructor had a &lt;code&gt;value&lt;/code&gt; property, a &lt;code&gt;previous&lt;/code&gt; property, and a &lt;code&gt;next&lt;/code&gt; property. We created methods to add nodes to the tail and head of the list, to remove nodes to the tail and head of the list, and to search the list for a value and return true or false depending on its existence in the list.&lt;/p&gt;
+
+&lt;p&gt;We ended the day with an introduction to Hot Seat. Hot Seat is a Fullstack tradition, whereby each person in the class sits in the &amp;ldquo;hot seat&amp;rdquo; for 10 minutes. It starts off with the person telling the class anything they deem is relevant about them, and then the floor opens up and the class is able to ask the person anything they want or that comes to mind. Our two instructors, Omri and Geoff, went first, and we learned some interesting facts about the both of them. Geoff&amp;rsquo;s background sounds really similar to mine - he also began college with the intent of going to medical school, and then pivoted and ended up in the programming world.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been an exhausting two days, and we&amp;rsquo;ve been reassured that our brains will get used to working so hard for so long. We&amp;rsquo;ll see if that pans out to be true! (I certainly hope so.)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Es6 on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/es6/index.xml</link>
+    <description>Recent content in Es6 on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/es6/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
+      <link>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <description>
+
+&lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
+
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+
+&lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
+
+&lt;p&gt;In the afternoon, we had our first Fullstack Hackathon. We worked among our learning groups to create something in Minecraft using &lt;a href=&#34;http://scriptcraftjs.org&#34; target=&#34;_blank&#34;&gt;ScriptCraft&lt;/a&gt;, a Minecraft plugin that lets you extend the game and build using JavaScript. Our team ended up building what we originally called &amp;ldquo;The Hunger Games&amp;rdquo; – we could specify the size of a maze to be built, and how many animals (we tested with chickens, to not have to worry about randomizing animals and such) would be placed in the maze. The maze would then programmatically be built in real-time, the chickens were placed, and then players would enter the maze and try to kill as many chickens as they could. The game would keep track of how many chickens each player killed.&lt;/p&gt;
+
+&lt;p&gt;(We later re-named it to &amp;ldquo;Chicken Rain&amp;rdquo; after a comment from a classmate, because we released all of the chickens at once from the sky, thereby making it rain chickens for a small period of time.)&lt;/p&gt;
+
+&lt;p&gt;Though it sounds relatively simple and we don&amp;rsquo;t have a huge amount of code (minus comments and failed attempts and whitespaces, it&amp;rsquo;s only about 40 lines), it took a lot of effort and researching to figure out how to do each baby step. The hardest part for us was attempting to place chickens where there aren&amp;rsquo;t already blocks from the maze so that the chickens would actually be in the maze, and not on top of it. We weren&amp;rsquo;t able to solve this issue in the time that was given to us – apparently, ScriptCraft has really weird object structures, so you can&amp;rsquo;t just pull out a property like you could in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/scriptcraft-hackathon-game.png&#34; class=&#34;center-img&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
+
+&lt;p&gt;Despite the learning curve, it was a lot of fun, and it was a great way to destress from the checkpoint. It was also really cool to apply our JavaScript knowledge to a &lt;em&gt;completely&lt;/em&gt; different context.&lt;/p&gt;
+
+&lt;h2 id=&#34;discovering-the-hidden-side-of-jquery&#34;&gt;Discovering the Hidden Side of JQuery&lt;/h2&gt;
+
+&lt;p&gt;Today was spent entirely on JQuery. I thought this would be a &amp;ldquo;oh, let&amp;rsquo;s catch up with a good friend&amp;rdquo; kinda day – JQuery and I have spent a lot of time together throughout the my earning of Free Code Camp&amp;rsquo;s Front-End Certification, but it turns out, there&amp;rsquo;s &lt;em&gt;a lot&lt;/em&gt; I don&amp;rsquo;t know about JQuery.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/trip-planner-app-jquery.png&#34; class=&#34;center-img&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
+
+&lt;p&gt;When we started the &amp;ldquo;add&amp;rdquo; functionality, we weren&amp;rsquo;t really thinking about how to make our code reusable, so we ended up writing basically the same 13 lines of code for all three sections. (We&amp;rsquo;re totally violating DRY in probably every way possible.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#hotels&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var selectedOption = $(&amp;quot;#hotel-choices option:selected&amp;quot;).text();
+  var hotelIndex;
+  hotels.forEach(function(hotel, index) {
+    if (hotel.name === selectedOption) {
+      hotelIndex = index;
+    }
+  })
+  var hotelLocation = hotels[hotelIndex].place.location;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex + &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; + selectedOption + &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
+  var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
+  $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;drawMarker&lt;/code&gt; function on the second-to-last line was originally part of our &lt;code&gt;maps.js&lt;/code&gt; inside of another function, but because we needed to access it here, we ended up making it a global function. Our instructor brought up the idea of using a &amp;ldquo;fake&amp;rdquo; &lt;code&gt;module.exports&lt;/code&gt;/&lt;code&gt;require&lt;/code&gt; for the front-end as an alternative, so that&amp;rsquo;s definitely something I want to look into once we&amp;rsquo;re able to get the functionality down.&lt;/p&gt;
+
+&lt;p&gt;The thing that we hands-down struggled with the most was trying to connect the marker to the item that was added, so that when we deleted the item, the marker would be deleted along with it. The solution we ended up coming up with is also a little bit of a mess, but we were &lt;em&gt;so happy&lt;/em&gt; when we finally got it working.&lt;/p&gt;
+
+&lt;p&gt;In the second-to-last line of the code above, we saved the marker in the (unfortunately also global) variable &lt;code&gt;markerTest&lt;/code&gt;. Then, we used JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method on the &lt;code&gt;#hotel-itinerary&lt;/code&gt; div with the corresponding database &lt;code&gt;id&lt;/code&gt; of the item to store the name of the hotel/restaurant/activity, and the marker that was just added. Then, to remove both:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#itinerary&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var name = $(this).siblings()[0].textContent;
+  var index = $(this).parent().attr(&#39;id&#39;);
+  var parent = $(this).parent().parent().attr(&#39;id&#39;);
+  var marker = $(&amp;quot;#&amp;quot; + parent + &amp;quot; #&amp;quot; + index).data(name);
+  marker.setMap(null);
+  $(this).parent().remove();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Essentially, we jumped through several hoops to find the corresponding &lt;code&gt;div&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; of the text next to the &amp;ldquo;X&amp;rdquo; button that was clicked, and then used that to look up the marker that was stored with the name. &lt;code&gt;marker.setMap(null)&lt;/code&gt; removes that specific marker, and then we finally remove the actual div containing the text and the button.&lt;/p&gt;
+
+&lt;p&gt;We were able to figure out how to add a day with slightly less headaches, and our challenge for tomorrow will be to figure out how to switch between days.&lt;/p&gt;
+
+&lt;h2 id=&#34;intro-to-es6&#34;&gt;Intro to ES6&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
+
+&lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

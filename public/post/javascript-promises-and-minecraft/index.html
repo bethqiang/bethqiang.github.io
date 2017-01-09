@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Week 2, Day 5: JavaScript Promises and Minecraft &middot; Beth Qiang</title>
+  <meta name="author" content="Beth Qiang">
+  <meta name="description" content="A developer&#39;s thoughts on life, code, and the pursuit of happiness.">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- RSS autodiscovery -->
+  
+
+  <link rel="shortcut icon" href="http://bethqiang.com/img/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="http://bethqiang.com/css/main.css">
+  <link rel="stylesheet" href="http://bethqiang.com/css/github.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+  
+
+  <!-- Stylesheet for theme color -->
+  <style type="text/css">
+  a {color: #3498db;}
+  .pagination a {color: #3498db;}
+  .gist .gist-file .gist-meta {color: #3498db !important;}
+  a:focus, a:hover {color: #2079b4;}
+  h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+  .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+  <div class="site-header">
+  <nav class="site-nav">
+    <a href="#" id="menu-icon" class="menu-icon">
+      <svg viewBox="0 0 18 15">
+        <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"
+        />
+        <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"
+        />
+        <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"
+        />
+      </svg>
+    </a>
+
+    <div class="trigger">
+      <div class="social">
+        
+          <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+        
+        
+          <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+        
+        
+          <a href="//www.linkedin.com/in/bethanyqiang" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+        
+        
+          <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+        
+        
+      </div>
+
+      <div class="main-nav">
+        <a href="http://bethqiang.com/" class="page-link">Blog</a>
+        
+          <a href="about/" class="page-link">About</a>
+        
+          <a href="portfolio/" class="page-link">Portfolio</a>
+        
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+  <main class="content" role="main">
+    
+  <article class="post">
+    <header>
+      <h1 class="post-title">Week 2, Day 5: JavaScript Promises and Minecraft</h1>
+      <div class="post-meta">
+        
+          <time datetime="November 12, 2016">
+            November 12, 2016
+          </time>
+        
+      </div>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>After the <a href="http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/" target="_blank">callback hell we experienced yesterday</a>, we learned about promises today. A promise, according to my instructor and <a href="https://promisesaplus.com/" target="_blank">the Promises/A+ Spec</a> and basically any other legitimate source, represents the <strong>eventual result of an asynchronous operation</strong>.</p>
+
+<p>Let’s bring back our (slightly refactored, with the <code>insertIntoTable</code> function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:</p>
+
+<pre><code>router.post('/tweets', function(req, res, next){
+  let userName, name = req.body.name, content = req.body.content;
+    client.query('SELECT id FROM users WHERE name = $1', [name], function(err, result) {
+      if (err) return next(err);
+      if (result.rows.length === 0) {
+        client.query('INSERT INTO users (name) VALUES ($1)', [name], function(err, result) {
+          if (err) return next(err);
+          client.query('SELECT id FROM users WHERE name = $1', [name], function(err, result) {
+            if (err) return next(err);
+            insertIntoTable(result.rows[0].id, content);
+          });
+        });
+      } else {
+        insertIntoTable(result.rows[0].id, content);
+      }
+    });
+  });
+}
+</code></pre>
+
+<ul>
+<li>I don’t know what you’re talking about, it’s perfect.</li>
+</ul>
+
+<p>Just kidding. For real this time:</p>
+
+<ul>
+<li>It’s not very portable – you’d be hard-pressed to reuse parts of this code anywhere else.</li>
+<li>You can’t perform concurrent callback functions if you wanted to.</li>
+<li>Our code isn’t any kind of linear, and it can be hard to read and figure out what, when, and where things are happening and variables are passed through.</li>
+<li>We’re constantly repeating the error handler, although we need to if we want any error that happens to be registered – we can’t just omit it.</li>
+</ul>
+
+<h2 id="basics-of-promises">Basics of Promises</h2>
+
+<p>We were given a <code>promisifiedReadFile</code> function, which returned a new <code>Promise</code> with a <code>fs.readFile</code> function inside of it. We did various exercises in the context of reading and subsequently logging stanzas of a poem, where each stanza was its own text file. So, to read and log stanzas one and two, in any order:</p>
+
+<pre><code>promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1) {
+  console.log(stanza1);
+});
+
+promisifiedReadFile('poem-one/stanza-02.txt')
+.then(function(stanza2) {
+  console.log(stanza2);
+});
+</code></pre>
+
+<p>These two read processes would occur in parallel. However, one of the powerful thing about promises is that we can chain them in a specified order, so one thing always happens after another has completed.</p>
+
+<pre><code>promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt');
+})
+.then(function(stanza2) {
+    console.log(stanza2);
+});
+</code></pre>
+
+<p><strong>We need to return the promise at the end of the first <code>then</code></strong> – otherwise, the second <code>then</code> wouldn’t know to wait for the file to be read before logging stanza 2, and then our order wouldn’t be guaranteed.</p>
+
+<h2 id="multiple-handlers">Multiple Handlers</h2>
+
+<p>We can also handle two promises concurrently using multiple handlers. Let’s say we don’t care in which order stanzas 2 and 3 are read and printed, we just want them to be read and printed <em>after</em> stanza 1 is read.</p>
+
+<pre><code>const stanza1 = promisifiedReadFile('poem-one/stanza-01.txt')
+
+stanza1
+.then(function() {
+return promisifiedReadFile('poem-one/stanza-02.txt');
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+
+stanza1
+.then(function() {
+return promisifiedReadFile('poem-one/stanza-03.txt');
+})
+.then(function(stanza3) {
+  console.log(stanza3);
+})
+</code></pre>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<p>Another one of the advantages of using promises is error handling. Let’s see what our promise chain would look like if we included an error handler. We can do this one of three ways:</p>
+
+<ul>
+<li>Create a new <code>then</code> statement with the first argument as null and the second being the error function</li>
+<li>Attach our error handler to our last <code>then</code> statement</li>
+<li>Use <code>catch</code></li>
+</ul>
+
+<pre><code>promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt');
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+.then(null, function(err) { // the first argument is always the success function, the second is the failure function
+  console.log(err);
+})
+
+// is equivalent to
+
+promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt')
+})
+.then(function(stanza2) { // success function
+  console.log(stanza2);
+},
+function(err) { // failure function
+  console.log(err);
+};
+)
+// is equivalent to
+
+promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt')
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+.catch(function(err) { // use catch instead
+  console.log(err);
+})
+</code></pre>
+
+<p>Either stanza 1 or stanza 2 could have failed, and in both cases, the promise chain would end and the closest error handler after the promise would run. This means we don’t need to create an error handler for each part of the function; we can just include a unified error at the end. If any one of the parts before it fail, it will look for the closest error handler after it, and use that to handle the error. The promise chain is only followed if <em>everything</em> successful.</p>
+
+<p>However, something to be aware of is that <strong>if an error is successfully handled, that promise will have succeeded</strong>. What this means is that if we have a promise chain that looks like this:</p>
+
+<pre><code>promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1){
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt');
+})
+.then(function(stanza2) {
+  console.log(stanza2)
+})
+.then(null, function(err) {
+  console.log(err);
+})
+.then(function() {
+  console.log('successfully done');
+})
+</code></pre>
+
+<p>If there is an error in reading stanza 1, we&rsquo;ll skip past the second <code>then</code> and go directly to the error handler. If our error handler is successful in handling that error (e.g. if another error doesn’t arise when it’s running the function inside of it), then we’ll see “everything successfully done” in the console – even though it wasn’t.</p>
+
+<p>If we <em>only</em> wanted to see “everything successfully done” if the reading of both stanzas 1 and 2 were successful, we’d have to either force another error to be thrown in our error handler (which seems a bit silly), or we could just move the <code>console.log</code> of the success message before the error handler, like so:</p>
+
+<pre><code>promisifiedReadFile('poem-one/stanza-01.txt')
+.then(function(stanza1){
+  console.log(stanza1);
+  return promisifiedReadFile('poem-one/stanza-02.txt');
+})
+.then(function(stanza2) {
+  console.log(stanza2)
+})
+.then(function() {
+  console.log('everything successfully done');
+})
+.then(null, function(err) {
+  console.log(err);
+})
+</code></pre>
+
+<p>If no errors occur, the entire promise chain will be followed and we’ll get a “everything successfully done” console logged at the end. If an error is thrown somewhere, our message won’t be logged.</p>
+
+<h2 id="promise-all-and-promise-each">Promise.all and Promise.each</h2>
+
+<p>Finally, we also used <code>Promise.all</code> and <code>Promise.each</code>, the last of which is fairly specific to the bluebird library, but very useful in certain cases.</p>
+
+<p>Instead of having to manually write out eight <code>then</code> statements for each of eight stanzas, we can use <code>Promise.all</code>.</p>
+
+<pre><code>// create an array that contains filenames for each of the stanzas
+let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+  return 'poem-one/' + 'stanza-0' + n + '.txt';
+});
+
+let promiseArr = [];
+// create an array of promises corresponding to each file
+filenames.map(function(filename) {
+  promiseArr.push(promisifiedReadFile(filename)
+  .then(function(filename) {
+    console.log(filename);
+    })
+  )
+});
+
+Promise.all(promiseArr)
+.then(function() {
+  console.log('everything succesfully done');
+})
+.then(null, function(err) {
+  console.log(err);
+});
+</code></pre>
+
+<p>First, we create an array that contains filenames for each of the stanzas. Then, we create an array of promises corresponding to the reading and printing of each file. Lastly, we pass our promise array as an argument into <code>Promise.all</code>, and when all of the stanzas are successfully read and printed, log a success message. If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.</p>
+
+<p>An important thing to note is that <code>Promise.all</code> logs the result of promises in the order that files are done being read – not necessarily sequentially. If we wanted them in order, we’d have to use <code>Promise.each</code> instead.</p>
+
+<pre><code>let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+  return 'poem-one/' + 'stanza-0' + n + '.txt';
+});
+
+let promiseArr = [];
+
+Promise.each(filenames, function(filename) {
+  return promisifiedReadFile(filename)
+  .then(function(stanza) {
+    console.log(stanza);
+  });
+})
+.then(function() {
+  console.log('everything successfully done');
+})
+.then(null, function(err) {
+  console.error(err);
+})
+</code></pre>
+
+<p>After we have our array of filenames, we pass the filename and a callback function into <code>Promise.each</code>. The callback function returns a new promise for the first file, then prints it, then returns a new promise for the second file, then prints it, and so on until it runs through all eight files. Once it does, then it console.logs “everything successfully done.” If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.</p>
+
+<p>So, in summary, promises allow for:</p>
+
+<ul>
+<li>Portable code/functions</li>
+<li>“Linear”/“flat” chains</li>
+<li>Multiple handlers</li>
+<li>Unified error handling</li>
+</ul>
+
+<h2 id="minecraft">Minecraft</h2>
+
+<p>Friday evening, we had our first Game Night. Because hacking and using VR in Minecraft will both be a part the upcoming weeks, we used Game Night this week to start learning how to play. Fullstack actually built their New York campuses (Fullstack and Grace Hopper) in Minecraft – the end result is seriously impressive. We were also each given a plot of land in front of the building to build whatever we wanted to.</p>
+
+<p>A lot of mishaps were had, but a lot of fun was as well. A few of our more notable events include:</p>
+
+<ul>
+<li>We didn’t quite get the settings right for people to be able to build or destroy or do anything except walk/fly around and whack each other&hellip; so that’s what we did for 45 minutes, until staff did a hack to work around the issue.</li>
+<li>A few of our cohort kept getting lost in the forest, or stuck outside, and more than a few fell off of the world multiple times.</li>
+<li>A classmate was building a lava moat around his plot (because you know, why not?) and at one point, his lava spilled over to someone else’s plot. It was quite the effort to contain the lava before it spread.</li>
+<li>One of Fullstack’s co-founders attempted to build <a href="http://www.panynj.gov/wtcprogress/transportation-hub.html" target="_blank">the Oculus structure at the World Trade Center transportation hub</a>. And once he got bored of that (the partial thing was actually quite impressive!), he started continuously teleporting one of our instructors to him and then blowing him up with TNT.</li>
+</ul>
+
+<p>And if you’re curious, here’s a small snippet of video that our Product Manager, Mark Davis, recorded:</p>
+
+<iframe class="center-img" width="560" height="315" src="https://www.youtube.com/embed/jzLrYTZ47sc" frameborder="0" allowfullscreen></iframe>
+
+<p>I had a lot of fun, and I’m kind of obsessed with my cohort and our staff and instructors. I’m <em>really</em> looking forward to getting our VR headsets and trying them out in our virtual world, as well as just getting to spend more time with all of these people, both in front of a code editor and not!</p>
+
+    </section>
+
+    
+      <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+          <i class="fa fa-fw fa-tag"></i>
+          
+            
+            <a href="http://bethqiang.com/tags/fullstack-academy" class="tag-comma-separate">fullstack academy</a>
+          
+            
+            <a href="http://bethqiang.com/tags/junior-phase" class="tag-comma-separate">junior phase</a>
+          
+            
+            <a href="http://bethqiang.com/tags/promises" class="tag-comma-separate">promises</a>
+          
+            
+            <a href="http://bethqiang.com/tags/minecraft" class="tag-comma-separate">minecraft</a>
+          
+        </div>
+      </section>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/post\/javascript-promises-and-minecraft\/';
+    var disqus_title = 'Week 2, Day 5: JavaScript Promises and Minecraft';
+    var disqus_url = 'http:\/\/bethqiang.com\/post\/javascript-promises-and-minecraft\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      <section class="share">
+  <p class="info prompt">Share</p>
+  <a href="http://twitter.com/share?text=Week%202%2c%20Day%205%3a%20JavaScript%20Promises%20and%20Minecraft&url=http%3a%2f%2fbethqiang.com%2fpost%2fjavascript-promises-and-minecraft%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fpost%2fjavascript-promises-and-minecraft%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fpost%2fjavascript-promises-and-minecraft%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+      <footer class="post-footer">
+        <section class="author">
+  <div class="authorimage" style="background: url(http://bethqiang.com/img/avatar.jpg)"></div>
+  <h4>Beth Qiang</h4>
+  <p class="bio">developer - runner - animal lover - food enthusiast</p>
+  <p class="meta">
+    <i class="fa fa-fw fa-map-marker"></i> Austin, TX
+  </p>
+</section>
+      </footer>
+    
+  </article>
+
+  </main>
+
+  <a href="javascript:">
+  <div id="back-to-top">
+    <p class="backtotop">
+      <i class="fa fa-lg fa-angle-double-up"></i>
+      <a class="backtotoptext">Back to top</a>
+    </p>
+  </div>
+</a>
+
+  <footer class="site-footer">
+  <div class="inner">
+    <section class="copyright">A developer&rsquo;s thoughts on life, code, and the pursuit of happiness.</section>
+  </div>
+</footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bethqiang.com/js/index.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coding Bootcamps on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/coding-bootcamps/index.xml</link>
+    <description>Recent content in Coding Bootcamps on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/coding-bootcamps/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The Journey to Fullstack, Part 3: The Final Decision</title>
+      <link>http://bethqiang.com/post/the-journey-to-fullstack-part-3-the-final-decision/</link>
+      <pubDate>Fri, 21 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/the-journey-to-fullstack-part-3-the-final-decision/</guid>
+      <description>
+
+&lt;p&gt;If you’ve been following along on my journey thus far, at this point, I’ve been accepted to and received various scholarship amounts from Fullstack Academy, Galvanize, and Viking Code School. Here’s how I made the decision between those three.&lt;/p&gt;
+
+&lt;h2 id=&#34;galvanize&#34;&gt;Galvanize&lt;/h2&gt;
+
+&lt;p&gt;I actually ruled Galvanize out pretty early on — before I had even applied to Fullstack and Viking, in fact. My initial reservations centered around the tight turnaround times for when I was notified of my admission and scholarship and the beginning of the cohort. I was accepted on a Thursday, and the class was supposed to start on the following Monday. However, as I got to know Galvanize and other programs more, I realized the program just wasn’t the best fit I knew I could find.&lt;/p&gt;
+
+&lt;p&gt;I was able to speak to a current student, who also graciously gave me a tour of campus after hours. I asked her, “If you could change one thing about the program, what it would it be?” and her response was that she wished she could get more feedback on her work. (As a small tangent, that’s my favorite question to ask anyone of anything I’m considering — the answer can reveal a lot!) One of the reasons I chose to pursue a bootcamp was so that I could have frequent interaction with and feedback from people who know what they’re doing, so that wasn’t something I necessarily wanted to hear.&lt;/p&gt;
+
+&lt;p&gt;I initially really liked that Galvanize’s program is at a slightly less intense pace and timeline than a lot of other bootcamps, and it has room for you to actually have a life. As I continued my bootcamp search, however, I found that I wanted the intensity and the rigor and the “immersive-ness” that accompanies the 6-days-a-week-10-or-12-or-I’ve-lost-count-hours-per-day schedule. This wasn’t necessarily anything against Galvanize’s program; I just realized that I wanted something different.&lt;/p&gt;
+
+&lt;p&gt;And with that, the decision came down to either Fullstack or Viking.&lt;/p&gt;
+
+&lt;h2 id=&#34;fullstack-viking-the-similarities&#34;&gt;Fullstack &amp;amp; Viking: The Similarities&lt;/h2&gt;
+
+&lt;p&gt;On an overall level, Fullstack and Viking are very similar in many ways.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They’re both online. Viking’s only option is online, and this is Fullstack’s first online cohort.&lt;/li&gt;
+&lt;li&gt;They’re both known for being fairly intense programs — they expect at least 60 hours of work per week from their students, although it’s distributed slightly differently (I’ll get to that in a bit).&lt;/li&gt;
+&lt;li&gt;The program and content itself. Both seemed to have easy and frequent access to and contact with instructors and mentors, a copious amount of pair programming and group work, a project-based curriculum that would cover the entirety of full-stack development, in-depth work with algorithms and data structures, and strong job application and placement support.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;fullstack-viking-the-tangible-differences&#34;&gt;Fullstack &amp;amp; Viking: The Tangible Differences&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The curriculum. Fullstack teaches full-stack JavaScript, whereas Viking has a much heavier emphasis on Ruby and really only teaches JavaScript in the context of a couple of front-end frameworks. Beyond this, Fullstack seemed to have a much more comprehensive and robust curriculum, including Computer Science Saturdays designed to give students a deeper understanding of computer science and the building blocks of modern tools, and the CTO Program to expose students to the non-coding side of the software development industry.&lt;/li&gt;
+&lt;li&gt;The schedule. Viking’s schedule is Monday through Friday, from approximately 10am to at least 8 or 9pm in my time zone. Fullstack’s schedule is Monday through Saturday, from approximately 9am to 5:30pm in my time zone. Fullstack’s schedule meant that I could still have a couple of hours in the evening to attend Meetups in my area, catch up on some work or more challenging material, or start prepping for the next day, without having to stay up late. (Learning is important, but so is sleep!)&lt;/li&gt;
+&lt;li&gt;Fullstack is setting up a &lt;a href=&#34;http://fullstackacademy.com/remote-immersive#vrlab&#34; target=&#34;_blank&#34;&gt;Virtual Reality Lab&lt;/a&gt;, exclusively for Remote Immersive students. I’ll be honest, this is actually one of the things that drew me to Fullstack in the first place. I don’t have much experience with VR, but I definitely want to learn more about it and be able to experience it! I’m also very interested in the intersection between technology and education, so I was really excited about this part of the program.&lt;/li&gt;
+&lt;li&gt;The cost. Viking does have a deferred tuition model and I received a full scholarship from an outside organization, which meant that I would pay nothing to attend. While I didn’t receive a full scholarship from Fullstack, I received enough that cost became a very small factor in my decision. (Thanks, Fullstack! If you’re curious, you can read more about &lt;a href=&#34;http://www.fullstackacademy.com/remote-immersive#scholarships&#34; target=&#34;_blank&#34;&gt;the $500,000 fund&lt;/a&gt; they’ve set aside for the first few cohorts of their Remote Immersive program.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;the-intangibles-the-final-decision&#34;&gt;The Intangibles &amp;amp; the Final Decision&lt;/h2&gt;
+
+&lt;p&gt;For me, it came down to one big question: Where could I see myself thriving more?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The interview and the learning experience. Like I mentioned in the last post, I absolutely loved my Fullstack interview, and was very frustrated by my Viking interview. Contrary to the latter, I felt like I learned a fair bit in my Fullstack interview, and the fellow that interviewed me was enormously helpful and instrumental in that. I was encouraged to look at problems in a different way.&lt;/li&gt;
+&lt;li&gt;The community. Fullstack believes heavily in a “no asshole rule,” which is based upon the book &lt;a href=&#34;https://www.amazon.com/Asshole-Rule-Civilized-Workplace-Surviving/dp/0446698202&#34; target=&#34;_blank&#34;&gt;The No Asshole Rule: Building a Civilized Workplace and Surviving One That Isn’t&lt;/a&gt;. Having previously worked with a manager that was the epitome of a “workplace asshole,” I loved that they went out of their way to ensure that everyone they admitted and hired was respectful, friendly, and open.&lt;/li&gt;
+&lt;li&gt;The instructors. Having at least some industry experience within the instructing team was also important to me. All of Viking’s instructors seemed to have come from other bootcamps (the founder graduated from App Academy) or from Viking itself, and there seemed to be little industry experience among them. Some of Fullstack’s instructors are former students who have moved up through the ranks and proven the ability to both teach and code, and some (including the co-founders!) worked in the industry for some time before joining Fullstack. Whichever route they took, they had to have demonstrated both the ability to teach and the ability to code and contribute to real-life projects.&lt;/li&gt;
+&lt;li&gt;The students. A few Google, LinkedIn, and Twitter searches of Fullstack’s alumni produced some impressive results. The very great majority seemed employed at decent companies and startups, and had relatively active and robust online presences through social media, blogs, and websites. In contrast, it was hard for me to find any substantial information outside of Viking’s website about its graduates, and most of the profiles I found had been abandoned.&lt;/li&gt;
+&lt;li&gt;The projects. Fullstack has a &lt;a href=&#34;http://www.fullstackacademy.com/student-gallery&#34; target=&#34;_blank&#34;&gt;showcase of student projects&lt;/a&gt; on their website. (It didn’t hurt that two of the final projects were online versions of Pandemic and Settlers of Catan, both games that I love.) I had to hunt down Viking’s students’ projects, and even then, I could only find &lt;a href=&#34;https://www.youtube.com/watch?v=9IFEsq3Vsxw&#34; target=&#34;_blank&#34;&gt;a Youtube video&lt;/a&gt; from the very first cohort a year ago. Although I don’t have enough knowledge yet to evaluate the technical details, Fullstack’s students’ projects just seemed much more polished to me. The fact that students have &lt;a href=&#34;https://www.quora.com/How-many-hackathons-have-students-at-Fullstack-Academy-won&#34; target=&#34;_blank&#34;&gt;placed at or won a number of hackathons&lt;/a&gt; is also a testament to the skills they gain and the work they’re able to produce.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Though I’d be a part of Fullstack’s Remote Immersive cohort (and therefore a guinea pig of sorts) and Fullstack cost more for me, after I laid all of this out, I knew Fullstack was the right decision. I’m almost finished with the Foundations phase of their curriculum, and that has continually been re-affirmed throughout. I’ve arguably learned more in the past three weeks than I have in the past few months of self-learning combined, and the actual immersive hasn’t even started yet!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Read the other posts in this series:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-1-the-beginning/&#34; target=&#34;_blank&#34;&gt;Part 1: The Beginning&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;Part 2: The Bootcamp Admissions Process&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Journey to Fullstack, Part 2: The Bootcamp Admissions Process</title>
+      <link>http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/</link>
+      <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/</guid>
+      <description>
+
+&lt;p&gt;Once I had made the decision to apply to a bootcamp, the question then became: which ones? There are now more options than ever available to those wanting to attend, and it can be a daunting task to sift through them all and find one that fits what you’re looking for.&lt;/p&gt;
+
+&lt;p&gt;I started off with three main criteria. The first was that it was either located in Austin, where I currently live, or that it was online. I theoretically have the capability to pick up and move, but there were several logistical challenges with that that I preferred to avoid if I could. The second was that the curriculum would offer both breadth and depth. I wanted a program that taught full-stack development, but I also wanted to understand &lt;em&gt;why&lt;/em&gt; and &lt;em&gt;how&lt;/em&gt; things worked the way they did, and not just how to write code. I also wanted a focus on CS fundamentals, algorithms, and data structures. I don’t have a CS background, so it was important to me that these were part of the curriculum.&lt;/p&gt;
+
+&lt;p&gt;The last was, because I had spent months learning on my own prior, that it would take me from “20–120,” and not “0–60.” A program that takes someone from “0–60” would be one that takes people who have maybe never seen a line of code, or people who have a very rudimentary knowledge of coding, and gets them to a workable level. A program that takes someone from “20–120” will typically accept people who have built up a higher level of knowledge, whether gained through teaching themselves, working through courses on platforms like &lt;a href=&#34;https://www.codeschool.com/&#34; target=&#34;_blank&#34;&gt;CodeSchool&lt;/a&gt; or &lt;a href=&#34;https://www.codecademy.com/&#34; target=&#34;_blank&#34;&gt;Codeacademy&lt;/a&gt;, or have taken bootcamp prep/fundamentals courses that are offered by various organizations. Because their students start off at a slightly more advanced level, the programs are able to teach and do more than the “0–60” programs.&lt;/p&gt;
+
+&lt;h2 id=&#34;by-the-numbers&#34;&gt;By the Numbers&lt;/h2&gt;
+
+&lt;p&gt;So, with those in mind, I set off on my search. Here’s how things panned out.
+The number of programs I…&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Very heavily considered*: 8&lt;/li&gt;
+&lt;li&gt;Of those, those that were online: 4 (the other 4, in-person)&lt;/li&gt;
+&lt;li&gt;Applied to: 6&lt;/li&gt;
+&lt;li&gt;Never heard a peep back from: 1&lt;/li&gt;
+&lt;li&gt;Got an interview from: 5&lt;/li&gt;
+&lt;li&gt;Interviewed with: 3&lt;/li&gt;
+&lt;li&gt;Was accepted to: 3&lt;/li&gt;
+&lt;li&gt;Withdrew from before having the interview**: 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*Very heavily considered basically means I did a ton of research into, and maybe even talked to someone who worked in admissions or as an instructor for the program prior to applying.&lt;/p&gt;
+
+&lt;p&gt;**I’ll go into this a little more later, but I actually didn’t apply to all 6 in a huge batch — I applied to a couple at a time and waited to complete at least most of the process before doing more. I was accepted into great programs with offers I couldn’t refuse before I interviewed with those 2, and decided to withdraw from the process at that time.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-programs&#34;&gt;The Programs&lt;/h2&gt;
+
+&lt;p&gt;Okay, now that we have all of that out of the way, here’s a summary of the programs that looked into, my impressions, and the result of the process and why I made the decisions that I did.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-firehose-project-https-www-thefirehoseproject-com&#34;&gt;&lt;a href=&#34;https://www.thefirehoseproject.com/&#34; target=&#34;_blank&#34;&gt;The Firehose Project&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Online&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; 22 weeks. New people start every Monday. Weekly 1-on-1 meetings with your mentor. Cumulates in a group project, where you work with a group of people to simulate a real-life agile team.&lt;/p&gt;
+
+&lt;p&gt;FHP, as it’s sometimes abbreviated, doesn’t really have the normal admissions process. They have a two-week free intro course, and anyone that completes it and decides that they want to pursue the full program can. My interaction with FHP consisted of doing the first week of the intro course, and then having an extensive conversation with Marco, one of the founders and mentors. Marco was very open about the program itself and was extremely helpful in describing the pros and cons of FHP. He was also very willing to connect me with alumni, should I want that option.&lt;/p&gt;
+
+&lt;p&gt;Result: I didn’t end up finishing the intro course and pursuing this further. The overall structure also seemed a bit laxer than what I was looking for in a lot of ways. First, a “batch” of people started every Monday, and people were entering and finishing every week. A lot of students have very different goals — some want a career change and become a full-fledged professional developer, some wanted just enough technical information to enter the entrepreneurship realm, some wanted to gain some technical skills to help them in their current job. Similarly, there’s a wide variety of commitment levels that students have throughout the program — some quit their job to focus on it full-time, and others work full-time in their current jobs while going through the program.&lt;/p&gt;
+
+&lt;p&gt;I also really didn’t like the fact that I’d only be able to meet with a mentor just once a week and it seemed like the majority of the curriculum was independent and done on your own time, rather than extended periods of pair programming and working with others. Great for some, just not what I personally was looking for.&lt;/p&gt;
+
+&lt;h3 id=&#34;fullstack-academy-http-www-fullstackacademy-com-remote-immersive&#34;&gt;&lt;a href=&#34;http://www.fullstackacademy.com/&#34; target=&#34;_blank&#34;&gt;Fullstack Academy&lt;/a&gt; (Remote Immersive)&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Online&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; 17 weeks, Monday through Saturday. First four weeks are Foundations, which is more independently-driven. Next seven weeks are the bulk of learning, and are based more in lectures and pair programming. Last four weeks are almost entirely project-based. Campuses in New York City and Chicago in addition to online, non-full-time options available.&lt;/p&gt;
+
+&lt;p&gt;There was the standard written application, with questions about your education, your background, your experience with coding, why do you want to do this program, etc. After submitting that, I was sent a coding assessment that consisted of 5 problems that had to be done in 75 minutes. I was able to complete the first four in about 45 minutes, and never ended up figuring out the last one completely. Despite this, I was still invited to interview, so when they say they really want to see how you think, they definitely mean that!&lt;/p&gt;
+
+&lt;p&gt;I interviewed with a fellow, a previous student who performed extremely well during the program and is selected to serve as a teaching assistant of sorts for incoming cohorts. The interview consisted of a “let’s talk about you” part, followed by a pair programming/coding challenge part, followed by questions. The interview was really what made me love Fullstack. I got along really well with my interviewer, and I felt much more like I was pairing with someone than in any of my other interviews. I could bounce ideas off of my interviewer and he’d offer his thoughts, he made fun of me for my weird propensity toward nested functions, and even when he didn’t know what something would result in, we worked through it together and were able to figure it out. Following the coding portion, there was a chance to ask him questions — we were already at our time limit by then, but he graciously stayed to answer all of the questions I had.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt; Accepted! With a pretty large scholarship to boot. In attempt to attract people to their new program but also to make their program accessible to anyone who has the capability to be admitted, they’ve set aside &lt;a href=&#34;http://www.fullstackacademy.com/remote-immersive#scholarships&#34; target=&#34;_blank&#34;&gt;a $500,000 scholarship fund&lt;/a&gt; for the first few cohorts, and from my experience, they’re definitely not afraid to use it.&lt;/p&gt;
+
+&lt;h3 id=&#34;galvanize-http-www-galvanize-com&#34;&gt;&lt;a href=&#34;http://www.galvanize.com/&#34; target=&#34;_blank&#34;&gt;Galvanize&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Austin, TX&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; 24 weeks, Monday through Friday. Divided into quarters, each focusing on a different aspect of development. Cumulates in a final project. Campuses also in Boulder, Denver, Phoenix, San Francisco, and Seattle.&lt;/p&gt;
+
+&lt;p&gt;There was a standard written application, and then a “pre-challenge.” It was a singular, longer problem, had no time limit, and took me a couple of hours to complete. Then, I had a phone conversation with someone in the admissions department. This was entirely behavioral and was very similar to the written essay questions.&lt;/p&gt;
+
+&lt;p&gt;The technical interview was next, and was conducted by a former student from the Denver campus. The interview consisted of a “let’s talk about you” part, and a live coding portion that consisted of one problem that I found very easy. After I solved it on my own, my interviewer took me through other ways that it could be solved. I then had an opportunity to ask questions, and we ended up getting on a side tangent about a Ruby Rogues podcast that had just come out about being transparent about your pay.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt; Accepted, with a full scholarship!&lt;/p&gt;
+
+&lt;h3 id=&#34;hack-reactor-http-www-hackreactor-com-remote-makersquare-https-www-makersquare-com&#34;&gt;&lt;a href=&#34;http://www.hackreactor.com/&#34; target=&#34;_blank&#34;&gt;Hack Reactor&lt;/a&gt; (Remote) &amp;amp; &lt;a href=&#34;https://www.makersquare.com/&#34; target=&#34;_blank&#34;&gt;MakerSquare&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Hack Reactor — Online, MakerSquare — Austin, TX&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; 12-13 weeks, Monday through Saturday. Very similar to Fullstack, in that the first half is primarily learning and the second half is project-based. Hack Reactor has a campus located in San Francisco in addition to online. MakerSquare campuses are located in Los Angeles, New York City, and San Francisco, in addition to Austin.&lt;/p&gt;
+
+&lt;p&gt;There was one application for all Hack Reactor schools, which required you to have a fundamental knowledge of objects, functions, and arrays to even submit. I was invited to attend technical interviews with both Hack Reactor and MakerSquare, the former over Skype and the latter in person.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt; Applications withdrawn. I had received acceptances from Fullstack and Viking (see below) before these interviews, and with a giant scholarship from Fullstack and the deferred tuition model of Viking, I didn’t think it made sense to pursue two other options that would cost me ~18k up-front in tuition alone.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-university-of-texas-part-time-full-time-programs-https-www-codingbootcamputaustin-com&#34;&gt;&lt;a href=&#34;https://www.codingbootcamputaustin.com/&#34; target=&#34;_blank&#34;&gt;The University of Texas, Part-Time &amp;amp; Full-Time Programs&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Austin, TX&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; Part-time program is 24 weeks, Monday &amp;amp; Wednesday &amp;amp; Saturday or Tuesday &amp;amp; Thursday &amp;amp; Saturday. Full-time program is 12 weeks, Monday through Friday.&lt;/p&gt;
+
+&lt;p&gt;The application for these I assume* are similar: a written application, then an interview/pair programming/live coding challenge session with an instructor.&lt;/p&gt;
+
+&lt;p&gt;The part-time program was very new when I was considering it — they hadn’t graduated anyone yet, though they had two cohorts in the pipeline. I talked to an admissions officer when I was considering the part-time program, and I was very turned off by the fact that they weren’t willing to put me in touch with any of the current students or instructors so that I could ask them questions about the program. I eventually decided I wanted a full-time program, so I didn’t apply.&lt;/p&gt;
+
+&lt;p&gt;When I discovered they were beginning a full-time program, I completed the online application, and then never heard anything back. (*This is why I’m only assuming the application processes are similar and don’t actually know for sure.)&lt;/p&gt;
+
+&lt;p&gt;I’ve since heard mixed reviews about this program. They seem to have established good connections with hiring companies in Austin, but it seems like they’re still trying to iron out A LOT of issues in their program and it seems to have much more of a focus on breadth over depth. Once they figure out their issues, it’ll be interesting to see what their program looks like.&lt;/p&gt;
+
+&lt;h3 id=&#34;viking-code-school-https-www-vikingcodeschool-com&#34;&gt;&lt;a href=&#34;https://www.vikingcodeschool.com/&#34; target=&#34;_blank&#34;&gt;Viking Code School&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Location:&lt;/strong&gt; Online&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; 16 weeks, Monday through Friday. Deferred tuition model, so you only pay once you get a job. Cumulates in a final project. Part-time flex program available.&lt;/p&gt;
+
+&lt;p&gt;Standard written application. One thing to note is that the answer lengths are heavily constrained; I wrote relatively long answers (as in, multiple paragraphs for each question) without realizing this and then had to spend a good amount of time trying to cut each one down by a significant amount. Following that is an online coding challenge, during which you have 60 minutes to solve three problems. I personally thought that the online coding challenge was relatively easy and straightforward and I was able to solve them in half the time allotted (and that was including ten minutes at the end reviewing my code and ensuring everything worked as it should have).&lt;/p&gt;
+
+&lt;p&gt;Then, I had an interview with Erik Trautman, the founder, CEO, and primary instructor of the program. It started with three live coding challenges, each with specific time limits. I took a little more time than I should have on each of the problems, and so we rushed through the “tell me about yourself” portion of the interview, and I only had a few more minutes at the end to ask questions. Interestingly, it wasn’t a video call — it was just a normal audio call. I struggled a little bit with the last two problems and didn’t end up completing them. Erik was silent for almost the entire time I was working, and provided zero guidance one way or another when I would ask questions or throw an idea out, which was a little frustrating.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Result:&lt;/strong&gt; Despite not being able to complete two of the three problems, I was accepted, with a full scholarship!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Read the other posts in this series:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-1-the-beginning/&#34; target=&#34;_blank&#34;&gt;Part 1: The Beginning&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-3-the-final-decision/&#34; target=&#34;_blank&#34;&gt;Part 3: The Final Decision&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Journey to Fullstack, Part 1: The Beginning</title>
+      <link>http://bethqiang.com/post/the-journey-to-fullstack-part-1-the-beginning/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/the-journey-to-fullstack-part-1-the-beginning/</guid>
+      <description>
+
+&lt;p&gt;From as young as I can remember, I wanted to be a doctor. I loved science and problem-solving and wanted to use the two to one day save the world. Partway through college, after a long period of insightful conversations and self-reflection, I came to the conclusion that medicine wasn’t what I wanted to do with my life, it wasn&amp;rsquo;t going to be something I would find personally fulfilling, and it wasn&amp;rsquo;t where I thought I could make the most impact.&lt;/p&gt;
+
+&lt;p&gt;I started doing basic statistical and graphical programming to see how my research results turned out, and then make pretty graphs of said results. (Because if nothing else, at least I had pretty graphs.) When the time came to figure out what I wanted to do after graduation, I figured I like statistics and R enough that I decided to become a data analytics consultant.&lt;/p&gt;
+
+&lt;p&gt;Fast forward a year, during which I learned more R, some SQL, and some SAS. I wrote some of my own code, and quality checked other people’s codes. I also started to learn some Python on my own, because everyone said you could do cool things with Python. I started realizing more and more how much I enjoyed coding, but was always dissatisfied with the little amount that I was able to do on the job.&lt;/p&gt;
+
+&lt;p&gt;So I started branching off on my own. I used Coursera to go extend my knowledge of R and Python during nights and weekends. I managed to get to a point where my company was willing to send me to a local Python conference, and immediately came out of it with the mindset of “I want to build EVERYTHING!” Except I didn’t know really know what I could build with the relatively rudimentary skills I had taught myself. (I was slightly disappointed, though not very surprised, when I found out that you needed more than that to build an R2D2 robot that would tell you the weather when you asked.)&lt;/p&gt;
+
+&lt;h2 id=&#34;free-code-camp&#34;&gt;Free Code Camp&lt;/h2&gt;
+
+&lt;p&gt;While searching for project ideas or some kind of structure to help me go more in-depth, I came across &lt;a href=&#34;https://www.freecodecamp.com/&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;. For those who don’t know, Free Code Camp is an open source community with the goal of helping people learn how to code, and then allowing those people to work on real, nonprofit projects. I’m a huge fan of philanthropy and bettering our world and being a part of friendly communities, and I signed up for an account the same day I discovered it.&lt;/p&gt;
+
+&lt;p&gt;And so began the nights when I stayed up until 3am trying to vertically center images in divs, when I would use my lunch break to work on coding challenges, when I would bring books named Eloquent JavaScript with me on vacation for some “light beach reading.” It’s not an overstatement to say that Free Code Camp absolutely changed my life; I truly don’t know what my life would look like without it. It taught me the fundamentals of coding, it gave me real-world projects that I could work through, it came with an incredibly friendly and supportive community, and it challenged and fulfilled me in a way I hadn’t ever experienced before.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-i-decided-to-apply-to-bootcamps&#34;&gt;Why I Decided to Apply to Bootcamps&lt;/h2&gt;
+
+&lt;p&gt;I was no stranger to the idea of bootcamps; I had read and heard enough about them to know they were a feasible option. I was skeptical of them at first. The data analyst in me knew that the 99% job placement rates had to be skewed somehow. I also knew I was capable, intelligent, and motivated enough that I could become a professional developer on my own, at absolutely no cost to me other than time. I knew I could cobble together my own online curriculum, given a lot of research and some time. I knew I could find my own niche community and my own mentors, given a lot of meetups and attending events and meeting with various people (and some time). Instructors who could devote their time to me would be a lot harder to come by, but I knew could make it work mostly on my own.&lt;/p&gt;
+
+&lt;p&gt;But, going to work from 7am to 6pm, eating a quick dinner, and then coding from 7pm to 2am every day was &lt;strong&gt;&lt;em&gt;exhausting&lt;/em&gt;&lt;/strong&gt;. I knew that programming and developing web apps and software was exactly what I wanted to do with my life, and I didn’t want the distraction of “real life” getting in the way.&lt;/p&gt;
+
+&lt;p&gt;I wanted the structure and that extra push to get things done that came with the programs. Free Code Camp helps in that it gives a more definitive path to follow than the wild goose chase that the internet can oftentimes lead you on, but I was still trying to cobble together internet resources to fill in sometimes rather large gaps. (For the record, I’ve been in contact with Quincy about some of these and they’re really trying to make it as comprehensive and thorough as possible.) I also had gotten to the point where I knew and was very comfortable with the basics, but I wasn’t quite to the point of being able to understand and attack a lot of the more advanced concepts. I was in a weird in-between in which I was having difficulty finding resources that catered to my level to learn from.&lt;/p&gt;
+
+&lt;p&gt;I also wanted a community of people whom I could seek help and mentorship from, as well as people who were learning alongside me. The Free Code Camp, &lt;a href=&#34;http://www.codenewbie.org/&#34; target=&#34;_blank&#34;&gt;CodeNewbie&lt;/a&gt;, and &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt; communities filled this void to some extent, but the people who knew what they were doing had commitments outside of me and my learning (shocker, right?), and there never seemed to be someone consistently in the exact same place at the exact same time struggling with the exact same things as I was. Both of these together often made learning on my own hard and lonely.&lt;/p&gt;
+
+&lt;p&gt;In the end, I wanted more structure, intensity, and community than I knew I’d be able to find or create on my own in such a short period of time. I wanted to stop worrying about whether learning Angular or React was better. I wanted to not spend hours and hours attempting to decode vague error messages from newly installed software and packages. I wanted to learn how to build scalable apps and adhere to best practices. I wanted to focus on actually learning &lt;em&gt;how&lt;/em&gt; to program and solving problems through code, instead of spending a lot of my time trying to figure out &lt;em&gt;what&lt;/em&gt; and &lt;em&gt;how&lt;/em&gt; and &lt;em&gt;with whom&lt;/em&gt; to learn and do.&lt;/p&gt;
+
+&lt;p&gt;And so I began looking into coding bootcamps. I sought out anyone and everyone I could find who had graduated from a bootcamp or who was working in the tech industry to get their perspectives on them. After months of internal debate, multiple pro and con lists, and some messages in the Women Who Code Austin’s Slack channel about various scholarships available, I decided to apply with the mindset of, “Why not?”&lt;/p&gt;
+
+&lt;p&gt;I knew it wasn’t going to be easy. I knew I would still have to put in long hours, and hard work, and networking, and frequently feel completely incompetent. I knew it wasn’t the magic pill in becoming good at programming or getting a job, and that I would have to put in even more hours and work and dealing with rejection to accomplish that. And yet, I was excited to struggle along with 15 other people, to learn more than I maybe ever have in my life in such a small period of time, and to dive head-first into the crazy world of programming.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Read the other blog posts in this series:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;Part 2: The Bootcamp Admissions Process&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-3-the-final-decision/&#34; target=&#34;_blank&#34;&gt;Part 3: The Final Decision&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

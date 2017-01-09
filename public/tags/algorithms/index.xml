@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/algorithms/index.xml</link>
+    <description>Recent content in Algorithms on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 1, Day 4: Big O, Algorithms, and Game of Life</title>
+      <link>http://bethqiang.com/post/big-o-algorithms-and-game-of-life/</link>
+      <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/big-o-algorithms-and-game-of-life/</guid>
+      <description>&lt;p&gt;Today, we went over our &lt;a href=&#34;http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/&#34; target=&#34;_blank&#34;&gt;selector/DOM traversal exercise from yesterday&lt;/a&gt;, and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;arrayOfVals = [1, 2, 3];
+x = arrayOfVals[0];
+y = arrayOfVals[1];
+z = arrayOfVals[2];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;arrayOfVals = [1, 2, 3];
+[x, y, z] = arrayOfVals;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And x, y, and z will be assigned to 1, 2, and 3.&lt;/p&gt;
+
+&lt;p&gt;We talked extensively about Big-O algorithm complexity, which is used to describe the performance, whether by execution time or spaced used, of an algorithm. It specifically describes the worst-case scenario, although &lt;a href=&#34;http://bigocheatsheet.com/&#34; target=&#34;_blank&#34;&gt;this awesome cheat sheet&lt;/a&gt; gives you different scenarios.&lt;/p&gt;
+
+&lt;p&gt;Using what we learned, we then implemented two sorting algorithms: bubble sort and merge sort.&lt;/p&gt;
+
+&lt;p&gt;Bubble sort takes two adjacent numbers in a list and compares them, swapping the two if the second one is greater than the first. It then does this over and over, until it can go through the list without making swaps. We ended up doing this in a single function, although our instructor later showed us a more modular solution. We didn’t have a lot of trouble with this one — our biggest roadblock was figuring out when it went through the list without making swaps, although we fixed that relatively easily with the addition of a variable inside of the if statement — if an element was greater than the element next to it, it would go into the loop and the variable’s value was changed. If not, it would remain the default value.&lt;/p&gt;
+
+&lt;p&gt;We had a lot more trouble with the merge sort algorithm. Merge sort takes an array, splits it until each element is its own, singular array, and then merges neighboring arrays in sorted order together. Repeat until there’s only one array left.&lt;/p&gt;
+
+&lt;p&gt;We were able to get the “splitting” part quite easily through using the &lt;code&gt;shift&lt;/code&gt; method on the array prototype. We later learned that this increased the Big-O complexity from &lt;code&gt;O(n*log(n))&lt;/code&gt;, which is what it was supposed to be, to &lt;code&gt;O(n^2*log(n))&lt;/code&gt;, because every time you shift, you have to walk through all of the values in each array. The way to do split an array and maintain the original complexity was to use the &lt;code&gt;slice&lt;/code&gt; method from index 0 until the midpoint.&lt;/p&gt;
+
+&lt;p&gt;Then came the function that did the actual sorting, merging, and recursing. We tried doing it all in one function and it was not having any of that. We ended up talking in circles for most of the hour until we were called back to the main classroom, as we couldn’t figure out how to make the primary parameter a single array (that would be broken into multiple arrays by our split function), but then have it recurse back with two parameters to then merge.&lt;/p&gt;
+
+&lt;p&gt;This was also the first time we had to write our own tests, and that was an adventure in and of itself. It forced us to think much more about the structure of our inputs and outputs, which was one of the things that really tripped us up when we were trying to implement the merge sort function. We were never really sure what exactly our input should have been, and it’s very hard to write a function that does anything when you don’t know what you’re putting into it!&lt;/p&gt;
+
+&lt;p&gt;We also started on &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34; target=&#34;_blank&#34;&gt;Conway’s Game of Life&lt;/a&gt;, a cellular automaton with simple rules to somewhat emulate “life” — each cell in a grid can suffer from underpopulation and overcrowding, and will only become alive or dead based on pre-defined criteria. We didn’t have that much time today to work on it, but I’m really excited to continue with it tomorrow.&lt;/p&gt;
+
+&lt;p&gt;In non-technical news, we had our first &amp;ldquo;learning group&amp;rdquo; meeting today. Learning groups are smaller groups of 3-4 students headed by an instructor or fellow who meet once a week to chat about how things are going, ask questions, and just get to know classmates in a more intimate setting. I was a big fan of it — we bonded over feeling a little overwhelmed, VR and watching a Youtube video of our CEOs play in it, a classmate’s super lazy dog, and some technical difficulties where our fellow’s mic cut out and it was a joint effort to figure out how to fix it.&lt;/p&gt;
+
+&lt;p&gt;All in all, another great day.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Week 6, Day 1: Do One Thing Every Day That Scares You &middot; Beth Qiang</title>
+  <meta name="author" content="Beth Qiang">
+  <meta name="description" content="A developer&#39;s thoughts on life, code, and the pursuit of happiness.">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- RSS autodiscovery -->
+  
+
+  <link rel="shortcut icon" href="http://bethqiang.com/img/favicon.ico">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="http://bethqiang.com/css/main.css">
+  <link rel="stylesheet" href="http://bethqiang.com/css/github.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+  
+
+  <!-- Stylesheet for theme color -->
+  <style type="text/css">
+  a {color: #3498db;}
+  .pagination a {color: #3498db;}
+  .gist .gist-file .gist-meta {color: #3498db !important;}
+  a:focus, a:hover {color: #2079b4;}
+  h1.post-title a:focus, h1.post-title a:hover, h1.blog-title a:focus, h1.blog-title a:hover {color: #2079b4;}
+  .older-posts:hover, .newer-posts:hover {color: #2079b4;}
+</style>
+</head>
+
+<body class="home-template">
+  <div class="site-header">
+  <nav class="site-nav">
+    <a href="#" id="menu-icon" class="menu-icon">
+      <svg viewBox="0 0 18 15">
+        <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"
+        />
+        <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"
+        />
+        <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"
+        />
+      </svg>
+    </a>
+
+    <div class="trigger">
+      <div class="social">
+        
+          <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+        
+        
+          <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+        
+        
+          <a href="//www.linkedin.com/in/bethanyqiang" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+        
+        
+          <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+        
+        
+      </div>
+
+      <div class="main-nav">
+        <a href="http://bethqiang.com/" class="page-link">Blog</a>
+        
+          <a href="about/" class="page-link">About</a>
+        
+          <a href="portfolio/" class="page-link">Portfolio</a>
+        
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+  <main class="content" role="main">
+    
+  <article class="post">
+    <header>
+      <h1 class="post-title">Week 6, Day 1: Do One Thing Every Day That Scares You</h1>
+      <div class="post-meta">
+        
+          <time datetime="December 5, 2016">
+            December 5, 2016
+          </time>
+        
+      </div>
+    </header>
+
+    <section class="post-content">
+      <p>Today, we talked about forms in React. And practiced more React-y stuff. The more important part of the day was that I stood up in front of people, talked, and was slightly less terrified than I am when I see a spider! But we&rsquo;ll get to that in a second. First, the React stuff:</p>
+
+<ul>
+<li><p>Application state vs. UI/local state. Sometimes, we know ahead of time that some kinds of state are going to be localized to a particular area of our app – state like form data, timers, small animations, etc. Some people prefer to make a distinction between the application state, state that&rsquo;s central to our app that needs to be available to different components, and UI/local state, for things like forms. Creating a local state is literally the same process as creating an application state: initialize the property in the constructor, set it, and pass it through the props.</p></li>
+
+<li><p>Synthetic events. Whenever you pass a callback function to an event listener like <code>onClick</code>, React will implicitly pass an <code>event</code> object to it as its first argument. <code>SyntheticEvent</code> is React&rsquo;s wrapper class for the native browser event. React pools all events into the same <code>SyntheticEvent</code> object, which means that it&rsquo;s a single object allocation that React mutates at runtime. So, we can&rsquo;t use the event object itself asynchronously – including doing things like <code>setState</code> – so once you have the object, you should grab any values you want off of it before doing anything asynchronous.</p></li>
+</ul>
+
+<pre><code>this.setState({ input: event })
+// the above is bad
+// do the below instead
+this.setState({ inputValue: event.target.value }
+</code></pre>
+
+<ul>
+<li><p>Controlled vs. uncontrolled components. A controlled component is a form field whose value is managed by state. To do this, all we have to do is pass the <code>inputValue</code> from our state in as the <code>value</code> prop on the input element itself. In our input tag, we passed in <code>value={props.inputValue}</code>, so that the <code>value</code> in the input field is the same as the <code>inputValue</code> on the state. So, to clear the value in the input field (say, after the user clicks the Submit button), you just need to clear it from state!</p></li>
+
+<li><p>Disabling/enabling buttons and hiding/showing divs with error messages conditionally. Once we realized that <code>disable</code> was a native HTML button attribute, that made our lives a lot easier. (In our state, we added a <code>disabled</code> property, passed it to our component, and in the button tag of the component, we added <code>disabled={props.disabled}</code>.) Similarly, to display an error message with the error (&lsquo;Cannot be empty&rsquo; or &lsquo;Too long&rsquo;), and nothing if no error, we set a <code>message</code> property on the state with the error, passed it to the same component, and then rendered:</p></li>
+</ul>
+
+<pre><code>{props.message ?
+  &lt;div className=&quot;alert alert-warning&quot;&gt;{props.message}&lt;/div&gt; : ''}
+</code></pre>
+
+<ul>
+<li><code>componentWillReceiveProps</code>. When we rendered a playlist component, and then tried to switch from playlist to playlist from the sidebar, the component wouldn&rsquo;t update – even when our URL did. My pair and I spent a while trying to puzzle this out (without knowing that <code>componentWillReceiveProps</code> even existed), with the vague feeling that we had encountered this before but we were having trouble applying what we had done in the past to our current situation. (Also to be fair, it was the end of a long day and our brains weren&rsquo;t anywhere near full functioning capacity.) After a small hint, we attempted to implement it, knowing that we need to only fetch and reset the playlist when the <code>id</code> changes – otherwise, we&rsquo;d end up in an infinite loop! (Which actually did happen the first time we tried.)</li>
+</ul>
+
+<pre><code>componentWillReceiveProps (nextProps) {
+  const nextPlaylistId = nextProps.routeParams.playlistId;
+  const currentPlaylistId = this.props.routeParams.playlistId;
+  const selectPlaylist = this.props.selectPlaylist;
+  if (nextPlaylistId !== currentPlaylistId)
+    selectPlaylist(nextPlaylistId);
+    // selectPlaylist is a function in our stateful component that set the state to whichever playlist we clicked on
+}
+</code></pre>
+
+<p>We also got in some quality practice with building views and mapping over arrays of data and routing that we learned last week.</p>
+
+<hr />
+
+<blockquote>
+<p>&ldquo;Do one thing every day that scares you.&rdquo;
+<em>– Eleanor Roosevelt</em></p>
+</blockquote>
+
+<p>One of the more significant parts of today was that I presented a lightning talk at tonight&rsquo;s Women Who Code meetup! Public speaking is something that&rsquo;s terrified me throughout my entire life, although I&rsquo;ve gotten a little more comfortable with it over the years. (That doesn&rsquo;t mean it still doesn&rsquo;t terrify me!)</p>
+
+<p>I had a little technical difficulty at the beginning. And by that, I mean, I didn&rsquo;t realize my Mac didn&rsquo;t have the port that the little doo-hickey that gets attached to HDMI cables sometimes needs&hellip;but it does have an HDMI port! I also mean that I didn&rsquo;t quite fully test out how slides.com worked before actually presenting (this was not a shining example of how to prepare for a presentation) and ended up going without my notes. Given that, I think it went pretty well – I may have talked a little too fast and I have no idea how many times I said &ldquo;um&rdquo; (I decided to not worry about it after the notes debacle), but it&rsquo;s something!</p>
+
+<p>I&rsquo;m actually really excited for next month&rsquo;s lightning talks. (And that&rsquo;s a pretty big statement, coming from someone who never in a million years would think she&rsquo;d be excited about anything related to people listening to her talk.) I&rsquo;ll ideally have my tech talk for Fullstack prepped by then, so that might be a good avenue to practice that! I haven&rsquo;t quite decided the topic yet, but I know I&rsquo;ll definitely be signing up to speak again.</p>
+
+<p>I also met a number of cool women tonight, and we had some real-talk about our experiences in the workplace, and I&rsquo;m really looking forward to seeing them again! One of the women&rsquo;s New Year&rsquo;s resolution is to give a lightning talk every month, which I think is incredibly admirable, and something I may consider adopting. Whether I do or not, it was a fantastic experience, and I&rsquo;m comfortable enough with the community and with being a newbie to much of the general world that, as much as public speaking still somewhat terrifies me, I&rsquo;m okay with putting myself out there. I&rsquo;m okay with admitting the fact that I didn&rsquo;t know what ports my Mac had, and not having everything go perfectly, and maybe talking a little bit too fast – so long as I&rsquo;m always growing and learning along the way.</p>
+
+    </section>
+
+    
+      <section class="post-tags" style="padding-bottom:60px;">
+        <div class="post-meta tags">
+          <i class="fa fa-fw fa-tag"></i>
+          
+            
+            <a href="http://bethqiang.com/tags/fullstack-academy" class="tag-comma-separate">fullstack academy</a>
+          
+            
+            <a href="http://bethqiang.com/tags/junior-phase" class="tag-comma-separate">junior phase</a>
+          
+            
+            <a href="http://bethqiang.com/tags/react" class="tag-comma-separate">react</a>
+          
+            
+            <a href="http://bethqiang.com/tags/women-who-code" class="tag-comma-separate">women who code</a>
+          
+            
+            <a href="http://bethqiang.com/tags/lightning-talk" class="tag-comma-separate">lightning talk</a>
+          
+        </div>
+      </section>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/post\/do-one-thing-every-day-that-scares-you\/';
+    var disqus_title = 'Week 6, Day 1: Do One Thing Every Day That Scares You';
+    var disqus_url = 'http:\/\/bethqiang.com\/post\/do-one-thing-every-day-that-scares-you\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      <section class="share">
+  <p class="info prompt">Share</p>
+  <a href="http://twitter.com/share?text=Week%206%2c%20Day%201%3a%20Do%20One%20Thing%20Every%20Day%20That%20Scares%20You&url=http%3a%2f%2fbethqiang.com%2fpost%2fdo-one-thing-every-day-that-scares-you%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fpost%2fdo-one-thing-every-day-that-scares-you%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fpost%2fdo-one-thing-every-day-that-scares-you%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+      <footer class="post-footer">
+        <section class="author">
+  <div class="authorimage" style="background: url(http://bethqiang.com/img/avatar.jpg)"></div>
+  <h4>Beth Qiang</h4>
+  <p class="bio">developer - runner - animal lover - food enthusiast</p>
+  <p class="meta">
+    <i class="fa fa-fw fa-map-marker"></i> Austin, TX
+  </p>
+</section>
+      </footer>
+    
+  </article>
+
+  </main>
+
+  <a href="javascript:">
+  <div id="back-to-top">
+    <p class="backtotop">
+      <i class="fa fa-lg fa-angle-double-up"></i>
+      <a class="backtotoptext">Back to top</a>
+    </p>
+  </div>
+</a>
+
+  <footer class="site-footer">
+  <div class="inner">
+    <section class="copyright">A developer&rsquo;s thoughts on life, code, and the pursuit of happiness.</section>
+  </div>
+</footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bethqiang.com/js/index.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>

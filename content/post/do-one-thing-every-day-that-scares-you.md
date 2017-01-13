@@ -1,6 +1,6 @@
 +++
 title = "Week 6, Day 1: Do One Thing Every Day That Scares You"
-tags = ["fullstack academy", "junior phase", "react", "women who code", "lightning talk"]
+tags = ["fullstack academy", "junior phase", "react", "women who code", "talks"]
 date = "2016-12-05"
 +++
 

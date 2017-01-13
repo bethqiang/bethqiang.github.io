@@ -9,6 +9,69 @@
     <atom:link href="http://bethqiang.com/tags/fullstack-academy/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
+      <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
+
+&lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/post/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
+&lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
+&lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;
+&lt;li&gt;Implemented most of &lt;a href=&#34;https://github.com/bethqiang/todo-react-redux-immutable&#34; target=&#34;_blank&#34;&gt;a todo app&lt;/a&gt; using React, Redux, and Immutable.js. I used this to also practice some frontend testing. It was thrilling.&lt;/li&gt;
+&lt;li&gt;Started and finished most of my tech talk on Immutable Data &amp;amp; Immutable.js.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And in the past four days, a lot has happened.&lt;/p&gt;
+
+&lt;h2 id=&#34;grace-shopper&#34;&gt;Grace Shopper&lt;/h2&gt;
+
+&lt;p&gt;Probably the biggest thing that&amp;rsquo;s happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, &lt;a href=&#34;https://github.com/bethqiang/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, sells bots to help you with your gardening and cooking and butlering and general life-ing needs.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve personally worked on:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setting up ESLint and configuring it&lt;/li&gt;
+&lt;li&gt;Creating a few of the database models&lt;/li&gt;
+&lt;li&gt;Writing tests for said models&lt;/li&gt;
+&lt;li&gt;Adding signup and login features and functions that filter based on authorization&lt;/li&gt;
+&lt;li&gt;And most recently writing the routes and views for users to view their orders&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also just spent the last three hours trying and failing to fix a rather small but important thing (rendering the orders view automatically instead of on a click of a button, as it is right now), so this project is currently not on my list of favorite things ever.&lt;/p&gt;
+
+&lt;p&gt;In general, it&amp;rsquo;s definitely been challenging trying to figure out what goes where and how all of the pieces fit together. It&amp;rsquo;s our first time creating a fully-fledged app with only a set of requirements and literally &lt;em&gt;nothing&lt;/em&gt; else. I 110% believe we&amp;rsquo;re definitely all capable of doing all of it and doing it well, but we&amp;rsquo;re still in some ways getting our bearings straight.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s also been an interesting experience working as part of a team on a longer-term and larger-scale project (instead of just having a pairing partner for a workshop and then getting a different partner the next day). We have three people in our group, and we&amp;rsquo;ve paired all together on some things, and we&amp;rsquo;ve worked completely independently of each other on others, and sometimes one person branches off on their own while the other two pair.&lt;/p&gt;
+
+&lt;p&gt;Regardless of who works on what, everyone reviews all pull requests before we agree to merge, and it&amp;rsquo;s definitely not uncommon, if/when we&amp;rsquo;re working individually, for someone to pipe up and say, &amp;ldquo;Hey, I&amp;rsquo;m having trouble with this, can I share my screen and get y&amp;rsquo;all&amp;rsquo;s input?&amp;rdquo; Needless to say, I&amp;rsquo;ve also learned more of and become much more comfortable with Git over the past few days! I&amp;rsquo;m still very afraid of merge conflicts and Git yelling at me, but I&amp;rsquo;m sure I&amp;rsquo;ll get used to it eventually.&lt;/p&gt;
+
+&lt;h2 id=&#34;tech-talk-immutable-data-immutable-js&#34;&gt;Tech Talk: Immutable Data &amp;amp; Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I finished my tech talk. I really wanted to incorporate live coding instead of the code snippets at the end, but I was pushing the time limit before I put in the code at all. Next time!&lt;/p&gt;
+
+&lt;p&gt;I also presented it today. The good: I didn&amp;rsquo;t say &amp;ldquo;um&amp;rdquo; &lt;em&gt;quite&lt;/em&gt; as much as I typically do when speaking in public. The bad: when I was re-watching myself, I noticed at least two mistakes in my slides, and I think I relied on my notes a little too heavily. But hey, only way to get good at something is to keep doing it!&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in seeing it, &lt;a href=&#34;https://www.youtube.com/watch?v=IDf-tpuj8Kw&#34; target=&#34;_blank&#34;&gt;it&amp;rsquo;s already up on Fullstack&amp;rsquo;s YouTube channel&lt;/a&gt;! The slides can be viewed &lt;a href=&#34;https://speakerdeck.com/bethqiang/immutable-data-and-immutable-dot-js&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;stackathon&#34;&gt;Stackathon&lt;/h2&gt;
+
+&lt;p&gt;Another project that all Fullstack seniors do is the Stackathon project. We&amp;rsquo;re given four days to do literally anything we want, and we&amp;rsquo;re encouraged to work alone. (Although if you &lt;em&gt;really&lt;/em&gt; want to work with another person, no one&amp;rsquo;s going to stop you.)&lt;/p&gt;
+
+&lt;p&gt;My instructor and I have thrown around some ideas for what I could do. Right now, I&amp;rsquo;m leaning towards either creating a library that I can publish to npm, or an Electron app. (My idea right now for the latter basically amounts to a WYSIWYG editor to write in with an option to convert it to Markdown for static site generators.) I&amp;rsquo;m torn between these because I think writing my own legitimate library would be fun, but I wouldn&amp;rsquo;t get to do any front-end design, which really frustrates me sometimes but it&amp;rsquo;s also something I really enjoy. I keep hearing from people I trust that Electron isn&amp;rsquo;t terribly hard to learn, so I&amp;rsquo;ll probably take a look at it this weekend and see if it would be do-able to do what I want to do in the span of the four days we&amp;rsquo;ll be given.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m simultaneously really looking forward to working on this, but also somewhat scared as well. It&amp;rsquo;ll be something I choose and something that excites me, but if given the chance and an excuse, I work &lt;em&gt;way&lt;/em&gt; too much – and that&amp;rsquo;s not in the humble brag &amp;ldquo;I work too hard&amp;rdquo; kinda way. That&amp;rsquo;s an I&amp;rsquo;ll-stay-up-unhealthily-late-(until 5 am late, hello Tuesday night)-working-on-things-because-I-can-and-because-it&amp;rsquo;s-more-fun-than-sleep-and-because-things-not-being-perfect-bother-me kinda way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Junior Phase in Review</title>
       <link>http://bethqiang.com/post/fullstack-academy-junior-phase-in-review/</link>
       <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
@@ -1527,92 +1590,6 @@ Promise.each(filenames, function(filename) {
 &lt;iframe class=&#34;center-img&#34; width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/jzLrYTZ47sc&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;I had a lot of fun, and I’m kind of obsessed with my cohort and our staff and instructors. I’m &lt;em&gt;really&lt;/em&gt; looking forward to getting our VR headsets and trying them out in our virtual world, as well as just getting to spend more time with all of these people, both in front of a code editor and not!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</title>
-      <link>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</link>
-      <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</guid>
-      <description>&lt;p&gt;I don’t understand how it’s almost the end of the week already. Time is literally flying. We&amp;rsquo;ve spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it&amp;rsquo;s been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;what indexing was: a data structure that stores the values for a specific column in a table&lt;/li&gt;
-&lt;li&gt;why we should care about it: it makes searching much faster if you have a lot of data, as the database software no longer has to look at literally every single row in the table&lt;/li&gt;
-&lt;li&gt;how it works: it uses data structures like B-trees or hash tables&lt;/li&gt;
-&lt;li&gt;and why and when we wouldn’t want to use them willy nilly: they take up space, and are slightly less ideal for applications that require more frequent insert/delete/update operations because the indexes also have to be inserted/deleted/updated every time the tables are&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Right before lunch, President Obama was set to speak about the election results, and we took a break from anything code-related to listen to him, then had an hour-long conversation about what had happened the night before as a cohort and as a community.&lt;/p&gt;
-
-&lt;p&gt;Though I’m pretty sure I never actually said anything, and no one was pressured by any means to stay in the chat (and some people did leave), I really appreciated the open communication, the vulnerability that was shown, and Fullstack’s continued dedication to making sure that Fullstack was a safe environment for everyone to express their views and feel what they feel without fear of being judged, harassed, or a variety of other terrible things that happen in the real world. As a group of extremely different people from a variety of walks of life, our cohort didn’t necessarily agree on some points, but it was enlightening to hear everyone’s opinions and experiences.&lt;/p&gt;
-
-&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for &lt;a href=&#34;https://www.hackerrank.com/womens-codesprint-2&#34; target=&#34;_blank&#34;&gt;HackerRank’s Women’s CodeSprint&lt;/a&gt; that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between &lt;code&gt;forEach&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt; for probably the fourteenth time&amp;hellip;it’ll sink in eventually, right?!)&lt;/p&gt;
-
-&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
-
-&lt;p&gt;First, we created a new database module, where we used the &lt;a href=&#34;https://github.com/brianc/node-postgres&#34; target=&#34;_blank&#34;&gt;node-postgres&lt;/a&gt; library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our &lt;code&gt;tweetBank.js&lt;/code&gt; module and accompanying simple-array database, we were querying our database for the information that we wanted.&lt;/p&gt;
-
-&lt;p&gt;One of the biggest sources of confusion came when we were testing our Socket.io real-time updates via two incognito Chrome browsers – when we posted a tweet via one of the browsers, the browser that &lt;em&gt;didn’t&lt;/em&gt; post the tweet would be updated in real-time, but the browser that posted the tweet wouldn’t show the tweet until we manually refreshed the page.&lt;/p&gt;
-
-&lt;p&gt;This was our original code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.post(&#39;/tweets&#39;, function(req, res, next){
-  let userName;
-  let name = req.body.name;
-  let content = req.body.content;
-  client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
-    if (err) return next(err);
-
-    if (result.rows.length === 0) {
-      client.query(&#39;INSERT INTO users (name) VALUES ($1)&#39;, [name], function(err, result) {
-        if (err) return next(err);
-        client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
-          if (err) return next(err);
-          userName = result.rows[0].id;
-          client.query(&#39;INSERT INTO tweets (userid, content) VALUES ($1, $2)&#39;, [userName, content], function(err, result) {
-            if (err) return next(err);
-            client.query(&#39;SELECT id FROM tweets WHERE userid = $1 AND content = $2&#39;, [userName, content], function(err, result) {
-              if (err) return next(err);
-            });
-          });
-        });
-      });
-
-    } else {
-      userName = result.rows[0].id;
-      client.query(&#39;INSERT INTO tweets (userid, content) VALUES ($1, $2)&#39;, [userName, content], function(err, result) {
-        if (err) return next(err);
-        client.query(&#39;SELECT id FROM tweets WHERE userid = $1 AND content = $2&#39;, [userName, content], function(err, result) {
-          if (err) return next(err);
-        });
-      });
-    }
-  });
-
-  let newTweet = {
-      name: name,
-      content: content,
-      id: result.rows[0].id
-    };
-
-    io.sockets.emit(&#39;new_tweet&#39;, newTweet);
-    res.redirect(&#39;/&#39;);
-
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Can we just take a moment to appreciate how much of a hot mess that code is? We’ll be learning how to make this not such a mess tomorrow, or so we’ve been &lt;em&gt;promised&lt;/em&gt;. (Geddit?! Promises? &amp;hellip;well, I thought it was clever.)&lt;/p&gt;
-
-&lt;p&gt;Anyway, what was happening was that Node was being typical Node and its asynchronous nature was starting the first &lt;code&gt;query&lt;/code&gt;, then jumping straight down to our &lt;code&gt;newTweet&lt;/code&gt; object and the &lt;code&gt;res.redirect&lt;/code&gt; that would automatically reload the page. So, the page would actually redirect and reload before the tweet was in the database. We didn’t realize this initially, as the &lt;code&gt;newTweet&lt;/code&gt; object wasn’t pulling from the database at all, and most of it (the &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;content&lt;/code&gt;) could be populated without the database. (We didn’t realize our &lt;code&gt;id&lt;/code&gt; link, which required information from the database, wasn’t working until after fixing this issue.) We put the creation of the newTweet object, the Socket.io &lt;code&gt;emit&lt;/code&gt; event, and the &lt;code&gt;redirect&lt;/code&gt; inside the innermost callback functions, did some refactoring, and everything in our fake Twitter world was peaceful again, albeit a bit messy.&lt;/p&gt;
-
-&lt;p&gt;I also had an office hour/1-on-1 check-in with one of our fellows, Dani, during lunch. I was able to get her advice on how to start on a project that had been an idea floating around in my brain for a while now that I just haven’t really had the time to put into place, but I’m going to try to start carving out at least 30 minutes each day for it. I also realized today, while thinking about different ways to go about it, that I feel &lt;strong&gt;a lot&lt;/strong&gt; more confident in my coding ability than I did a week and a half ago. Which is a little crazy to say, because it’s literally only been a week and a half, but we’ve also learned and done so much in that time.&lt;/p&gt;
 </description>
     </item>
     

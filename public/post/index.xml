@@ -6,8 +6,71 @@
     <description>Recent content in Posts on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
+      <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
+
+&lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/post/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
+&lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
+&lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;
+&lt;li&gt;Implemented most of &lt;a href=&#34;https://github.com/bethqiang/todo-react-redux-immutable&#34; target=&#34;_blank&#34;&gt;a todo app&lt;/a&gt; using React, Redux, and Immutable.js. I used this to also practice some frontend testing. It was thrilling.&lt;/li&gt;
+&lt;li&gt;Started and finished most of my tech talk on Immutable Data &amp;amp; Immutable.js.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And in the past four days, a lot has happened.&lt;/p&gt;
+
+&lt;h2 id=&#34;grace-shopper&#34;&gt;Grace Shopper&lt;/h2&gt;
+
+&lt;p&gt;Probably the biggest thing that&amp;rsquo;s happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, &lt;a href=&#34;https://github.com/bethqiang/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, sells bots to help you with your gardening and cooking and butlering and general life-ing needs.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve personally worked on:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setting up ESLint and configuring it&lt;/li&gt;
+&lt;li&gt;Creating a few of the database models&lt;/li&gt;
+&lt;li&gt;Writing tests for said models&lt;/li&gt;
+&lt;li&gt;Adding signup and login features and functions that filter based on authorization&lt;/li&gt;
+&lt;li&gt;And most recently writing the routes and views for users to view their orders&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also just spent the last three hours trying and failing to fix a rather small but important thing (rendering the orders view automatically instead of on a click of a button, as it is right now), so this project is currently not on my list of favorite things ever.&lt;/p&gt;
+
+&lt;p&gt;In general, it&amp;rsquo;s definitely been challenging trying to figure out what goes where and how all of the pieces fit together. It&amp;rsquo;s our first time creating a fully-fledged app with only a set of requirements and literally &lt;em&gt;nothing&lt;/em&gt; else. I 110% believe we&amp;rsquo;re definitely all capable of doing all of it and doing it well, but we&amp;rsquo;re still in some ways getting our bearings straight.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s also been an interesting experience working as part of a team on a longer-term and larger-scale project (instead of just having a pairing partner for a workshop and then getting a different partner the next day). We have three people in our group, and we&amp;rsquo;ve paired all together on some things, and we&amp;rsquo;ve worked completely independently of each other on others, and sometimes one person branches off on their own while the other two pair.&lt;/p&gt;
+
+&lt;p&gt;Regardless of who works on what, everyone reviews all pull requests before we agree to merge, and it&amp;rsquo;s definitely not uncommon, if/when we&amp;rsquo;re working individually, for someone to pipe up and say, &amp;ldquo;Hey, I&amp;rsquo;m having trouble with this, can I share my screen and get y&amp;rsquo;all&amp;rsquo;s input?&amp;rdquo; Needless to say, I&amp;rsquo;ve also learned more of and become much more comfortable with Git over the past few days! I&amp;rsquo;m still very afraid of merge conflicts and Git yelling at me, but I&amp;rsquo;m sure I&amp;rsquo;ll get used to it eventually.&lt;/p&gt;
+
+&lt;h2 id=&#34;tech-talk-immutable-data-immutable-js&#34;&gt;Tech Talk: Immutable Data &amp;amp; Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I finished my tech talk. I really wanted to incorporate live coding instead of the code snippets at the end, but I was pushing the time limit before I put in the code at all. Next time!&lt;/p&gt;
+
+&lt;p&gt;I also presented it today. The good: I didn&amp;rsquo;t say &amp;ldquo;um&amp;rdquo; &lt;em&gt;quite&lt;/em&gt; as much as I typically do when speaking in public. The bad: when I was re-watching myself, I noticed at least two mistakes in my slides, and I think I relied on my notes a little too heavily. But hey, only way to get good at something is to keep doing it!&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in seeing it, &lt;a href=&#34;https://www.youtube.com/watch?v=IDf-tpuj8Kw&#34; target=&#34;_blank&#34;&gt;it&amp;rsquo;s already up on Fullstack&amp;rsquo;s YouTube channel&lt;/a&gt;! The slides can be viewed &lt;a href=&#34;https://speakerdeck.com/bethqiang/immutable-data-and-immutable-dot-js&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;stackathon&#34;&gt;Stackathon&lt;/h2&gt;
+
+&lt;p&gt;Another project that all Fullstack seniors do is the Stackathon project. We&amp;rsquo;re given four days to do literally anything we want, and we&amp;rsquo;re encouraged to work alone. (Although if you &lt;em&gt;really&lt;/em&gt; want to work with another person, no one&amp;rsquo;s going to stop you.)&lt;/p&gt;
+
+&lt;p&gt;My instructor and I have thrown around some ideas for what I could do. Right now, I&amp;rsquo;m leaning towards either creating a library that I can publish to npm, or an Electron app. (My idea right now for the latter basically amounts to a WYSIWYG editor to write in with an option to convert it to Markdown for static site generators.) I&amp;rsquo;m torn between these because I think writing my own legitimate library would be fun, but I wouldn&amp;rsquo;t get to do any front-end design, which really frustrates me sometimes but it&amp;rsquo;s also something I really enjoy. I keep hearing from people I trust that Electron isn&amp;rsquo;t terribly hard to learn, so I&amp;rsquo;ll probably take a look at it this weekend and see if it would be do-able to do what I want to do in the span of the four days we&amp;rsquo;ll be given.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m simultaneously really looking forward to working on this, but also somewhat scared as well. It&amp;rsquo;ll be something I choose and something that excites me, but if given the chance and an excuse, I work &lt;em&gt;way&lt;/em&gt; too much – and that&amp;rsquo;s not in the humble brag &amp;ldquo;I work too hard&amp;rdquo; kinda way. That&amp;rsquo;s an I&amp;rsquo;ll-stay-up-unhealthily-late-(until 5 am late, hello Tuesday night)-working-on-things-because-I-can-and-because-it&amp;rsquo;s-more-fun-than-sleep-and-because-things-not-being-perfect-bother-me kinda way.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>New Year, New Blog, Same Git Bewilderment</title>
@@ -1373,169 +1436,6 @@ app.use(&#39;/jquery&#39;, express.static(__dirname + &#39;/node_modules/jquery/
 &lt;p&gt;Tomorrow&amp;rsquo;s CS Saturday is all about immutability and functional programming and building(!!!) our own version of Git. Way excited. Mostly for the functional programming, but the other two are pretty cool too, I guess.&lt;/p&gt;
 
 &lt;p&gt;P.S. – word count: 927. Doing better at this whole &amp;ldquo;not writing thousands-of-words-long-chapter-books thing.&amp;rdquo;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 3, Day 1: Building a Wikipedia Clone</title>
-      <link>http://bethqiang.com/post/building-a-wikipedia-clone/</link>
-      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/building-a-wikipedia-clone/</guid>
-      <description>&lt;p&gt;The past day has been a complete whirlwind of learning and figuring out why things are going wrong. We built a Wikipedia clone with the following features:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A homepage that lists all the pages in the Wiki&lt;/li&gt;
-&lt;li&gt;The ability to create new pages&lt;/li&gt;
-&lt;li&gt;Page searching&lt;/li&gt;
-&lt;li&gt;Tagging&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We started from the very beginning – a blank text editor, in which we required a bunch of modules, set up our middleware, enabled our Nunjucks rendering engine and created simple templates, and created and connected to our Postgres database.&lt;/p&gt;
-
-&lt;p&gt;After all of the initial set up was done, we started creating our model schemas and synched them to our database. We used  &lt;a href=&#34;http://docs.sequelizejs.com/en/v3&#34; target=&#34;_blank&#34;&gt;Sequelize&lt;/a&gt; for all of our database communication. In our schemas, we had two relations: &lt;code&gt;Page&lt;/code&gt;, which contained fields like title, the URL, content, etc., and &lt;code&gt;User&lt;/code&gt;, which just contained name and email. We created validation rules – the primary ones were that most fields weren&amp;rsquo;t allowed to be null, the user email went through Sequelize&amp;rsquo;s email validation, and the status had to be open or closed and not anything else.&lt;/p&gt;
-
-&lt;p&gt;We initially started by creating &lt;code&gt;get&lt;/code&gt; routes to &lt;code&gt;/wiki&lt;/code&gt; and &lt;code&gt;/wiki/add&lt;/code&gt;, and a &lt;code&gt;post&lt;/code&gt; route to &lt;code&gt;/wiki&lt;/code&gt; in a &lt;code&gt;wiki.js&lt;/code&gt; module in our &lt;code&gt;routes&lt;/code&gt; directory. The first, &lt;code&gt;get(&#39;/wiki&#39;)&lt;/code&gt;, would just be a list of all of the articles – a simple query to our database for all of the posts it contains. The second, &lt;code&gt;/wiki/add&lt;/code&gt;, would present the user with an HTML form to create a new article. Once a post was added, we wanted to redirect the user to the newly created page, which meant that we needed a route for our newly created page! (More on this in a second.)&lt;/p&gt;
-
-&lt;p&gt;The last one, &lt;code&gt;post(&#39;/wiki&#39;)&lt;/code&gt;, required us to set our form with &lt;code&gt;action=&#39;/wiki/&#39;&lt;/code&gt; and &lt;code&gt;method=&#39;POST&#39;&lt;/code&gt;. When we set this up, one of the challenges that we faced was that a URL for each page couldn&amp;rsquo;t be null, but we didn&amp;rsquo;t want to create a field in the form where the user would have to manually create a URL-compatible string for it. (And you know there&amp;rsquo;s a subset of users who would do it wrong too&amp;hellip;) To address this, we set up a hook, &lt;code&gt;beforeValidate&lt;/code&gt;, in our model to transform the page&amp;rsquo;s title into a usable URL string programmatically.&lt;/p&gt;
-
-&lt;p&gt;We used dynamic routing (&lt;code&gt;/wiki/:urlTitle&lt;/code&gt;) for each page to have its own route. One of the things we had to remember here was to keep this route above our &lt;code&gt;/wiki/add&lt;/code&gt; route, or else every time we went to the &lt;code&gt;/add&lt;/code&gt; route, our server will think that add is the &lt;code&gt;urlTitle&lt;/code&gt; and will try to send back an article called &amp;ldquo;add.&amp;rdquo; This also meant that we can&amp;rsquo;t actually have a page called &amp;ldquo;add,&amp;rdquo; but that&amp;rsquo;s a small price to pay. :)&lt;/p&gt;
-
-&lt;p&gt;To make our lives easier and much less repetitive, we set up a virtual field called &lt;code&gt;route&lt;/code&gt;, which would add &lt;code&gt;&#39;/wiki/&#39;&lt;/code&gt; to each urlTitle to create the route that it would eventually be associated with. We created a virtual field for this because it&amp;rsquo;s always derived, so we don&amp;rsquo;t really need to store it anywhere, and we don&amp;rsquo;t want to keep having to create &lt;code&gt;res.redirect&lt;/code&gt;s in our routes, either.&lt;/p&gt;
-
-&lt;p&gt;Now, having the ability to author a page is great. But authors probably want some credit for their contributions, right? And, we&amp;rsquo;d want to see each author&amp;rsquo;s page and the pages that they&amp;rsquo;ve written. This is where our &lt;code&gt;User&lt;/code&gt; model came in. We created a Sequelize association between our &lt;code&gt;Page&lt;/code&gt; model and our &lt;code&gt;User&lt;/code&gt; model – &lt;code&gt;Page.belongsTo(User, { as: &#39;author&#39; })&lt;/code&gt;. We later learned that this does a number of things under the hood, including changing the schema (so we had to force the schema to re-make itself) and placing instance methods on our page objects to manage the association between these two.&lt;/p&gt;
-
-&lt;p&gt;We updated our &lt;code&gt;post&lt;/code&gt; method route with &lt;code&gt;findOrCreate&lt;/code&gt; so that if that user already existed, we&amp;rsquo;d use that user, but if it didn&amp;rsquo;t, we&amp;rsquo;d add him/her. Then, we would associate that user with the new page. This required the following code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-  User.findOrCreate({
-    where: {
-      name: req.body.name,
-      email: req.body.email
-    }
-  })
-  .then(function(values) {
-    const user = values[0];
-    const page = Page.build({
-      title: req.body.title,
-      content: req.body.content
-    });
-    return page.save().then(function(page) {
-      return page.setAuthor(user);
-    };
-  })
-  .then(function(page) {
-    res.redirect(page.route);
-  })
-  .catch(next);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;My partner and I were &lt;em&gt;really&lt;/em&gt; confused about this for a &lt;em&gt;really&lt;/em&gt; long time. First off, we didn&amp;rsquo;t realize that Sequelize&amp;rsquo;s &lt;code&gt;belongsTo&lt;/code&gt; does a lot of things behind-the-scenes, and had no concept of the &lt;code&gt;setAuthor&lt;/code&gt; method. Second, we no idea what was going on with the nested &lt;code&gt;then&lt;/code&gt;s – why were they nested? In what order were things happening? What was being passed where? Why was everything being returned?&lt;/p&gt;
-
-&lt;p&gt;So to tackle the first – if they weren&amp;rsquo;t nested, and more clearly defined, they would look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-  .then(function(values) {
-    const user = values[0];
-    const page = Page.build({
-      title: req.body.title,
-      content: req.body.content
-    });
-    return page.save() // resolves to a page object
-  })
-  .then(function(page) { // receives that page object
-    return page.setAuthor(user); // &amp;lt;== ERROR: user is not defined
-  };
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To help us understand what was going on, our instructor broke it down a little further:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-  .then(function(values) {
-    const user = values[0];
-    const page = Page.build({
-      title: req.body.title,
-      content: req.body.content
-    });
-    var pageSavePromise = page.save();
-    var pageSaveAndOtherStuff = pageSavePromise.then(function(page) {
-      var settingAuthorPromise = page.setAuthor(user); // start setting author
-      return settingAuthorPromise; // make paveSaveAndOtherStuff promise wait for this to resolve before IT resolves
-    });
-    return pageSaveAndOtherStuff; // this now resolves BEFORE the author setting is completed
-  })
-  .then(function(page) {
-    return page.setAuthor(user);
-  };
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In &lt;code&gt;settingAuthorPromise&lt;/code&gt;, we &lt;em&gt;start&lt;/em&gt; setting the author. Then, we make the &lt;code&gt;pageSaveAndOtherStuff&lt;/code&gt; promise wait for &lt;code&gt;settingAuthorPromise&lt;/code&gt; to resolve before it resolves. But, &lt;code&gt;return pageSaveAndOtherStuff&lt;/code&gt; resolves &lt;strong&gt;&lt;em&gt;before&lt;/em&gt;&lt;/strong&gt; the author setting is completed.&lt;/p&gt;
-
-&lt;p&gt;Having understood this now, instead of going with our solution-provided code, we refactored it to make it slightly more intuitive to us:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-  User.findOrCreate({
-    where: {
-      name: name,
-      email: email
-    }
-  })
-  .then(function(values) {
-    const user = values[0];
-    return Page.create({
-      title: title,
-      content: content,
-      status: status,
-      tags: tags
-    })
-    .then(function(addedPage) {
-      return addedPage.setAuthor(user);
-    })
-  })
-  .then(function(addedPage) {
-    res.redirect(addedPage.route);
-  })
-  .catch(next);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We eliminated &lt;code&gt;page.save&lt;/code&gt; entirely by using &lt;code&gt;Page.create&lt;/code&gt; instead of &lt;code&gt;Page.build&lt;/code&gt;, and made the layout a little more linear. &lt;code&gt;Page.create&lt;/code&gt; resolves to a page object and passes it to the &lt;code&gt;page.setAuthor&lt;/code&gt; method. This takes the ID of the user and sets it as the authorId of the page. Once all of that is done, the redirect happens, and our catch clause is last.&lt;/p&gt;
-
-&lt;p&gt;We then set up routes to &lt;code&gt;/users&lt;/code&gt; and &lt;code&gt;/users/:id&lt;/code&gt; for an individual&amp;rsquo;s page. For the later, we used a &lt;code&gt;Promise.all&lt;/code&gt; statement because we needed to do two lookups, one to the user table to get the user ID, and the second to the page table to match the &lt;code&gt;authorId&lt;/code&gt; – something that Sequelize created for us as the foreign key.&lt;/p&gt;
-
-&lt;p&gt;Back in our wiki page route, we added in the author of each page via eager loading:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.get(&#39;/:urlTitle&#39;, function(req, res, next) {
-  Page.findOne({
-    where: {
-      urlTitle: req.params.urlTitle
-    },
-    include: [
-      {model: User, as: &#39;author&#39;}
-    ]
-  })
-  .then(function(page) {
-    if (page === null) {
-      return next(new Error(&#39;That page was not found!&#39;));
-    }
-    res.render(&#39;wikipage&#39;, {
-      page: page
-    });
-  })
-  .catch(next);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Which, in another feat of magic, is Sequelize&amp;rsquo;s way of basically doing a join between those two tables, and then making everything on &lt;code&gt;User&lt;/code&gt; available on &lt;code&gt;Page&lt;/code&gt; under the property &lt;code&gt;author&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The last thing I ended up doing after class was setting up tags, which involved first setting a new tags field on our model (using &lt;code&gt;Sequelize.ARRAY(Sequelize.TEXT)&lt;/code&gt;), and then using &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;this.setDataValue&lt;/code&gt; to re-set the incoming tag string as an array. Then, we modified the locals object to render in our controller, and rendered the view to include our tags on each page.&lt;/p&gt;
-
-&lt;p&gt;We also enabled the ability for the user to search for a specific tag in an HTML form with a &lt;code&gt;/search&lt;/code&gt; route. One of the mistakes I made here, was one that I mentioned above for the &lt;code&gt;/add&lt;/code&gt; route: I tried putting the &lt;code&gt;/search&lt;/code&gt; route below &lt;code&gt;/:urlTitle&lt;/code&gt;, so I was given a few error messages before I realized what was happening.&lt;/p&gt;
-
-&lt;p&gt;We specified the search form&amp;rsquo;s method as &lt;code&gt;get&lt;/code&gt;, which meant that we had to pull data in through &lt;code&gt;req.query&lt;/code&gt; instead of &lt;code&gt;req.body&lt;/code&gt;. We created a class method on our model to &lt;code&gt;findByTag&lt;/code&gt; using the &lt;code&gt;$overlap&lt;/code&gt; operator, and used it to find all of the pages with a single tag. We also created a &lt;code&gt;findSimilar&lt;/code&gt; instance method, and added a link on each page to a list of &amp;ldquo;similar&amp;rdquo; pages (or, pages with the same tag[s] as the page that you were on).&lt;/p&gt;
 </description>
     </item>
     

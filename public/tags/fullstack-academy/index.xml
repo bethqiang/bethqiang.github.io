@@ -9,6 +9,38 @@
     <atom:link href="http://bethqiang.com/tags/fullstack-academy/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Shopping Carts &amp; Being Seniors</title>
+      <link>http://bethqiang.com/post/shopping-carts-and-being-seniors/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/shopping-carts-and-being-seniors/</guid>
+      <description>
+
+&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
+
+&lt;p&gt;The features I&amp;rsquo;ve primarily been working on have been the Orders History page for a logged in user, and I just started working on our cart. Relatively early on in the process, we decided we were just going to have our cart saved on the session, and never actually persisted in the database. One of the main challenges I&amp;rsquo;ve faced while doing this was coming to terms with the fact that we weren&amp;rsquo;t actually going to the database in our back-end route to fetch and update and delete items in our cart; we were just setting an array on the &lt;code&gt;req.session&lt;/code&gt; object. Though the premise was the same — the front-end would dispatch an action, that would send an AJAX request to our back-end, which would manipulate that array, then send the resulting array back to the front-end — it just felt a little strange doing it.&lt;/p&gt;
+
+&lt;p&gt;The primary benefits, I think, to doing it this way are it&amp;rsquo;s a little less intensive on our server and it&amp;rsquo;s a little easier to transition someone&amp;rsquo;s cart when they&amp;rsquo;re not signed up or logged in originally to when they do sign up or log in. The drawbacks are, that let&amp;rsquo;s say someone&amp;rsquo;s kid throws some Pokemon&amp;rsquo;s cards into dad&amp;rsquo;s cart, and then dad actually signs in, dad probably doesn&amp;rsquo;t want those Pokemon cards. Likewise, if you put items in your cart when logged into a computer that&amp;rsquo;s not primarily yours, your cart will persist to the next person who uses that computer but when you log in via a different computer, your cart may* not be there anymore. And, this didn&amp;rsquo;t even occur to me until our fellow mentioned it, but we actually have no knowledge about what&amp;rsquo;s in our users&amp;rsquo; carts, so we can&amp;rsquo;t gather data about it or market to them or send them endless emails about things sitting in their carts.&lt;/p&gt;
+
+&lt;p&gt;*We may be attempting to solve this in the near future by setting the session ID to be the user&amp;rsquo;s email. May, being the key word&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;deployment-continuous-integration&#34;&gt;Deployment &amp;amp; Continuous Integration&lt;/h2&gt;
+
+&lt;p&gt;We also went through a workshop about how to deploy and run continuous integration our apps via &lt;a href=&#34;https://www.heroku.com/&#34; target=&#34;_blank&#34;&gt;Heroku&lt;/a&gt; and &lt;a href=&#34;http://codeship.com/&#34; target=&#34;_blank&#34;&gt;Codeship&lt;/a&gt;. I&amp;rsquo;ve deployed apps to Heroku before, so I was relatively familiar with that process. But, I&amp;rsquo;ve never used any continuous integration tool before. Our first attempt at using CodeShip didn&amp;rsquo;t end up going so well — we ran into some errors, did something to fix it, ran into more errors, fixed those, then came across &lt;em&gt;new&lt;/em&gt; errors&amp;hellip;until finally our fellow told us we were spending too much time on it and it might be a good idea to kind of sort of make our app somewhat functional before really worrying about it. So, we deleted that and moved on.&lt;/p&gt;
+
+&lt;p&gt;I did think the integration with CodeShip and Heroku was really cool; we could automate things to the point where all we&amp;rsquo;d have to do is push to GitHub, and then CodeShip would run, and then it would deploy automatically to Heroku. I&amp;rsquo;m excited for when we do get it to work to see all of it in action!&lt;/p&gt;
+
+&lt;h2 id=&#34;not-project-related-things&#34;&gt;Not-Project-Related Things&lt;/h2&gt;
+
+&lt;p&gt;I met with Career Services for the first time on Friday! Like most things in life, it was both wonderful and terrifying — wonderful because the future is always an exciting thing. Terrifying because, well, no one &lt;em&gt;really&lt;/em&gt; likes the job hunt, do they?! We talked mostly about what I&amp;rsquo;m looking for, where I&amp;rsquo;m looking for it, and in general things I should be thinking about. I took some time over the weekend to research some companies to put on my &amp;ldquo;Companies I&amp;rsquo;d Love to Work For&amp;rdquo; list, which I&amp;rsquo;ll be building out over the next few weeks.&lt;/p&gt;
+
+&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/post/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
       <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
       <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
@@ -1314,282 +1346,6 @@ app.use(&#39;/jquery&#39;, express.static(__dirname + &#39;/node_modules/jquery/
 &lt;p&gt;In other news, Pieter DePree, Recruiting Lead at Stack Overflow, came to campus to talk about how Stack Overflow hires developers, and more specifically, what we can do to start preparing ourselves and our online presence for the job hunt in a couple of months. Though some of his points didn&amp;rsquo;t necessarily apply at this point in time, it did make us aware of what we need to start doing when, and gave us the knowledge of how to prepare ourselves for when it did. It was also really interesting to get a detailed look into the hiring process at company like Stack Overflow.&lt;/p&gt;
 
 &lt;p&gt;And lastly, who could forget about our Minecraft adventure on Friday? &lt;a href=&#34;http://bethqiang.com/post/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve written a bit on it before&lt;/a&gt;, so I&amp;rsquo;m not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack&amp;rsquo;s co-founders. I haven&amp;rsquo;t yet been back into our server to see if people have built anything this weekend, but I&amp;rsquo;m excited to check in later tonight and see what&amp;rsquo;s been happening.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 2, Day 5: JavaScript Promises and Minecraft</title>
-      <link>http://bethqiang.com/post/javascript-promises-and-minecraft/</link>
-      <pubDate>Sat, 12 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/javascript-promises-and-minecraft/</guid>
-      <description>
-
-&lt;p&gt;After the &lt;a href=&#34;http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/&#34; target=&#34;_blank&#34;&gt;callback hell we experienced yesterday&lt;/a&gt;, we learned about promises today. A promise, according to my instructor and &lt;a href=&#34;https://promisesaplus.com/&#34; target=&#34;_blank&#34;&gt;the Promises/A+ Spec&lt;/a&gt; and basically any other legitimate source, represents the &lt;strong&gt;eventual result of an asynchronous operation&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let’s bring back our (slightly refactored, with the &lt;code&gt;insertIntoTable&lt;/code&gt; function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.post(&#39;/tweets&#39;, function(req, res, next){
-  let userName, name = req.body.name, content = req.body.content;
-    client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
-      if (err) return next(err);
-      if (result.rows.length === 0) {
-        client.query(&#39;INSERT INTO users (name) VALUES ($1)&#39;, [name], function(err, result) {
-          if (err) return next(err);
-          client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
-            if (err) return next(err);
-            insertIntoTable(result.rows[0].id, content);
-          });
-        });
-      } else {
-        insertIntoTable(result.rows[0].id, content);
-      }
-    });
-  });
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I don’t know what you’re talking about, it’s perfect.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Just kidding. For real this time:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It’s not very portable – you’d be hard-pressed to reuse parts of this code anywhere else.&lt;/li&gt;
-&lt;li&gt;You can’t perform concurrent callback functions if you wanted to.&lt;/li&gt;
-&lt;li&gt;Our code isn’t any kind of linear, and it can be hard to read and figure out what, when, and where things are happening and variables are passed through.&lt;/li&gt;
-&lt;li&gt;We’re constantly repeating the error handler, although we need to if we want any error that happens to be registered – we can’t just omit it.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;basics-of-promises&#34;&gt;Basics of Promises&lt;/h2&gt;
-
-&lt;p&gt;We were given a &lt;code&gt;promisifiedReadFile&lt;/code&gt; function, which returned a new &lt;code&gt;Promise&lt;/code&gt; with a &lt;code&gt;fs.readFile&lt;/code&gt; function inside of it. We did various exercises in the context of reading and subsequently logging stanzas of a poem, where each stanza was its own text file. So, to read and log stanzas one and two, in any order:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1) {
-  console.log(stanza1);
-});
-
-promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
-.then(function(stanza2) {
-  console.log(stanza2);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These two read processes would occur in parallel. However, one of the powerful thing about promises is that we can chain them in a specified order, so one thing always happens after another has completed.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1) {
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
-})
-.then(function(stanza2) {
-    console.log(stanza2);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;We need to return the promise at the end of the first &lt;code&gt;then&lt;/code&gt;&lt;/strong&gt; – otherwise, the second &lt;code&gt;then&lt;/code&gt; wouldn’t know to wait for the file to be read before logging stanza 2, and then our order wouldn’t be guaranteed.&lt;/p&gt;
-
-&lt;h2 id=&#34;multiple-handlers&#34;&gt;Multiple Handlers&lt;/h2&gt;
-
-&lt;p&gt;We can also handle two promises concurrently using multiple handlers. Let’s say we don’t care in which order stanzas 2 and 3 are read and printed, we just want them to be read and printed &lt;em&gt;after&lt;/em&gt; stanza 1 is read.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;const stanza1 = promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-
-stanza1
-.then(function() {
-return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
-})
-.then(function(stanza2) {
-  console.log(stanza2);
-})
-
-stanza1
-.then(function() {
-return promisifiedReadFile(&#39;poem-one/stanza-03.txt&#39;);
-})
-.then(function(stanza3) {
-  console.log(stanza3);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;error-handling&#34;&gt;Error Handling&lt;/h2&gt;
-
-&lt;p&gt;Another one of the advantages of using promises is error handling. Let’s see what our promise chain would look like if we included an error handler. We can do this one of three ways:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create a new &lt;code&gt;then&lt;/code&gt; statement with the first argument as null and the second being the error function&lt;/li&gt;
-&lt;li&gt;Attach our error handler to our last &lt;code&gt;then&lt;/code&gt; statement&lt;/li&gt;
-&lt;li&gt;Use &lt;code&gt;catch&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1) {
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
-})
-.then(function(stanza2) {
-  console.log(stanza2);
-})
-.then(null, function(err) { // the first argument is always the success function, the second is the failure function
-  console.log(err);
-})
-
-// is equivalent to
-
-promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1) {
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
-})
-.then(function(stanza2) { // success function
-  console.log(stanza2);
-},
-function(err) { // failure function
-  console.log(err);
-};
-)
-// is equivalent to
-
-promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1) {
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
-})
-.then(function(stanza2) {
-  console.log(stanza2);
-})
-.catch(function(err) { // use catch instead
-  console.log(err);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Either stanza 1 or stanza 2 could have failed, and in both cases, the promise chain would end and the closest error handler after the promise would run. This means we don’t need to create an error handler for each part of the function; we can just include a unified error at the end. If any one of the parts before it fail, it will look for the closest error handler after it, and use that to handle the error. The promise chain is only followed if &lt;em&gt;everything&lt;/em&gt; successful.&lt;/p&gt;
-
-&lt;p&gt;However, something to be aware of is that &lt;strong&gt;if an error is successfully handled, that promise will have succeeded&lt;/strong&gt;. What this means is that if we have a promise chain that looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1){
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
-})
-.then(function(stanza2) {
-  console.log(stanza2)
-})
-.then(null, function(err) {
-  console.log(err);
-})
-.then(function() {
-  console.log(&#39;successfully done&#39;);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If there is an error in reading stanza 1, we&amp;rsquo;ll skip past the second &lt;code&gt;then&lt;/code&gt; and go directly to the error handler. If our error handler is successful in handling that error (e.g. if another error doesn’t arise when it’s running the function inside of it), then we’ll see “everything successfully done” in the console – even though it wasn’t.&lt;/p&gt;
-
-&lt;p&gt;If we &lt;em&gt;only&lt;/em&gt; wanted to see “everything successfully done” if the reading of both stanzas 1 and 2 were successful, we’d have to either force another error to be thrown in our error handler (which seems a bit silly), or we could just move the &lt;code&gt;console.log&lt;/code&gt; of the success message before the error handler, like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
-.then(function(stanza1){
-  console.log(stanza1);
-  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
-})
-.then(function(stanza2) {
-  console.log(stanza2)
-})
-.then(function() {
-  console.log(&#39;everything successfully done&#39;);
-})
-.then(null, function(err) {
-  console.log(err);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If no errors occur, the entire promise chain will be followed and we’ll get a “everything successfully done” console logged at the end. If an error is thrown somewhere, our message won’t be logged.&lt;/p&gt;
-
-&lt;h2 id=&#34;promise-all-and-promise-each&#34;&gt;Promise.all and Promise.each&lt;/h2&gt;
-
-&lt;p&gt;Finally, we also used &lt;code&gt;Promise.all&lt;/code&gt; and &lt;code&gt;Promise.each&lt;/code&gt;, the last of which is fairly specific to the bluebird library, but very useful in certain cases.&lt;/p&gt;
-
-&lt;p&gt;Instead of having to manually write out eight &lt;code&gt;then&lt;/code&gt; statements for each of eight stanzas, we can use &lt;code&gt;Promise.all&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// create an array that contains filenames for each of the stanzas
-let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
-  return &#39;poem-one/&#39; + &#39;stanza-0&#39; + n + &#39;.txt&#39;;
-});
-
-let promiseArr = [];
-// create an array of promises corresponding to each file
-filenames.map(function(filename) {
-  promiseArr.push(promisifiedReadFile(filename)
-  .then(function(filename) {
-    console.log(filename);
-    })
-  )
-});
-
-Promise.all(promiseArr)
-.then(function() {
-  console.log(&#39;everything succesfully done&#39;);
-})
-.then(null, function(err) {
-  console.log(err);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;First, we create an array that contains filenames for each of the stanzas. Then, we create an array of promises corresponding to the reading and printing of each file. Lastly, we pass our promise array as an argument into &lt;code&gt;Promise.all&lt;/code&gt;, and when all of the stanzas are successfully read and printed, log a success message. If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.&lt;/p&gt;
-
-&lt;p&gt;An important thing to note is that &lt;code&gt;Promise.all&lt;/code&gt; logs the result of promises in the order that files are done being read – not necessarily sequentially. If we wanted them in order, we’d have to use &lt;code&gt;Promise.each&lt;/code&gt; instead.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
-  return &#39;poem-one/&#39; + &#39;stanza-0&#39; + n + &#39;.txt&#39;;
-});
-
-let promiseArr = [];
-
-Promise.each(filenames, function(filename) {
-  return promisifiedReadFile(filename)
-  .then(function(stanza) {
-    console.log(stanza);
-  });
-})
-.then(function() {
-  console.log(&#39;everything successfully done&#39;);
-})
-.then(null, function(err) {
-  console.error(err);
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After we have our array of filenames, we pass the filename and a callback function into &lt;code&gt;Promise.each&lt;/code&gt;. The callback function returns a new promise for the first file, then prints it, then returns a new promise for the second file, then prints it, and so on until it runs through all eight files. Once it does, then it console.logs “everything successfully done.” If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.&lt;/p&gt;
-
-&lt;p&gt;So, in summary, promises allow for:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Portable code/functions&lt;/li&gt;
-&lt;li&gt;“Linear”/“flat” chains&lt;/li&gt;
-&lt;li&gt;Multiple handlers&lt;/li&gt;
-&lt;li&gt;Unified error handling&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;minecraft&#34;&gt;Minecraft&lt;/h2&gt;
-
-&lt;p&gt;Friday evening, we had our first Game Night. Because hacking and using VR in Minecraft will both be a part the upcoming weeks, we used Game Night this week to start learning how to play. Fullstack actually built their New York campuses (Fullstack and Grace Hopper) in Minecraft – the end result is seriously impressive. We were also each given a plot of land in front of the building to build whatever we wanted to.&lt;/p&gt;
-
-&lt;p&gt;A lot of mishaps were had, but a lot of fun was as well. A few of our more notable events include:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;We didn’t quite get the settings right for people to be able to build or destroy or do anything except walk/fly around and whack each other&amp;hellip; so that’s what we did for 45 minutes, until staff did a hack to work around the issue.&lt;/li&gt;
-&lt;li&gt;A few of our cohort kept getting lost in the forest, or stuck outside, and more than a few fell off of the world multiple times.&lt;/li&gt;
-&lt;li&gt;A classmate was building a lava moat around his plot (because you know, why not?) and at one point, his lava spilled over to someone else’s plot. It was quite the effort to contain the lava before it spread.&lt;/li&gt;
-&lt;li&gt;One of Fullstack’s co-founders attempted to build &lt;a href=&#34;http://www.panynj.gov/wtcprogress/transportation-hub.html&#34; target=&#34;_blank&#34;&gt;the Oculus structure at the World Trade Center transportation hub&lt;/a&gt;. And once he got bored of that (the partial thing was actually quite impressive!), he started continuously teleporting one of our instructors to him and then blowing him up with TNT.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And if you’re curious, here’s a small snippet of video that our Product Manager, Mark Davis, recorded:&lt;/p&gt;
-
-&lt;iframe class=&#34;center-img&#34; width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/jzLrYTZ47sc&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;p&gt;I had a lot of fun, and I’m kind of obsessed with my cohort and our staff and instructors. I’m &lt;em&gt;really&lt;/em&gt; looking forward to getting our VR headsets and trying them out in our virtual world, as well as just getting to spend more time with all of these people, both in front of a code editor and not!&lt;/p&gt;
 </description>
     </item>
     

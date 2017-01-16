@@ -6,8 +6,40 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Shopping Carts &amp; Being Seniors</title>
+      <link>http://bethqiang.com/post/shopping-carts-and-being-seniors/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/shopping-carts-and-being-seniors/</guid>
+      <description>
+
+&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
+
+&lt;p&gt;The features I&amp;rsquo;ve primarily been working on have been the Orders History page for a logged in user, and I just started working on our cart. Relatively early on in the process, we decided we were just going to have our cart saved on the session, and never actually persisted in the database. One of the main challenges I&amp;rsquo;ve faced while doing this was coming to terms with the fact that we weren&amp;rsquo;t actually going to the database in our back-end route to fetch and update and delete items in our cart; we were just setting an array on the &lt;code&gt;req.session&lt;/code&gt; object. Though the premise was the same — the front-end would dispatch an action, that would send an AJAX request to our back-end, which would manipulate that array, then send the resulting array back to the front-end — it just felt a little strange doing it.&lt;/p&gt;
+
+&lt;p&gt;The primary benefits, I think, to doing it this way are it&amp;rsquo;s a little less intensive on our server and it&amp;rsquo;s a little easier to transition someone&amp;rsquo;s cart when they&amp;rsquo;re not signed up or logged in originally to when they do sign up or log in. The drawbacks are, that let&amp;rsquo;s say someone&amp;rsquo;s kid throws some Pokemon&amp;rsquo;s cards into dad&amp;rsquo;s cart, and then dad actually signs in, dad probably doesn&amp;rsquo;t want those Pokemon cards. Likewise, if you put items in your cart when logged into a computer that&amp;rsquo;s not primarily yours, your cart will persist to the next person who uses that computer but when you log in via a different computer, your cart may* not be there anymore. And, this didn&amp;rsquo;t even occur to me until our fellow mentioned it, but we actually have no knowledge about what&amp;rsquo;s in our users&amp;rsquo; carts, so we can&amp;rsquo;t gather data about it or market to them or send them endless emails about things sitting in their carts.&lt;/p&gt;
+
+&lt;p&gt;*We may be attempting to solve this in the near future by setting the session ID to be the user&amp;rsquo;s email. May, being the key word&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;deployment-continuous-integration&#34;&gt;Deployment &amp;amp; Continuous Integration&lt;/h2&gt;
+
+&lt;p&gt;We also went through a workshop about how to deploy and run continuous integration our apps via &lt;a href=&#34;https://www.heroku.com/&#34; target=&#34;_blank&#34;&gt;Heroku&lt;/a&gt; and &lt;a href=&#34;http://codeship.com/&#34; target=&#34;_blank&#34;&gt;Codeship&lt;/a&gt;. I&amp;rsquo;ve deployed apps to Heroku before, so I was relatively familiar with that process. But, I&amp;rsquo;ve never used any continuous integration tool before. Our first attempt at using CodeShip didn&amp;rsquo;t end up going so well — we ran into some errors, did something to fix it, ran into more errors, fixed those, then came across &lt;em&gt;new&lt;/em&gt; errors&amp;hellip;until finally our fellow told us we were spending too much time on it and it might be a good idea to kind of sort of make our app somewhat functional before really worrying about it. So, we deleted that and moved on.&lt;/p&gt;
+
+&lt;p&gt;I did think the integration with CodeShip and Heroku was really cool; we could automate things to the point where all we&amp;rsquo;d have to do is push to GitHub, and then CodeShip would run, and then it would deploy automatically to Heroku. I&amp;rsquo;m excited for when we do get it to work to see all of it in action!&lt;/p&gt;
+
+&lt;h2 id=&#34;not-project-related-things&#34;&gt;Not-Project-Related Things&lt;/h2&gt;
+
+&lt;p&gt;I met with Career Services for the first time on Friday! Like most things in life, it was both wonderful and terrifying — wonderful because the future is always an exciting thing. Terrifying because, well, no one &lt;em&gt;really&lt;/em&gt; likes the job hunt, do they?! We talked mostly about what I&amp;rsquo;m looking for, where I&amp;rsquo;m looking for it, and in general things I should be thinking about. I took some time over the weekend to research some companies to put on my &amp;ldquo;Companies I&amp;rsquo;d Love to Work For&amp;rdquo; list, which I&amp;rsquo;ll be building out over the next few weeks.&lt;/p&gt;
+
+&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/post/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
@@ -1371,71 +1403,6 @@ User.create({
 &lt;p&gt;We also had another Game Night, where I finally got to see some of the things my fellow classmates have been building. Someone created a pool surrounded by lava. Someone else claimed an enormous plot of land – our theory is that he&amp;rsquo;s trying to build a subdivision and drive up rent. One of our instructors decided to cover his entire plot in glass blocks (because, why not, I guess?), and the other instructor built a cute little cabin. Apparently, someone built an absolutely frightening house – I can’t tell you what that means or what it looks like, because I was too absorbed in building my treehouse to venture over there. We’re having a Minecraft hackathon on Monday afternoon, and I have very little idea of what that involves, but I’m really excited!&lt;/p&gt;
 
 &lt;p&gt;And on another note, it&amp;rsquo;s both hilarious and not how half of this post built up into “I need to write shorter posts”&amp;hellip;and this is over 1600 words, not including the code blocks. C’mon, Beth.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 3, Days 4 and 5: CSS Fundamentals</title>
-      <link>http://bethqiang.com/post/css-fundamentals/</link>
-      <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/css-fundamentals/</guid>
-      <description>&lt;p&gt;A couple of good changes have been made over the past couple of days. First, I&amp;rsquo;ve been making it a priority to get outside every day – even if it&amp;rsquo;s just for 15 minutes, it&amp;rsquo;s been great to just step away from a screen for a bit. Second, I&amp;rsquo;ve rearranged my desk setup so that my second monitor (which is actually just a 42-inch TV, but anyway) is at eye-level behind my laptop (which is below eye-level, often meaning I would be hunched over), and it&amp;rsquo;s been a game-changer. Thirdly, and probably most importantly because it has to actually do with coding and this whole bootcamp thing, is that we&amp;rsquo;ve completely switched gears.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve now spent the better part of the past two days focusing on CSS, which is simultaneously fantastic and terrible. Fantastic, because CSS is something I consistently struggle with and never really learned how to do properly (there are so many other things to learn!). But, if learned properly, I&amp;rsquo;ve always known it can do wonders for both my apps as well as my sanity. Terrible, for the exact same reason. (I now have a myriad of CSS articles and tutorials to read once I get a semblance of free time.)&lt;/p&gt;
-
-&lt;p&gt;We started off with a lecture about CSS &amp;amp; SASS &amp;amp; SCSS, and then did a workshop where we basically built some of the Bootstrap library. Most of what we talked about and did, I had used or tried to use before, without really understanding them or what they were doing, and therefore never had much success.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/css-family-guy.gif&#34; class=&#34;center-img&#34; alt=&#34;Family Guy CSS Comparison&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;Exactly like that. You can&amp;rsquo;t write a post about CSS and not include this gif, right?&lt;/p&gt;
-
-&lt;p&gt;Some of my key takeaways were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;What block vs. inline vs. inline-block elements actually are, and how they behave. Block-level elements will by default try to clear their own line, can have margins, and you can have a height and a width. Inline-level elements don&amp;rsquo;t clear their line, will &lt;em&gt;ignore&lt;/em&gt; top and bottom margins, and they don&amp;rsquo;t care about your height or width – they&amp;rsquo;ll by default fit whatever content is in it. (I never knew either of these, and it&amp;rsquo;s been the cause of a fair amount of my CSS frustrations.) Inline-block elements are kind of a mashup of the two: they don&amp;rsquo;t clear the line but they&amp;rsquo;ll respect your margins and dimensions.&lt;/li&gt;
-&lt;li&gt;Floats. I knew they ended up collapsing the parent element, but I never really knew why, until Geoff explained and showed it to us with 3D diagrams – the floated element almost &amp;ldquo;floats&amp;rdquo; above in 3D space the element beneath it, which causes the parent element to collapse and the element below to take up the space that it was once in. Then, clearfix to the rescue! (Which I also had thrown around willy-nilly before in attempt to make it work, but now I actually know &lt;strong&gt;&lt;em&gt;how&lt;/em&gt;&lt;/strong&gt; to use it.)&lt;/li&gt;
-&lt;li&gt;What happens when you have conflicting styles. I knew the cascading part, but I never knew the exact rules of selector specificity and it helped to see examples of different rules side-by-side and have to figure out which one took precedence.&lt;/li&gt;
-&lt;li&gt;You can do things like for loops and math with SASS!!!!!!!!! (I like for loops and math.) Also, media queries and mixins can make your life (and the look of whatever you&amp;rsquo;re building) significantly better.&lt;/li&gt;
-&lt;li&gt;I actually ended up going through the Bootstrap source code after class, and it was pretty cool to see and understand the code underneath a tool I had used so much. Bootstrap implements their grid system with elements that have a combination of properties: floated to the left, width as percentages of the full width, and with media queries.
-We also had learning group yesterday, during which we ended up talking extensively about space and Mars. Not at all related to anything, but enlightening nonetheless, especially given one our our fellows&amp;rsquo; extensive experience with NASA and space research!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;After doing a fair amount of review in the morning over our workshop from yesterday, as well as Express and Sequelize for our upcoming checkpoint (basically a test) on Monday, we started on what will eventually be a &amp;ldquo;Trip Planner&amp;rdquo; app. Today, we mob-programmed the entire back-end and database together, and then I worked with a partner on designing the static UI. I was really excited to use some of the CSS/SASS/SCSS that we learned yesterday, and doing the styling was much less of a painful effort than it typically is for me.&lt;/p&gt;
-
-&lt;p&gt;We also got an interesting lesson in the separation of server and client-side execution. We had used NPM to import Bootstrap and JQuery into our app, and had all kinds of complications about JavaScript not being able to find them. In the end, and with a little help from our instructor, we ended up:&lt;/p&gt;
-
-&lt;p&gt;Serving our static files in our &lt;code&gt;server.js&lt;/code&gt; file with &lt;code&gt;express.static&lt;/code&gt;, as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;app.use(express.static(__dirname + &#39;/public&#39;));
-app.use(&#39;/bootstrap&#39;, express.static(__dirname + &#39;/node_modules/bootstrap/dist&#39;))
-app.use(&#39;/jquery&#39;, express.static(__dirname + &#39;/node_modules/jquery/dist&#39;))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Adding link and script tags to our CSS, Bootstrap, JQuery, and Google Javascript API map:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/bootstrap/css/bootstrap.min.css&amp;quot;&amp;gt;
-&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/stylesheets/style.css&amp;quot;&amp;gt;
-
-&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;
-
-&amp;lt;script src=&amp;quot;/jquery/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;/bootstrap/js/bootstrap.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;https://maps.googleapis.com/maps/api/js?key=MY_API_KEY&amp;amp;sensor=true&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We had originally tried to to &lt;code&gt;require&lt;/code&gt; our &lt;code&gt;map.js&lt;/code&gt; file in our &lt;code&gt;server.js&lt;/code&gt; file, like you would a Node module, before our instructor pointed out that we&amp;rsquo;d want the client to execute it, not our server. Basically, anything you want the server to execute should go into your back-end. Anything you want the client to execute should go into your front-end. That made a lot of sense. (And seems obvious now that we know that, but such is the journey of learning how to code.) So, into our HTML it went:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;/map.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And voila! Maps and Bootstrap and JQuery.&lt;/p&gt;
-
-&lt;p&gt;Tomorrow&amp;rsquo;s CS Saturday is all about immutability and functional programming and building(!!!) our own version of Git. Way excited. Mostly for the functional programming, but the other two are pretty cool too, I guess.&lt;/p&gt;
-
-&lt;p&gt;P.S. – word count: 927. Doing better at this whole &amp;ldquo;not writing thousands-of-words-long-chapter-books thing.&amp;rdquo;&lt;/p&gt;
 </description>
     </item>
     

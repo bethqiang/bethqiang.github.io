@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</loc>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bethqiang.com/post/shopping-carts-and-being-seniors/</loc>
     <lastmod>2017-01-15T00:00:00+00:00</lastmod>
   </url>
@@ -183,7 +188,7 @@
   
   <url>
     <loc>http://bethqiang.com/</loc>
-    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -212,6 +217,12 @@
   </url>
   
   <url>
+    <loc>http://bethqiang.com/tags/cto-lectures/</loc>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bethqiang.com/tags/data-structures/</loc>
     <lastmod>2016-11-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -231,7 +242,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/fullstack-academy/</loc>
-    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -255,7 +266,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/grace-shopper/</loc>
-    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -301,7 +312,7 @@
   
   <url>
     <loc>http://bethqiang.com/post/</loc>
-    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -325,7 +336,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/senior-phase/</loc>
-    <lastmod>2017-01-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -343,7 +354,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/stackathon/</loc>
-    <lastmod>2017-01-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

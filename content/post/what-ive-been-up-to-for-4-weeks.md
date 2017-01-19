@@ -19,7 +19,7 @@ And in the past four days, a lot has happened.
 
 ## Grace Shopper
 
-Probably the biggest thing that's happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, [Codsworth Robotics](https://github.com/bethqiang/codsworth-robotics), sells bots to help you with your gardening and cooking and butlering and general life-ing needs.
+Probably the biggest thing that's happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, [Codsworth Robotics](https://github.com/Codsworth-Robotics/codsworth-robotics), sells bots to help you with your gardening and cooking and butlering and general life-ing needs.
 
 I've personally worked on:
 

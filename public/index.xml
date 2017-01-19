@@ -6,8 +6,68 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture</title>
+      <link>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</link>
+      <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</guid>
+      <description>
+
+&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
+
+&lt;p&gt;One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package &lt;code&gt;nodemailer&lt;/code&gt; to our checkout process, so that when a user places an order, they&amp;rsquo;ll immediately be sent an email with their confirmation number.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-01/alfred-pennyworth.png&#34; class=&#34;center-img&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;My teammates made fun of me a little bit for being so excited about this, and I can&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; articulate why I was, except for that it was just a moment for me when I realized &lt;em&gt;how incredible programming can be&lt;/em&gt;. Which I realize still sounds a little weird, because, at its core, I just sent myself an email. But, a lot of seemingly disparate things came together at that moment for me, I think. (And let&amp;rsquo;s be real, who doesn&amp;rsquo;t want an email from Alfred Pennyworth?!)&lt;/p&gt;
+
+&lt;h2 id=&#34;stackathon&#34;&gt;Stackathon&lt;/h2&gt;
+
+&lt;p&gt;The end of one project means the beginning of another! Today was the first day of Stackathon, which essentially is a personal hackathon. We have until Monday to build something (anything) of our choosing, and there are a couple of awards on the line.&lt;/p&gt;
+
+&lt;p&gt;After internally debating for basically the past month about what I&amp;rsquo;ve wanted to do, I finally decided to attempt an &lt;a href=&#34;https://altvr.com/&#34; target=&#34;_blank&#34;&gt;AltSpace&lt;/a&gt; or &lt;a href=&#34;https://vtime.net/&#34; target=&#34;_blank&#34;&gt;vTime&lt;/a&gt;-like app, but one that could support many more people than those currently do. As Mark Davis, Fullstack&amp;rsquo;s Product Manager, &lt;a href=&#34;https://www.fullstackacademy.com/blog/vr-lab-jan-2017&#34; target=&#34;_blank&#34;&gt;describes&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Here&amp;rsquo;s what we wish existed, now: a simple VR environment where up to 25 avatars can interact with each other, with real-time voice chat, that&amp;rsquo;s accessible on a Google Daydream headset as an MVP, but is also extensible to any WebVR enabled headset.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As I only have five days, my primary goals will be to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Render a scene (I&amp;rsquo;m not worried about this part)&lt;/li&gt;
+&lt;li&gt;Integrate with Firebase to support a lot of people joining (I&amp;rsquo;m more worried about this part), and&lt;/li&gt;
+&lt;li&gt;Use WebRTC for real-time audio communication (I&amp;rsquo;m not even sure this part is going to happen, but hey, reach for the stars?)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;d also love to pitch this to my Capstone Project team after, and build on top of it to create something even more amazing.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve avoided seriously entertaining this idea pretty much since I started thinking about what I wanted to do, because every time I did, I would get overwhelmed and terrified. I&amp;rsquo;m very excited and intrigued by the VR space, but also terrified because of the sheer complexity of designing 3D environments and interactions with those environments.&lt;/p&gt;
+
+&lt;p&gt;One of my favorite sayings is, &amp;ldquo;If your dreams don&amp;rsquo;t scare you, they&amp;rsquo;re not big enough.&amp;rdquo; I suppose that&amp;rsquo;s pretty applicable now — wish me luck!&lt;/p&gt;
+
+&lt;h2 id=&#34;cto-lecture-design&#34;&gt;CTO Lecture: Design&lt;/h2&gt;
+
+&lt;p&gt;During Senior Phase, we&amp;rsquo;re going to be having CTO Lectures on a regular basis. These are a series of lectures to expose us to the non-technical parts of building software, including design, scalability, agile, the &amp;ldquo;lean startup&amp;rdquo; methodology, etc. This was one of the parts about the program that I was looking forward to most, and today definitely did not disappoint.&lt;/p&gt;
+
+&lt;p&gt;We heard from &lt;a href=&#34;https://www.linkedin.com/in/oddurs&#34; target=&#34;_blank&#34;&gt;Oddur Sigurdsson&lt;/a&gt;, who previously was Creative Director at Fullstack. He worked in the software/design industry for a number of years, and now runs his own company. To become a designer, he argued, there are three steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Play. You should be making something. Experiment. Share it with others. &lt;strong&gt;&lt;em&gt;Ignore the rules.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Plan. Set guidelines for yourself. Set a direction (e.g., I want to be there in seven weeks, or two hours). Set goals, and don&amp;rsquo;t stop until you&amp;rsquo;ve achieved them.&lt;/li&gt;
+&lt;li&gt;Polish. Iterate and refine. Find the balance between functional and beautiful. Push the limits of your abilities. Get critical feedback.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Another one of his points was that there are striking similarities between programming and design, and I&amp;rsquo;d argue that these are very applicable to life as well.&lt;/p&gt;
+
+&lt;p&gt;After talking generally about being a designer and the process of design, Oddur pulled out Photoshop and Sketch and demonstrated his workflows and tools for editing photos and creating site/app designs. He spent maybe 20 minutes maximum designing in Sketch, but his design was absolutely gorgeous and I was blown away.&lt;/p&gt;
+
+&lt;p&gt;When I have an extra minute or two (so&amp;hellip;after Fullstack is over?), it&amp;rsquo;s definitely something I would love to delve into further. So much I want to do, so little time. Sigh.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Shopping Carts &amp; Being Seniors</title>
@@ -66,7 +126,7 @@
 
 &lt;h2 id=&#34;grace-shopper&#34;&gt;Grace Shopper&lt;/h2&gt;
 
-&lt;p&gt;Probably the biggest thing that&amp;rsquo;s happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, &lt;a href=&#34;https://github.com/bethqiang/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, sells bots to help you with your gardening and cooking and butlering and general life-ing needs.&lt;/p&gt;
+&lt;p&gt;Probably the biggest thing that&amp;rsquo;s happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, sells bots to help you with your gardening and cooking and butlering and general life-ing needs.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve personally worked on:&lt;/p&gt;
 
@@ -1263,146 +1323,6 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 &lt;h2 id=&#34;node-js-interactive-north-america&#34;&gt;Node.js Interactive North America&lt;/h2&gt;
 
 &lt;p&gt;And on a completely different note, I&amp;rsquo;ve been awarded a ticket to &lt;a href=&#34;http://events.linuxfoundation.org/events/node-interactive&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which is taking place here in Austin in a week and a half! This will mean that I&amp;rsquo;ll be missing two days of class (and therefore, will be very busy over Thanksgiving) but it also means that I&amp;rsquo;ll get to spend two days immersed in everything Node, meet awesome people, and hear about all of the super cool things that are going on in the community. Thanks to &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt; for making it possible for me to attend, and I can&amp;rsquo;t wait to share everything that I experience!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 3, Days 2 and 3: On Feeling Completely Overwhelmed</title>
-      <link>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</link>
-      <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</guid>
-      <description>
-
-&lt;p&gt;Let’s talk about feelings for a second. I’m generally a very optimistic person with a decent amount of confidence in myself, my critical-thinking and problem-solving abilities, and my ability to stick with something when it’s challenging. I don’t like to dwell on the negatives, and I generally try not to let myself get too down.&lt;/p&gt;
-
-&lt;p&gt;But today was kind of a sucky day. It didn’t start off that way. I woke up after six hours of sleep feeling a little sleepy, but feeling pretty good about most of the material we had covered in the past couple of days. I knew that my blog post from yesterday needed editing, and set out to do that before class.&lt;/p&gt;
-
-&lt;p&gt;As I was editing, I realized that maybe I didn’t understand some of the things we did as much as I thought I did. My post didn’t really make sense in a lot of places, and I couldn’t figure out how to &lt;em&gt;make&lt;/em&gt; it make sense. Then, we reviewed the solution to the workshop we did yesterday, and I quickly started getting overwhelmed – I knew generally how to write decent tests, and I thought I had a pretty good grasp of promises, but I was having a really hard time seeing how everything was connecting.&lt;/p&gt;
-
-&lt;p&gt;Then, we talked more in-depth about promises, and my brain was still a little boggled and twisted from the session before, and I wasn’t able to follow as much as I maybe could have otherwise. By the end of the morning, I was completely overwhelmed, stressed, and my confidence was at the lowest point it’s been since Fullstack began. My brain was running in circles around itself, and even things I knew that I knew started to not make any sense.&lt;/p&gt;
-
-&lt;p&gt;During lunch, when I usually take some time to read programming blogs or review what we covered during the morning or a variety of related things, my sole goal was to get out of the house and do something unrelated to coding for the entire hour and a half. I took a 45 minute walk while listening to a new podcast by Stephen Dubner, of Freaknomics fame, called &lt;a href=&#34;http://freakonomics.com/tmsidk/&#34; target=&#34;_blank&#34;&gt;Tell Me Something I Don’t Know&lt;/a&gt;. (It was literally a podcast about random facts. It was pretty interesting, though I don’t know if I’ll be a regular listener.) I then ate lunch, watched some cute puppy videos, and read about politics.&lt;/p&gt;
-
-&lt;p&gt;Once I had an opportunity to calm down and reassure myself that I did in fact, know how to code and solve problems with some degree of competency, and that yes, I could do this, I knew I needed to change something. I needed more time. Time for me to do thorough concept reviews in the evenings, and do fun Code Wars problems, and go to meetups, and work on personal projects, and do more functional programming because for some reason that really excites me. I needed time do things that I find fun that aren&amp;rsquo;t directly related to class. And also, you know, sleep. But more importantly, I &lt;em&gt;also&lt;/em&gt; needed some time every day to do things like go for 45 minute walks or watch cute puppy videos or get dinner with a friend once in a blue moon. And run. Running helps. (That&amp;rsquo;s a long list, I know.)&lt;/p&gt;
-
-&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
-
-&lt;p&gt;Outside of class and evening reviewing (which, in and of itself, I need to find a way to optimze), writing these posts have by far taken the largest chunk of my time. Daily 1,500-word blog posts are great, and I’m sure I’ll thank myself for them later. But, I’m starting to realize with the schedule that we have and the time I need outside of class, they’re unsustainable. Frankly, they take too much time to write, and even just saving an hour a day will give me an hour to start doing other things. That definitely doesn&amp;rsquo;t mean I&amp;rsquo;m going to abandon writing about each day. I just have to choose more wisely what I want to write, and cap the length of and detail in each post, thereby lessening the time that they take.&lt;/p&gt;
-
-&lt;p&gt;In the interest of keeping some kind of record of what we’ve been doing and learning the past two days, here’s a (sort of) quick-and-dirty summary.&lt;/p&gt;
-
-&lt;h2 id=&#34;back-end-testing-and-sequelize-magic&#34;&gt;Back-End Testing and Sequelize Magic&lt;/h2&gt;
-
-&lt;p&gt;We learned all about testing on the back-end. Some of the key takeaways:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It’s generally preferable to use a different database to test your code than when you’re developing or when your app is in production, so that you can stick stuff in and take stuff out and completely reset your database freely. This can be done pretty easily by creating a process environment variable, and then setting a conditional for that variable when you’re setting your database.&lt;/li&gt;
-&lt;li&gt;Constantly talking about Mocha and Chai made me constantly want a hot, creamy, caffeine- and sugar-laden beverages.&lt;/li&gt;
-&lt;li&gt;When we’re using promises in our tests, which is often because much of what we’re testing is asynchronous, we need to include either &lt;code&gt;return&lt;/code&gt; or &lt;code&gt;done&lt;/code&gt;. If neither are included, Mocha reads our tests, and passes them, &lt;em&gt;before our async functions finish doing what they’re supposed to do&lt;/em&gt;. And once our async functions are done, we&amp;rsquo;ll get an error – but the tests have already passed and Mocha&amp;rsquo;s over it. So that’s not good.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Done&lt;/code&gt; is passed into our test function, and then we can invoke it at the end (and in our &lt;code&gt;catch&lt;/code&gt;) to signal to Mocha that it’s good to go and can move on to the next test. If we don’t want to use &lt;code&gt;done&lt;/code&gt;, we can use &lt;code&gt;return&lt;/code&gt; instead, and to Mocha, it’ll almost be like an implied &lt;code&gt;then&lt;/code&gt; after.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If we&amp;rsquo;re creating 3 pages to test if our &lt;code&gt;findByTag&lt;/code&gt; function works, with &lt;code&gt;done&lt;/code&gt;, this would look like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;describe(&#39;findByTag&#39;, function () {
-  beforeEach(function(done) { // done is passed in
-    Promise.all([
-      Page.create({ new page info }),
-      Page.create({ new page info }),
-      Page.create({ new page info })
-    ])
-    .then(function() { // our success/error functions
-      done();
-    }, done)
-  })
-  it(&#39;gets pages with the search tag&#39;, function(done) { // done is passed in here as well
-    Page.findByTag(&#39;tag&#39;)
-    .then(function(pages) {
-      expect(pages).to.equal(something)
-      expect(pages).to.equal(somethingelse)
-      done(); // this indicates the end of the async
-    })
-    .catch(done); // error-handling
-  });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With &lt;code&gt;return&lt;/code&gt;, the same code would look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;describe(&#39;findByTag&#39;, function () { // no done being passed
-  beforeEach(function() {
-    return Promise.all([ // return this
-      Page.create({ info }),
-      Page.create({ info }),
-      Page.create({ info })
-    ]) // no need for success/error functions using done
-  })
-  it(&#39;gets pages with the search tag&#39;, function() { // no done being passed
-    return Page.findByTag(&#39;tag&#39;) // return this
-    .then(function(pages) {
-      expect(pages).to.equal(something)
-      expect(pages).to.equal(somethingelse) // no done after this
-    })
-  }); // and no need for a catch(done) statement here
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/post/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// in models &amp;gt; index.js, set associations:
-Page.belongsTo(User);
-User.hasMany(Page);
-
-// in our test specs, creating a new instance:
-beforeEach(function(done) {
-User.create({
-  name: &#39;Spock&#39;,
-  email: &#39;spock@starfleet.gov&#39;,
-  pages: [{
-    title: &#39;Science Officer\&#39;s Log #7&#39;,
-    content: &#39;Humans are emotional.&#39;,
-    status: &#39;open&#39;,
-    tags: [&#39;Sci-fi&#39;, &#39;TV&#39;]
-    }]
-    },
-    {
-      include: [ Page ]
-    })
-    .then(newInfo =&amp;gt; {
-      newPageInfo = newInfo.pages; // our pages data can now be accessed via the pages property
-      done();
-    })
-    .catch(done);
-  });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We also learned that Sequelize is way too smart and picky for its own good. For an entire hour, we tried an incredible number of ways and syntaxes to create a &lt;code&gt;page&lt;/code&gt; property, but every time, we’d get an empty array back. The fact that we got an array back showed us that Sequelize was trying to give us something, just not what we wanted. Our fellow had a sudden realization – Sequelize was looking for a &lt;code&gt;pages&lt;/code&gt; property, and we were trying to give it a &lt;code&gt;page&lt;/code&gt; property. He also told us a funny (or not, if you were him) story about how he was once trying to do something similar with a property that ended in a “y” – which, in the English language, the plural becomes “ies.” For an entire day or two, he was trying to figure out why Sequelize was putting up a fit, before realizing he had specified the plural as “ys.”&lt;/p&gt;
-
-&lt;h2 id=&#34;promise-mechanics-and-building-a-promise-library&#34;&gt;Promise Mechanics and Building a Promise Library&lt;/h2&gt;
-
-&lt;p&gt;Today, we spent a good deal of time talking about the mechanics of promises, and we spent the afternoon building a deferral-style promise library similar to &lt;a href=&#34;https://docs.angularjs.org/api/ng/service/$q&#34; target=&#34;_blank&#34;&gt;AngularJS’s $q service&lt;/a&gt;. We created &lt;code&gt;$Promise&lt;/code&gt; and &lt;code&gt;Deferral&lt;/code&gt; classes, with the &lt;code&gt;then&lt;/code&gt; method on the &lt;code&gt;$Promise&lt;/code&gt; prototype that took two callback functions and the &lt;code&gt;resolve&lt;/code&gt; and &lt;code&gt;reject&lt;/code&gt; methods on the &lt;code&gt;Deferral&lt;/code&gt; prototype.&lt;/p&gt;
-
-&lt;p&gt;The first roadblock we faced was figuring out how to trigger the &lt;code&gt;then&lt;/code&gt; and the callback functions, which was stored in the &lt;code&gt;$promise&lt;/code&gt; instance, when the promise was resolved. Our first idea was to include it in the &lt;code&gt;resolve&lt;/code&gt; and &lt;code&gt;reject&lt;/code&gt; methods, but then they’d be triggered right after a promise was fulfilled – not when the &lt;code&gt;then&lt;/code&gt; was called. We ended up creating an intermediate function, whose job was solely to take the callback function off of the array it was stored in and run it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$Promise.prototype.callHandlers = function(data) {
-  if (this._state !== &#39;pending&#39;) {
-    let fn = this._handlerGroups.shift();
-    // handlerGroups was an array of objects containing success and failure functions
-    fn.successCb(data);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The second challenge we faced was to ensure that, even if events occurred in the opposite order – if the promise is resolved after the &lt;code&gt;then&lt;/code&gt; – that the &lt;code&gt;then&lt;/code&gt; would still run. We contemplated a myriad of options, including recursion, a while loop, a &lt;code&gt;setInterval&lt;/code&gt; to check the state of the promise, and ended up going down a rabbit hole trying to research &lt;code&gt;setImmediate&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;We later learned that the answer was &lt;em&gt;incredibly&lt;/em&gt; easy – we could just call our &lt;code&gt;callHandlers&lt;/code&gt; function in the same function that fulfilled the promise. When the &lt;code&gt;then&lt;/code&gt; is run initially (before the promise is fulfilled), it’ll add its callback functions to the storage array, and even though it calls the &lt;code&gt;callHandlers&lt;/code&gt; method, the &lt;code&gt;callHandlers&lt;/code&gt; method won’t invoke the callback because the state is still pending. When the promise is resolved, then we just need to call the &lt;code&gt;callHandlers&lt;/code&gt; method to run the callback functions that were already stored.&lt;/p&gt;
-
-&lt;h2 id=&#34;game-night-round-2&#34;&gt;Game Night, Round 2&lt;/h2&gt;
-
-&lt;p&gt;We also had another Game Night, where I finally got to see some of the things my fellow classmates have been building. Someone created a pool surrounded by lava. Someone else claimed an enormous plot of land – our theory is that he&amp;rsquo;s trying to build a subdivision and drive up rent. One of our instructors decided to cover his entire plot in glass blocks (because, why not, I guess?), and the other instructor built a cute little cabin. Apparently, someone built an absolutely frightening house – I can’t tell you what that means or what it looks like, because I was too absorbed in building my treehouse to venture over there. We’re having a Minecraft hackathon on Monday afternoon, and I have very little idea of what that involves, but I’m really excited!&lt;/p&gt;
-
-&lt;p&gt;And on another note, it&amp;rsquo;s both hilarious and not how half of this post built up into “I need to write shorter posts”&amp;hellip;and this is over 1600 words, not including the code blocks. C’mon, Beth.&lt;/p&gt;
 </description>
     </item>
     

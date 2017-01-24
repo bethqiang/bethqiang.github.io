@@ -1,6 +1,6 @@
 +++
 title = "The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture"
-tags = ["fullstack academy", "senior phase", "grace shopper", "stackathon", "cto lectures"]
+tags = ["fullstack academy", "senior phase", "grace shopper", "stackathon", "vr", "cto lectures"]
 date = "2017-01-18"
 +++
 

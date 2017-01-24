@@ -62,7 +62,7 @@
           <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
         
         
-          <a href="//www.linkedin.com/in/bethanyqiang" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+          <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
         
         
           <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>

@@ -6,8 +6,78 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
+      <link>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</link>
+      <pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</guid>
+      <description>
+
+&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
+
+&lt;h2 id=&#34;react-and-a-frame&#34;&gt;React and A-Frame&lt;/h2&gt;
+
+&lt;p&gt;We put React in initially because we thought it&amp;rsquo;d be a nice-to-have. Then we realized that, for our base MVP at least, we definitely wouldn&amp;rsquo;t be using it to any meaningful degree. A-Frame and React also don&amp;rsquo;t necessarily always play nice with each other; A-Frame is an entity-component-system framework, which favors composability over inheritance. React, on the other hand, is based on inheritance. One of the reasons React is so performant is that it batches its updates; however, when we&amp;rsquo;re going for 60 or 90fps+ real-time rendering, that&amp;rsquo;s maybe not quite what we want.&lt;/p&gt;
+
+&lt;p&gt;Despite this, using React with A-Frame does have a few benefits. First, as long as we&amp;rsquo;re able to let A-Frame do the 3D and VR bits, React does a great job at what it was meant for: a view layer and managing state. Furthermore, I&amp;rsquo;ve heard that wrapping React over three.js (our other possible option) results in a lot of performance issues, but A-Frame provides the much-needed bridge between the 3D/VR world and React, lessening that performance hit by a not insignificant amount.&lt;/p&gt;
+
+&lt;p&gt;We ultimately decided that if we do want to have various views in the future (which ideally we will, at least on the desktop version), it&amp;rsquo;d be better to have React in from the start, rather than needing to go back later to finagle it back in and make it play nice with everything already there. We&amp;rsquo;ve been told in our initial code review that, despite having React in our app, (1) it&amp;rsquo;s very un-React like and we could probably do more React-ifying, which I definitely want to look into soon and (2) it almost resembles an Angular app, because it&amp;rsquo;s very event-based right now.&lt;/p&gt;
+
+&lt;h2 id=&#34;redux-and-immutable-js&#34;&gt;Redux and Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I threw Redux into both ends as well, and converted our state to use Immutable.js. Using Redux on the back-end was an entirely new experience and it took an afternoon to go baby-step-by-baby-step to un-boggle my brain, but once I realized that it was &lt;em&gt;the exact same&lt;/em&gt; as Redux on the front-end — you dispatch an action, and your reducer changes the state based on that action — everything pretty much clicked afterwards.&lt;/p&gt;
+
+&lt;p&gt;As I was adding in Immutable.js, I learned an interesting tidbit: socket.io doesn&amp;rsquo;t really understand Immutable collections and ends up converting them to plain JavaScript structures when sending them across the Internet. We were exceptionally confused for a short period of time when our back-end was supposedly sending an Immutable Map and our front-end could access properties on it like it was a normal object.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-race-condition&#34;&gt;Another Race Condition&lt;/h2&gt;
+
+&lt;h3 id=&#34;or-when-i-learn-that-getelementbyid-queryselector-true&#34;&gt;Or, when I learn that getElementById &amp;gt; querySelector === true&lt;/h3&gt;
+
+&lt;p&gt;We also had another race condition emerge that is strangely absent in my prototype. When a new user joined and there were existing users in the &amp;ldquo;room,&amp;rdquo; the back-end would sometimes start pushing this new user&amp;rsquo;s updates to the front-ends of everyone else before the new user had been able to be added to everyone else&amp;rsquo;s DOM. The &lt;code&gt;newUser&lt;/code&gt; function and the &lt;code&gt;updateUsers&lt;/code&gt; function were originally separate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;newUser&#39;, user =&amp;gt; {
+  console.log(&#39;Someone else has joined&#39;);
+  putUserOnDOM(user);
+});
+
+socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  console.log(&#39;Updating position for all users&#39;);
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+    otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get rid of the race condition that this caused, I ended up implementing a conditional statement — if the element didn&amp;rsquo;t exist on the DOM, add it. If it did, then update as normal.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    if (!otherAvatar) {
+      putUserOnDOM(users[user]);
+    } else {
+      otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+      otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+    }
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Even after implementing this, we were having issues with the &lt;code&gt;querySelector&lt;/code&gt; — there seemed to be times that the &lt;code&gt;querySelector&lt;/code&gt; errored out, which prevented the &lt;code&gt;if&lt;/code&gt; statement from ever being executed, which means the user was never put on the DOM. As you can imagine, that&amp;rsquo;s a small problem. So, instead, I decided to use &lt;code&gt;getElementById&lt;/code&gt; (which I hadn&amp;rsquo;t tried in the first place because the majority of A-Frame examples I had seen used &lt;code&gt;querySelector&lt;/code&gt;). Since it was a guarantee that &lt;code&gt;getElementById&lt;/code&gt; would return &lt;code&gt;null&lt;/code&gt; if the element didn&amp;rsquo;t exist, we could ensure that the &lt;code&gt;if&lt;/code&gt; statement would execute when it needed to.&lt;/p&gt;
+
+&lt;p&gt;I later discovered that in order to use &lt;code&gt;querySelector&lt;/code&gt; on IDs that are numbers, you sometimes &lt;a href=&#34;http://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers&#34; target=&#34;_blank&#34;&gt;need to handle them in special ways&lt;/a&gt;. So, the reason it only sometimes freaked out on us was because our IDs were simply socket IDs, only some of them started with numbers. The more you know!&lt;/p&gt;
+
+&lt;h2 id=&#34;real-time-audio-communication&#34;&gt;Real-Time Audio Communication&lt;/h2&gt;
+
+&lt;p&gt;Though I hadn&amp;rsquo;t done a lot of WebRTC outside of my initial research when putting together my prototype, I started helping one of my teammates implement WebRTC. He had gotten &lt;em&gt;really&lt;/em&gt; close over the past few days, but still not quite there — two browsers were connected, but audio still wasn&amp;rsquo;t streaming from one to the other. We ended up attempting to use the &lt;a href=&#34;https://simplewebrtc.com/&#34; target=&#34;_blank&#34;&gt;SimpleWebRTC library&lt;/a&gt;, which we knew &lt;em&gt;was physically possible&lt;/em&gt; to integrate with our socket structure, but something about it was just not happy with our sockets. So, we moved on to reimplementing from scratch. TBD on how that turns out, but fingers crossed!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How to Develop a VR App Prototype, in 26 Steps</title>
@@ -1265,90 +1335,6 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 &lt;hr /&gt;
 
 &lt;p&gt;I also did fun things like make around 10 pounds of macaroni and cheese (including, but not limited to, 12 cups of dry pasta + 3 pounds of cheese + an entire half gallon of whole milk + a stick and a half of butter), attend my boyfriend&amp;rsquo;s giant Thanksgiving dinner (and ate so much delicious food), saw Fantastic Beasts and Where to Find Them and allowed my inner Harry Potter nerd geek out for a bit, went out with friends, caught up on West World (GREAT show), and watched some old Office episodes. Though I did do a fair amount of work, it was a nice break from the 12-ish-hour-per-day grind that our days typically are.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
-      <link>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</link>
-      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</guid>
-      <description>
-
-&lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
-
-&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
-
-&lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
-
-&lt;p&gt;In the afternoon, we had our first Fullstack Hackathon. We worked among our learning groups to create something in Minecraft using &lt;a href=&#34;http://scriptcraftjs.org&#34; target=&#34;_blank&#34;&gt;ScriptCraft&lt;/a&gt;, a Minecraft plugin that lets you extend the game and build using JavaScript. Our team ended up building what we originally called &amp;ldquo;The Hunger Games&amp;rdquo; – we could specify the size of a maze to be built, and how many animals (we tested with chickens, to not have to worry about randomizing animals and such) would be placed in the maze. The maze would then programmatically be built in real-time, the chickens were placed, and then players would enter the maze and try to kill as many chickens as they could. The game would keep track of how many chickens each player killed.&lt;/p&gt;
-
-&lt;p&gt;(We later re-named it to &amp;ldquo;Chicken Rain&amp;rdquo; after a comment from a classmate, because we released all of the chickens at once from the sky, thereby making it rain chickens for a small period of time.)&lt;/p&gt;
-
-&lt;p&gt;Though it sounds relatively simple and we don&amp;rsquo;t have a huge amount of code (minus comments and failed attempts and whitespaces, it&amp;rsquo;s only about 40 lines), it took a lot of effort and researching to figure out how to do each baby step. The hardest part for us was attempting to place chickens where there aren&amp;rsquo;t already blocks from the maze so that the chickens would actually be in the maze, and not on top of it. We weren&amp;rsquo;t able to solve this issue in the time that was given to us – apparently, ScriptCraft has really weird object structures, so you can&amp;rsquo;t just pull out a property like you could in JavaScript.&lt;/p&gt;
-
-&lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/scriptcraft-hackathon-game.png&#34; class=&#34;center-img&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
-
-&lt;p&gt;Despite the learning curve, it was a lot of fun, and it was a great way to destress from the checkpoint. It was also really cool to apply our JavaScript knowledge to a &lt;em&gt;completely&lt;/em&gt; different context.&lt;/p&gt;
-
-&lt;h2 id=&#34;discovering-the-hidden-side-of-jquery&#34;&gt;Discovering the Hidden Side of JQuery&lt;/h2&gt;
-
-&lt;p&gt;Today was spent entirely on JQuery. I thought this would be a &amp;ldquo;oh, let&amp;rsquo;s catch up with a good friend&amp;rdquo; kinda day – JQuery and I have spent a lot of time together throughout the my earning of Free Code Camp&amp;rsquo;s Front-End Certification, but it turns out, there&amp;rsquo;s &lt;em&gt;a lot&lt;/em&gt; I don&amp;rsquo;t know about JQuery.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/trip-planner-app-jquery.png&#34; class=&#34;center-img&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
-
-&lt;p&gt;When we started the &amp;ldquo;add&amp;rdquo; functionality, we weren&amp;rsquo;t really thinking about how to make our code reusable, so we ended up writing basically the same 13 lines of code for all three sections. (We&amp;rsquo;re totally violating DRY in probably every way possible.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(&#39;#hotels&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
-  var selectedOption = $(&amp;quot;#hotel-choices option:selected&amp;quot;).text();
-  var hotelIndex;
-  hotels.forEach(function(hotel, index) {
-    if (hotel.name === selectedOption) {
-      hotelIndex = index;
-    }
-  })
-  var hotelLocation = hotels[hotelIndex].place.location;
-  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex + &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; + selectedOption + &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
-  $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
-  var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
-  $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;drawMarker&lt;/code&gt; function on the second-to-last line was originally part of our &lt;code&gt;maps.js&lt;/code&gt; inside of another function, but because we needed to access it here, we ended up making it a global function. Our instructor brought up the idea of using a &amp;ldquo;fake&amp;rdquo; &lt;code&gt;module.exports&lt;/code&gt;/&lt;code&gt;require&lt;/code&gt; for the front-end as an alternative, so that&amp;rsquo;s definitely something I want to look into once we&amp;rsquo;re able to get the functionality down.&lt;/p&gt;
-
-&lt;p&gt;The thing that we hands-down struggled with the most was trying to connect the marker to the item that was added, so that when we deleted the item, the marker would be deleted along with it. The solution we ended up coming up with is also a little bit of a mess, but we were &lt;em&gt;so happy&lt;/em&gt; when we finally got it working.&lt;/p&gt;
-
-&lt;p&gt;In the second-to-last line of the code above, we saved the marker in the (unfortunately also global) variable &lt;code&gt;markerTest&lt;/code&gt;. Then, we used JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method on the &lt;code&gt;#hotel-itinerary&lt;/code&gt; div with the corresponding database &lt;code&gt;id&lt;/code&gt; of the item to store the name of the hotel/restaurant/activity, and the marker that was just added. Then, to remove both:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(&#39;#itinerary&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
-  var name = $(this).siblings()[0].textContent;
-  var index = $(this).parent().attr(&#39;id&#39;);
-  var parent = $(this).parent().parent().attr(&#39;id&#39;);
-  var marker = $(&amp;quot;#&amp;quot; + parent + &amp;quot; #&amp;quot; + index).data(name);
-  marker.setMap(null);
-  $(this).parent().remove();
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Essentially, we jumped through several hoops to find the corresponding &lt;code&gt;div&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; of the text next to the &amp;ldquo;X&amp;rdquo; button that was clicked, and then used that to look up the marker that was stored with the name. &lt;code&gt;marker.setMap(null)&lt;/code&gt; removes that specific marker, and then we finally remove the actual div containing the text and the button.&lt;/p&gt;
-
-&lt;p&gt;We were able to figure out how to add a day with slightly less headaches, and our challenge for tomorrow will be to figure out how to switch between days.&lt;/p&gt;
-
-&lt;h2 id=&#34;intro-to-es6&#34;&gt;Intro to ES6&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
-
-&lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
 </description>
     </item>
     

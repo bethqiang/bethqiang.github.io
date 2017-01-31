@@ -9,6 +9,76 @@
     <atom:link href="http://bethqiang.com/tags/vr/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
+      <link>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</link>
+      <pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</guid>
+      <description>
+
+&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
+
+&lt;h2 id=&#34;react-and-a-frame&#34;&gt;React and A-Frame&lt;/h2&gt;
+
+&lt;p&gt;We put React in initially because we thought it&amp;rsquo;d be a nice-to-have. Then we realized that, for our base MVP at least, we definitely wouldn&amp;rsquo;t be using it to any meaningful degree. A-Frame and React also don&amp;rsquo;t necessarily always play nice with each other; A-Frame is an entity-component-system framework, which favors composability over inheritance. React, on the other hand, is based on inheritance. One of the reasons React is so performant is that it batches its updates; however, when we&amp;rsquo;re going for 60 or 90fps+ real-time rendering, that&amp;rsquo;s maybe not quite what we want.&lt;/p&gt;
+
+&lt;p&gt;Despite this, using React with A-Frame does have a few benefits. First, as long as we&amp;rsquo;re able to let A-Frame do the 3D and VR bits, React does a great job at what it was meant for: a view layer and managing state. Furthermore, I&amp;rsquo;ve heard that wrapping React over three.js (our other possible option) results in a lot of performance issues, but A-Frame provides the much-needed bridge between the 3D/VR world and React, lessening that performance hit by a not insignificant amount.&lt;/p&gt;
+
+&lt;p&gt;We ultimately decided that if we do want to have various views in the future (which ideally we will, at least on the desktop version), it&amp;rsquo;d be better to have React in from the start, rather than needing to go back later to finagle it back in and make it play nice with everything already there. We&amp;rsquo;ve been told in our initial code review that, despite having React in our app, (1) it&amp;rsquo;s very un-React like and we could probably do more React-ifying, which I definitely want to look into soon and (2) it almost resembles an Angular app, because it&amp;rsquo;s very event-based right now.&lt;/p&gt;
+
+&lt;h2 id=&#34;redux-and-immutable-js&#34;&gt;Redux and Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I threw Redux into both ends as well, and converted our state to use Immutable.js. Using Redux on the back-end was an entirely new experience and it took an afternoon to go baby-step-by-baby-step to un-boggle my brain, but once I realized that it was &lt;em&gt;the exact same&lt;/em&gt; as Redux on the front-end — you dispatch an action, and your reducer changes the state based on that action — everything pretty much clicked afterwards.&lt;/p&gt;
+
+&lt;p&gt;As I was adding in Immutable.js, I learned an interesting tidbit: socket.io doesn&amp;rsquo;t really understand Immutable collections and ends up converting them to plain JavaScript structures when sending them across the Internet. We were exceptionally confused for a short period of time when our back-end was supposedly sending an Immutable Map and our front-end could access properties on it like it was a normal object.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-race-condition&#34;&gt;Another Race Condition&lt;/h2&gt;
+
+&lt;h3 id=&#34;or-when-i-learn-that-getelementbyid-queryselector-true&#34;&gt;Or, when I learn that getElementById &amp;gt; querySelector === true&lt;/h3&gt;
+
+&lt;p&gt;We also had another race condition emerge that is strangely absent in my prototype. When a new user joined and there were existing users in the &amp;ldquo;room,&amp;rdquo; the back-end would sometimes start pushing this new user&amp;rsquo;s updates to the front-ends of everyone else before the new user had been able to be added to everyone else&amp;rsquo;s DOM. The &lt;code&gt;newUser&lt;/code&gt; function and the &lt;code&gt;updateUsers&lt;/code&gt; function were originally separate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;newUser&#39;, user =&amp;gt; {
+  console.log(&#39;Someone else has joined&#39;);
+  putUserOnDOM(user);
+});
+
+socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  console.log(&#39;Updating position for all users&#39;);
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+    otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get rid of the race condition that this caused, I ended up implementing a conditional statement — if the element didn&amp;rsquo;t exist on the DOM, add it. If it did, then update as normal.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    if (!otherAvatar) {
+      putUserOnDOM(users[user]);
+    } else {
+      otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+      otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+    }
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Even after implementing this, we were having issues with the &lt;code&gt;querySelector&lt;/code&gt; — there seemed to be times that the &lt;code&gt;querySelector&lt;/code&gt; errored out, which prevented the &lt;code&gt;if&lt;/code&gt; statement from ever being executed, which means the user was never put on the DOM. As you can imagine, that&amp;rsquo;s a small problem. So, instead, I decided to use &lt;code&gt;getElementById&lt;/code&gt; (which I hadn&amp;rsquo;t tried in the first place because the majority of A-Frame examples I had seen used &lt;code&gt;querySelector&lt;/code&gt;). Since it was a guarantee that &lt;code&gt;getElementById&lt;/code&gt; would return &lt;code&gt;null&lt;/code&gt; if the element didn&amp;rsquo;t exist, we could ensure that the &lt;code&gt;if&lt;/code&gt; statement would execute when it needed to.&lt;/p&gt;
+
+&lt;p&gt;I later discovered that in order to use &lt;code&gt;querySelector&lt;/code&gt; on IDs that are numbers, you sometimes &lt;a href=&#34;http://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers&#34; target=&#34;_blank&#34;&gt;need to handle them in special ways&lt;/a&gt;. So, the reason it only sometimes freaked out on us was because our IDs were simply socket IDs, only some of them started with numbers. The more you know!&lt;/p&gt;
+
+&lt;h2 id=&#34;real-time-audio-communication&#34;&gt;Real-Time Audio Communication&lt;/h2&gt;
+
+&lt;p&gt;Though I hadn&amp;rsquo;t done a lot of WebRTC outside of my initial research when putting together my prototype, I started helping one of my teammates implement WebRTC. He had gotten &lt;em&gt;really&lt;/em&gt; close over the past few days, but still not quite there — two browsers were connected, but audio still wasn&amp;rsquo;t streaming from one to the other. We ended up attempting to use the &lt;a href=&#34;https://simplewebrtc.com/&#34; target=&#34;_blank&#34;&gt;SimpleWebRTC library&lt;/a&gt;, which we knew &lt;em&gt;was physically possible&lt;/em&gt; to integrate with our socket structure, but something about it was just not happy with our sockets. So, we moved on to reimplementing from scratch. TBD on how that turns out, but fingers crossed!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>How to Develop a VR App Prototype, in 26 Steps</title>
       <link>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>

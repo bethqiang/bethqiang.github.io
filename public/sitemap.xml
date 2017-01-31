@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</loc>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</loc>
     <lastmod>2017-01-23T00:00:00+00:00</lastmod>
   </url>
@@ -193,13 +198,19 @@
   
   <url>
     <loc>http://bethqiang.com/</loc>
-    <lastmod>2017-01-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bethqiang.com/tags/blogging/</loc>
     <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bethqiang.com/tags/capstone-project/</loc>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -247,7 +258,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/fullstack-academy/</loc>
-    <lastmod>2017-01-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -317,7 +328,7 @@
   
   <url>
     <loc>http://bethqiang.com/post/</loc>
-    <lastmod>2017-01-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -341,7 +352,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/senior-phase/</loc>
-    <lastmod>2017-01-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -382,7 +393,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/vr/</loc>
-    <lastmod>2017-01-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

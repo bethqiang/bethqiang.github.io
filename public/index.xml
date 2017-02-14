@@ -6,8 +6,78 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
+      <link>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
+      <description>
+
+&lt;p&gt;So, it&amp;rsquo;s been a while. In the past couple of weeks, our project has gone from a scaffolded foundation to a thing with different rooms and avatar skins and couches, and it&amp;rsquo;s been really cool to see!&lt;/p&gt;
+
+&lt;h2 id=&#34;logging-in&#34;&gt;Logging In&lt;/h2&gt;
+
+&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
+
+&lt;p&gt;I also had my first encounter with React inline styling while creating the Login component! I haven&amp;rsquo;t come to a firm conclusion on how I feel about it yet, but some part of me seems to prefer it. It seems&amp;hellip;like less mental overhead somehow. I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; like the fact that I wasn&amp;rsquo;t able to use things like &lt;code&gt;:focus&lt;/code&gt;, &lt;code&gt;:hover&lt;/code&gt;, &lt;code&gt;:before&lt;/code&gt;, and &lt;code&gt;:after&lt;/code&gt;, which my initial styling had depended on. For the first two, I ended up installing Radium, which effectively replicated them. I also learned about syntax decorators, and sprinkled that into our Babel configuration. For the last two, I resorted to just creating two &lt;code&gt;div&lt;/code&gt;s.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-chair&#34;&gt;THE CHAIR!!!!&lt;/h2&gt;
+
+&lt;p&gt;As I mentioned in my previous post, A-Frame and React don&amp;rsquo;t really like each other very much. They&amp;rsquo;re fundamentally built on different programming paradigms, and there&amp;rsquo;s a lot of smaller issues that crop up (e.g. the words &lt;code&gt;height&lt;/code&gt; and &lt;code&gt;width&lt;/code&gt; are apparently React-specific words and we can&amp;rsquo;t use them as HTML attributes, or the fact that &lt;code&gt;a-sphere&lt;/code&gt;s will render fine, &lt;code&gt;a-cylinder&lt;/code&gt;s will render but throw wanrings, and &lt;code&gt;a-box&lt;/code&gt;es won&amp;rsquo;t render at all). Because of this, the moment we React-ified what we&amp;rsquo;ve now dubbed &amp;ldquo;the chair&amp;rdquo; was a pretty epic moment for us. It was the first time that it felt like A-Frame and React played nicely with each other!&lt;/p&gt;
+
+&lt;p&gt;A-Frame HTML, like normal HTML, will ignore things it doesn&amp;rsquo;t understand. Apparently, A-Frame HTML has no concept of a &lt;code&gt;div&lt;/code&gt;. Therefore, in order to render different elements, we had to wrap them in &lt;code&gt;a-entity&lt;/code&gt; tags. Creating a singular chair was mostly a matter of some basic shapes and positioning.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export default (props) =&amp;gt; (
+  &amp;lt;a-entity id=&amp;quot;chair&amp;quot; position={`${props.x} ${props.y} ${props.z}`} rotation=&amp;quot;0 180 0&amp;quot;&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 1; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;-0.25 0.5 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 1; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;0.25 0.5 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.5; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;-0.25 0.25 0.5&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.5; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;0.25 0.25 0.5&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.05; depth: 0.05; width: 0.55&amp;quot;
+              position=&amp;quot;0 1 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity material=&amp;quot;color: black&amp;quot;
+              geometry=&amp;quot;primitive: box; depth: 0.55; height: 0.05; width: 0.55&amp;quot;
+              position=&amp;quot;0 0.5 0.25&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+  &amp;lt;/a-entity&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(If an entity is a child of another entity, the parent element takes on what is analogous to absolute positioning, and its child elements take on what is analogous to relative positioning with relation to its parent element.)&lt;/p&gt;
+
+&lt;p&gt;Once we had our singular React-ified chair, we passed in an array of positions. Each position was passed down to each chair via props. And voila, we had chairs on chairs on chairs!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; class=&#34;center-img&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;link-traversal&#34;&gt;Link Traversal&lt;/h2&gt;
+
+&lt;p&gt;Early on, it was always an idea that we&amp;rsquo;d have different rooms &amp;ldquo;branching off&amp;rdquo; of our main room, where people could go to have private conversations. Our initial idea was to have one scene with interconnecting rooms literally branching off of it; almost like a real building would. However, as time went on, we realized that it might be easier for us to program the switching of rooms if we just had one room per scene, and switched out the scenes when a user entered or left a room.&lt;/p&gt;
+
+&lt;p&gt;So, the next natural step would be to figure out how to get a user from one scene to another. We started off with the idea of hyperlinks, where each hyperlink would render a different component that contained a full &lt;code&gt;a-scene&lt;/code&gt; and everything in it. But, once we implemented them, we realized that Chromium would knock us out of VR mode to traverse links, so that was a no-go. Mozilla has apparently worked out a fix for this, but because VR mode doesn&amp;rsquo;t work on the Daydream with Firefox Nightly, we had to find a different workaround.&lt;/p&gt;
+
+&lt;p&gt;Instead, we ended up with a single &lt;code&gt;a-scene&lt;/code&gt; tag in our main React component, and switching components wrapped in &lt;code&gt;a-entity&lt;/code&gt; tags in and out of it accordingly. It&amp;rsquo;s not the most ideal solution, but as of this point in time, there doesn&amp;rsquo;t seem to be a better way to accomplish this given the current state of the technology and Chrome&amp;rsquo;s security measures that prevent us from using a lot of WebVR APIs.&lt;/p&gt;
+
+&lt;p&gt;Our links take the form of fancy magical floating orbs that glow a certain shade of blue when you hover over them.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/aframe-hyperlink-orbs.png&#34; class=&#34;center-img&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Coming soon, to a blog near you: how a frog caused us a lot of mental anguish, how we solved (sort of) the teleportation/everything-else-is-eating-our-browser-resources problem, and how these two topics are very related.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
@@ -1291,50 +1361,6 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 &lt;p&gt;This was definitely one of the more frustrating workshops to figure out, and one of our instructors even said that he&amp;rsquo;d argue it was the most frustrating out of all of them. While JQuery can be extremely powerful, it definitely has its drawbacks when creating a large application, which I hadn&amp;rsquo;t experienced before this. One of them is that it doesn&amp;rsquo;t really tell us where to put anything – should AJAX requests be in a separate part of our app from our DOM manipulation? We can&amp;rsquo;t match up a template to some kind of dataset, and thereby avoid having to manually make DOM manipulations. We also can&amp;rsquo;t just loop over objects and re-render – we have to add them piece by piece.&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s been interesting over the past few days to watch our code spiral out of control, but I&amp;rsquo;m now very ready to enter a realm where at least some structure exists. Bring on React!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 4, Day 3 and Break: More JQuery, WebSockets, and React</title>
-      <link>http://bethqiang.com/post/more-jquery-websockets-and-react/</link>
-      <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/more-jquery-websockets-and-react/</guid>
-      <description>&lt;p&gt;We ended class early on Wednesday because of the holiday. Given the couple of hours that we had, my pair and I primarily worked on figuring out how to &amp;ldquo;persist&amp;rdquo; (at least until the server is reset) the hotels, restaurants, and activities that the user chooses on the days that they add them to – so, for example, if the user chooses a hotel and three restaurants on Day 2, that hotel and those restaurants will populate the itinerary every time the user switches to Day 2. We ended up doing this using arrays inside of objects inside of an object:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var days = {
-  day1: {
-    hotel: [],
-    restaurant: [],
-    activity: []
-  }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The review and solution code implemented this with arrays of hotels, restaurants, and activities as &lt;em&gt;properties&lt;/em&gt; on a &lt;code&gt;Day&lt;/code&gt; constructor, and then built &lt;code&gt;show/hideButton&lt;/code&gt;, &lt;code&gt;add/removeAttraction&lt;/code&gt;, etc. functions on the prototype. I basically completely forgot things like classes and prototypes existed while we were working through the workshop, but it makes much more sense than the way we did it. It&amp;rsquo;s a lot cleaner and modular (as opposed to our way, in which we were doing everything somewhat haphazardly and very discordantly).&lt;/p&gt;
-
-&lt;p&gt;A couple of other JQuery practices that I saw in the review that I definitely want to keep in mind and implement going forward are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Saving parts of the DOM as variables so JQuery doesn&amp;rsquo;t have to go looking for the element every single time you call it, as well as for better readability.&lt;/li&gt;
-&lt;li&gt;Let&amp;rsquo;s say you have a &lt;code&gt;div&lt;/code&gt; with an &lt;code&gt;id&lt;/code&gt; of &lt;code&gt;optionsPanel&lt;/code&gt;, saved as a JQuery variable with the same name. Inside that div, you have an element with the id &lt;code&gt;hotel-choices&lt;/code&gt;. Instead of getting the latter element with &lt;code&gt;$hotelSelect = $(&amp;quot;#hotel-choices&amp;quot;)&lt;/code&gt; and forcing JQuery to start searching from the top of the DOM every time, you can utilize the &lt;code&gt;optionsPanel&lt;/code&gt; div, and get that element with &lt;code&gt;$hotelSelect = $optionsPanel.find(&#39;#hotel-choices&#39;)&lt;/code&gt;. It doesn&amp;rsquo;t make a huge difference in terms of performance for a small app like this, but I can see how it could be useful when you&amp;rsquo;re building out things on a larger scale.&lt;/li&gt;
-&lt;li&gt;Using HTML5 &lt;code&gt;data&lt;/code&gt; attributes in certain situations instead of using classes. An extra bonus of doing this is that you can use JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method to easily access the value.&lt;/li&gt;
-&lt;li&gt;The revealing module pattern – using IIFEs to do everything that you don&amp;rsquo;t want polluting the global space, and then returning an object containing a very small subset of the module to reveal globally.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This workshop also made me realize that I need to get better at architecting and designing the code itself – how to make code modular instead of one giant file with global variables everywhere, when should you use prototypes, how to create sensible connections between different elements and data, etc.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;We&amp;rsquo;ve subsequently had the last four days off, although I&amp;rsquo;ve been working ahead in an effort to not fall behind in the two days I&amp;rsquo;ll be missing this week for &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I learned about TCP vs. IP protocols, event emitters, websockets, and rooms and namespaces, and then built a &amp;ldquo;World Wide Whiteboard&amp;rdquo; – an app that allows a user to &amp;ldquo;draw&amp;rdquo; something on a Microsoft Paint-like interface, and the drawing appears in real-time for all of the other users connected to the server. After the basic functionality was built, I added in the ability to join rooms, so that you could go into a specific room and whatever was drawn would only be broadcasted to other users in that room.&lt;/p&gt;
-
-&lt;p&gt;I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I&amp;rsquo;ve been really excited about this part of the curriculum, as &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve used React before at a hackathon&lt;/a&gt; but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn&amp;rsquo;t any kind of depth happening. I&amp;rsquo;m excited to get actually learn how and why things work, and how powerful it can be when you&amp;rsquo;re not constricted to only 36 hours!&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I also did fun things like make around 10 pounds of macaroni and cheese (including, but not limited to, 12 cups of dry pasta + 3 pounds of cheese + an entire half gallon of whole milk + a stick and a half of butter), attend my boyfriend&amp;rsquo;s giant Thanksgiving dinner (and ate so much delicious food), saw Fantastic Beasts and Where to Find Them and allowed my inner Harry Potter nerd geek out for a bit, went out with friends, caught up on West World (GREAT show), and watched some old Office episodes. Though I did do a fair amount of work, it was a nice break from the 12-ish-hour-per-day grind that our days typically are.&lt;/p&gt;
 </description>
     </item>
     

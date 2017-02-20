@@ -6,8 +6,60 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
+      <link>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</guid>
+      <description>
+
+&lt;p&gt;Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&amp;rsquo;s avatar to that intersection point. Sounds simple enough, right?&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/ryanbetts/aframe-daydream-controller-component&#34; target=&#34;_blank&#34;&gt;aframe-daydream-controller-component&lt;/a&gt; comes with a built-in A-Frame raycaster, so setting up a simple scene with the controller and configuring it so that you&amp;rsquo;d move where your controller was pointing wasn&amp;rsquo;t terribly difficult. (&lt;a href=&#34;https://github.com/bethqiang/aframe-daydream-controller&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; a lil baby thing I created to test it in an isolated environment, if you&amp;rsquo;re curious.)&lt;/p&gt;
+
+&lt;p&gt;At first, I was getting wildly different coordinates when clicking the same place over and over, and was confused about why that was. I reached out on the &lt;a href=&#34;https://aframevr-slack.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;A-Frame Slack&lt;/a&gt; (which, sidenote, is a great place if you&amp;rsquo;re interested in or working with A-Frame), and learned that raycasters, at least the way they&amp;rsquo;re set up in A-Frame right now, typically will only give accurate coordinates when you&amp;rsquo;re detecting an intersection with something with depth — so instead of planes as our grounds, we had to use boxes with significant depth and then re-position them so that their top face was at &lt;code&gt;y=0&lt;/code&gt;. Just one of those A-Frame oddities that still haven&amp;rsquo;t quite been ironed out, it seems.&lt;/p&gt;
+
+&lt;p&gt;Once I got that working successfully on a little baby app, I then attempted to implement that into our full app, and ran into a pretty big wall. With all of the assets we were loading and the other demands we were making of the browser, the browser refused to also correctly load the controller and its corresponding raycaster. Raycasters are generally pretty computationally heavy, and it seems we hit the limits of what a mobile browser could do.&lt;/p&gt;
+
+&lt;p&gt;So, I needed a way to bring down the expense of using a raycaster, but a raycaster was also my best bet in terms of relatively easily and accurately getting an intersection point. Thus, after talking to our fellow and another team who was also using A-Frame for their Capstone Project, we decided to create a &amp;ldquo;temporary&amp;rdquo; raycaster — when the controller&amp;rsquo;s &lt;code&gt;button down&lt;/code&gt; event fired, we&amp;rsquo;d create our raycaster, shoot it out with the direction vector that our controller had, and find the intersection with the ground. Then, it&amp;rsquo;d cease to exist until the next time the &lt;code&gt;button down&lt;/code&gt; event was fired.&lt;/p&gt;
+
+&lt;p&gt;In attempt to reduce the load even further, as well as skip over some of the bugs with A-Frame&amp;rsquo;s built-in raycaster, I ended up using three.js and its raycaster to do this, and placing the logic in an A-Frame component.&lt;/p&gt;
+
+&lt;p&gt;To find the direction vector, I found the top and bottom vertices of the physical &lt;code&gt;ray&lt;/code&gt; (really, just a cyan-colored cylinder that was attached to and came out of the controller model), and found the vector between those two points. After most of a day of debugging smaller issues with the other team, we finally got this to work! (And, I had a nice little refresher with the vector math I had learned once upon a time in linear algebra.)&lt;/p&gt;
+
+&lt;p&gt;In our debugging session, I learned two primary lessons:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A-Frame and three.js can render elements with either buffer geometries or &amp;ldquo;regular&amp;rdquo; geometries. Buffer geometries are more performant and reduce memory usage, but are harder to manipulate because you don&amp;rsquo;t have access to properties like their vertices. A-Frame, by default, converts all geometries to buffer geometries, but this was a no-go because that meant we couldn&amp;rsquo;t do what we needed to do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;three.js&amp;rsquo;s raycaster&amp;rsquo;s &lt;code&gt;intersectObjects&lt;/code&gt; method takes two arguments, an array of objects you want to detect an intersection with, and an optional recursive flag that&amp;rsquo;s set to false by default if not specified. According to the documentation, &lt;code&gt;If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is false.&lt;/code&gt; Because we were explicitly telling it to check for the ground, and not any of its descendants, we left this as false. After many rounds of not getting intersections when we were clearly intersecting with the ground, we changed this to &lt;code&gt;true&lt;/code&gt; on the offhand that that was the issue — and what do you know, it was! We&amp;rsquo;re still not certain why we need this recursive flag, so more investigation on this matter will definitely be happening.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;the-gap&#34;&gt;&amp;ldquo;The Gap&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;One of my teammates added a really cool feature — the Gap! It&amp;rsquo;s another room that you can access with a number of Minecraft skins, including, among many others, Admiral Grace Hopper, Princess Belle, Robocop, the Pink Power Ranger, Mario, and Woody. Clicking on a Minecraft skin changes your avatar, with a fun little &amp;ldquo;Changed skin to [skin name]&amp;rdquo; voiceover. It&amp;rsquo;s super nifty!&lt;/p&gt;
+
+&lt;h2 id=&#34;presentation-demo-day&#34;&gt;Presentation &amp;amp; Demo Day!&lt;/h2&gt;
+
+&lt;p&gt;We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/I5ND_1PI77c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;And &lt;a href=&#34;https://youtu.be/_M0p3UwNhB8&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; a link to the entire hour of presentations, in case you want to see what my classmates have been up to!&lt;/p&gt;
+
+&lt;p&gt;After that, a few more workshops, and a graduation, my Fullstack experience was over. It&amp;rsquo;s still weird to think about, and not logging into our Zoom classroom this morning was a slightly disorienting and also mildly sad experience, but I&amp;rsquo;m excited to continue on this journey and see what the next adventure has in store!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
@@ -1211,156 +1263,6 @@ this.handleClick = this.handleClick.bind(this);
 
 &lt;li&gt;&lt;p&gt;I have two groups of people to give enormous thanks to. The first is Women Who Code, without whom I never would have been able to attend due to cost. The second is my amazing instructors at Fullstack, for working with me on giving me early access to workshops and previous cohorts’ lectures, which allowed me to work ahead so that I could take two days away from class without missing out on too much!&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 5, Day 1: I Never Thought JQuery Could Be So Confusing</title>
-      <link>http://bethqiang.com/post/i-never-thought-jquery-could-be-so-confusing/</link>
-      <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/i-never-thought-jquery-could-be-so-confusing/</guid>
-      <description>&lt;p&gt;We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: &lt;a href=&#34;http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/post/more-jquery-websockets-and-react/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, this time with the goal of making it persistent – that is, making the user&amp;rsquo;s trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.&lt;/p&gt;
-
-&lt;p&gt;First, we reconfigured a &lt;code&gt;get&lt;/code&gt; route so that it would serve up all of our attraction information.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.get(&#39;/options&#39;, (req, res, next) =&amp;gt; {
-  Promise.all([
-    Hotel.findAll(),
-    Restaurant.findAll(),
-    Activity.findAll()
-  ])
-  .spread((hotels, restaurants, activities) =&amp;gt; {
-    res.send({hotels, restaurants, activities})
-  })
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, in our front-end, we made an AJAX request to get the data from our new &lt;code&gt;/options&lt;/code&gt; URL to make our list of available options in the dropdown menu. My pair and I did this step in a separate file and therefore ended up exposing more functions and variable to the global scope, although our class solution did it directly in one of the existing files. Though it required a little more configuration later in the workshop, there&amp;rsquo;s definitely something to be said for not polluting the global scope.&lt;/p&gt;
-
-&lt;p&gt;We then created a &lt;code&gt;Day&lt;/code&gt; model, which held only the day number but we connected it to the rest of our data using Sequelize associations.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var Day = db.define(&#39;day&#39;, {
-  number: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  }
-});
-// associations
-Day.belongsTo(Hotel);
-Day.belongsToMany(Restaurant, {through: &#39;day_restaurants&#39;});
-Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can only stay at one hotel per day, but the same hotel on multiple days, so that was a one-to-many relationship. For both restaurants and activities, you could eat/do multiple things in the same day, and you could eat/do the same thing over multiple days, so those were many-to-many relationships.&lt;/p&gt;
-
-&lt;p&gt;We then mounted a &lt;code&gt;/api/days&lt;/code&gt; route to our app, which would route things like creating a new day, deleting a day, adding attractions, and removing attractions.&lt;/p&gt;
-
-&lt;p&gt;We got to use our &lt;a href=&#34;http://bethqiang.com/post/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;new-found eager loading skills&lt;/a&gt; to get all of the activities for all of the days:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.get(&#39;/&#39;, (req, res, next) =&amp;gt; {
-  Day.findAll({
-    include: [Hotel, Restaurant, Activity],
-    order: &#39;number ASC&#39;
-  })
-  .then(days =&amp;gt; res.send(days))
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One of the things that we had to ensure that we did was manage the many-to-many relationship when adding and removing restaurants and activities. We added our hotel by doing:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/hotel&#39;, (req, res, next) =&amp;gt; {
-  Day.findById(req.params.dayId)
-  .then(day =&amp;gt; day.setHotel(req.body.hotelId))
-  .then(() =&amp;gt; res.status(204))
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;But in order to add a restaurant, because you could have many restaurants, we had to do the following instead:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/restaurants/&#39;, (req, res, next) =&amp;gt; {
-  Day.findById(req.params.dayId)
-  .then(day =&amp;gt; day.addRestaurant(req.body.restaurantId))
-  // if we setRestaurants, we&#39;d be replacing whatever restaurants are currently there and not adding to
-  .then(() =&amp;gt; res.status(204))
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;There was a pretty consistent theme among a lot of these routes – we&amp;rsquo;d find our day, then do something with the day. To clean up our code a little bit via DRY, we used &lt;code&gt;router.param&lt;/code&gt; to configure this &lt;code&gt;findById&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.param(&#39;dayId&#39;, (req, res, next, theDayId) =&amp;gt; {
-  Day.findById(theDayId)
-  .then(foundDay =&amp;gt; {
-    req.day = foundDay;
-    next();
-  })
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And then we could delete a lot of the beginning of our routes, and instead do:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/hotel&#39;, (req, res, next) =&amp;gt; {
-  req.day.setHotel(req.body.hotelId)
-  .then(() =&amp;gt; res.status(204))
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Another thing I didn&amp;rsquo;t realize we could dictate while we were actually working on it was whether we wanted to pass the information from our front-end through actually posting an object using the AJAX &lt;code&gt;data&lt;/code&gt; field, and therefore using &lt;code&gt;req.body&lt;/code&gt; on the back-end, or through the URL, and therefore using &lt;code&gt;req.params&lt;/code&gt; on the back-end. We did all of ours the latter way (simply because we just didn&amp;rsquo;t think of the former), although I&amp;rsquo;m not sure if one is necessarily better than the other.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Re-configuring our front-end I found more challenging for two reasons:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;We at first weren&amp;rsquo;t entirely sure what we could move to the back-end and what we needed to move to the front-end. (We learned the hard way that you can&amp;rsquo;t &lt;code&gt;module.exports&lt;/code&gt; and &lt;code&gt;require&lt;/code&gt; front-end files into the back-end, because the back-end files don&amp;rsquo;t have access to the module&amp;rsquo;s dependencies, including JQuery! [And by the hard way, I mean lots of commenting out things and maybe some hair-pulling.])&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;There&amp;rsquo;s not really any separation of functions with JQuery – we found ourselves with functions that did a million and one things at a time, and it wasn&amp;rsquo;t the easiest to keep them straight in our heads, but it was also pretty much unavoidable.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Most of our re-configuration was just removing references to the global variables that used to hold our hotels, restaurants, and activities and instead used AJAX requests to populate those fields. When we clicked a button to add a day or an attraction or remove a day or an attraction, we needed to write AJAX requests for each of those as well, so our changes not only showed up in the front-end but also would change the data in our database.&lt;/p&gt;
-
-&lt;p&gt;One of the last things we had to do was create a &lt;code&gt;beforeDestroy&lt;/code&gt; hook so that when a day was deleted, all of the following days&amp;rsquo; numbers would be decremented by one.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hooks: {
-  beforeDestroy: function(dayBeingDestroyed) {
-    return Day.findAll({
-    // the return ensures it will wait for everything to happen before deleting
-      where: {
-        number: {
-          $gt: dayBeingDestroyed.number
-        }
-      }
-    })
-    .then(daysAfter =&amp;gt; {
-      var updatingDayNumbers = daysAfter.map(day =&amp;gt; {
-        day.number --;
-        return day.save();
-      });
-      return Promise.all(updatingDayNumbers);
-    })
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And because our &lt;code&gt;Day.destroy&lt;/code&gt; method that we were using with a &lt;code&gt;where&lt;/code&gt; to find our exact day won&amp;rsquo;t trigger the &lt;code&gt;beforeDestroy&lt;/code&gt; hook, we had to reconfigure that so that we were destroying a single instance of Day instead.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;router.delete(&#39;/:id&#39;, (req, res, next) =&amp;gt; {
-  Day.findById(req.params.id)
-  .then(day =&amp;gt; day.destroy())
-  .then(() =&amp;gt; res.status(204))
-  .catch(next);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This was definitely one of the more frustrating workshops to figure out, and one of our instructors even said that he&amp;rsquo;d argue it was the most frustrating out of all of them. While JQuery can be extremely powerful, it definitely has its drawbacks when creating a large application, which I hadn&amp;rsquo;t experienced before this. One of them is that it doesn&amp;rsquo;t really tell us where to put anything – should AJAX requests be in a separate part of our app from our DOM manipulation? We can&amp;rsquo;t match up a template to some kind of dataset, and thereby avoid having to manually make DOM manipulations. We also can&amp;rsquo;t just loop over objects and re-render – we have to add them piece by piece.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s been interesting over the past few days to watch our code spiral out of control, but I&amp;rsquo;m now very ready to enter a realm where at least some structure exists. Bring on React!&lt;/p&gt;
 </description>
     </item>
     

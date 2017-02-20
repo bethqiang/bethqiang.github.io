@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</loc>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</loc>
     <lastmod>2017-02-13T00:00:00+00:00</lastmod>
   </url>
@@ -203,7 +208,7 @@
   
   <url>
     <loc>http://bethqiang.com/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -215,7 +220,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/capstone-project/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -263,7 +268,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/fullstack-academy/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -333,7 +338,7 @@
   
   <url>
     <loc>http://bethqiang.com/post/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -357,7 +362,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/senior-phase/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -398,7 +403,7 @@
   
   <url>
     <loc>http://bethqiang.com/tags/vr/</loc>
-    <lastmod>2017-02-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

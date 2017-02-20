@@ -9,6 +9,58 @@
     <atom:link href="http://bethqiang.com/tags/fullstack-academy/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
+      <link>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</guid>
+      <description>
+
+&lt;p&gt;Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&amp;rsquo;s avatar to that intersection point. Sounds simple enough, right?&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/ryanbetts/aframe-daydream-controller-component&#34; target=&#34;_blank&#34;&gt;aframe-daydream-controller-component&lt;/a&gt; comes with a built-in A-Frame raycaster, so setting up a simple scene with the controller and configuring it so that you&amp;rsquo;d move where your controller was pointing wasn&amp;rsquo;t terribly difficult. (&lt;a href=&#34;https://github.com/bethqiang/aframe-daydream-controller&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; a lil baby thing I created to test it in an isolated environment, if you&amp;rsquo;re curious.)&lt;/p&gt;
+
+&lt;p&gt;At first, I was getting wildly different coordinates when clicking the same place over and over, and was confused about why that was. I reached out on the &lt;a href=&#34;https://aframevr-slack.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;A-Frame Slack&lt;/a&gt; (which, sidenote, is a great place if you&amp;rsquo;re interested in or working with A-Frame), and learned that raycasters, at least the way they&amp;rsquo;re set up in A-Frame right now, typically will only give accurate coordinates when you&amp;rsquo;re detecting an intersection with something with depth — so instead of planes as our grounds, we had to use boxes with significant depth and then re-position them so that their top face was at &lt;code&gt;y=0&lt;/code&gt;. Just one of those A-Frame oddities that still haven&amp;rsquo;t quite been ironed out, it seems.&lt;/p&gt;
+
+&lt;p&gt;Once I got that working successfully on a little baby app, I then attempted to implement that into our full app, and ran into a pretty big wall. With all of the assets we were loading and the other demands we were making of the browser, the browser refused to also correctly load the controller and its corresponding raycaster. Raycasters are generally pretty computationally heavy, and it seems we hit the limits of what a mobile browser could do.&lt;/p&gt;
+
+&lt;p&gt;So, I needed a way to bring down the expense of using a raycaster, but a raycaster was also my best bet in terms of relatively easily and accurately getting an intersection point. Thus, after talking to our fellow and another team who was also using A-Frame for their Capstone Project, we decided to create a &amp;ldquo;temporary&amp;rdquo; raycaster — when the controller&amp;rsquo;s &lt;code&gt;button down&lt;/code&gt; event fired, we&amp;rsquo;d create our raycaster, shoot it out with the direction vector that our controller had, and find the intersection with the ground. Then, it&amp;rsquo;d cease to exist until the next time the &lt;code&gt;button down&lt;/code&gt; event was fired.&lt;/p&gt;
+
+&lt;p&gt;In attempt to reduce the load even further, as well as skip over some of the bugs with A-Frame&amp;rsquo;s built-in raycaster, I ended up using three.js and its raycaster to do this, and placing the logic in an A-Frame component.&lt;/p&gt;
+
+&lt;p&gt;To find the direction vector, I found the top and bottom vertices of the physical &lt;code&gt;ray&lt;/code&gt; (really, just a cyan-colored cylinder that was attached to and came out of the controller model), and found the vector between those two points. After most of a day of debugging smaller issues with the other team, we finally got this to work! (And, I had a nice little refresher with the vector math I had learned once upon a time in linear algebra.)&lt;/p&gt;
+
+&lt;p&gt;In our debugging session, I learned two primary lessons:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A-Frame and three.js can render elements with either buffer geometries or &amp;ldquo;regular&amp;rdquo; geometries. Buffer geometries are more performant and reduce memory usage, but are harder to manipulate because you don&amp;rsquo;t have access to properties like their vertices. A-Frame, by default, converts all geometries to buffer geometries, but this was a no-go because that meant we couldn&amp;rsquo;t do what we needed to do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;three.js&amp;rsquo;s raycaster&amp;rsquo;s &lt;code&gt;intersectObjects&lt;/code&gt; method takes two arguments, an array of objects you want to detect an intersection with, and an optional recursive flag that&amp;rsquo;s set to false by default if not specified. According to the documentation, &lt;code&gt;If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is false.&lt;/code&gt; Because we were explicitly telling it to check for the ground, and not any of its descendants, we left this as false. After many rounds of not getting intersections when we were clearly intersecting with the ground, we changed this to &lt;code&gt;true&lt;/code&gt; on the offhand that that was the issue — and what do you know, it was! We&amp;rsquo;re still not certain why we need this recursive flag, so more investigation on this matter will definitely be happening.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;the-gap&#34;&gt;&amp;ldquo;The Gap&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;One of my teammates added a really cool feature — the Gap! It&amp;rsquo;s another room that you can access with a number of Minecraft skins, including, among many others, Admiral Grace Hopper, Princess Belle, Robocop, the Pink Power Ranger, Mario, and Woody. Clicking on a Minecraft skin changes your avatar, with a fun little &amp;ldquo;Changed skin to [skin name]&amp;rdquo; voiceover. It&amp;rsquo;s super nifty!&lt;/p&gt;
+
+&lt;h2 id=&#34;presentation-demo-day&#34;&gt;Presentation &amp;amp; Demo Day!&lt;/h2&gt;
+
+&lt;p&gt;We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/I5ND_1PI77c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;And &lt;a href=&#34;https://youtu.be/_M0p3UwNhB8&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; a link to the entire hour of presentations, in case you want to see what my classmates have been up to!&lt;/p&gt;
+
+&lt;p&gt;After that, a few more workshops, and a graduation, my Fullstack experience was over. It&amp;rsquo;s still weird to think about, and not logging into our Zoom classroom this morning was a slightly disorienting and also mildly sad experience, but I&amp;rsquo;m excited to continue on this journey and see what the next adventure has in store!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
       <link>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
@@ -1162,62 +1214,6 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 &lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
 
 &lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 3: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-3/</link>
-      <pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/post/fullstack-academy-week-3/</guid>
-      <description>
-
-&lt;p&gt;With a CS Saturday about functional programming, immutability, and Git under our belts, we&amp;rsquo;re officially halfway through Junior Phase.&lt;/p&gt;
-
-&lt;p&gt;Um, what?&lt;/p&gt;
-
-&lt;p&gt;Yeah, so, that&amp;rsquo;s a thing.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-week-by-the-numbers&#34;&gt;The Week By the Numbers:&lt;/h2&gt;
-
-&lt;p&gt;Cups of coffee had: 5.5&lt;/p&gt;
-
-&lt;p&gt;Miles ran: 4 (ugh)&lt;/p&gt;
-
-&lt;p&gt;Current length of to-do list: 37&lt;/p&gt;
-
-&lt;p&gt;Hours I&amp;rsquo;ve spent snuggling with/walking dogs: 3&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;For most of the immersive so far, I felt like I was at least sort of staying on top of things – I may have been struggling to tread water, but my head was still above the surface.&lt;/p&gt;
-
-&lt;p&gt;Until Tuesday, when &lt;a href=&#34;http://bethqiang.com/post/on-feeling-completely-overwhelmed/&#34; target=&#34;_blank&#34;&gt;I felt like I was going &lt;em&gt;down&lt;/em&gt; and I had no idea how to stop it&lt;/a&gt;. Then during lunch on Wednesday, I stepped away from my computer, and just took some time to appreciate the outdoors and the food I was eating and the moment that I was in. Eventually, I was able to reassure myself that I am a capable human being, and that with enough time, effort, and conscious practice, everything that I was confused about would start to make sense. Eventually.&lt;/p&gt;
-
-&lt;p&gt;It was also nice to hear in the end-of-week reflection among our cohort that I was far from the only one who had had an off day or two. One of our instructors mentioned that this journey is a rollercoaster: you can feel on top of the world and everything just clicks one day, and like everything&amp;rsquo;s falling apart the very next. It&amp;rsquo;s definitely a marathon, not a sprint, and we&amp;rsquo;re all getting there together.&lt;/p&gt;
-
-&lt;p&gt;Looking back, I had started to neglect some aspects of my health, other than trying for the occasional run. In the days since then, the core changes that I&amp;rsquo;ve made in my life are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Going outside during lunch &lt;em&gt;every day&lt;/em&gt;. Even if it&amp;rsquo;s just for 10 or 15 minutes. Just taking a moment to 110% get my mind and my body away from any kind of screen is incredibly refreshing and calming.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Raised my second monitor to be at eye-level. This has helped with my terribly cranky back.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Going to bed earlier and getting up earlier. But &lt;em&gt;also&lt;/em&gt; getting at least 7 hours of sleep a night. Because let&amp;rsquo;s be honest, very few people are at their best at 1am. And very few people can perform optimally on smaller amounts of sleep. (I&amp;rsquo;m not lucky enough to be in either of those camps.)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Making some time for non-coding things. Like taking an entire Saturday night off to have dinner and see some cool lights along the river with friends. And spending some time at the animal shelter I volunteer at to snuggle with and walk dogs. (There are very few things in life that are better than snuggling with dogs.)&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;On my walks and runs, I&amp;rsquo;ve been listening to podcasts like &lt;a href=&#34;https://softskills.audio&#34; target=&#34;_blank&#34;&gt;Soft Skills Engineering&lt;/a&gt; (incredibly informative but also humorous and entertaining), &lt;a href=&#34;https://gimletmedia.com/show/startup&#34; target=&#34;_blank&#34;&gt;StartUp&lt;/a&gt;, &lt;a href=&#34;http://www.codenewbie.org&#34; target=&#34;_blank&#34;&gt;CodeNewbie&lt;/a&gt;, and &lt;a href=&#34;http://www.greaterthancode.com&#34; target=&#34;_blank&#34;&gt;Greater Than Code&lt;/a&gt; – podcasts that are related to tech and development but don&amp;rsquo;t get into the technical weeds. I&amp;rsquo;ve also been reading more tech blogs and watching recorded tech talks and project presentations on &lt;a href=&#34;https://www.youtube.com/fullstackacademy&#34; target=&#34;_blank&#34;&gt;Fullstack&amp;rsquo;s YouTube Channel&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;On a related note, someone who works at Venmo also came to campus to give a tech talk, during which she live-coded a mini version of Express. I was incredibly impressed, and hope that sometime in the near future, I can also try live-coding &lt;em&gt;something&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the spirit of the upcoming holiday, but also just because I feel like it&amp;rsquo;s incredibly deserved, I want to once again reiterate how much I absolutely love and appreciate the entire Fullstack staff and everyone in my cohort. Staff who are in our Slack group but have very little actual relation to our cohort have helped us out in some of our 9pm coding crises. Omri and Geoff, our instructors, are able to make lectures interesting and entertaining, and are always looking out for us and willing to take whatever time is needed to ensure everyone is staying sane and asking questions and learning. Dani, one of our fellows, and I spent a ton of time puzzling out a recursion problem during our office hours – we haven&amp;rsquo;t quite figured it out yet, but it&amp;rsquo;ll be pretty great when we do. Eliot, our other fellow, took a few hours out of his Sunday afternoon to review and answer any lingering questions about Sequelize before our checkpoint (basically, a test) tomorrow. And my cohort has been very open and supportive and upbeat – we definitely have a &lt;a href=&#34;https://www.youtube.com/watch?v=iFu8Z-cV0Xk&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;We&amp;rsquo;re All in This Together&lt;/em&gt;&lt;/a&gt; kinda vibe.&lt;/p&gt;
-
-&lt;h2 id=&#34;node-js-interactive-north-america&#34;&gt;Node.js Interactive North America&lt;/h2&gt;
-
-&lt;p&gt;And on a completely different note, I&amp;rsquo;ve been awarded a ticket to &lt;a href=&#34;http://events.linuxfoundation.org/events/node-interactive&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which is taking place here in Austin in a week and a half! This will mean that I&amp;rsquo;ll be missing two days of class (and therefore, will be very busy over Thanksgiving) but it also means that I&amp;rsquo;ll get to spend two days immersed in everything Node, meet awesome people, and hear about all of the super cool things that are going on in the community. Thanks to &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt; for making it possible for me to attend, and I can&amp;rsquo;t wait to share everything that I experience!&lt;/p&gt;
 </description>
     </item>
     

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Node.Js on Beth Qiang</title>
-    <link>http://bethqiang.com/tags/node.js/index.xml</link>
-    <description>Recent content in Node.Js on Beth Qiang</description>
+    <title>Nodejs on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/nodejs/index.xml</link>
+    <description>Recent content in Nodejs on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://bethqiang.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://bethqiang.com/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Node.js Interactive North America 2016</title>

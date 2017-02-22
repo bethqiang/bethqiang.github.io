@@ -1,6 +1,6 @@
 +++
 title = "Week 3, Day 1: Building a Wikipedia Clone"
-tags = ["fullstack academy", "junior phase", "node.js", "express", "sequelize"]
+tags = ["fullstack academy", "junior phase", "nodejs", "express", "sequelize"]
 date = "2016-11-14"
 +++
 

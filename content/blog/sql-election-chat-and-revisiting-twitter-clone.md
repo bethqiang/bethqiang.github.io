@@ -1,6 +1,6 @@
 +++
 title = "Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone"
-tags = ["fullstack academy", "junior phase", "node.js", "express", "sql"]
+tags = ["fullstack academy", "junior phase", "nodejs", "express", "sql"]
 date = "2016-11-10"
 +++
 

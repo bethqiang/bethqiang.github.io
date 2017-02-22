@@ -1,6 +1,6 @@
 +++
 title = "Node.js Interactive North America 2016"
-tags = ["node.js", "conferences", "women who code"]
+tags = ["nodejs", "conferences", "women who code"]
 date = "2016-11-30"
 +++
 

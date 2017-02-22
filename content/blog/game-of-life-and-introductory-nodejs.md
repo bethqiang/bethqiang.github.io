@@ -1,6 +1,6 @@
 +++
 title = "Week 1, Day 5: Game of Life and Introductory Node.js"
-tags = ["fullstack academy", "junior phase", "game of life", "node.js"]
+tags = ["fullstack academy", "junior phase", "game of life", "nodejs"]
 date = "2016-11-04"
 +++
 

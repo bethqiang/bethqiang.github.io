@@ -1,6 +1,6 @@
 +++
 title = "Week 2, Day 1: Node-Shell Workshop, Express, and Advice from People Who Sort of Know What They’re Doing"
-tags = ["fullstack academy", "junior phase", "node.js", "express"]
+tags = ["fullstack academy", "junior phase", "nodejs", "express"]
 date = "2016-11-08"
 +++
 

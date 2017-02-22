@@ -1,6 +1,6 @@
 +++
 title = "Week 2, Day 2: Building a Twitter Clone with Node.js and Express"
-tags = ["fullstack academy", "junior phase", "node.js", "express"]
+tags = ["fullstack academy", "junior phase", "nodejs", "express"]
 date = "2016-11-09"
 +++
 

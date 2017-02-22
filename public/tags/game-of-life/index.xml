@@ -10,15 +10,15 @@
     
     <item>
       <title>Game of Life with React and Redux: The Hard Parts</title>
-      <link>http://bethqiang.com/post/game-of-life-with-react-and-redux/</link>
+      <link>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</link>
       <pubDate>Thu, 22 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/game-of-life-with-react-and-redux/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</guid>
       <description>
 
 &lt;p&gt;For the past few days, I&amp;rsquo;ve spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There&amp;rsquo;s actually really not that much Sass – starting out, I wanted to practice it, although now that I&amp;rsquo;m halfway through, I&amp;rsquo;m realizing that I really don&amp;rsquo;t need it. I probably should have just saved it for another project – but anyway.&lt;/p&gt;
 
-&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/post/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
 
 &lt;h2 id=&#34;the-webpack-rabbit-hole&#34;&gt;The Webpack Rabbit Hole&lt;/h2&gt;
 
@@ -205,10 +205,10 @@ I was quite proud of myself for figuring out all of this, and ran my code&amp;he
     
     <item>
       <title>Week 1, Day 5: Game of Life and Introductory Node.js</title>
-      <link>http://bethqiang.com/post/game-of-life-and-introductory-nodejs/</link>
+      <link>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</link>
       <pubDate>Fri, 04 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/game-of-life-and-introductory-nodejs/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</guid>
       <description>
 
 &lt;p&gt;We spent the first half of the day working on &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34; target=&#34;_blank&#34;&gt;Conway’s Game of Life&lt;/a&gt;, which is probably one of the more widely known examples of cellular automaton. In this “game,” the player’s only interaction with the game is at the very beginning, when the board is first set. (It can also be set randomly, requiring no user input at all.) Each round after, cells “live” or “die” according to predetermined rules.&lt;/p&gt;

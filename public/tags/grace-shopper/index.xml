@@ -10,17 +10,17 @@
     
     <item>
       <title>The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture</title>
-      <link>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</link>
+      <link>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</link>
       <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</guid>
       <description>
 
-&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
+&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
 
 &lt;p&gt;One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package &lt;code&gt;nodemailer&lt;/code&gt; to our checkout process, so that when a user places an order, they&amp;rsquo;ll immediately be sent an email with their confirmation number.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-01/alfred-pennyworth.png&#34; class=&#34;center-img&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-01/alfred-pennyworth.png&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;My teammates made fun of me a little bit for being so excited about this, and I can&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; articulate why I was, except for that it was just a moment for me when I realized &lt;em&gt;how incredible programming can be&lt;/em&gt;. Which I realize still sounds a little weird, because, at its core, I just sent myself an email. But, a lot of seemingly disparate things came together at that moment for me, I think. (And let&amp;rsquo;s be real, who doesn&amp;rsquo;t want an email from Alfred Pennyworth?!)&lt;/p&gt;
 
@@ -70,13 +70,13 @@
     
     <item>
       <title>Shopping Carts &amp; Being Seniors</title>
-      <link>http://bethqiang.com/post/shopping-carts-and-being-seniors/</link>
+      <link>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/shopping-carts-and-being-seniors/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</guid>
       <description>
 
-&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
+&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
 
 &lt;p&gt;The features I&amp;rsquo;ve primarily been working on have been the Orders History page for a logged in user, and I just started working on our cart. Relatively early on in the process, we decided we were just going to have our cart saved on the session, and never actually persisted in the database. One of the main challenges I&amp;rsquo;ve faced while doing this was coming to terms with the fact that we weren&amp;rsquo;t actually going to the database in our back-end route to fetch and update and delete items in our cart; we were just setting an array on the &lt;code&gt;req.session&lt;/code&gt; object. Though the premise was the same — the front-end would dispatch an action, that would send an AJAX request to our back-end, which would manipulate that array, then send the resulting array back to the front-end — it just felt a little strange doing it.&lt;/p&gt;
 
@@ -94,18 +94,18 @@
 
 &lt;p&gt;I met with Career Services for the first time on Friday! Like most things in life, it was both wonderful and terrifying — wonderful because the future is always an exciting thing. Terrifying because, well, no one &lt;em&gt;really&lt;/em&gt; likes the job hunt, do they?! We talked mostly about what I&amp;rsquo;m looking for, where I&amp;rsquo;m looking for it, and in general things I should be thinking about. I took some time over the weekend to research some companies to put on my &amp;ldquo;Companies I&amp;rsquo;d Love to Work For&amp;rdquo; list, which I&amp;rsquo;ll be building out over the next few weeks.&lt;/p&gt;
 
-&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/post/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
+&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
-      <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
+      <link>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</link>
       <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
@@ -113,7 +113,7 @@
 &lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/post/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
 &lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
 &lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
 &lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;

@@ -10,15 +10,15 @@
     
     <item>
       <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
-      <link>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</link>
+      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
       <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
       <description>
 
 &lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
 
-&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
 
 &lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
 
@@ -30,7 +30,7 @@
 
 &lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/scriptcraft-hackathon-game.png&#34; class=&#34;center-img&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
 
@@ -42,7 +42,7 @@
 
 &lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/trip-planner-app-jquery.png&#34; class=&#34;center-img&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
 
@@ -57,7 +57,10 @@
     }
   })
   var hotelLocation = hotels[hotelIndex].place.location;
-  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex + &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; + selectedOption + &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
+    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
+    selectedOption +
+    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
   $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
   var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
   $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
@@ -94,10 +97,10 @@
     
     <item>
       <title>Week 3, Days 2 and 3: On Feeling Completely Overwhelmed</title>
-      <link>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</link>
+      <link>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</guid>
       <description>
 
 &lt;p&gt;Let’s talk about feelings for a second. I’m generally a very optimistic person with a decent amount of confidence in myself, my critical-thinking and problem-solving abilities, and my ability to stick with something when it’s challenging. I don’t like to dwell on the negatives, and I generally try not to let myself get too down.&lt;/p&gt;
@@ -112,7 +115,7 @@
 
 &lt;p&gt;Once I had an opportunity to calm down and reassure myself that I did in fact, know how to code and solve problems with some degree of competency, and that yes, I could do this, I knew I needed to change something. I needed more time. Time for me to do thorough concept reviews in the evenings, and do fun Code Wars problems, and go to meetups, and work on personal projects, and do more functional programming because for some reason that really excites me. I needed time do things that I find fun that aren&amp;rsquo;t directly related to class. And also, you know, sleep. But more importantly, I &lt;em&gt;also&lt;/em&gt; needed some time every day to do things like go for 45 minute walks or watch cute puppy videos or get dinner with a friend once in a blue moon. And run. Running helps. (That&amp;rsquo;s a long list, I know.)&lt;/p&gt;
 
-&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
+&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/blog/2016/11/13/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
 
 &lt;p&gt;Outside of class and evening reviewing (which, in and of itself, I need to find a way to optimze), writing these posts have by far taken the largest chunk of my time. Daily 1,500-word blog posts are great, and I’m sure I’ll thank myself for them later. But, I’m starting to realize with the schedule that we have and the time I need outside of class, they’re unsustainable. Frankly, they take too much time to write, and even just saving an hour a day will give me an hour to start doing other things. That definitely doesn&amp;rsquo;t mean I&amp;rsquo;m going to abandon writing about each day. I just have to choose more wisely what I want to write, and cap the length of and detail in each post, thereby lessening the time that they take.&lt;/p&gt;
 
@@ -174,7 +177,7 @@
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/post/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
+&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;// in models &amp;gt; index.js, set associations:
 Page.belongsTo(User);
@@ -234,13 +237,13 @@ User.create({
     
     <item>
       <title>Week 2, Day 5: JavaScript Promises and Minecraft</title>
-      <link>http://bethqiang.com/post/javascript-promises-and-minecraft/</link>
+      <link>http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/</link>
       <pubDate>Sat, 12 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/javascript-promises-and-minecraft/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/</guid>
       <description>
 
-&lt;p&gt;After the &lt;a href=&#34;http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/&#34; target=&#34;_blank&#34;&gt;callback hell we experienced yesterday&lt;/a&gt;, we learned about promises today. A promise, according to my instructor and &lt;a href=&#34;https://promisesaplus.com/&#34; target=&#34;_blank&#34;&gt;the Promises/A+ Spec&lt;/a&gt; and basically any other legitimate source, represents the &lt;strong&gt;eventual result of an asynchronous operation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;After the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/&#34; target=&#34;_blank&#34;&gt;callback hell we experienced yesterday&lt;/a&gt;, we learned about promises today. A promise, according to my instructor and &lt;a href=&#34;https://promisesaplus.com/&#34; target=&#34;_blank&#34;&gt;the Promises/A+ Spec&lt;/a&gt; and basically any other legitimate source, represents the &lt;strong&gt;eventual result of an asynchronous operation&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let’s bring back our (slightly refactored, with the &lt;code&gt;insertIntoTable&lt;/code&gt; function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:&lt;/p&gt;
 
@@ -502,7 +505,13 @@ Promise.each(filenames, function(filename) {
 
 &lt;p&gt;And if you’re curious, here’s a small snippet of video that our Product Manager, Mark Davis, recorded:&lt;/p&gt;
 
-&lt;iframe class=&#34;center-img&#34; width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/jzLrYTZ47sc&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/jzLrYTZ47sc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I had a lot of fun, and I’m kind of obsessed with my cohort and our staff and instructors. I’m &lt;em&gt;really&lt;/em&gt; looking forward to getting our VR headsets and trying them out in our virtual world, as well as just getting to spend more time with all of these people, both in front of a code editor and not!&lt;/p&gt;
 </description>

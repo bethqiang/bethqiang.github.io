@@ -10,10 +10,10 @@
     
     <item>
       <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
-      <link>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</link>
+      <link>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</guid>
+      <guid>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</guid>
       <description>
 
 &lt;p&gt;Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&amp;rsquo;s avatar to that intersection point. Sounds simple enough, right?&lt;/p&gt;
@@ -46,13 +46,15 @@
 
 &lt;p&gt;We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!&lt;/p&gt;
 
-&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
 
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
   &lt;iframe src=&#34;//www.youtube.com/embed/I5ND_1PI77c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;And &lt;a href=&#34;https://youtu.be/_M0p3UwNhB8&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; a link to the entire hour of presentations, in case you want to see what my classmates have been up to!&lt;/p&gt;
 
@@ -62,17 +64,17 @@
     
     <item>
       <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
-      <link>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</link>
+      <link>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
+      <guid>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
       <description>
 
 &lt;p&gt;So, it&amp;rsquo;s been a while. In the past couple of weeks, our project has gone from a scaffolded foundation to a thing with different rooms and avatar skins and couches, and it&amp;rsquo;s been really cool to see!&lt;/p&gt;
 
 &lt;h2 id=&#34;logging-in&#34;&gt;Logging In&lt;/h2&gt;
 
-&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
+&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
 
 &lt;p&gt;I also had my first encounter with React inline styling while creating the Login component! I haven&amp;rsquo;t come to a firm conclusion on how I feel about it yet, but some part of me seems to prefer it. It seems&amp;hellip;like less mental overhead somehow. I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; like the fact that I wasn&amp;rsquo;t able to use things like &lt;code&gt;:focus&lt;/code&gt;, &lt;code&gt;:hover&lt;/code&gt;, &lt;code&gt;:before&lt;/code&gt;, and &lt;code&gt;:after&lt;/code&gt;, which my initial styling had depended on. For the first two, I ended up installing Radium, which effectively replicated them. I also learned about syntax decorators, and sprinkled that into our Babel configuration. For the last two, I resorted to just creating two &lt;code&gt;div&lt;/code&gt;s.&lt;/p&gt;
 
@@ -110,7 +112,7 @@
 
 &lt;p&gt;Once we had our singular React-ified chair, we passed in an array of positions. Each position was passed down to each chair via props. And voila, we had chairs on chairs on chairs!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; class=&#34;center-img&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;link-traversal&#34;&gt;Link Traversal&lt;/h2&gt;
 
@@ -122,7 +124,7 @@
 
 &lt;p&gt;Our links take the form of fancy magical floating orbs that glow a certain shade of blue when you hover over them.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/aframe-hyperlink-orbs.png&#34; class=&#34;center-img&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/aframe-hyperlink-orbs.png&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -132,13 +134,13 @@
     
     <item>
       <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
-      <link>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</link>
+      <link>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</link>
       <pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</guid>
       <description>
 
-&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
+&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
 
 &lt;h2 id=&#34;react-and-a-frame&#34;&gt;React and A-Frame&lt;/h2&gt;
 

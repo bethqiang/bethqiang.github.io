@@ -10,15 +10,15 @@
     
     <item>
       <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
-      <link>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</link>
+      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
       <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
       <description>
 
 &lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
 
-&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
 
 &lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
 
@@ -30,7 +30,7 @@
 
 &lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/scriptcraft-hackathon-game.png&#34; class=&#34;center-img&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
 
@@ -42,7 +42,7 @@
 
 &lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/trip-planner-app-jquery.png&#34; class=&#34;center-img&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
 
@@ -57,7 +57,10 @@
     }
   })
   var hotelLocation = hotels[hotelIndex].place.location;
-  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex + &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; + selectedOption + &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
+    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
+    selectedOption +
+    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
   $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
   var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
   $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);

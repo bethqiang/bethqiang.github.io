@@ -1,0 +1,1272 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Beth Qiang</title>
+    <link>http://bethqiang.com/blog/index.xml</link>
+    <description>Recent content in Blogs on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://bethqiang.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
+      <link>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</guid>
+      <description>
+
+&lt;p&gt;Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&amp;rsquo;s avatar to that intersection point. Sounds simple enough, right?&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/ryanbetts/aframe-daydream-controller-component&#34; target=&#34;_blank&#34;&gt;aframe-daydream-controller-component&lt;/a&gt; comes with a built-in A-Frame raycaster, so setting up a simple scene with the controller and configuring it so that you&amp;rsquo;d move where your controller was pointing wasn&amp;rsquo;t terribly difficult. (&lt;a href=&#34;https://github.com/bethqiang/aframe-daydream-controller&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; a lil baby thing I created to test it in an isolated environment, if you&amp;rsquo;re curious.)&lt;/p&gt;
+
+&lt;p&gt;At first, I was getting wildly different coordinates when clicking the same place over and over, and was confused about why that was. I reached out on the &lt;a href=&#34;https://aframevr-slack.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;A-Frame Slack&lt;/a&gt; (which, sidenote, is a great place if you&amp;rsquo;re interested in or working with A-Frame), and learned that raycasters, at least the way they&amp;rsquo;re set up in A-Frame right now, typically will only give accurate coordinates when you&amp;rsquo;re detecting an intersection with something with depth — so instead of planes as our grounds, we had to use boxes with significant depth and then re-position them so that their top face was at &lt;code&gt;y=0&lt;/code&gt;. Just one of those A-Frame oddities that still haven&amp;rsquo;t quite been ironed out, it seems.&lt;/p&gt;
+
+&lt;p&gt;Once I got that working successfully on a little baby app, I then attempted to implement that into our full app, and ran into a pretty big wall. With all of the assets we were loading and the other demands we were making of the browser, the browser refused to also correctly load the controller and its corresponding raycaster. Raycasters are generally pretty computationally heavy, and it seems we hit the limits of what a mobile browser could do.&lt;/p&gt;
+
+&lt;p&gt;So, I needed a way to bring down the expense of using a raycaster, but a raycaster was also my best bet in terms of relatively easily and accurately getting an intersection point. Thus, after talking to our fellow and another team who was also using A-Frame for their Capstone Project, we decided to create a &amp;ldquo;temporary&amp;rdquo; raycaster — when the controller&amp;rsquo;s &lt;code&gt;button down&lt;/code&gt; event fired, we&amp;rsquo;d create our raycaster, shoot it out with the direction vector that our controller had, and find the intersection with the ground. Then, it&amp;rsquo;d cease to exist until the next time the &lt;code&gt;button down&lt;/code&gt; event was fired.&lt;/p&gt;
+
+&lt;p&gt;In attempt to reduce the load even further, as well as skip over some of the bugs with A-Frame&amp;rsquo;s built-in raycaster, I ended up using three.js and its raycaster to do this, and placing the logic in an A-Frame component.&lt;/p&gt;
+
+&lt;p&gt;To find the direction vector, I found the top and bottom vertices of the physical &lt;code&gt;ray&lt;/code&gt; (really, just a cyan-colored cylinder that was attached to and came out of the controller model), and found the vector between those two points. After most of a day of debugging smaller issues with the other team, we finally got this to work! (And, I had a nice little refresher with the vector math I had learned once upon a time in linear algebra.)&lt;/p&gt;
+
+&lt;p&gt;In our debugging session, I learned two primary lessons:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A-Frame and three.js can render elements with either buffer geometries or &amp;ldquo;regular&amp;rdquo; geometries. Buffer geometries are more performant and reduce memory usage, but are harder to manipulate because you don&amp;rsquo;t have access to properties like their vertices. A-Frame, by default, converts all geometries to buffer geometries, but this was a no-go because that meant we couldn&amp;rsquo;t do what we needed to do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;three.js&amp;rsquo;s raycaster&amp;rsquo;s &lt;code&gt;intersectObjects&lt;/code&gt; method takes two arguments, an array of objects you want to detect an intersection with, and an optional recursive flag that&amp;rsquo;s set to false by default if not specified. According to the documentation, &lt;code&gt;If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is false.&lt;/code&gt; Because we were explicitly telling it to check for the ground, and not any of its descendants, we left this as false. After many rounds of not getting intersections when we were clearly intersecting with the ground, we changed this to &lt;code&gt;true&lt;/code&gt; on the offhand that that was the issue — and what do you know, it was! We&amp;rsquo;re still not certain why we need this recursive flag, so more investigation on this matter will definitely be happening.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;the-gap&#34;&gt;&amp;ldquo;The Gap&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;One of my teammates added a really cool feature — the Gap! It&amp;rsquo;s another room that you can access with a number of Minecraft skins, including, among many others, Admiral Grace Hopper, Princess Belle, Robocop, the Pink Power Ranger, Mario, and Woody. Clicking on a Minecraft skin changes your avatar, with a fun little &amp;ldquo;Changed skin to [skin name]&amp;rdquo; voiceover. It&amp;rsquo;s super nifty!&lt;/p&gt;
+
+&lt;h2 id=&#34;presentation-demo-day&#34;&gt;Presentation &amp;amp; Demo Day!&lt;/h2&gt;
+
+&lt;p&gt;We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/I5ND_1PI77c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;And &lt;a href=&#34;https://youtu.be/_M0p3UwNhB8&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; a link to the entire hour of presentations, in case you want to see what my classmates have been up to!&lt;/p&gt;
+
+&lt;p&gt;After that, a few more workshops, and a graduation, my Fullstack experience was over. It&amp;rsquo;s still weird to think about, and not logging into our Zoom classroom this morning was a slightly disorienting and also mildly sad experience, but I&amp;rsquo;m excited to continue on this journey and see what the next adventure has in store!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
+      <link>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
+      <description>
+
+&lt;p&gt;So, it&amp;rsquo;s been a while. In the past couple of weeks, our project has gone from a scaffolded foundation to a thing with different rooms and avatar skins and couches, and it&amp;rsquo;s been really cool to see!&lt;/p&gt;
+
+&lt;h2 id=&#34;logging-in&#34;&gt;Logging In&lt;/h2&gt;
+
+&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
+
+&lt;p&gt;I also had my first encounter with React inline styling while creating the Login component! I haven&amp;rsquo;t come to a firm conclusion on how I feel about it yet, but some part of me seems to prefer it. It seems&amp;hellip;like less mental overhead somehow. I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; like the fact that I wasn&amp;rsquo;t able to use things like &lt;code&gt;:focus&lt;/code&gt;, &lt;code&gt;:hover&lt;/code&gt;, &lt;code&gt;:before&lt;/code&gt;, and &lt;code&gt;:after&lt;/code&gt;, which my initial styling had depended on. For the first two, I ended up installing Radium, which effectively replicated them. I also learned about syntax decorators, and sprinkled that into our Babel configuration. For the last two, I resorted to just creating two &lt;code&gt;div&lt;/code&gt;s.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-chair&#34;&gt;THE CHAIR!!!!&lt;/h2&gt;
+
+&lt;p&gt;As I mentioned in my previous post, A-Frame and React don&amp;rsquo;t really like each other very much. They&amp;rsquo;re fundamentally built on different programming paradigms, and there&amp;rsquo;s a lot of smaller issues that crop up (e.g. the words &lt;code&gt;height&lt;/code&gt; and &lt;code&gt;width&lt;/code&gt; are apparently React-specific words and we can&amp;rsquo;t use them as HTML attributes, or the fact that &lt;code&gt;a-sphere&lt;/code&gt;s will render fine, &lt;code&gt;a-cylinder&lt;/code&gt;s will render but throw wanrings, and &lt;code&gt;a-box&lt;/code&gt;es won&amp;rsquo;t render at all). Because of this, the moment we React-ified what we&amp;rsquo;ve now dubbed &amp;ldquo;the chair&amp;rdquo; was a pretty epic moment for us. It was the first time that it felt like A-Frame and React played nicely with each other!&lt;/p&gt;
+
+&lt;p&gt;A-Frame HTML, like normal HTML, will ignore things it doesn&amp;rsquo;t understand. Apparently, A-Frame HTML has no concept of a &lt;code&gt;div&lt;/code&gt;. Therefore, in order to render different elements, we had to wrap them in &lt;code&gt;a-entity&lt;/code&gt; tags. Creating a singular chair was mostly a matter of some basic shapes and positioning.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export default (props) =&amp;gt; (
+  &amp;lt;a-entity id=&amp;quot;chair&amp;quot; position={`${props.x} ${props.y} ${props.z}`} rotation=&amp;quot;0 180 0&amp;quot;&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 1; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;-0.25 0.5 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 1; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;0.25 0.5 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.5; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;-0.25 0.25 0.5&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.5; depth: 0.05; width: 0.05&amp;quot;
+              position=&amp;quot;0.25 0.25 0.5&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity mixin=&amp;quot;chair-part&amp;quot;
+              geometry=&amp;quot;height: 0.05; depth: 0.05; width: 0.55&amp;quot;
+              position=&amp;quot;0 1 0&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+    &amp;lt;a-entity material=&amp;quot;color: black&amp;quot;
+              geometry=&amp;quot;primitive: box; depth: 0.55; height: 0.05; width: 0.55&amp;quot;
+              position=&amp;quot;0 0.5 0.25&amp;quot;&amp;gt;&amp;lt;/a-entity&amp;gt;
+  &amp;lt;/a-entity&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(If an entity is a child of another entity, the parent element takes on what is analogous to absolute positioning, and its child elements take on what is analogous to relative positioning with relation to its parent element.)&lt;/p&gt;
+
+&lt;p&gt;Once we had our singular React-ified chair, we passed in an array of positions. Each position was passed down to each chair via props. And voila, we had chairs on chairs on chairs!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;link-traversal&#34;&gt;Link Traversal&lt;/h2&gt;
+
+&lt;p&gt;Early on, it was always an idea that we&amp;rsquo;d have different rooms &amp;ldquo;branching off&amp;rdquo; of our main room, where people could go to have private conversations. Our initial idea was to have one scene with interconnecting rooms literally branching off of it; almost like a real building would. However, as time went on, we realized that it might be easier for us to program the switching of rooms if we just had one room per scene, and switched out the scenes when a user entered or left a room.&lt;/p&gt;
+
+&lt;p&gt;So, the next natural step would be to figure out how to get a user from one scene to another. We started off with the idea of hyperlinks, where each hyperlink would render a different component that contained a full &lt;code&gt;a-scene&lt;/code&gt; and everything in it. But, once we implemented them, we realized that Chromium would knock us out of VR mode to traverse links, so that was a no-go. Mozilla has apparently worked out a fix for this, but because VR mode doesn&amp;rsquo;t work on the Daydream with Firefox Nightly, we had to find a different workaround.&lt;/p&gt;
+
+&lt;p&gt;Instead, we ended up with a single &lt;code&gt;a-scene&lt;/code&gt; tag in our main React component, and switching components wrapped in &lt;code&gt;a-entity&lt;/code&gt; tags in and out of it accordingly. It&amp;rsquo;s not the most ideal solution, but as of this point in time, there doesn&amp;rsquo;t seem to be a better way to accomplish this given the current state of the technology and Chrome&amp;rsquo;s security measures that prevent us from using a lot of WebVR APIs.&lt;/p&gt;
+
+&lt;p&gt;Our links take the form of fancy magical floating orbs that glow a certain shade of blue when you hover over them.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/aframe-hyperlink-orbs.png&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Coming soon, to a blog near you: how a frog caused us a lot of mental anguish, how we solved (sort of) the teleportation/everything-else-is-eating-our-browser-resources problem, and how these two topics are very related.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
+      <link>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</link>
+      <pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</guid>
+      <description>
+
+&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
+
+&lt;h2 id=&#34;react-and-a-frame&#34;&gt;React and A-Frame&lt;/h2&gt;
+
+&lt;p&gt;We put React in initially because we thought it&amp;rsquo;d be a nice-to-have. Then we realized that, for our base MVP at least, we definitely wouldn&amp;rsquo;t be using it to any meaningful degree. A-Frame and React also don&amp;rsquo;t necessarily always play nice with each other; A-Frame is an entity-component-system framework, which favors composability over inheritance. React, on the other hand, is based on inheritance. One of the reasons React is so performant is that it batches its updates; however, when we&amp;rsquo;re going for 60 or 90fps+ real-time rendering, that&amp;rsquo;s maybe not quite what we want.&lt;/p&gt;
+
+&lt;p&gt;Despite this, using React with A-Frame does have a few benefits. First, as long as we&amp;rsquo;re able to let A-Frame do the 3D and VR bits, React does a great job at what it was meant for: a view layer and managing state. Furthermore, I&amp;rsquo;ve heard that wrapping React over three.js (our other possible option) results in a lot of performance issues, but A-Frame provides the much-needed bridge between the 3D/VR world and React, lessening that performance hit by a not insignificant amount.&lt;/p&gt;
+
+&lt;p&gt;We ultimately decided that if we do want to have various views in the future (which ideally we will, at least on the desktop version), it&amp;rsquo;d be better to have React in from the start, rather than needing to go back later to finagle it back in and make it play nice with everything already there. We&amp;rsquo;ve been told in our initial code review that, despite having React in our app, (1) it&amp;rsquo;s very un-React like and we could probably do more React-ifying, which I definitely want to look into soon and (2) it almost resembles an Angular app, because it&amp;rsquo;s very event-based right now.&lt;/p&gt;
+
+&lt;h2 id=&#34;redux-and-immutable-js&#34;&gt;Redux and Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I threw Redux into both ends as well, and converted our state to use Immutable.js. Using Redux on the back-end was an entirely new experience and it took an afternoon to go baby-step-by-baby-step to un-boggle my brain, but once I realized that it was &lt;em&gt;the exact same&lt;/em&gt; as Redux on the front-end — you dispatch an action, and your reducer changes the state based on that action — everything pretty much clicked afterwards.&lt;/p&gt;
+
+&lt;p&gt;As I was adding in Immutable.js, I learned an interesting tidbit: socket.io doesn&amp;rsquo;t really understand Immutable collections and ends up converting them to plain JavaScript structures when sending them across the Internet. We were exceptionally confused for a short period of time when our back-end was supposedly sending an Immutable Map and our front-end could access properties on it like it was a normal object.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-race-condition&#34;&gt;Another Race Condition&lt;/h2&gt;
+
+&lt;h3 id=&#34;or-when-i-learn-that-getelementbyid-queryselector-true&#34;&gt;Or, when I learn that getElementById &amp;gt; querySelector === true&lt;/h3&gt;
+
+&lt;p&gt;We also had another race condition emerge that is strangely absent in my prototype. When a new user joined and there were existing users in the &amp;ldquo;room,&amp;rdquo; the back-end would sometimes start pushing this new user&amp;rsquo;s updates to the front-ends of everyone else before the new user had been able to be added to everyone else&amp;rsquo;s DOM. The &lt;code&gt;newUser&lt;/code&gt; function and the &lt;code&gt;updateUsers&lt;/code&gt; function were originally separate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;newUser&#39;, user =&amp;gt; {
+  console.log(&#39;Someone else has joined&#39;);
+  putUserOnDOM(user);
+});
+
+socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  console.log(&#39;Updating position for all users&#39;);
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+    otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get rid of the race condition that this caused, I ended up implementing a conditional statement — if the element didn&amp;rsquo;t exist on the DOM, add it. If it did, then update as normal.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
+  Object.keys(users).forEach(user =&amp;gt; {
+    const otherAvatar = document.querySelector(`#${users[user].id}`);
+    if (!otherAvatar) {
+      putUserOnDOM(users[user]);
+    } else {
+      otherAvatar.setAttribute(&#39;position&#39;, `${users[user].x} ${users[user].y} ${users[user].z}`);
+      otherAvatar.setAttribute(&#39;rotation&#39;, `${users[user].xrot} ${users[user].yrot} ${users[user].zrot}`);
+    }
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Even after implementing this, we were having issues with the &lt;code&gt;querySelector&lt;/code&gt; — there seemed to be times that the &lt;code&gt;querySelector&lt;/code&gt; errored out, which prevented the &lt;code&gt;if&lt;/code&gt; statement from ever being executed, which means the user was never put on the DOM. As you can imagine, that&amp;rsquo;s a small problem. So, instead, I decided to use &lt;code&gt;getElementById&lt;/code&gt; (which I hadn&amp;rsquo;t tried in the first place because the majority of A-Frame examples I had seen used &lt;code&gt;querySelector&lt;/code&gt;). Since it was a guarantee that &lt;code&gt;getElementById&lt;/code&gt; would return &lt;code&gt;null&lt;/code&gt; if the element didn&amp;rsquo;t exist, we could ensure that the &lt;code&gt;if&lt;/code&gt; statement would execute when it needed to.&lt;/p&gt;
+
+&lt;p&gt;I later discovered that in order to use &lt;code&gt;querySelector&lt;/code&gt; on IDs that are numbers, you sometimes &lt;a href=&#34;http://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers&#34; target=&#34;_blank&#34;&gt;need to handle them in special ways&lt;/a&gt;. So, the reason it only sometimes freaked out on us was because our IDs were simply socket IDs, only some of them started with numbers. The more you know!&lt;/p&gt;
+
+&lt;h2 id=&#34;real-time-audio-communication&#34;&gt;Real-Time Audio Communication&lt;/h2&gt;
+
+&lt;p&gt;Though I hadn&amp;rsquo;t done a lot of WebRTC outside of my initial research when putting together my prototype, I started helping one of my teammates implement WebRTC. He had gotten &lt;em&gt;really&lt;/em&gt; close over the past few days, but still not quite there — two browsers were connected, but audio still wasn&amp;rsquo;t streaming from one to the other. We ended up attempting to use the &lt;a href=&#34;https://simplewebrtc.com/&#34; target=&#34;_blank&#34;&gt;SimpleWebRTC library&lt;/a&gt;, which we knew &lt;em&gt;was physically possible&lt;/em&gt; to integrate with our socket structure, but something about it was just not happy with our sockets. So, we moved on to reimplementing from scratch. TBD on how that turns out, but fingers crossed!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Develop a VR App Prototype, in 26 Steps</title>
+      <link>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</link>
+      <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</guid>
+      <description>&lt;p&gt;Step 1: Come up with an idea. &lt;a href=&#34;http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/&#34; target=&#34;_blank&#34;&gt;Decide upon attempting to prototype a social VR app&lt;/a&gt; that would support many users, as there isn&amp;rsquo;t one that exists today that does so, and ideally (if time permits) implement real-time audio.&lt;/p&gt;
+
+&lt;p&gt;Step 2: Notice that &lt;a href=&#34;https://aframe.io/&#34; target=&#34;_blank&#34;&gt;A-Frame&lt;/a&gt; is supposedly easy to get up-and-running. Do some digging into creating multiuser experiences in A-Frame. Discover that someone has created a &lt;a href=&#34;https://github.com/ngokevin/kframe/tree/master/components/firebase&#34; target=&#34;_blank&#34;&gt;Firebase component in A-Frame&lt;/a&gt;, making the multiuser part &lt;em&gt;very&lt;/em&gt; easy.&lt;/p&gt;
+
+&lt;p&gt;Step 3: Implement A-Frame and the Firebase component according to the example. Render a scene where when a user hits the page, another &amp;ldquo;avatar&amp;rdquo; pops up! With head-tracking!&lt;/p&gt;
+
+&lt;p&gt;Step 4: Realize that with the enormous degree of abstraction going on, it&amp;rsquo;s really hard to understand what&amp;rsquo;s happening, and by extension, do anything to customize what&amp;rsquo;s in front of you.&lt;/p&gt;
+
+&lt;p&gt;Step 5: Puzzle over what to do for a bit. Decide that websockets might be a better idea, instead of Firebase. You&amp;rsquo;re familiar with them, and you know that you could customize them to your liking.&lt;/p&gt;
+
+&lt;p&gt;Step 6: Implement the basics of websockets. Get stuck on how to add A-Frame elements (which it calls &amp;ldquo;entities&amp;rdquo;) to the view when a user hits the page. Spend a few hours being confused.&lt;/p&gt;
+
+&lt;p&gt;Step 7: Replace A-Frame with &lt;a href=&#34;https://threejs.org/&#34; target=&#34;_blank&#34;&gt;three.js&lt;/a&gt;, in attempt to get rid of some of the abstractions it&amp;rsquo;s making. Manage to render a view that would pop a cube on the screen when someone hit the page.&lt;/p&gt;
+
+&lt;p&gt;Step 8: Become confused at why, when you opened a second incognito page, the first person/element wasn&amp;rsquo;t present anymore. (Fast forward to step 14.5: it&amp;rsquo;s because you never configured your sockets to do so. Whoops.)&lt;/p&gt;
+
+&lt;p&gt;Step 9: Attempt to refactor the &lt;a href=&#34;https://github.com/borismus/webvr-boilerplate&#34; target=&#34;_blank&#34;&gt;webvr-boilerplate&lt;/a&gt; so that you could work with it slightly easier. End up breaking a lot of stuff.&lt;/p&gt;
+
+&lt;p&gt;Step 10: Complain to a classmate about how terrible VR is. Contemplate starting a different project, although it&amp;rsquo;s 11pm on Friday night and you&amp;rsquo;re presenting on Monday. Create a new GitHub repo for your project. Start customizing the &lt;a href=&#34;https://github.com/chentsulin/electron-react-boilerplate&#34; target=&#34;_blank&#34;&gt;electron-react-boilerplate&lt;/a&gt; to fit the project you have in mind.&lt;/p&gt;
+
+&lt;p&gt;Step 11: Wake up the next morning, determined once again to conquer VR. Download Unity for the first time. Watch an introductory video going over how to start developing an app for the Google Daydream with Unity. Use Unity to successfully create an app with a floating box and view it on the Daydream.&lt;/p&gt;
+
+&lt;p&gt;Step 12: Follow a tutorial made for Google Cardboard to create a social VR app with Unity. Get stuck halfway through. Puzzle why over the person in the tutorial was able to delete his main camera, and you can&amp;rsquo;t, but also why you&amp;rsquo;re not able to switch the camera to the box that represents your avatar.&lt;/p&gt;
+
+&lt;p&gt;Step 13: Decide to take another crack at A-Frame. Realize that A-Frame is just an HTML wrapper around a three.js object. Also realize that because of this, you can just append A-Frame entities to the DOM like you would anything else. Feel a tad bit dumb, because you should have realized this a while ago. But also feel wonderful, because this makes your life infinitely easier.&lt;/p&gt;
+
+&lt;p&gt;Step 14: Bang out half of your app&amp;rsquo;s functionality, including the creation of a user, getting all existing users for the new user, and adding the new user to everyone else&amp;rsquo;s DOM. Get stuck on how to update each user&amp;rsquo;s position on everyone else&amp;rsquo;s view.&lt;/p&gt;
+
+&lt;p&gt;Step 15: Have a chat with one of the core contributors to A-Frame. He recommends trying to use the built-in &lt;code&gt;tick&lt;/code&gt; component, which hooks into the browser&amp;rsquo;s native render loop. Attempt to implement this. Sort of succeed, except now a rather important part of your app is failing: a new user who joins isn&amp;rsquo;t able to receive the already-existing users. The already-existing users aren&amp;rsquo;t appearing at all on the new user&amp;rsquo;s DOM. Decide to call it a night and go to bed.&lt;/p&gt;
+
+&lt;p&gt;Step 16: Wake up the next morning, and spend some time at the shelter, walking and playing with dogs. Because dogs make everything better.&lt;/p&gt;
+
+&lt;p&gt;Step 17: Continue attempting to figure out what&amp;rsquo;s going wrong and how to fix it. Fail. Intermittently chat with previously mentioned core contributor, who&amp;rsquo;s traveling and on planes and can only talk sparingly and can&amp;rsquo;t really look at your code thoroughly. Fail to come to any meaningful conclusions.&lt;/p&gt;
+
+&lt;p&gt;Step 18: Reach out to your fellow who&amp;rsquo;s a socket whiz, because you suspect this may have more to do with sockets than with A-Frame. He says give him a few hours.&lt;/p&gt;
+
+&lt;p&gt;Step 19: Eat, because it&amp;rsquo;s 2pm and you haven&amp;rsquo;t eaten yet. Research WebRTC.&lt;/p&gt;
+
+&lt;p&gt;Step 20: Meet with your fellow. Do A LOT of debugging, gradually getting closer and closer to the issue. Discover the issue was that entities were trying to push updates to new entities, before the new entities were able to load on the new user&amp;rsquo;s DOM.&lt;/p&gt;
+
+&lt;p&gt;Step 21: Implement a somewhat roundabout and possibly non-ideal way to fix this, including creating a variable that switches to &lt;code&gt;true&lt;/code&gt; once the new user has received the existing users, and sending somewhat meaningless socket events back-and-forth between the client and the server. In the process, end up updating the user&amp;rsquo;s position twice for every render loop, which meant that the new user was experiencing some weird spazzy movements.&lt;/p&gt;
+
+&lt;p&gt;Step 22: Hear from said fellow that A-Frame&amp;rsquo;s built-in WASD controls may not actually update the position. You may have to either programmatically temporarily disable them (for a very quick period of time) in order for the position to be updated, then enabled again after you update the position, or just create your own WASD controls.&lt;/p&gt;
+
+&lt;p&gt;Step 23: Go grocery shopping. Wait forever in line, because everyone does their grocery shopping on Sunday evenings but you still haven&amp;rsquo;t learned to not go at that time.&lt;/p&gt;
+
+&lt;p&gt;Step 24: Fix your double-updating-position problem. Tentatively try out just updating the user&amp;rsquo;s positions with the normal built-in WASD controls still enabled. REALIZE IT WORKS AND YOU DON&amp;rsquo;T HAVE TO ROLL YOUR OWN WASD CONTROLS!!!!!!!! Successfully broadcast the position of each user to every other user with a slightly hacky &lt;code&gt;setInterval&lt;/code&gt; loop and more somewhat meaningless socket events back and forth.&lt;/p&gt;
+
+&lt;p&gt;Step 25: Add rotation tracking. Spend a couple of hours making your scene look pretty with trees and mountains. Create a super basic slideshow to start your presentation with for the next day.&lt;/p&gt;
+
+&lt;p&gt;Step 26: Sigh in relief after your presentation. You might not have had time to implement real-time audio, but you accomplished at least your base goal, and that&amp;rsquo;s definitely something to be proud of.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The biggest lessons I learned from prototyping this app were:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Experimenting is fun. Learning new technologies is fun. But, maybe when you only have five days to pull off a project, you should use something that&amp;rsquo;s above version 0.4.0.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;VR is hard. Literally no one knows what they&amp;rsquo;re doing. Developing on a platform that was released a month ago makes it enormously harder.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Most importantly, before you embark on implementing a new technology, understand the abstractions that it&amp;rsquo;s making. I spent much more time fighting with A-Frame than I did working with it, because I didn&amp;rsquo;t understand any of the abstractions that it uses.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As is the pace of life at Fullstack, we presented our Stackathon projects today, and immediately jumped into our final Capstone project. I was nervous (and still am) about doing another VR project, because this one took a fair bit out of me and I was slightly disillusioned with VR by the end. However, my teammates were excited about building upon what I had done and making this into a fully-fledged &lt;em&gt;thing&lt;/em&gt; (and despite my exhaustion and frustration, I was still very much excited about it as well) — so that&amp;rsquo;s happening! Wish us luck; we&amp;rsquo;ll definitely need it. I&amp;rsquo;m looking forward to the adventure we&amp;rsquo;re about to embark on!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;GitHub Repo for my project here: &lt;a href=&#34;https://github.com/bethqiang/transcend&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Live demo of my project here: &lt;a href=&#34;https://transcend.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(The demo will probably be more effective if you have two incognito windows open, or recruit a friend to get on at the same time as you. Or, even better, have one person use a WebVR-enabled device, and one use a desktop!)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture</title>
+      <link>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</link>
+      <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</guid>
+      <description>
+
+&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
+
+&lt;p&gt;One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package &lt;code&gt;nodemailer&lt;/code&gt; to our checkout process, so that when a user places an order, they&amp;rsquo;ll immediately be sent an email with their confirmation number.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-01/alfred-pennyworth.png&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;My teammates made fun of me a little bit for being so excited about this, and I can&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; articulate why I was, except for that it was just a moment for me when I realized &lt;em&gt;how incredible programming can be&lt;/em&gt;. Which I realize still sounds a little weird, because, at its core, I just sent myself an email. But, a lot of seemingly disparate things came together at that moment for me, I think. (And let&amp;rsquo;s be real, who doesn&amp;rsquo;t want an email from Alfred Pennyworth?!)&lt;/p&gt;
+
+&lt;h2 id=&#34;stackathon&#34;&gt;Stackathon&lt;/h2&gt;
+
+&lt;p&gt;The end of one project means the beginning of another! Today was the first day of Stackathon, which essentially is a personal hackathon. We have until Monday to build something (anything) of our choosing, and there are a couple of awards on the line.&lt;/p&gt;
+
+&lt;p&gt;After internally debating for basically the past month about what I&amp;rsquo;ve wanted to do, I finally decided to attempt an &lt;a href=&#34;https://altvr.com/&#34; target=&#34;_blank&#34;&gt;AltSpace&lt;/a&gt; or &lt;a href=&#34;https://vtime.net/&#34; target=&#34;_blank&#34;&gt;vTime&lt;/a&gt;-like app, but one that could support many more people than those currently do. As Mark Davis, Fullstack&amp;rsquo;s Product Manager, &lt;a href=&#34;https://www.fullstackacademy.com/blog/vr-lab-jan-2017&#34; target=&#34;_blank&#34;&gt;describes&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Here&amp;rsquo;s what we wish existed, now: a simple VR environment where up to 25 avatars can interact with each other, with real-time voice chat, that&amp;rsquo;s accessible on a Google Daydream headset as an MVP, but is also extensible to any WebVR enabled headset.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As I only have five days, my primary goals will be to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Render a scene (I&amp;rsquo;m not worried about this part)&lt;/li&gt;
+&lt;li&gt;Integrate with Firebase to support a lot of people joining (I&amp;rsquo;m more worried about this part), and&lt;/li&gt;
+&lt;li&gt;Use WebRTC for real-time audio communication (I&amp;rsquo;m not even sure this part is going to happen, but hey, reach for the stars?)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;d also love to pitch this to my Capstone Project team after, and build on top of it to create something even more amazing.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve avoided seriously entertaining this idea pretty much since I started thinking about what I wanted to do, because every time I did, I would get overwhelmed and terrified. I&amp;rsquo;m very excited and intrigued by the VR space, but also terrified because of the sheer complexity of designing 3D environments and interactions with those environments.&lt;/p&gt;
+
+&lt;p&gt;One of my favorite sayings is, &amp;ldquo;If your dreams don&amp;rsquo;t scare you, they&amp;rsquo;re not big enough.&amp;rdquo; I suppose that&amp;rsquo;s pretty applicable now — wish me luck!&lt;/p&gt;
+
+&lt;h2 id=&#34;cto-lecture-design&#34;&gt;CTO Lecture: Design&lt;/h2&gt;
+
+&lt;p&gt;During Senior Phase, we&amp;rsquo;re going to be having CTO Lectures on a regular basis. These are a series of lectures to expose us to the non-technical parts of building software, including design, scalability, agile, the &amp;ldquo;lean startup&amp;rdquo; methodology, etc. This was one of the parts about the program that I was looking forward to most, and today definitely did not disappoint.&lt;/p&gt;
+
+&lt;p&gt;We heard from &lt;a href=&#34;https://www.linkedin.com/in/oddurs&#34; target=&#34;_blank&#34;&gt;Oddur Sigurdsson&lt;/a&gt;, who previously was Creative Director at Fullstack. He worked in the software/design industry for a number of years, and now runs his own company. To become a designer, he argued, there are three steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Play. You should be making something. Experiment. Share it with others. &lt;strong&gt;&lt;em&gt;Ignore the rules.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Plan. Set guidelines for yourself. Set a direction (e.g., I want to be there in seven weeks, or two hours). Set goals, and don&amp;rsquo;t stop until you&amp;rsquo;ve achieved them.&lt;/li&gt;
+&lt;li&gt;Polish. Iterate and refine. Find the balance between functional and beautiful. Push the limits of your abilities. Get critical feedback.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Another one of his points was that there are striking similarities between programming and design, and I&amp;rsquo;d argue that these are very applicable to life as well.&lt;/p&gt;
+
+&lt;p&gt;After talking generally about being a designer and the process of design, Oddur pulled out Photoshop and Sketch and demonstrated his workflows and tools for editing photos and creating site/app designs. He spent maybe 20 minutes maximum designing in Sketch, but his design was absolutely gorgeous and I was blown away.&lt;/p&gt;
+
+&lt;p&gt;When I have an extra minute or two (so&amp;hellip;after Fullstack is over?), it&amp;rsquo;s definitely something I would love to delve into further. So much I want to do, so little time. Sigh.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Shopping Carts &amp; Being Seniors</title>
+      <link>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</guid>
+      <description>
+
+&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
+
+&lt;p&gt;The features I&amp;rsquo;ve primarily been working on have been the Orders History page for a logged in user, and I just started working on our cart. Relatively early on in the process, we decided we were just going to have our cart saved on the session, and never actually persisted in the database. One of the main challenges I&amp;rsquo;ve faced while doing this was coming to terms with the fact that we weren&amp;rsquo;t actually going to the database in our back-end route to fetch and update and delete items in our cart; we were just setting an array on the &lt;code&gt;req.session&lt;/code&gt; object. Though the premise was the same — the front-end would dispatch an action, that would send an AJAX request to our back-end, which would manipulate that array, then send the resulting array back to the front-end — it just felt a little strange doing it.&lt;/p&gt;
+
+&lt;p&gt;The primary benefits, I think, to doing it this way are it&amp;rsquo;s a little less intensive on our server and it&amp;rsquo;s a little easier to transition someone&amp;rsquo;s cart when they&amp;rsquo;re not signed up or logged in originally to when they do sign up or log in. The drawbacks are, that let&amp;rsquo;s say someone&amp;rsquo;s kid throws some Pokemon&amp;rsquo;s cards into dad&amp;rsquo;s cart, and then dad actually signs in, dad probably doesn&amp;rsquo;t want those Pokemon cards. Likewise, if you put items in your cart when logged into a computer that&amp;rsquo;s not primarily yours, your cart will persist to the next person who uses that computer but when you log in via a different computer, your cart may* not be there anymore. And, this didn&amp;rsquo;t even occur to me until our fellow mentioned it, but we actually have no knowledge about what&amp;rsquo;s in our users&amp;rsquo; carts, so we can&amp;rsquo;t gather data about it or market to them or send them endless emails about things sitting in their carts.&lt;/p&gt;
+
+&lt;p&gt;*We may be attempting to solve this in the near future by setting the session ID to be the user&amp;rsquo;s email. May, being the key word&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;deployment-continuous-integration&#34;&gt;Deployment &amp;amp; Continuous Integration&lt;/h2&gt;
+
+&lt;p&gt;We also went through a workshop about how to deploy and run continuous integration our apps via &lt;a href=&#34;https://www.heroku.com/&#34; target=&#34;_blank&#34;&gt;Heroku&lt;/a&gt; and &lt;a href=&#34;http://codeship.com/&#34; target=&#34;_blank&#34;&gt;Codeship&lt;/a&gt;. I&amp;rsquo;ve deployed apps to Heroku before, so I was relatively familiar with that process. But, I&amp;rsquo;ve never used any continuous integration tool before. Our first attempt at using CodeShip didn&amp;rsquo;t end up going so well — we ran into some errors, did something to fix it, ran into more errors, fixed those, then came across &lt;em&gt;new&lt;/em&gt; errors&amp;hellip;until finally our fellow told us we were spending too much time on it and it might be a good idea to kind of sort of make our app somewhat functional before really worrying about it. So, we deleted that and moved on.&lt;/p&gt;
+
+&lt;p&gt;I did think the integration with CodeShip and Heroku was really cool; we could automate things to the point where all we&amp;rsquo;d have to do is push to GitHub, and then CodeShip would run, and then it would deploy automatically to Heroku. I&amp;rsquo;m excited for when we do get it to work to see all of it in action!&lt;/p&gt;
+
+&lt;h2 id=&#34;not-project-related-things&#34;&gt;Not-Project-Related Things&lt;/h2&gt;
+
+&lt;p&gt;I met with Career Services for the first time on Friday! Like most things in life, it was both wonderful and terrifying — wonderful because the future is always an exciting thing. Terrifying because, well, no one &lt;em&gt;really&lt;/em&gt; likes the job hunt, do they?! We talked mostly about what I&amp;rsquo;m looking for, where I&amp;rsquo;m looking for it, and in general things I should be thinking about. I took some time over the weekend to research some companies to put on my &amp;ldquo;Companies I&amp;rsquo;d Love to Work For&amp;rdquo; list, which I&amp;rsquo;ll be building out over the next few weeks.&lt;/p&gt;
+
+&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
+      <link>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
+
+&lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
+&lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
+&lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;
+&lt;li&gt;Implemented most of &lt;a href=&#34;https://github.com/bethqiang/todo-react-redux-immutable&#34; target=&#34;_blank&#34;&gt;a todo app&lt;/a&gt; using React, Redux, and Immutable.js. I used this to also practice some frontend testing. It was thrilling.&lt;/li&gt;
+&lt;li&gt;Started and finished most of my tech talk on Immutable Data &amp;amp; Immutable.js.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And in the past four days, a lot has happened.&lt;/p&gt;
+
+&lt;h2 id=&#34;grace-shopper&#34;&gt;Grace Shopper&lt;/h2&gt;
+
+&lt;p&gt;Probably the biggest thing that&amp;rsquo;s happened is that we started our Grace Shopper project, an (eventually) fully-functioning e-Commerce store. Our store, &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, sells bots to help you with your gardening and cooking and butlering and general life-ing needs.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve personally worked on:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Setting up ESLint and configuring it&lt;/li&gt;
+&lt;li&gt;Creating a few of the database models&lt;/li&gt;
+&lt;li&gt;Writing tests for said models&lt;/li&gt;
+&lt;li&gt;Adding signup and login features and functions that filter based on authorization&lt;/li&gt;
+&lt;li&gt;And most recently writing the routes and views for users to view their orders&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also just spent the last three hours trying and failing to fix a rather small but important thing (rendering the orders view automatically instead of on a click of a button, as it is right now), so this project is currently not on my list of favorite things ever.&lt;/p&gt;
+
+&lt;p&gt;In general, it&amp;rsquo;s definitely been challenging trying to figure out what goes where and how all of the pieces fit together. It&amp;rsquo;s our first time creating a fully-fledged app with only a set of requirements and literally &lt;em&gt;nothing&lt;/em&gt; else. I 110% believe we&amp;rsquo;re definitely all capable of doing all of it and doing it well, but we&amp;rsquo;re still in some ways getting our bearings straight.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s also been an interesting experience working as part of a team on a longer-term and larger-scale project (instead of just having a pairing partner for a workshop and then getting a different partner the next day). We have three people in our group, and we&amp;rsquo;ve paired all together on some things, and we&amp;rsquo;ve worked completely independently of each other on others, and sometimes one person branches off on their own while the other two pair.&lt;/p&gt;
+
+&lt;p&gt;Regardless of who works on what, everyone reviews all pull requests before we agree to merge, and it&amp;rsquo;s definitely not uncommon, if/when we&amp;rsquo;re working individually, for someone to pipe up and say, &amp;ldquo;Hey, I&amp;rsquo;m having trouble with this, can I share my screen and get y&amp;rsquo;all&amp;rsquo;s input?&amp;rdquo; Needless to say, I&amp;rsquo;ve also learned more of and become much more comfortable with Git over the past few days! I&amp;rsquo;m still very afraid of merge conflicts and Git yelling at me, but I&amp;rsquo;m sure I&amp;rsquo;ll get used to it eventually.&lt;/p&gt;
+
+&lt;h2 id=&#34;tech-talk-immutable-data-immutable-js&#34;&gt;Tech Talk: Immutable Data &amp;amp; Immutable.js&lt;/h2&gt;
+
+&lt;p&gt;I finished my tech talk. I really wanted to incorporate live coding instead of the code snippets at the end, but I was pushing the time limit before I put in the code at all. Next time!&lt;/p&gt;
+
+&lt;p&gt;I also presented it today. The good: I didn&amp;rsquo;t say &amp;ldquo;um&amp;rdquo; &lt;em&gt;quite&lt;/em&gt; as much as I typically do when speaking in public. The bad: when I was re-watching myself, I noticed at least two mistakes in my slides, and I think I relied on my notes a little too heavily. But hey, only way to get good at something is to keep doing it!&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in seeing it, &lt;a href=&#34;https://www.youtube.com/watch?v=IDf-tpuj8Kw&#34; target=&#34;_blank&#34;&gt;it&amp;rsquo;s already up on Fullstack&amp;rsquo;s YouTube channel&lt;/a&gt;! The slides can be viewed &lt;a href=&#34;https://speakerdeck.com/bethqiang/immutable-data-and-immutable-dot-js&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;stackathon&#34;&gt;Stackathon&lt;/h2&gt;
+
+&lt;p&gt;Another project that all Fullstack seniors do is the Stackathon project. We&amp;rsquo;re given four days to do literally anything we want, and we&amp;rsquo;re encouraged to work alone. (Although if you &lt;em&gt;really&lt;/em&gt; want to work with another person, no one&amp;rsquo;s going to stop you.)&lt;/p&gt;
+
+&lt;p&gt;My instructor and I have thrown around some ideas for what I could do. Right now, I&amp;rsquo;m leaning towards either creating a library that I can publish to npm, or an Electron app. (My idea right now for the latter basically amounts to a WYSIWYG editor to write in with an option to convert it to Markdown for static site generators.) I&amp;rsquo;m torn between these because I think writing my own legitimate library would be fun, but I wouldn&amp;rsquo;t get to do any front-end design, which really frustrates me sometimes but it&amp;rsquo;s also something I really enjoy. I keep hearing from people I trust that Electron isn&amp;rsquo;t terribly hard to learn, so I&amp;rsquo;ll probably take a look at it this weekend and see if it would be do-able to do what I want to do in the span of the four days we&amp;rsquo;ll be given.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m simultaneously really looking forward to working on this, but also somewhat scared as well. It&amp;rsquo;ll be something I choose and something that excites me, but if given the chance and an excuse, I work &lt;em&gt;way&lt;/em&gt; too much – and that&amp;rsquo;s not in the humble brag &amp;ldquo;I work too hard&amp;rdquo; kinda way. That&amp;rsquo;s an I&amp;rsquo;ll-stay-up-unhealthily-late-(until 5 am late, hello Tuesday night)-working-on-things-because-I-can-and-because-it&amp;rsquo;s-more-fun-than-sleep-and-because-things-not-being-perfect-bother-me kinda way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>New Year, New Blog, Same Git Bewilderment</title>
+      <link>http://bethqiang.com/blog/2017/01/09/new-year-new-blog-same-git-bewilderment/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/09/new-year-new-blog-same-git-bewilderment/</guid>
+      <description>
+
+&lt;p&gt;Big things have been happening in the past three weeks!&lt;/p&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s talk about this site. I started getting annoyed a while ago because my Jekyll site would build somewhat slowly — it&amp;rsquo;d take about two seconds each time. Now, two seconds isn&amp;rsquo;t a huge amount. But, in the larger scheme of things, I &lt;em&gt;only&lt;/em&gt; have about 30 posts so far, and it would take two seconds &lt;em&gt;every time I made any kind of change and wanted to see it&lt;/em&gt;. Jekyll&amp;rsquo;s speed (or lack thereof) once posts start accumulating is something that&amp;rsquo;s pretty well-documented, and I wanted to give this space a little bit of a facelift anyway, so I decided to explore a few alternatives and see what I could find. Plus, playing with new technology is always fun!&lt;/p&gt;
+
+&lt;p&gt;I first considered &lt;a href=&#34;https://github.com/gatsbyjs/gatsby&#34; target=&#34;_blank&#34;&gt;Gatsby&lt;/a&gt;, a React-based static site generator. It&amp;rsquo;s no secret that I&amp;rsquo;m a huge fan of React, but I was a little put off by this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Gatsby is not yet stable. APIs will break. Functionality is missing. It&amp;rsquo;s usable but if you plan on building with it, expect a rocky road for some time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;ll definitely be following Gatsby along its journey, but I figured I might as well try to not make my life too much harder right now.&lt;/p&gt;
+
+&lt;p&gt;I meandered around the static site generator world for a short period of time, but nothing really stuck out to me. Until a few days ago, when I stumbled upon a post about migrating from Jekyll to &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt;. I remembered, in some distant part of my brain, what I thought Hugo was (&lt;em&gt;&amp;ldquo;just another static site generator&amp;rdquo;&lt;/em&gt;). But hey, this site actually looked kinda nifty. And it could be fun to learn Go (templates, not the real thing, but still). And it&amp;rsquo;s supposed to be &lt;em&gt;WILDLY BLAZING FAST&lt;/em&gt;?!&lt;/p&gt;
+
+&lt;p&gt;After perusing themes and others&amp;rsquo; sites, I was convinced. I coded a &lt;em&gt;super&lt;/em&gt; basic &amp;ldquo;theme&amp;rdquo; (I&amp;rsquo;m not sure I can even call it that) from scratch to get a sense of the overall structure, the templating engine, and how the pieces worked together. Then, I found &lt;a href=&#34;https://github.com/digitalcraftsman/hugo-steam-theme&#34; target=&#34;_blank&#34;&gt;a theme I liked&lt;/a&gt; and set about customizing it and incorporating my own elements, like the navigation bar, the post summaries, the back to top button, the tag cloud/archives page, etc.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-git-rabbit-hole&#34;&gt;The Git Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;Everything was going rather swimmingly — I struggled a little bit with figuring out the nested-loop structure of the archives page, and it took me way too long to remember that VSCode has a handy &amp;ldquo;replace all&amp;rdquo; feature, but overall, it wasn&amp;rsquo;t terribly painful.&lt;/p&gt;
+
+&lt;p&gt;Until I attempted to deploy this to my GitHub User Page. That went a little something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So&amp;hellip;in order for GitHub pages to do anything, it needs an &lt;code&gt;index.html&lt;/code&gt; in the root directory. But when Hugo builds my site, my &lt;code&gt;index.html&lt;/code&gt; is sent to the public directory.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The documentation, and most of the (admittedly limited) tutorials out there say that I should create two different repositories — one for the source code, and one that would just serve the compiled &lt;code&gt;public&lt;/code&gt; directory. Worst comes to worst, I can deal with that, but there has to be a better way&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;[Insert furious Googling here.]&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Oh look, &lt;a href=&#34;https://hjdskes.github.io/blog/deploying-hugo-on-personal-gh-pages/&#34; target=&#34;_blank&#34;&gt;this guy&lt;/a&gt; created separate branches, and is just serving the &lt;code&gt;public&lt;/code&gt; folder on the &lt;code&gt;master&lt;/code&gt; branch! I can do that.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I made sure to make at least four copies of everything I had, just in case something went terribly wrong. Then, I started taking trips down various git rabbit holes — first, not having the correct access rights, then subtrees and submodules, and then updates being rejected for various reasons. I learned the hard way what &lt;code&gt;git push origin &#39;git subtree split --prefix public master&#39;:master --force&lt;/code&gt; does. (Spoiler alert: it deletes your &lt;code&gt;master&lt;/code&gt; branch.)&lt;/p&gt;
+
+&lt;p&gt;Luckily, my &lt;code&gt;hugo&lt;/code&gt; branch still has my entire commit history, so if in the future, I want a &lt;code&gt;master&lt;/code&gt; branch with the history, I think I could just rename that branch. One more &lt;code&gt;git subtree push --prefix public origin master&lt;/code&gt; command later, my &lt;code&gt;master&lt;/code&gt; branch was populated with my &lt;code&gt;public&lt;/code&gt; directory, and everything seemed to be working as it should!&lt;/p&gt;
+
+&lt;p&gt;I want to eventually create a script to automate these pushes, but given that Fullstack is starting again after a long and relaxing break, I suppose those will have to wait until I manage to get some free time again. At the very least, the site is up and running, it looks a little snazzier, and I learned some Go and Git!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Game of Life with React and Redux: The Hard Parts</title>
+      <link>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</link>
+      <pubDate>Thu, 22 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</guid>
+      <description>
+
+&lt;p&gt;For the past few days, I&amp;rsquo;ve spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There&amp;rsquo;s actually really not that much Sass – starting out, I wanted to practice it, although now that I&amp;rsquo;m halfway through, I&amp;rsquo;m realizing that I really don&amp;rsquo;t need it. I probably should have just saved it for another project – but anyway.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
+
+&lt;h2 id=&#34;the-webpack-rabbit-hole&#34;&gt;The Webpack Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;The first roadblock I ran into was trying to run and deploy a front-end-only React app via GitHub Pages. (I didn&amp;rsquo;t want to bother with any kind of back-end, even a little mini server to serve static files, because I recently discovered that Heroku makes you give them your credit card information if you want to deploy more than five apps. Which is fine, and I&amp;rsquo;m sure I&amp;rsquo;ll do it eventually, but if I can avoid it, I totally will.) So, I couldn&amp;rsquo;t serve static files. Which meant that my main &lt;code&gt;index.html&lt;/code&gt; file had to be in my root directory. Okay, that&amp;rsquo;s annoying, but that&amp;rsquo;s not &lt;em&gt;too&lt;/em&gt; bad. (Yet.)&lt;/p&gt;
+
+&lt;p&gt;After pondering a couple of different possibilities, including just linking CDNs to React and Redux in the index.html, I decided to go the Webpack route. I&amp;rsquo;d then be able to throw Sass into the mixture. I set up a basic version of Webpack, along with React and Redux, coded a quick &amp;ldquo;Hello World,&amp;rdquo; and deployed it under a repo titled &amp;ldquo;experiment.&amp;rdquo; I told Webpack to output my &lt;code&gt;bundle.js&lt;/code&gt; in a &lt;code&gt;public&lt;/code&gt; folder. And&amp;hellip;then I realized I had no idea how to open my app locally.&lt;/p&gt;
+
+&lt;p&gt;As a result, I ended up diving into and spending hours in a Webpack rabbit hole learning how to set up the Webpack dev server and a production Webpack configuration. Webpack can do &lt;em&gt;a lot&lt;/em&gt; of things, and I&amp;rsquo;m sure I didn&amp;rsquo;t even come across half of them. After a few more rounds of experimentally uploading and deploying, I finally settled on a configuration that would deploy without errors, and had a colorful &amp;ldquo;Hello World!&amp;rdquo; to prove it!&lt;/p&gt;
+
+&lt;p&gt;So, that was a fun day 1 of this project.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-beginning-aka-the-starting-grid&#34;&gt;The Beginning (aka, the Starting Grid)&lt;/h2&gt;
+
+&lt;p&gt;My next major hurdle came when I started adding files I thought I&amp;rsquo;d need (action creators, reducers, components, containers, etc.). I started by trying to create rough outlines of the components, and then I&amp;rsquo;d think about everything I&amp;rsquo;d need the component&amp;rsquo;s containers to do, and then I tried writing functions in containers, and then I forgot entirely how Redux worked, and then I got really overwhelmed.&lt;/p&gt;
+
+&lt;p&gt;So. Deep breath.&lt;/p&gt;
+
+&lt;p&gt;I deleted my rough outlines in attempt to start from a clean slate. I started again, this time with the &lt;em&gt;sole goal&lt;/em&gt; of just getting some kind of grid to show up. I wasn&amp;rsquo;t sure where to put this magical &lt;code&gt;makeGrid&lt;/code&gt; function, and stuck it in a &lt;code&gt;utils.js&lt;/code&gt; file for the moment, figuring I could move it later. I needed to represent the board&amp;rsquo;s cells and their status in some way. I made a giant array of objects, each of which would have properties like an &lt;code&gt;id&lt;/code&gt; and a &lt;code&gt;status&lt;/code&gt;, which is what my pair and I did when we did this in vanilla JavaScript.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (width, height) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; width; yCoord++) {
+    for (let xCoord = 0; xCoord &amp;lt; height; xCoord++) {
+      grid.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      })
+    }
+  }
+  return grid;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I passed this through the &lt;code&gt;BoardContainer&lt;/code&gt; down to the &lt;code&gt;Board&lt;/code&gt; component, I didn&amp;rsquo;t see a way I could easily map over the array in a way that would give me a board with a certain number of rows and columns, instead of a board that consisted of one row with many, many columns. I revisited my &lt;code&gt;makeGrid&lt;/code&gt; function and instead, made an array that had rows that were also arrays that held objects, that were each of the individual cells.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (height, width) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let row = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      row.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      });
+    }
+    grid.push(row);
+  }
+  return grid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later. Anyway, in my &lt;code&gt;Board&lt;/code&gt; component, I could map over each row, and within each row, map over each cell, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const Board = props =&amp;gt; {
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;table&amp;gt;
+        &amp;lt;tbody&amp;gt;
+          {props.board.grid.map((row, yCoord) =&amp;gt; (
+            &amp;lt;tr key={yCoord}&amp;gt;
+              {row.map((cell, xCoord) =&amp;gt; (
+                &amp;lt;Cell key={xCoord}
+                  id={props.id}
+                  status={props.board.grid[xCoord][yCoord].status}
+                  handleClick={() =&amp;gt; props.toggleCell(xCoord, yCoord)} /&amp;gt;
+              ))}
+            &amp;lt;/tr&amp;gt;
+          ))}
+        &amp;lt;/tbody&amp;gt;
+      &amp;lt;/table&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then set up a very basic cell component, added in some styling, and voila, I had a grid!&lt;/p&gt;
+
+&lt;p&gt;Making the board have a random configuration upon the initial render wasn&amp;rsquo;t difficult; I just added a &lt;code&gt;randomize&lt;/code&gt; parameter with a default value of &lt;code&gt;true&lt;/code&gt; to the &lt;code&gt;makeGrid&lt;/code&gt; function and a conditional:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (randomize) {
+  if (Math.random() &amp;gt; 0.75) status = &#39;alive&#39;;
+  else status = &#39;dead&#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;counting-living-neighbors&#34;&gt;Counting Living Neighbors&lt;/h2&gt;
+
+&lt;p&gt;Cool! Next goal: advance to the next generation, given the number of dead or alive neighbors around each cell.&lt;/p&gt;
+
+&lt;p&gt;After creating actions, I needed to create a new function that would &amp;ldquo;calculate&amp;rdquo; the new statuses of each cell. This ended up looking like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const stepForward = (grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+  const newGrid = [];
+  let status;
+
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let newRow = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      let currStatus = grid[xCoord][yCoord].status;
+      let count = getLivingNeighbors(xCoord, yCoord, grid);
+      if (currStatus === &#39;alive&#39; &amp;amp;&amp;amp; (count === 2 || count === 3)) {
+        status = &#39;alive&#39;;
+      } else if (currStatus === &#39;dead&#39; &amp;amp;&amp;amp; count === 3) {
+        status = &#39;alive&#39;;
+      } else {
+        status = &#39;dead&#39;;
+      }
+      newRow.push({
+        xCoord,
+        yCoord,
+        status
+      });
+    }
+    newGrid.push(newRow);
+  }
+  return newGrid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yes, there&amp;rsquo;s a lot of repetition in there&amp;hellip;I&amp;rsquo;m essentially recreating the &lt;code&gt;makeGrid&lt;/code&gt; function, with some extra stuff in between. Refactoring these huge functions is definitely on the to-do list.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;getLivingNeighbors&lt;/code&gt; was a function that consisted of nested &lt;code&gt;for&lt;/code&gt; loops, to loop through each cell that surrounded the current cell, checked if the &lt;code&gt;className&lt;/code&gt; on the cell DOM element was &lt;code&gt;&#39;alive&#39;&lt;/code&gt;, and if so, incremented the &lt;code&gt;count&lt;/code&gt;.
+I was quite proud of myself for figuring out all of this, and ran my code&amp;hellip;only to realize that all of the cells would immediately die on the first &amp;ldquo;step.&amp;rdquo; After puzzling and Googling, it turns out, &lt;code&gt;document.getElementById&lt;/code&gt; doesn&amp;rsquo;t work in React – you can&amp;rsquo;t directly manipulate the DOM! Well, that&amp;rsquo;s something. A few Stack Overflow answers suggested trying the &lt;code&gt;ref&lt;/code&gt; property that React provides, but even though it was a possibility, it didn&amp;rsquo;t seem like what the &lt;code&gt;ref&lt;/code&gt; property was intended for. (I didn&amp;rsquo;t have a callback function to provide within it; I just wanted to access the DOM element&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Instead, I took a somewhat roundabout way of getting the surrounding cells and their status. To make this work, I also had to change the values of the &lt;code&gt;status&lt;/code&gt; field from &lt;code&gt;&#39;alive&#39;&lt;/code&gt; or &lt;code&gt;&#39;dead&#39;&lt;/code&gt; to 1s and 0s so that I could just increment the count based on neighboring statuses instead of trying to deal with conditionals for each neighbor.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const getLivingNeighbors = (xCoord, yCoord, grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+
+  // If a cell is at the edge of the grid, the cell on the opposite edge will be its neighbor
+  const left = xCoord - 1 &amp;lt; 0 ? (width - 1) : (xCoord - 1);
+  const right = xCoord + 1 === width ? 0 : (xCoord + 1);
+  const up = yCoord - 1 &amp;lt; 0 ? (height - 1) : (yCoord - 1);
+  const down = yCoord + 1 === height ? 0 : (yCoord + 1);
+
+  let count = 0;
+
+  count += grid[left][up].status;
+  count += grid[xCoord][up].status;
+  count += grid[right][up].status;
+  count += grid[left][yCoord].status;
+  count += grid[right][yCoord].status;
+  count += grid[left][down].status;
+  count += grid[xCoord][down].status;
+  count += grid[right][down].status;
+
+  return count;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;non-intuitive-grid-positioning&#34;&gt;Non-Intuitive Grid Positioning&lt;/h2&gt;
+
+&lt;p&gt;So, remember when I said, &amp;ldquo;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Well, once I had the &lt;code&gt;stepForward&lt;/code&gt; function coded out and triggering with a click on the corresponding button, I discovered that though my Game of Life was doing &lt;em&gt;something&lt;/em&gt; in the next generation, the common patterns weren&amp;rsquo;t behaving quite as expected. (Although, they weren&amp;rsquo;t disappearing, at least.)&lt;/p&gt;
+
+&lt;p&gt;After a lot of state-examining (thanks, &lt;code&gt;redux-logger&lt;/code&gt;!) and clicking around on boxes, I discovered that there was a conflict between the way I had set up my grid and the way I was referencing positions in it. Because I set it up so that each row is its own array and the rows were the y coordinates, this actually meant that whenever I wanted to reference a position on the grid, I&amp;rsquo;d have to specify the y coordinate first. (e.g. &lt;code&gt;grid[y][x]&lt;/code&gt; – until this point, I had been doing the opposite.)&lt;/p&gt;
+
+&lt;p&gt;After changing this in every place I was referencing a grid position, everything worked as expected! I could now advance generations on the click of a button, as well as click to toggle a cell to be &lt;code&gt;alive&lt;/code&gt; or &lt;code&gt;dead&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;Now that I have at least the basic core functionality down of moving from generation to generation, I have a couple of smaller things to add:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;setInterval&lt;/code&gt; or &lt;code&gt;requestAnimationFrame&lt;/code&gt; so that the game will automatically advance generations on initial render or on the press of the play button&lt;/li&gt;
+&lt;li&gt;A counter to show the number of generations that have passed&lt;/li&gt;
+&lt;li&gt;Functionality of the rest of the buttons (play, stop, random)&lt;/li&gt;
+&lt;li&gt;Some styling and pretty colors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Possibly one the more intensive and time-consuming things will be refactoring – right now, most of my core functionality is in a massive &lt;code&gt;utils.js&lt;/code&gt; file with two large and repetitive functions. It&amp;rsquo;d be nice to see if I could also make it so that when I&amp;rsquo;m referencing positions in the grid, I can specify the x coordinate first instead of the y.&lt;/p&gt;
+
+&lt;p&gt;In case you&amp;rsquo;re curious, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; the GitHub repo for this project. It&amp;rsquo;s not deployed yet, but I do plan on it after I&amp;rsquo;m done!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Junior Phase in Review</title>
+      <link>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</link>
+      <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</guid>
+      <description>
+
+&lt;p&gt;We&amp;rsquo;re six and a half weeks in, which also means we&amp;rsquo;re halfway done with Fullstack Academy. It&amp;rsquo;s still a little crazy to think about, and I&amp;rsquo;ve been having a little bit of trouble processing this in its entirety. In some ways, I feel like it was a week ago that we started, fresh-eyed, strangers to each other and the enormous world of programming, and eager to absorb the firehose of information that was about to be thrown at us. In other ways, I feel like it&amp;rsquo;s been many months – we&amp;rsquo;ve learned and done so much, we&amp;rsquo;ve gotten to know each other and each other&amp;rsquo;s pets very well, we&amp;rsquo;ve settled into a little bit of a routine, and we&amp;rsquo;re all a little tired and very ready for a break.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-giant-list-of-what-we-ve-learned-and-the-general-learning-experience&#34;&gt;The Giant List of What We&amp;rsquo;ve Learned, and the General Learning Experience&lt;/h2&gt;
+
+&lt;p&gt;Throughout the journey, we&amp;rsquo;ve consistently built upon the basic fundamentals we covered in Foundations: scope and closure, prototypes and inheritance, first-class functions, and higher-order functions.&lt;/p&gt;
+
+&lt;p&gt;We covered the backend with Node, Express, SQL, Sequelize, and Postgres, the frontend with CSS/SASS, jQuery, web sockets, React, and Redux, and everything in between. We attempted to wrap our minds around data structures and algorithms, promises, testing, more promises, object-oriented and functional programming paradigms, the event loop and call stack, and how THE WHOLE INTERNET works (okay, maybe not the whole internet, but things like DNS, TCP/IP, HTTP, how browsers work, and cookies and sessions).&lt;/p&gt;
+
+&lt;p&gt;Fullstack and our instructors have placed an enormous emphasis on taking our time to really, truly, understand what&amp;rsquo;s happening, why, and how things work under-the-hood, under all of the abstractions that a lot of our tools create. One of my instructors&amp;rsquo; favorite questions to answer is, &amp;ldquo;This is working, but we have no idea why&amp;hellip;?&amp;rdquo; We built our own bash shells, promise libraries, CSS libraries, and trip planning apps. We cloned Wikipedia, Twitter, and Spotify across the stack, from creating databases to gently and considerately fighting with React. In our CS Saturdays, we learned about and built compilers and parsers, database querying languages and ORMs, git and immutability and our own basic version control systems, machine learning, and cryptography.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve become whiz kids at using Chrome dev tools, collaborating with others on programming projects, breaking problems down into manageable pieces, trying things and failing, and making Slack emojis. (#theimportantthings) We&amp;rsquo;ve learned how to become more compassionate programmers and people and citizens of the world.&lt;/p&gt;
+
+&lt;p&gt;Fullstack is constantly iterating on its curriculum, trying to keep it up-to-date, relevant, and challenging for its students. &lt;a href=&#34;https://www.fullstackacademy.com/blog/angular-to-react-fullstack-academy-updates-its-curriculum&#34; target=&#34;_blank&#34;&gt;They&amp;rsquo;ve recently made a shift from teaching Angular to teaching React&lt;/a&gt;, and some instructors are right along with us in being relative newcomers to React, so in some cases, we&amp;rsquo;re learning together, which can be both a frustrating and humbling experience when someone you look to as a source of guidance says, &amp;ldquo;You know what? I actually have no idea.&amp;rdquo; There are enough people who know React (and various other aspects of the programming world) well enough though that if someone doesn&amp;rsquo;t know something, someone else definitely will. (Or at least, has the knowledge to figure it out!)&lt;/p&gt;
+
+&lt;h2 id=&#34;the-remote-experience&#34;&gt;The Remote Experience&lt;/h2&gt;
+
+&lt;p&gt;Going into the Remote Immersive, I wasn&amp;rsquo;t sure what to expect of the experience in general. Innately, being remote has its challenges. Some of the in-person instructors and students, understandably, aren&amp;rsquo;t used to worrying about accommodating the remote cohort day-to-day, and sometimes they&amp;rsquo;ll forget small things like needing to talk into a mic in order for us to hear them during CS Saturday lectures. We&amp;rsquo;ve had our fair share of technical hiccups when it comes to using the software and technology that we do to make our experience possible. And as much as I&amp;rsquo;d absolutely love to, I can&amp;rsquo;t go out to dinner with my cohort or attend meetups with them on weekends or do happy hour after a long day of class.&lt;/p&gt;
+
+&lt;p&gt;But, as a cohort, we&amp;rsquo;ve gotten to bond in other ways. Like accidentally forgetting to mute our mics and yelling across the room to a family member. Or having your kids pop in and out of your video frame, curious about what you&amp;rsquo;re doing. Or having your cat hop onto your desk right in front of your camera. Or having glitches in our video software, which momentarily makes your instructor sound like a demon. Or fighting with YouTube bots during our live streams of CS Saturdays.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve done Hot Seat, during which we got to know each other on a deeper level than just pair programming and working with them. (Although, it&amp;rsquo;s arguable that when you&amp;rsquo;ve spent 2.5 hours trying to write a single test or you&amp;rsquo;ve spent the better part of 2 days wrestling with jQuery on a fairly complex app with someone, you&amp;rsquo;ve gotten to know a side of them very, very well!) We&amp;rsquo;ve done game nights, during which people fell off of the Minecraft world and one of Fullstack&amp;rsquo;s founders discovered the joys of TNT, and also during which one of our fellows reached 2+ million points in a game and kept eating everyone else. We&amp;rsquo;ve had learning group lunches, where we talked about space exploration and the headaches that D3 can cause with smaller groups and our fellow.&lt;/p&gt;
+
+&lt;p&gt;I won&amp;rsquo;t pretend like everyone in my cohort are the best friends I&amp;rsquo;ve ever made, and we&amp;rsquo;d almost certainly be closer if we were in-person with each other every day. But I know, at the very least, that I&amp;rsquo;ve found some very close friends, that our cohort will maintain connections with each other as we go through our personal programming journeys, and that I&amp;rsquo;ll always have a solid group of people I know I can always depend on, vento to, and ask for help and advice.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-fullstack-experience-as-a-student-growing-developer-and-woman&#34;&gt;The Fullstack Experience as a Student, Growing Developer, and Woman&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve said this before, but I think it&amp;rsquo;s absolutely, 110% worth repeating: Fullstack has been nothing short of amazing. Their dedication to creating a safe, open, accessible, but challenging learning experience for each and every one of their students was obvious from week 1. When big things have happened in our world and our lives, Fullstack set aside extra time in our and their days so that we can talk about it.&lt;/p&gt;
+
+&lt;p&gt;Fullstack&amp;rsquo;s instructors and fellows have made themselves 110% accessible at most hours of the day for anything – whether we have questions about the material, or are struggling with a concept, or want advice on a personal project, or are feeling a little down about being a woman in our world, or literally anything else, programming-related or not. Even instructors and engineers who aren&amp;rsquo;t officially associated with our cohort have pitched in via Slack to help us out with not only understanding concepts, but also with things like setting up linters and combing through style guides.&lt;/p&gt;
+
+&lt;p&gt;Fullstack&amp;rsquo;s students are no less amazing: every single person I&amp;rsquo;ve met, talked to, and worked with has been incredibly intelligent, driven, and passionate, whether it be about virtual reality, or backend frameworks, or puppies. (Or all of the above?) Regardless of where students are in the journey, no one looks down upon anyone for not knowing as much about a given area of the programming world. We all understand that we&amp;rsquo;re here to learn, and everyone&amp;rsquo;s more than willing to help each other and learning alongside each other as much as we possibly can.&lt;/p&gt;
+
+&lt;p&gt;In the six weeks I&amp;rsquo;ve been at Fullstack, I&amp;rsquo;ve also done two hackathons that were completely organized by Fullstack, for Fullstack. The first of these was for our cohort, as a way to unwind after one of our checkpoints. We had been fiddling around with Minecraft for some game nights, so we did a ScriptCraft hackathon – using only JavaScript, we had to create something cool in the Minecraft world using the ScriptCraft plugin.&lt;/p&gt;
+
+&lt;p&gt;The second of these happened just yesterday, and was dubbed a &amp;ldquo;Coding for Good&amp;rdquo;/&amp;ldquo;Holiday Hackathon,&amp;rdquo; with the goal of finding a social good problem that we were passionate about, and creating a solution to solve it. A lot of really cool ideas were built and deployed, from a Chrome extension that would prompt you to donate to a charity if you were shopping online or reading a news article about a disaster somewhere in the world, to an app that can connect people who need food with restaurants that have food about to expire or that&amp;rsquo;s going to be thrown away, to an app where &amp;ldquo;Tinder meets volunteering.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;I wanted to make a special note when it comes to being a woman at Fullstack. Consistent with Fullstack&amp;rsquo;s mission, values, and goals, I have never once felt like I&amp;rsquo;ve been looked down upon or otherwise treated unfairly because of my gender. While at Fullstack, I&amp;rsquo;ve never been self-conscious about the fact that I&amp;rsquo;m a woman – I&amp;rsquo;ve always considered myself &amp;ldquo;just another Fullstack student.&amp;rdquo; It definitely helps that out of my 13-person cohort, five of us, and one of our fellows, are women, and there&amp;rsquo;s an incredibly strong support system for women in the Fullstack community across all campuses.&lt;/p&gt;
+
+&lt;p&gt;As a student, a learning and growing developer who sometimes makes very rookie mistakes, a person of color, and a woman, I&amp;rsquo;ve been welcomed into the Fullstack community with wide-open arms. Fullstack has embraced us for our motivation, dedication, values, ambitions and goals, backgrounds and experiences, and our differences. We&amp;rsquo;ve been empowered to take what we&amp;rsquo;ve learned to go out and do things to make our world a better place, while also making ourselves better developers and better people.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been a wild ride so far, and we still have some time to go before being done. Until then, I&amp;rsquo;ll continue treasuring every day that goes by, embracing the successes, failures, learning experiences, and the Fullstack community along the way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Rest of Week 6: Redux, Authentication, and Social Activities</title>
+      <link>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</link>
+      <pubDate>Sun, 11 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</guid>
+      <description>
+
+&lt;p&gt;So, I’ve kind of fallen off the face of this blog for the past week. Apologies for that – it’s been an incredibly busy week. Tomorrow is our Senior Checkpoint; it’s kind of like our final exam to make sure that we’re sufficiently prepared to move on to Senior Phase. I’ve spent the pretty much all of my free time (of which we have little to begin with) this past week gearing up for that and attempting to review everything we’ve learned in the past six weeks, which isn’t really an easy feat by any means, given the amount of material we’ve covered!&lt;/p&gt;
+
+&lt;p&gt;Since my last blog post, we’ve covered Redux, Redux with React, and authentication. It took me a little more time and effort to wrap my head around Redux and how everything is working than it has for the other topics we’ve covered, but after completely re-doing the entirety of the 5-day workshop we did in class, I think I have a decent grasp of it now. (If you’re interested, you can see the result of my solo work in &lt;a href=&#34;https://github.com/bethqiang/juke&#34; target=&#34;_blank&#34;&gt;this GitHub repo&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;With Redux and the help of one of my fellows, I’ve formed a little workflow and mental checklist for myself for handling Redux:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create constants for action types. (It’s been suggested to us, instead of using strings for action types, to use variables that have values of strings instead – our linter can pick up on spelling mistakes if they happen, which has been super useful when my tired brain forgets how to spell “receive.”)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create synchronous action creators. Synchronous action creators are functions that return objects, called actions, that are formatted to be sent into the Redux state. These typically have a type, which will be the action type that we created in the previous step, and sometimes a payload.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create asynchronous action creators, or dispatchers, or “thunks” using &lt;code&gt;thunkMiddleware&lt;/code&gt; from &lt;code&gt;redux-thunk&lt;/code&gt;. Instead of dispatching an action object, this allows us to dispatch a new function! Basically, it says, “Oh, it looks like this person is trying to do something asynchronous. Instead of giving it to the reducer, let me invoke it and pass the store’s dispatch method on it, so whenever the side effect completes or the action resolves, they can use it to dispatch a new action with the data they get.”&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create reducers. We pass an &lt;code&gt;action&lt;/code&gt; to the store&amp;rsquo;s &lt;code&gt;dispatch&lt;/code&gt; method, and the store executes its &lt;code&gt;reducer&lt;/code&gt; function. Typically, the reducer consists of a &lt;code&gt;switch&lt;/code&gt; statement that describes a different update depending on the action&amp;rsquo;s type. It&amp;rsquo;s super important that the reducer is a pure function, which means that there&amp;rsquo;s no side effects like AJAX calls. (That&amp;rsquo;s what #3 is for!)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the actual components and containers needed. Set local state, pass down props, and create functions as needed. If we’re using &lt;code&gt;react-redux&lt;/code&gt;, we can use &lt;code&gt;mapStateToProps&lt;/code&gt; and &lt;code&gt;mapStateToDispatch&lt;/code&gt; and &lt;code&gt;connect&lt;/code&gt; to do this in a less boilerplate-y fashion. If we need a local state (for forms and stuff) as well as access to the global store, we can create a container and put a container inside of that that will then render the presentational component. Also in &lt;code&gt;react-redux&lt;/code&gt;, if we need to access a component’s own props, we can use &lt;code&gt;ownProps&lt;/code&gt; in either or both of those functions as the second argument. &lt;code&gt;connect&lt;/code&gt; also does a couple of other super useful things for us, which I won’t repeat here in the interest of typing and space and not being repetitive, but needless to say that I’m a big fan.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fix up your routes if you need to.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I still haven’t yet implemented Redux or &lt;code&gt;react-redux&lt;/code&gt; straight out of the box. I&amp;rsquo;ve so far just built out a normal React app and then refactored to use Redux/&lt;code&gt;react-redux&lt;/code&gt;. One of my to-dos over break will be to try to get the hang of doing it from scratch without an existing React component.&lt;/p&gt;
+
+&lt;p&gt;We also talked about and used the &lt;code&gt;Provider&lt;/code&gt; component and initial/route-specific loading, where we can use React Router’s &lt;code&gt;&amp;lt;Route&amp;gt;&lt;/code&gt; element prop &lt;code&gt;onEnter&lt;/code&gt;. This allows us to set the next router state and do things like load data from an AJAX call upon entering a route.&lt;/p&gt;
+
+&lt;p&gt;We spent about a day on authentication, but to be honest, most of my group&amp;rsquo;s attempt at implementing authentication was stymied because we were still trying to wrap our heads around Redux. Learning more about and understanding authentication to at least some degree has been put on the to-do list for winter break!&lt;/p&gt;
+
+&lt;h2 id=&#34;other-things&#34;&gt;Other Things&lt;/h2&gt;
+
+&lt;h3 id=&#34;review-month-game-night-and-the-reign-of-dj-rumba-and-hot-seat&#34;&gt;Review Month, Game Night (and the Reign of DJ Rumba), and Hot Seat&lt;/h3&gt;
+
+&lt;p&gt;Speaking of which, we also talked about Review “Month” (for most cohorts, there’s only a week, but we have all of winter break as well!) and what we should be doing during that time – not only should we go through some of the material that we may be shaky on, but it’ll be a good time to explore the programming world and start some projects and start our tech talks, as well. I’ve been putting together a list of things I want to do over break and prioritizing them (because I honestly don’t think three weeks is enough to do everything I want to do!). I’ll post that soon&amp;hellip;once I have it figured out for myself. (Creating the list of things I want to do isn’t terribly difficult. It’s prioritizing them that will be&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Sometime in the middle of the week (days blur together after a while), we also did a short little Game Night. We played &lt;a href=&#34;http://agamari.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, which is a game developed by a group from the recently graduated cohort at Fullstack. Everyone&amp;rsquo;s a ball and you roll around a spherical world eating other balls, which makes you bigger. You can also eat other players, which, depending on their size, can make you &lt;em&gt;a lot&lt;/em&gt; bigger. One of our fellows became absolutely massive and was basically taking over our world.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/agamari.png&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;She was so big that she couldn&amp;rsquo;t really see where she was rolling, and kept eating us by accident, even when she was trying to avoid eating people! I had a lot of fun and the game itself is quite impressive, both graphically and the amount of thought and work that was put into it. (They even took physics laws into account!)&lt;/p&gt;
+
+&lt;p&gt;We also finished up with our Hot Seat in our cohort and learned about one of our fellow’s previous lives, which included going door-to-door selling $3500 vacuums. I think we’re going to be doing Hot Seat Round 2 in Senior Phase, as a way to just find out more about each other, because how else do you find out that one of your fellows once was a vacuum salesman?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 6, Day 1: Do One Thing Every Day That Scares You</title>
+      <link>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</link>
+      <pubDate>Mon, 05 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</guid>
+      <description>&lt;p&gt;Today, we talked about forms in React. And practiced more React-y stuff. The more important part of the day was that I stood up in front of people, talked, and was slightly less terrified than I am when I see a spider! But we&amp;rsquo;ll get to that in a second. First, the React stuff:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Application state vs. UI/local state. Sometimes, we know ahead of time that some kinds of state are going to be localized to a particular area of our app – state like form data, timers, small animations, etc. Some people prefer to make a distinction between the application state, state that&amp;rsquo;s central to our app that needs to be available to different components, and UI/local state, for things like forms. Creating a local state is literally the same process as creating an application state: initialize the property in the constructor, set it, and pass it through the props.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Synthetic events. Whenever you pass a callback function to an event listener like &lt;code&gt;onClick&lt;/code&gt;, React will implicitly pass an &lt;code&gt;event&lt;/code&gt; object to it as its first argument. &lt;code&gt;SyntheticEvent&lt;/code&gt; is React&amp;rsquo;s wrapper class for the native browser event. React pools all events into the same &lt;code&gt;SyntheticEvent&lt;/code&gt; object, which means that it&amp;rsquo;s a single object allocation that React mutates at runtime. So, we can&amp;rsquo;t use the event object itself asynchronously – including doing things like &lt;code&gt;setState&lt;/code&gt; – so once you have the object, you should grab any values you want off of it before doing anything asynchronous.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;this.setState({ input: event })
+// the above is bad
+// do the below instead
+this.setState({ inputValue: event.target.value }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Controlled vs. uncontrolled components. A controlled component is a form field whose value is managed by state. To do this, all we have to do is pass the &lt;code&gt;inputValue&lt;/code&gt; from our state in as the &lt;code&gt;value&lt;/code&gt; prop on the input element itself. In our input tag, we passed in &lt;code&gt;value={props.inputValue}&lt;/code&gt;, so that the &lt;code&gt;value&lt;/code&gt; in the input field is the same as the &lt;code&gt;inputValue&lt;/code&gt; on the state. So, to clear the value in the input field (say, after the user clicks the Submit button), you just need to clear it from state!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Disabling/enabling buttons and hiding/showing divs with error messages conditionally. Once we realized that &lt;code&gt;disable&lt;/code&gt; was a native HTML button attribute, that made our lives a lot easier. (In our state, we added a &lt;code&gt;disabled&lt;/code&gt; property, passed it to our component, and in the button tag of the component, we added &lt;code&gt;disabled={props.disabled}&lt;/code&gt;.) Similarly, to display an error message with the error (&amp;lsquo;Cannot be empty&amp;rsquo; or &amp;lsquo;Too long&amp;rsquo;), and nothing if no error, we set a &lt;code&gt;message&lt;/code&gt; property on the state with the error, passed it to the same component, and then rendered:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;{props.message ?
+  &amp;lt;div className=&amp;quot;alert alert-warning&amp;quot;&amp;gt;{props.message}&amp;lt;/div&amp;gt; : &#39;&#39;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;componentWillReceiveProps&lt;/code&gt;. When we rendered a playlist component, and then tried to switch from playlist to playlist from the sidebar, the component wouldn&amp;rsquo;t update – even when our URL did. My pair and I spent a while trying to puzzle this out (without knowing that &lt;code&gt;componentWillReceiveProps&lt;/code&gt; even existed), with the vague feeling that we had encountered this before but we were having trouble applying what we had done in the past to our current situation. (Also to be fair, it was the end of a long day and our brains weren&amp;rsquo;t anywhere near full functioning capacity.) After a small hint, we attempted to implement it, knowing that we need to only fetch and reset the playlist when the &lt;code&gt;id&lt;/code&gt; changes – otherwise, we&amp;rsquo;d end up in an infinite loop! (Which actually did happen the first time we tried.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;componentWillReceiveProps (nextProps) {
+  const nextPlaylistId = nextProps.routeParams.playlistId;
+  const currentPlaylistId = this.props.routeParams.playlistId;
+  const selectPlaylist = this.props.selectPlaylist;
+  if (nextPlaylistId !== currentPlaylistId)
+    selectPlaylist(nextPlaylistId);
+    // selectPlaylist is a function in our stateful component that set the state to whichever playlist we clicked on
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also got in some quality practice with building views and mapping over arrays of data and routing that we learned last week.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Do one thing every day that scares you.&amp;rdquo;
+&lt;em&gt;– Eleanor Roosevelt&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One of the more significant parts of today was that I presented a lightning talk at tonight&amp;rsquo;s Women Who Code meetup! Public speaking is something that&amp;rsquo;s terrified me throughout my entire life, although I&amp;rsquo;ve gotten a little more comfortable with it over the years. (That doesn&amp;rsquo;t mean it still doesn&amp;rsquo;t terrify me!)&lt;/p&gt;
+
+&lt;p&gt;I had a little technical difficulty at the beginning. And by that, I mean, I didn&amp;rsquo;t realize my Mac didn&amp;rsquo;t have the port that the little doo-hickey that gets attached to HDMI cables sometimes needs&amp;hellip;but it does have an HDMI port! I also mean that I didn&amp;rsquo;t quite fully test out how slides.com worked before actually presenting (this was not a shining example of how to prepare for a presentation) and ended up going without my notes. Given that, I think it went pretty well – I may have talked a little too fast and I have no idea how many times I said &amp;ldquo;um&amp;rdquo; (I decided to not worry about it after the notes debacle), but it&amp;rsquo;s something!&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m actually really excited for next month&amp;rsquo;s lightning talks. (And that&amp;rsquo;s a pretty big statement, coming from someone who never in a million years would think she&amp;rsquo;d be excited about anything related to people listening to her talk.) I&amp;rsquo;ll ideally have my tech talk for Fullstack prepped by then, so that might be a good avenue to practice that! I haven&amp;rsquo;t quite decided the topic yet, but I know I&amp;rsquo;ll definitely be signing up to speak again.&lt;/p&gt;
+
+&lt;p&gt;I also met a number of cool women tonight, and we had some real-talk about our experiences in the workplace, and I&amp;rsquo;m really looking forward to seeing them again! One of the women&amp;rsquo;s New Year&amp;rsquo;s resolution is to give a lightning talk every month, which I think is incredibly admirable, and something I may consider adopting. Whether I do or not, it was a fantastic experience, and I&amp;rsquo;m comfortable enough with the community and with being a newbie to much of the general world that, as much as public speaking still somewhat terrifies me, I&amp;rsquo;m okay with putting myself out there. I&amp;rsquo;m okay with admitting the fact that I didn&amp;rsquo;t know what ports my Mac had, and not having everything go perfectly, and maybe talking a little bit too fast – so long as I&amp;rsquo;m always growing and learning along the way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 5: Thoughts and Reflections</title>
+      <link>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</link>
+      <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</guid>
+      <description>
+
+&lt;p&gt;It&amp;rsquo;s been a slightly crazy week. I missed two days of class to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve spent most of this weekend doing some preliminary review for our upcoming Junior Phase checkpoint. (Basically, our &amp;ldquo;final&amp;rdquo; exam. It determines whether or not we get to move on to Senior Phase. You know, just a wee thing.) This has reinforced to me two things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;We&amp;rsquo;ve learned A LOT – there&amp;rsquo;s a lot to review!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Things that would have (and did) caused me headaches in week 1 are pretty easy now. I can definitely tell that my problem-solving ability, especially in the context of programming, has increased drastically; problems that I wouldn&amp;rsquo;t have been able to solve without significant help in week 1 only took a little bit of pseudocoding on a piece of paper before I was able to quickly implement a solution.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;On the flip side, this week and this experience in general has proven to me that the more that I learn, the more I feel like I don&amp;rsquo;t know, in the absolute best way possible – there really never is a lack of things to learn and investigate and tinker around with. Though I&amp;rsquo;m starting to realize just how much I&amp;rsquo;ve learned and grown in the past five weeks, entire worlds that I had no idea existed prior have opened up to me this week.&lt;/p&gt;
+
+&lt;p&gt;During Node.js Interactive, I learned about bots and image APIs that can pinpoint locations and emotions and the enormously large number of ways things could go wrong with your application&amp;rsquo;s security at any given point in time. We also started React this week, which has been an entire adventure in and of itself. (Much love to my pairs, who have been patient with me when I ended up confusing myself and offered some great jokes when things got a little rough.) I also listened to two different podcasts about Elm this week, and I&amp;rsquo;m itching to try it. I&amp;rsquo;ve wanted to for a while, and have been putting it off, because free time isn&amp;rsquo;t really a concept for me anymore, and because I convinced myself that I need to learn JavaScript well before learning another language&amp;hellip;but I may dabble in it over winter break. Just to try it out and see what it&amp;rsquo;s like!&lt;/p&gt;
+
+&lt;p&gt;(Speaking of which, one of those podcasts led me to &lt;a href=&#34;https://youtu.be/txxKx_I39a8&#34; target=&#34;_blank&#34;&gt;this talk&lt;/a&gt; by Jamison Dance from React.js Conf earlier this year about some of the flaws in JavaScript that React sort-of addresses and that Elm &lt;em&gt;actually&lt;/em&gt; addresses. It&amp;rsquo;s amazing and hilarious and insightful and one of my favorite talks I&amp;rsquo;ve discovered so far.)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m honestly a little surprised by how much I&amp;rsquo;m enjoying React. I don&amp;rsquo;t know if I should have been that surprised, considering I&amp;rsquo;ve been looking forward to learning it ever since sort-of-but-not-really learning it at the &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;Austin Diversity Hackathon&lt;/a&gt;, and I&amp;rsquo;ve had an inexplicable propensity towards functional programming. I&amp;rsquo;ve been having a lot of fun with it, and I can&amp;rsquo;t wait to build a personal project or two over the break with it!&lt;/p&gt;
+
+&lt;h2 id=&#34;so-what-do-you-want-to-be-when-you-grow-up&#34;&gt;&amp;ldquo;So, what do you want to be when you grow up?&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;The rapidly approaching end to Junior Phase means that we&amp;rsquo;re now gearing up for Senior Phase. I&amp;rsquo;m really looking forward to applying what we&amp;rsquo;ve learned to build out actual applications. But, it also means that post-Fullstack is a very real thing that we now should start thinking about, whether it be us joining the workforce or joining Fullstack as a fellow.&lt;/p&gt;
+
+&lt;p&gt;I really like the idea of being a fellow; mentoring and teaching has always been one of my favorite things, and I think it would be an incredible opportunity to continue my learning in an environment that I love. I&amp;rsquo;m planning on talking to both of my fellows to find out what their experiences have been like, and then I&amp;rsquo;ll weigh my options after that and decide if I want to apply.&lt;/p&gt;
+
+&lt;p&gt;If I decide not to apply or don&amp;rsquo;t get accepted as a fellow (both of which are very real possibilities!), that means job hunting, everyone&amp;rsquo;s absolute &lt;em&gt;favorite&lt;/em&gt; activity ever, will definitely be happening. We just received a huge amount of information about what&amp;rsquo;s to come: from prepping our online presence and resumes and cover letters, to practicing whiteboarding with our cohort to doing mock interviews with our career staff, to actually figuring out what kind of companies we&amp;rsquo;d want to work for, to prepping for our tech talks and demo day, and a whole host of other activities. I&amp;rsquo;ve decided to adopt a very healthy coping mechanism: other than an initial read-through of all of the material we were given, I&amp;rsquo;m pretending like none of that exists. (For now.)&lt;/p&gt;
+
+&lt;h2 id=&#34;come-see-me-talk&#34;&gt;Come see me talk!&lt;/h2&gt;
+
+&lt;p&gt;And on a &lt;em&gt;completely&lt;/em&gt; different note, if you&amp;rsquo;re in Austin, I&amp;rsquo;m giving a lightning talk tomorrow at &lt;a href=&#34;https://www.meetup.com/Women-Who-Code-Austin/events/232301799/&#34; target=&#34;_blank&#34;&gt;Women Who Code Austin&amp;rsquo;s meetup&lt;/a&gt;! Come join us for food and camraderie and to hear about my conference experience and count how many times I say &amp;ldquo;um.&amp;rdquo; (In college, I actually sought out people who were willing to tally the number of times I said &amp;ldquo;um&amp;rdquo; to practice speaking with because that&amp;rsquo;s a habit I&amp;rsquo;ve been working on breaking.)&lt;/p&gt;
+
+&lt;p&gt;I also forgot how much public speaking occasionally terrifies me. It&amp;rsquo;ll be fine, right? Right. It&amp;rsquo;ll be fine. Probably.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 5, Days 3.5-5: React and React Router</title>
+      <link>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</link>
+      <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</guid>
+      <description>
+
+&lt;p&gt;We&amp;rsquo;ve now entered the wonderful but occasionally odd and confusing world of React. It&amp;rsquo;s a super cool piece of technology and I&amp;rsquo;m very quickly falling head-over-heels for it, but it&amp;rsquo;s also&amp;hellip;weird. It&amp;rsquo;ll take a little bit of time to get used to. To learn and practice React, we&amp;rsquo;ve been building a Spotify clone, which Fullstack has affectionately dubbed &amp;ldquo;Juke.&amp;rdquo; We started by building probably one of the simplest apps ever (and a prerequsite to learning anything new in the programming world):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function App() {
+  return &amp;lt;h1&amp;gt;Hello React&amp;lt;/h1&amp;gt;;
+}
+
+ReactDOM.render(&amp;lt;App /&amp;gt;, document.getElementById(&#39;app&#39;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yeah, we&amp;rsquo;ve struggled for the two and a half to create that. Ain&amp;rsquo;t she a beaut?&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Tooootally kidding.&lt;/p&gt;
+
+&lt;h2 id=&#34;react&#34;&gt;React&lt;/h2&gt;
+
+&lt;h3 id=&#34;stateful-and-stateless-components&#34;&gt;Stateful and Stateless Components&lt;/h3&gt;
+
+&lt;p&gt;Components can either be stateful or stateless. A stateful component looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Stateful extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: &#39;Yay!&#39;
+    }
+  }
+  render() {
+    return (
+      &amp;lt;h1&amp;gt;Woo, I&#39;m stateful!&amp;lt;/h1&amp;gt;
+      &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And a stateless component looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function Stateless(props) {
+  return (
+    &amp;lt;h1&amp;gt;Hey ma, look, no state!&amp;lt;/h1&amp;gt;
+    &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
+  );
+}
+
+// or, ES6-ified:
+
+const Stateless = (props) =&amp;gt; {
+  return (
+    &amp;lt;h1&amp;gt;Hey ma, look, no state!&amp;lt;/h1&amp;gt;
+    &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Separating our stateful components from our stateless components, and therefore separating our state management from our view logic, can free up our stateless components to be moved around and resused, and they&amp;rsquo;ll work regardless of what component is managing their state.&lt;/p&gt;
+
+&lt;h3 id=&#34;state&#34;&gt;State&lt;/h3&gt;
+
+&lt;p&gt;State should include the minimum amount of data necessary to render our UI. Unlike &lt;code&gt;props&lt;/code&gt;, it can be mutated. State can be passed down from parent to child via &lt;code&gt;props&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;this.setState({key: value})&lt;/code&gt; sets the state. The only way to cause the render method to execute again is by using &lt;code&gt;setState&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tom&amp;rsquo;s First Law is that state must always be initialized with the appropriate data type. So, if the &lt;code&gt;albums&lt;/code&gt; property will eventually be an array, it should be initialized with &lt;code&gt;[]&lt;/code&gt; (or an actual array, if you know what the value will be) – not null, not undefined, not anything else you can think of. (In case you were wondering, I don&amp;rsquo;t know who Tom is, although I&amp;rsquo;ve been meaning to ask.)&lt;/p&gt;
+
+&lt;h3 id=&#34;component-lifecycle&#34;&gt;Component Lifecycle&lt;/h3&gt;
+
+&lt;p&gt;All of &lt;code&gt;get&lt;/code&gt; requests and &lt;code&gt;setState&lt;/code&gt;s should be inside of a &lt;code&gt;componentDidMount&lt;/code&gt; lifecycle method. What&amp;rsquo;s the difference between using &lt;code&gt;componentDidMount&lt;/code&gt; and &lt;code&gt;componentWillMount&lt;/code&gt;, you ask? &lt;code&gt;componentWillMount&lt;/code&gt; occurs before the component is actually rendered (as opposed to after, in &lt;code&gt;componentDidMount&lt;/code&gt;), but if the response happens to take a long time and the user does something else that takes the component out of the DOM, when the response comes back, the callback will try to invoke &lt;code&gt;setState&lt;/code&gt; on the unmounted component&amp;hellip;and that doesn&amp;rsquo;t sound like it ends very well.&lt;/p&gt;
+
+&lt;h3 id=&#34;mapping-over-an-array-with-a-key&#34;&gt;Mapping Over an Array with a Key&lt;/h3&gt;
+
+&lt;p&gt;When we&amp;rsquo;re creating a loop in JSX, it can be hard for React to keep track of the DOM structure. To help React boost its lookup time for these elements, we can give the parent of each set of JSX we return from the loop a value called a &lt;code&gt;key&lt;/code&gt; that is unique within the loop.&lt;/p&gt;
+
+&lt;p&gt;For Juke, we needed to render a component called &lt;code&gt;Albums&lt;/code&gt;, which was essentially the same album information displayed for 5 different albums:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;render() {
+  return (
+    &amp;lt;div className=&amp;quot;col-xs-10&amp;quot;&amp;gt;
+      &amp;lt;h3&amp;gt;Albums&amp;lt;/h3&amp;gt;
+      &amp;lt;div className=&amp;quot;row&amp;quot;&amp;gt;
+        {this.props.albums.map(album =&amp;gt; (
+          &amp;lt;div key={album.id} className=&amp;quot;col-xs-4&amp;quot;&amp;gt;
+            &amp;lt;a className=&amp;quot;thumbnail&amp;quot; href=&amp;quot;#&amp;quot;&amp;gt;
+              &amp;lt;img src={album.imageUrl} /&amp;gt;
+              &amp;lt;div className=&amp;quot;caption&amp;quot;&amp;gt;
+                &amp;lt;h5&amp;gt;
+                  &amp;lt;span&amp;gt;{album.name}&amp;lt;/span&amp;gt;
+                &amp;lt;/h5&amp;gt;
+                &amp;lt;small&amp;gt;{album.songs.length}&amp;lt;/small&amp;gt;
+              &amp;lt;/div&amp;gt;
+            &amp;lt;/a&amp;gt;
+          &amp;lt;/div&amp;gt;
+        ))}
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We used &lt;code&gt;album.id&lt;/code&gt; as our &lt;code&gt;key&lt;/code&gt;, placed it in the &lt;code&gt;div&lt;/code&gt; that we were creating for each album, and then extracted the information for each album.&lt;/p&gt;
+
+&lt;h3 id=&#34;passing-down-props-and-click-handlers&#34;&gt;Passing Down Props and Click Handlers&lt;/h3&gt;
+
+&lt;p&gt;At some point, we eventually got to this view:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/react-juke-single-album-view.png&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Where we could click on any album, and then we&amp;rsquo;d be given details of the album below it. To do this, we had to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a method on our stateful &lt;code&gt;Main&lt;/code&gt; component, that would receive the album we selected as a parameter:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;handleClick(album) {
+  console.log(album.id);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bind the method to our constructor to preserve the &lt;code&gt;this&lt;/code&gt; context of the &lt;code&gt;Main&lt;/code&gt; class:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;// in constructor of Main
+this.handleClick = this.handleClick.bind(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Pass the method down as a prop to our &lt;code&gt;Albums&lt;/code&gt; component:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Albums albums={this.state.albums} handleClick={this.handleClick} /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Pass the prop to our click handler, and also make sure we pass along the album we want as the argument. (We won&amp;rsquo;t always need an anonymous function in the click listener, but in this case, it&amp;rsquo;s necessary because we wanted to send back the album).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;a className=&amp;quot;thumbnail&amp;quot; href=&amp;quot;#&amp;quot; onClick={() =&amp;gt; this.props.handleClick(album)}&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Edit our &lt;code&gt;handleClick&lt;/code&gt; function so that it does more than &lt;code&gt;console.log&lt;/code&gt; and forces a re-render:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;handleClick(album) {
+  this.setState({
+    selectedAlbum: album,
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add the &lt;code&gt;Album&lt;/code&gt; component as a child to the &lt;code&gt;Main&lt;/code&gt; component, and pass our album in as &lt;code&gt;props&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Album selectedAlbum={this.state.selectedAlbum} /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, we could change our JSX in our &lt;code&gt;Album&lt;/code&gt; component to reflect the properties we were passing down.&lt;/p&gt;
+
+&lt;p&gt;All of this became MUCH easier when we used React Router, which we&amp;rsquo;ll get to in a bit.&lt;/p&gt;
+
+&lt;h3 id=&#34;actually-changing-the-view&#34;&gt;Actually Changing the View&lt;/h3&gt;
+
+&lt;p&gt;But we didn&amp;rsquo;t want both of these components on the page at the same time; we wanted to be able to click on an album on the homepage, and to be taken to a page with that album&amp;rsquo;s information.&lt;/p&gt;
+
+&lt;p&gt;We could tell from our state whether or not we have a chosen album – our selected album will either be an empty object if no album is selected or an object representing an album, so we checked the truthiness of &lt;code&gt;album.id&lt;/code&gt; to determine whether one was selected. Then, we needed to conditionally switch between whether we rendered the &lt;code&gt;Albums&lt;/code&gt; component or the &lt;code&gt;Album&lt;/code&gt; component, so we used a ternary control operator:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  this.state.selectedAlbum.id ?
+  &amp;lt;Album album={this.state.selectedAlbum}/&amp;gt; :
+  &amp;lt;Albums albums={this.state.albums}/&amp;gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This also gets a little easier with React Router.&lt;/p&gt;
+
+&lt;h2 id=&#34;react-router&#34;&gt;React Router&lt;/h2&gt;
+
+&lt;p&gt;Not going to lie, we struggled a fair bit at first to figure out what was going on with React Router.&lt;/p&gt;
+
+&lt;h3 id=&#34;router-basics&#34;&gt;Router Basics&lt;/h3&gt;
+
+&lt;p&gt;React Router is a handy way to keep your UI in sync with your URL. It ties into URL and history to allow for easy navigation to and between different parts of your application, and it easily integrates the nesting of components.&lt;/p&gt;
+
+&lt;p&gt;A route is composed of a URL and a React component. When the URL bar matches the one specified in the route, React Router causes the specific component&amp;rsquo;s render function to execute.&lt;/p&gt;
+
+&lt;p&gt;So, if we had a route that looked like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Route path=&amp;quot;/specificstuff&amp;quot; component={SpecificStuff}&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And someone entered &lt;code&gt;www.domain.com/specificstuff&lt;/code&gt; into the URL, the component &lt;code&gt;SpecificStuff&lt;/code&gt; would be rendered.&lt;/p&gt;
+
+&lt;h3 id=&#34;children-and-cloneelement&#34;&gt;Children and cloneElement&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;this.props.children&lt;/code&gt; is a special prop that every component receives, which references the child components of that component. If we wanted to pass props from our parent component to its children component, we can use one of React&amp;rsquo;s static methods – &lt;code&gt;cloneElement&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if we had a Router hierarchy that looked like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+  &amp;lt;Router history={browserHistory}&amp;gt;
+    &amp;lt;Route path=&amp;quot;/&amp;quot; component={Main}&amp;gt;
+      &amp;lt;Route path=&amp;quot;/albums&amp;quot; component={Albums} /&amp;gt;
+      &amp;lt;Route path=&amp;quot;:albumId&amp;quot; component={Album} /&amp;gt;
+    &amp;lt;/Router&amp;gt;
+  &amp;lt;/Router&amp;gt;,
+  document.getElementById(&#39;app&#39;)
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And a &lt;code&gt;Main&lt;/code&gt; component render that looked like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;render() {
+  return (
+    &amp;lt;Sidebar /&amp;gt;
+    {
+      this.props.children ?
+        React.cloneElement(this.props.children, {
+          albums: this.state.albums,
+          album: this.state.selectedAlbum
+        })
+      : null
+    }
+  )
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;this.props.children&lt;/code&gt; would refer to the components &lt;code&gt;Album&lt;/code&gt; and &lt;code&gt;Albums&lt;/code&gt;, and we&amp;rsquo;re passing &lt;code&gt;this.props.albums&lt;/code&gt; and &lt;code&gt;this.props.album&lt;/code&gt; to both of them.&lt;/p&gt;
+
+&lt;p&gt;We need to check that &lt;code&gt;this.props.children&lt;/code&gt; exists first, or else &lt;code&gt;React.cloneElement&lt;/code&gt; will throw a fun little error. We also need to &amp;ldquo;clone&amp;rdquo; the element to keep our render method pure – we don&amp;rsquo;t want to mutate anything. It&amp;rsquo;s the same idea as using &lt;code&gt;Array.prototype.map&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Notice that this is basically doing the same thing as the code with the ternary operator from above – conditionally rendering &lt;code&gt;Album&lt;/code&gt; or &lt;code&gt;Albums&lt;/code&gt; depending on what information we want to see, except that we don&amp;rsquo;t actually have to use a ternary operator! Whichever URL it matches on will be the component that is rendered.&lt;/p&gt;
+
+&lt;h3 id=&#34;params&#34;&gt;Params&lt;/h3&gt;
+
+&lt;p&gt;For a dynamic route like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Route path=&amp;quot;albums/:albumId&amp;quot; component={Album} /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In addition to whatever props we pass down to it, it&amp;rsquo;ll also have a whole lot of other props attached to it like location, router, routeParams, etc. These are all being passed by the Route component. We can use the &lt;code&gt;params&lt;/code&gt; prop to get the appropriate album ID.&lt;/p&gt;
+
+&lt;h3 id=&#34;link&#34;&gt;Link&lt;/h3&gt;
+
+&lt;p&gt;The Link component is a thin wrapper around the &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; element that we can pass a prop called &lt;code&gt;to&lt;/code&gt; that will tell it how to change the URL.&lt;/p&gt;
+
+&lt;p&gt;Remember the sort-of complicated &lt;code&gt;handleClick&lt;/code&gt; and &lt;code&gt;onClick&lt;/code&gt; steps we had to do above to pass the album that was clicked to our &lt;code&gt;Main&lt;/code&gt; component so that we could render our single album view? Well, turns out, instead of doing all of that, we can do:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Link to={`/albums/${album.id}`} className=&amp;quot;thumbnail&amp;quot;&amp;gt;
+  &amp;lt;img src={album.imageUrl} /&amp;gt;
+  &amp;lt;div className=&amp;quot;caption&amp;quot;&amp;gt;
+    &amp;lt;h5&amp;gt;
+      &amp;lt;span&amp;gt;{album.name}&amp;lt;/span&amp;gt;
+    &amp;lt;/h5&amp;gt;
+    &amp;lt;small&amp;gt;{album.songs.length}songs&amp;lt;/small&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/Link&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;No &lt;code&gt;handleClick&lt;/code&gt; method, no binding, and no passing methods down as props or having to pass props to our click handler!&lt;/p&gt;
+
+&lt;h3 id=&#34;a-fun-little-aside&#34;&gt;A Fun Little Aside&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s an interesting, but maybe frustrating, result when you attempt to nest a component inside of the same component. For a very long time, we were attempting to do something similar to this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+  &amp;lt;Router history={hashHistory}&amp;gt;
+    &amp;lt;Route path=&amp;quot;/artist&amp;quot; component={Artist}&amp;gt;
+      &amp;lt;Route path=&amp;quot;artist/:artistId/albums&amp;quot; component={Artist} /&amp;gt;
+    &amp;lt;/Router&amp;gt;
+  &amp;lt;/Router&amp;gt;,
+  document.getElementById(&#39;app&#39;)
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Let&amp;rsquo;s just say you wanted to try some album inception.)&lt;/p&gt;
+
+&lt;p&gt;What we ended up with was errors that properties on our &lt;code&gt;props&lt;/code&gt; were undefined, and we struggled along for an hour, changing distant parts of our code attempting to figure out what was going on and why.&lt;/p&gt;
+
+&lt;p&gt;At the end of a slightly painful journey, we discovered that the DOM was actually rendering twice; once properly the first time with the properties on &lt;code&gt;this.props&lt;/code&gt; that had the information we wanted, but the second time, no information was being passed to the properties on &lt;code&gt;this.props&lt;/code&gt; and we got a happy slew of errors.&lt;/p&gt;
+
+&lt;p&gt;Needless to say, that&amp;rsquo;s not a mistake we&amp;rsquo;ll be making again!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Node.js Interactive North America 2016</title>
+      <link>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</link>
+      <pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</guid>
+      <description>
+
+&lt;p&gt;Thanks to &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt;, I was given a ticket to &lt;a href=&#34;http://events.linuxfoundation.org/events/node-interactive&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, “the marquee event for JavaScript developers, companies that rely on Node.js, and the vendors that support both of these constituents.” The two days covered a wide spectrum of aspects and use cases for Node.js and its ecosystem.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-registration.JPG&#34; alt=&#34;Node.js Interactive North America Registration&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;In the opening keynotes alone, we heard from a wide variety of speakers and corresponding organizations. (The following list is not completely inclusive.) &lt;a href=&#34;https://twitter.com/mikeal&#34; target=&#34;_blank&#34;&gt;Mikeal Rogers&lt;/a&gt; of the Node Foundation started off, talking about the state of Node.js, the world’s fastest growing open-source platform with over 400 packages being published to npm &lt;strong&gt;&lt;em&gt;per day&lt;/em&gt;&lt;/strong&gt;. (What.) Next, &lt;a href=&#34;https://twitter.com/blipsofadoug&#34; target=&#34;_blank&#34;&gt;Doug Wilson&lt;/a&gt; spoke on the state of Express and Express 5.0, which will have cool features like native promise support in routing. &lt;a href=&#34;https://twitter.com/joemccann&#34; target=&#34;_blank&#34;&gt;Joe McCann&lt;/a&gt; from Node Source talked about enterprise organizations like NASA, Master Card, and Condé Nast that used a mission-critical, enterprise version of Node.js with an emphasis on security, reliability, and extensibility. &lt;a href=&#34;https://twitter.com/andrew_j_hoyt&#34; target=&#34;_blank&#34;&gt;Andy Hoyt&lt;/a&gt; of IBM talked about Node.js’s role in the digital revolution, the API economy, the rise of serverless environments, and demo’ed a Slackbot operating on serverless Node.js.&lt;/p&gt;
+
+&lt;h2 id=&#34;contributing-to-node-js-core&#34;&gt;Contributing to Node.js Core&lt;/h2&gt;
+
+&lt;p&gt;Two of the first morning’s talks, one of which was also a keynote, were about contributing to the Node.js core code. The first of these was from &lt;a href=&#34;https://twitter.com/williamkapke&#34; target=&#34;_blank&#34;&gt;William Kapke&lt;/a&gt;, a Node.js contributor who had quite the bumpy journey through the ecosystem. In addition to telling his story, Kapke also provided tips for interacting and contributing to the community. They didn’t necessarily paint the rosiest picture, but seemed like very down-to-earth and realistic advice. These were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don’t assume that you’re right.&lt;/li&gt;
+&lt;li&gt;Research and offer solutions; don’t just go into an issue and say “I want to contribute, what can I do?”.&lt;/li&gt;
+&lt;li&gt;Your work &lt;strong&gt;&lt;em&gt;will&lt;/em&gt;&lt;/strong&gt; be scrutinized, and you need to be okay with that.&lt;/li&gt;
+&lt;li&gt;BE PATIENT! And persistent. Also, champion your own cause. You may not be able to figure something out or get an answer the first time around, but if you keep at it, you will eventually.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The second was &lt;em&gt;A Beginner’s Guide to Reading the Node.js Core Source&lt;/em&gt;, by &lt;a href=&#34;https://twitter.com/trott&#34; target=&#34;_blank&#34;&gt;Rich Trott&lt;/a&gt;, another contributor and a member of the Node.js Core Technical Committee.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-contributing.JPG&#34; alt=&#34;Reading the Node.js Core Source&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;His steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Step 0: If you&amp;rsquo;re not familiar with JavaScript, familiarize yourself with it. Maybe try writing a &amp;ldquo;Hello World!&amp;rdquo; program, if you&amp;rsquo;re feeling particularly adventurous.&lt;/li&gt;
+&lt;li&gt;Step 1: Pick an API (or multiple) and read the documentation. API usage often provides clues to implementation. Also, merged PRs/closed issues count as documentation!&lt;/li&gt;
+&lt;li&gt;Step 2: Look at some code. Some modules are short and digestible and some are longer and slightly less digestible.&lt;/li&gt;
+&lt;li&gt;Step 3: Find tests for that module and read those. Sometimes, there’s behavior that’s only documented in tests.&lt;/li&gt;
+&lt;li&gt;Step 4 (optional, but encouraged): Contribute! If you’re intimidated or don’t know where to start, Trott started &lt;a href=&#34;http://nodetodo.org/&#34; target=&#34;_blank&#34;&gt;Node Todo&lt;/a&gt; just for you: follow his initial instructions, and then reach out to him via email or Twitter (info in the instructions) and he/his team will help you find something worthwhile that you can personally do to contribute given your ability level/skillset.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both of these talks were really useful to me because I’ve sort-of-attempted to dip my toes into the world of open source before, but every time I go through GitHub issues in attempt to find something I want to fix and make a pull request for, I find it really hard to accurately judge whether I have the ability/skillset to do so or if I’m throwing myself into the deep end without being able to get out. And then I get slightly disillusioned, and don&amp;rsquo;t think about it for a period of time, and then decide that maybe I want to try this open source thing again. And repeat.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-rest-of-the-first-day&#34;&gt;The Rest of the First Day&lt;/h2&gt;
+
+&lt;p&gt;Some of the other talks I found particularly interesting from the first day were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The different types of bots and how to build one with &lt;a href=&#34;https://twitter.com/ohhoe&#34; target=&#34;_blank&#34;&gt;Rachel White&lt;/a&gt;. I recently discovered that &lt;a href=&#34;https://www.open-austin.org/&#34; target=&#34;_blank&#34;&gt;Open Austin&lt;/a&gt; built &lt;a href=&#34;https://github.com/open-austin/CutePetsAustin&#34; target=&#34;_blank&#34;&gt;a Twitter bot&lt;/a&gt; that randomly pulls pictures of adoptable animals at the Austin Animal Center, and this got me thinking that maybe I’d be able to do the same with the shelter that I volunteer with&amp;hellip;or create a different, similarly semi-useful one. Or just do something completely ridiculous. I haven’t quite thought it out fully yet&amp;hellip;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Full stack testing and test automation, the different tools available (and there are a lot!), best practices, and the &lt;sup&gt;80&lt;/sup&gt;&amp;frasl;&lt;sub&gt;20&lt;/sub&gt; rule (you can do 80% of your testing with a very small number of commands – focus on those first, and add in the fancy stuff later) with &lt;a href=&#34;https://twitter.com/queenofagileqa&#34; target=&#34;_blank&#34;&gt;Stacy Kirk&lt;/a&gt;. Testing is still something I need a lot of practice with, and this was a great overview of the ecosystem and the high-level things I should be keeping in mind.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://nodegame.org/&#34; target=&#34;_blank&#34;&gt;nodeGame&lt;/a&gt;, an open source JavaScript framework for online, multiplayer, real-time games and experiments directly in the browser, with &lt;a href=&#34;https://twitter.com/balietti&#34; target=&#34;_blank&#34;&gt;Stefano Balietti&lt;/a&gt;, a computational social scientist. I majored in psychology in college and a large part of my four years was spent doing psychological research, so this talk brought out that part of my inner nerd. It was really cool to see the combination of behavioral sciences and tech like sockets and Node.js as a way to to find out just how weirdly people behave.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-nodegame.JPG&#34; alt=&#34;nodeGame at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;security&#34;&gt;Security&lt;/h2&gt;
+
+&lt;p&gt;There were quite a lot of security talks on the second day. Though it’s arguably one of the most important parts of the tech world, security has always been a little bit of a black box to me. I haven’t really ever investigated it on my own (mostly because I just haven’t needed it yet), and we haven’t gotten to that portion of Fullstack’s curriculum yet.&lt;/p&gt;
+
+&lt;p&gt;The first security-related talk I attended was &lt;em&gt;Writing Secure Node Code: Understanding and Avoiding the Most Common Node.js Security Mistakes&lt;/em&gt; with &lt;a href=&#34;https://twitter.com/guypod&#34; target=&#34;_blank&#34;&gt;Guy Podjarny&lt;/a&gt;. One of his key messages was that the things that make JavaScript awesome, like the event loop, are also the things that make JavaScript vulnerable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-security.JPG&#34; alt=&#34;Writing Secure Node Code at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Vulnerabilities aren’t always in your code either – most of your app’s code probably comes from npm, which also means that most of your vulnerability comes from npm. Podjarny then did some live hacking, in which he was able to exploit vulnerabilities in some very widely-used packages: &lt;a href=&#34;https://www.npmjs.com/package/st&#34; target=&#34;_blank&#34;&gt;st&lt;/a&gt; using different HTML &amp;amp; URL encodings, &lt;a href=&#34;https://www.npmjs.com/package/marked&#34; target=&#34;_blank&#34;&gt;marked&lt;/a&gt; using long algorithm runs*, &lt;a href=&#34;https://www.npmjs.com/package/ms&#34; target=&#34;_blank&#34;&gt;ms&lt;/a&gt; using type manipulation, and &lt;a href=&#34;https://www.npmjs.com/package/mongoose&#34; target=&#34;_blank&#34;&gt;mongoose&lt;/a&gt; using Buffers. (I’d also like to give his company, Snyk, the “best sticker” award: it’s a dog with sunglasses with code in them. [Anything with dogs can win over my heart pretty easily.])&lt;/p&gt;
+
+&lt;p&gt;*Something really cool that was related to the long algorithm runs/uncontrolled regexes happened later in the day, when I was working on a React workshop with two of my classmates. When I ran &lt;code&gt;npm install&lt;/code&gt; on the project, I was informed that I should upgrade one of the dependencies of the app we were building, because our version was vulnerable to “Regex DoS,” and I knew exactly what that meant, thanks to this talk!&lt;/p&gt;
+
+&lt;p&gt;I learned the basics of cryptography with &lt;a href=&#34;https://twitter.com/adam_englander&#34; target=&#34;_blank&#34;&gt;Adam Englander&lt;/a&gt; – what it is, what makes good cryptography, the different types, and some best practices. I also learned about data validation with &lt;a href=&#34;https://www.linkedin.com/in/paul-milham-6693a810&#34; target=&#34;_blank&#34;&gt;Paul Milham&lt;/a&gt;, why it’s important (we’ve all seen &lt;a href=&#34;https://xkcd.com/327/&#34; target=&#34;_blank&#34;&gt;the XKCD comic&lt;/a&gt;, right?), tools that you can use to do it (&lt;a href=&#34;https://github.com/hapijs/joi&#34; target=&#34;_blank&#34;&gt;Joi&lt;/a&gt;, &lt;a href=&#34;https://github.com/continuationlabs/celebrate&#34; target=&#34;_blank&#34;&gt;Celebrate&lt;/a&gt;, &lt;a href=&#34;https://www.npmjs.com/package/tean&#34; target=&#34;_blank&#34;&gt;Tean&lt;/a&gt;), and how to make sure that data validation is coded into your app, and that it isn’t tossed off to the wayside.&lt;/p&gt;
+
+&lt;h2 id=&#34;other-not-strictly-technical-things&#34;&gt;Other, Not-Strictly-Technical Things&lt;/h2&gt;
+
+&lt;h3 id=&#34;including-some-very-necessary-thank-yous&#34;&gt;Including some very necessary thank yous&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;There was a distinct lack of women. Someone in passing told me that only about 10% of the attendees were women. Regardless of the actual proportion, I often found myself one of a few women in a room at any given time. And, all of the opening keynote speakers were white men. I wasn’t really surprised at all, but it was just another reminder of tech’s diversity problem.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On a different, but related-to-diversity-and-inclusion, note, the conference provided onsite childcare. I don’t have a child, but I think it’s awesome that they provided it! Also, the JW Marriott, where the conference was held, had both gender-neutral and gender-specific bathrooms on opposite sides of the floor. So, if you were uncomfortable with one, you had the option of the other.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I’ve been meaning to get myself a Raspberry Pi and start tooling around with it, and just hadn’t gotten around to it. So, when I discovered that I could get one for free by doing a few Google Cloud coding challenges, I was all about it! I learned how to use the Cloud Shell &amp;amp; gcloud, I deployed a basic Node.js Express application in the App Engine, I used the Cloud Vision API to detect objects, faces, and landmarks in photos, and translated a small speech sample to text using the Cloud Speech API. I also learned how to use vim – or at least, I was able to Google my way through using it while doing all of these! After these, &lt;a href=&#34;https://twitter.com/BethQiang/status/803717252755419136&#34; target=&#34;_blank&#34;&gt;I earned my Raspberry Pi – and got a Cardboard as a bonus&lt;/a&gt;!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I have two groups of people to give enormous thanks to. The first is Women Who Code, without whom I never would have been able to attend due to cost. The second is my amazing instructors at Fullstack, for working with me on giving me early access to workshops and previous cohorts’ lectures, which allowed me to work ahead so that I could take two days away from class without missing out on too much!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

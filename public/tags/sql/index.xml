@@ -10,10 +10,10 @@
     
     <item>
       <title>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</title>
-      <link>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</link>
+      <link>http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/</link>
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/</guid>
       <description>&lt;p&gt;I don’t understand how it’s almost the end of the week already. Time is literally flying. We&amp;rsquo;ve spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it&amp;rsquo;s been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -27,13 +27,13 @@
 
 &lt;p&gt;Though I’m pretty sure I never actually said anything, and no one was pressured by any means to stay in the chat (and some people did leave), I really appreciated the open communication, the vulnerability that was shown, and Fullstack’s continued dedication to making sure that Fullstack was a safe environment for everyone to express their views and feel what they feel without fear of being judged, harassed, or a variety of other terrible things that happen in the real world. As a group of extremely different people from a variety of walks of life, our cohort didn’t necessarily agree on some points, but it was enlightening to hear everyone’s opinions and experiences.&lt;/p&gt;
 
-&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
+&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for &lt;a href=&#34;https://www.hackerrank.com/womens-codesprint-2&#34; target=&#34;_blank&#34;&gt;HackerRank’s Women’s CodeSprint&lt;/a&gt; that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between &lt;code&gt;forEach&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt; for probably the fourteenth time&amp;hellip;it’ll sink in eventually, right?!)&lt;/p&gt;
 
-&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
+&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/09/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
 
 &lt;p&gt;First, we created a new database module, where we used the &lt;a href=&#34;https://github.com/brianc/node-postgres&#34; target=&#34;_blank&#34;&gt;node-postgres&lt;/a&gt; library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our &lt;code&gt;tweetBank.js&lt;/code&gt; module and accompanying simple-array database, we were querying our database for the information that we wanted.&lt;/p&gt;
 

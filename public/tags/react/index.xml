@@ -10,15 +10,15 @@
     
     <item>
       <title>Game of Life with React and Redux: The Hard Parts</title>
-      <link>http://bethqiang.com/post/game-of-life-with-react-and-redux/</link>
+      <link>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</link>
       <pubDate>Thu, 22 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/game-of-life-with-react-and-redux/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</guid>
       <description>
 
 &lt;p&gt;For the past few days, I&amp;rsquo;ve spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There&amp;rsquo;s actually really not that much Sass – starting out, I wanted to practice it, although now that I&amp;rsquo;m halfway through, I&amp;rsquo;m realizing that I really don&amp;rsquo;t need it. I probably should have just saved it for another project – but anyway.&lt;/p&gt;
 
-&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/post/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
 
 &lt;h2 id=&#34;the-webpack-rabbit-hole&#34;&gt;The Webpack Rabbit Hole&lt;/h2&gt;
 
@@ -205,10 +205,10 @@ I was quite proud of myself for figuring out all of this, and ran my code&amp;he
     
     <item>
       <title>The Rest of Week 6: Redux, Authentication, and Social Activities</title>
-      <link>http://bethqiang.com/post/redux-authentication-and-social-activities/</link>
+      <link>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</link>
       <pubDate>Sun, 11 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/redux-authentication-and-social-activities/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</guid>
       <description>
 
 &lt;p&gt;So, I’ve kind of fallen off the face of this blog for the past week. Apologies for that – it’s been an incredibly busy week. Tomorrow is our Senior Checkpoint; it’s kind of like our final exam to make sure that we’re sufficiently prepared to move on to Senior Phase. I’ve spent the pretty much all of my free time (of which we have little to begin with) this past week gearing up for that and attempting to review everything we’ve learned in the past six weeks, which isn’t really an easy feat by any means, given the amount of material we’ve covered!&lt;/p&gt;
@@ -245,7 +245,7 @@ I was quite proud of myself for figuring out all of this, and ran my code&amp;he
 
 &lt;p&gt;Sometime in the middle of the week (days blur together after a while), we also did a short little Game Night. We played &lt;a href=&#34;http://agamari.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, which is a game developed by a group from the recently graduated cohort at Fullstack. Everyone&amp;rsquo;s a ball and you roll around a spherical world eating other balls, which makes you bigger. You can also eat other players, which, depending on their size, can make you &lt;em&gt;a lot&lt;/em&gt; bigger. One of our fellows became absolutely massive and was basically taking over our world.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-12/agamari.png&#34; class=&#34;center-img&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/agamari.png&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;She was so big that she couldn&amp;rsquo;t really see where she was rolling, and kept eating us by accident, even when she was trying to avoid eating people! I had a lot of fun and the game itself is quite impressive, both graphically and the amount of thought and work that was put into it. (They even took physics laws into account!)&lt;/p&gt;
 
@@ -255,10 +255,10 @@ I was quite proud of myself for figuring out all of this, and ran my code&amp;he
     
     <item>
       <title>Week 6, Day 1: Do One Thing Every Day That Scares You</title>
-      <link>http://bethqiang.com/post/do-one-thing-every-day-that-scares-you/</link>
+      <link>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</link>
       <pubDate>Mon, 05 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/do-one-thing-every-day-that-scares-you/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</guid>
       <description>&lt;p&gt;Today, we talked about forms in React. And practiced more React-y stuff. The more important part of the day was that I stood up in front of people, talked, and was slightly less terrified than I am when I see a spider! But we&amp;rsquo;ll get to that in a second. First, the React stuff:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -318,10 +318,10 @@ this.setState({ inputValue: event.target.value }
     
     <item>
       <title>Week 5, Days 3.5-5: React and React Router</title>
-      <link>http://bethqiang.com/post/react-and-react-router/</link>
+      <link>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</link>
       <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/react-and-react-router/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</guid>
       <description>
 
 &lt;p&gt;We&amp;rsquo;ve now entered the wonderful but occasionally odd and confusing world of React. It&amp;rsquo;s a super cool piece of technology and I&amp;rsquo;m very quickly falling head-over-heels for it, but it&amp;rsquo;s also&amp;hellip;weird. It&amp;rsquo;ll take a little bit of time to get used to. To learn and practice React, we&amp;rsquo;ve been building a Spotify clone, which Fullstack has affectionately dubbed &amp;ldquo;Juke.&amp;rdquo; We started by building probably one of the simplest apps ever (and a prerequsite to learning anything new in the programming world):&lt;/p&gt;
@@ -430,7 +430,7 @@ const Stateless = (props) =&amp;gt; {
 
 &lt;p&gt;At some point, we eventually got to this view:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-12/react-juke-single-album-view.png&#34; class=&#34;center-img&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/react-juke-single-album-view.png&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;Where we could click on any album, and then we&amp;rsquo;d be given details of the album below it. To do this, we had to:&lt;/p&gt;
 

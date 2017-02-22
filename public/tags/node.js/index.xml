@@ -10,15 +10,15 @@
     
     <item>
       <title>Node.js Interactive North America 2016</title>
-      <link>http://bethqiang.com/post/nodejs-interactive-north-america-2016/</link>
+      <link>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</link>
       <pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/nodejs-interactive-north-america-2016/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</guid>
       <description>
 
 &lt;p&gt;Thanks to &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt;, I was given a ticket to &lt;a href=&#34;http://events.linuxfoundation.org/events/node-interactive&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, “the marquee event for JavaScript developers, companies that rely on Node.js, and the vendors that support both of these constituents.” The two days covered a wide spectrum of aspects and use cases for Node.js and its ecosystem.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/nodejs-interactive-2016-registration.JPG&#34; class=&#34;center-img&#34; alt=&#34;Node.js Interactive North America Registration&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-registration.JPG&#34; alt=&#34;Node.js Interactive North America Registration&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;In the opening keynotes alone, we heard from a wide variety of speakers and corresponding organizations. (The following list is not completely inclusive.) &lt;a href=&#34;https://twitter.com/mikeal&#34; target=&#34;_blank&#34;&gt;Mikeal Rogers&lt;/a&gt; of the Node Foundation started off, talking about the state of Node.js, the world’s fastest growing open-source platform with over 400 packages being published to npm &lt;strong&gt;&lt;em&gt;per day&lt;/em&gt;&lt;/strong&gt;. (What.) Next, &lt;a href=&#34;https://twitter.com/blipsofadoug&#34; target=&#34;_blank&#34;&gt;Doug Wilson&lt;/a&gt; spoke on the state of Express and Express 5.0, which will have cool features like native promise support in routing. &lt;a href=&#34;https://twitter.com/joemccann&#34; target=&#34;_blank&#34;&gt;Joe McCann&lt;/a&gt; from Node Source talked about enterprise organizations like NASA, Master Card, and Condé Nast that used a mission-critical, enterprise version of Node.js with an emphasis on security, reliability, and extensibility. &lt;a href=&#34;https://twitter.com/andrew_j_hoyt&#34; target=&#34;_blank&#34;&gt;Andy Hoyt&lt;/a&gt; of IBM talked about Node.js’s role in the digital revolution, the API economy, the rise of serverless environments, and demo’ed a Slackbot operating on serverless Node.js.&lt;/p&gt;
 
@@ -35,7 +35,7 @@
 
 &lt;p&gt;The second was &lt;em&gt;A Beginner’s Guide to Reading the Node.js Core Source&lt;/em&gt;, by &lt;a href=&#34;https://twitter.com/trott&#34; target=&#34;_blank&#34;&gt;Rich Trott&lt;/a&gt;, another contributor and a member of the Node.js Core Technical Committee.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/nodejs-interactive-2016-contributing.JPG&#34; class=&#34;center-img&#34; alt=&#34;Reading the Node.js Core Source&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-contributing.JPG&#34; alt=&#34;Reading the Node.js Core Source&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;His steps:&lt;/p&gt;
 
@@ -61,7 +61,7 @@
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://nodegame.org/&#34; target=&#34;_blank&#34;&gt;nodeGame&lt;/a&gt;, an open source JavaScript framework for online, multiplayer, real-time games and experiments directly in the browser, with &lt;a href=&#34;https://twitter.com/balietti&#34; target=&#34;_blank&#34;&gt;Stefano Balietti&lt;/a&gt;, a computational social scientist. I majored in psychology in college and a large part of my four years was spent doing psychological research, so this talk brought out that part of my inner nerd. It was really cool to see the combination of behavioral sciences and tech like sockets and Node.js as a way to to find out just how weirdly people behave.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/nodejs-interactive-2016-nodegame.JPG&#34; class=&#34;center-img&#34; alt=&#34;nodeGame at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-nodegame.JPG&#34; alt=&#34;nodeGame at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;security&#34;&gt;Security&lt;/h2&gt;
 
@@ -69,7 +69,7 @@
 
 &lt;p&gt;The first security-related talk I attended was &lt;em&gt;Writing Secure Node Code: Understanding and Avoiding the Most Common Node.js Security Mistakes&lt;/em&gt; with &lt;a href=&#34;https://twitter.com/guypod&#34; target=&#34;_blank&#34;&gt;Guy Podjarny&lt;/a&gt;. One of his key messages was that the things that make JavaScript awesome, like the event loop, are also the things that make JavaScript vulnerable.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/nodejs-interactive-2016-security.JPG&#34; class=&#34;center-img&#34; alt=&#34;Writing Secure Node Code at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-security.JPG&#34; alt=&#34;Writing Secure Node Code at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;Vulnerabilities aren’t always in your code either – most of your app’s code probably comes from npm, which also means that most of your vulnerability comes from npm. Podjarny then did some live hacking, in which he was able to exploit vulnerabilities in some very widely-used packages: &lt;a href=&#34;https://www.npmjs.com/package/st&#34; target=&#34;_blank&#34;&gt;st&lt;/a&gt; using different HTML &amp;amp; URL encodings, &lt;a href=&#34;https://www.npmjs.com/package/marked&#34; target=&#34;_blank&#34;&gt;marked&lt;/a&gt; using long algorithm runs*, &lt;a href=&#34;https://www.npmjs.com/package/ms&#34; target=&#34;_blank&#34;&gt;ms&lt;/a&gt; using type manipulation, and &lt;a href=&#34;https://www.npmjs.com/package/mongoose&#34; target=&#34;_blank&#34;&gt;mongoose&lt;/a&gt; using Buffers. (I’d also like to give his company, Snyk, the “best sticker” award: it’s a dog with sunglasses with code in them. [Anything with dogs can win over my heart pretty easily.])&lt;/p&gt;
 
@@ -95,10 +95,10 @@
     
     <item>
       <title>Week 3, Day 1: Building a Wikipedia Clone</title>
-      <link>http://bethqiang.com/post/building-a-wikipedia-clone/</link>
+      <link>http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/</link>
       <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/building-a-wikipedia-clone/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/</guid>
       <description>&lt;p&gt;The past day has been a complete whirlwind of learning and figuring out why things are going wrong. We built a Wikipedia clone with the following features:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -258,10 +258,10 @@
     
     <item>
       <title>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</title>
-      <link>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</link>
+      <link>http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/</link>
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/sql-election-chat-and-revisiting-twitter-clone/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/</guid>
       <description>&lt;p&gt;I don’t understand how it’s almost the end of the week already. Time is literally flying. We&amp;rsquo;ve spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it&amp;rsquo;s been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -275,13 +275,13 @@
 
 &lt;p&gt;Though I’m pretty sure I never actually said anything, and no one was pressured by any means to stay in the chat (and some people did leave), I really appreciated the open communication, the vulnerability that was shown, and Fullstack’s continued dedication to making sure that Fullstack was a safe environment for everyone to express their views and feel what they feel without fear of being judged, harassed, or a variety of other terrible things that happen in the real world. As a group of extremely different people from a variety of walks of life, our cohort didn’t necessarily agree on some points, but it was enlightening to hear everyone’s opinions and experiences.&lt;/p&gt;
 
-&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
+&lt;p&gt;In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my first hackathon&lt;/a&gt;, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for &lt;a href=&#34;https://www.hackerrank.com/womens-codesprint-2&#34; target=&#34;_blank&#34;&gt;HackerRank’s Women’s CodeSprint&lt;/a&gt; that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between &lt;code&gt;forEach&lt;/code&gt; and &lt;code&gt;map&lt;/code&gt; for probably the fourteenth time&amp;hellip;it’ll sink in eventually, right?!)&lt;/p&gt;
 
-&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
+&lt;p&gt;We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/09/twitter-clone-with-nodejs-and-expressjs/&#34; target=&#34;_blank&#34;&gt;Twitter clone&lt;/a&gt; again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.&lt;/p&gt;
 
 &lt;p&gt;First, we created a new database module, where we used the &lt;a href=&#34;https://github.com/brianc/node-postgres&#34; target=&#34;_blank&#34;&gt;node-postgres&lt;/a&gt; library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our &lt;code&gt;tweetBank.js&lt;/code&gt; module and accompanying simple-array database, we were querying our database for the information that we wanted.&lt;/p&gt;
 
@@ -343,11 +343,11 @@
     </item>
     
     <item>
-      <title>Week 2, Day 2: Building a Twitter Clone with Node.js and Express.js</title>
-      <link>http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/</link>
+      <title>Week 2, Day 2: Building a Twitter Clone with Node.js and Express</title>
+      <link>http://bethqiang.com/blog/2016/11/09/twitter-clone-with-nodejs-and-expressjs/</link>
       <pubDate>Wed, 09 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/twitter-clone-with-nodejs-and-expressjs/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/09/twitter-clone-with-nodejs-and-expressjs/</guid>
       <description>
 
 &lt;p&gt;We built a Twitter clone app with Node and Express, and wanted it to have the following:&lt;/p&gt;
@@ -418,7 +418,7 @@ app.listen(3000, function () {
 
 &lt;p&gt;Not only does this help in debugging, it also helped me in visualizing a little bit of what’s going on in what can sometimes be a nebulous world. Unlike front-end work, where you can see things changing as you work (or not, depending on if you’re doing things right!), it can be hard to really understand what’s happening when you&amp;rsquo;re working on the back-end.&lt;/p&gt;
 
-&lt;p&gt;Our logging middleware also is passed a &lt;code&gt;next&lt;/code&gt; parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;during the Express lecture&lt;/a&gt;: every request gets exactly one response, and that the order of your routes is important.&lt;/p&gt;
+&lt;p&gt;Our logging middleware also is passed a &lt;code&gt;next&lt;/code&gt; parameter, which allows the request to match to a later route and send a response back to the client – without it, a response would never be sent. These represent two of the core principles we learned &lt;a href=&#34;http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;during the Express lecture&lt;/a&gt;: every request gets exactly one response, and that the order of your routes is important.&lt;/p&gt;
 
 &lt;h2 id=&#34;templating-engine&#34;&gt;Templating Engine&lt;/h2&gt;
 
@@ -704,11 +704,11 @@ const socket = io.connect();
     </item>
     
     <item>
-      <title>Week 2, Day 1: Node-Shell Workshop, Express.js, and Advice from People Who Sort of Know What They’re Doing</title>
-      <link>http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/</link>
+      <title>Week 2, Day 1: Node-Shell Workshop, Express, and Advice from People Who Sort of Know What They’re Doing</title>
+      <link>http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/</guid>
       <description>
 
 &lt;p&gt;I started off my day with watching &lt;a href=&#34;https://youtu.be/8aGhZQkoFbQ&#34; target=&#34;_blank&#34;&gt;a fantastic talk about event loops&lt;/a&gt;, and then briefly looking at a &lt;a href=&#34;https://www.codewars.com&#34; target=&#34;_blank&#34;&gt;Code Wars&lt;/a&gt; problem. I’ve done a few Code Wars problems in the past, but we’ve now been incentivized — if we reach 4 kyu (for those who aren’t familiar, that just refers to a certain level) by the end of Junior Phase, we get a cool shirt. And a lot of knowledge and practice. But I’m obviously only doing it for the shirt. ;)&lt;/p&gt;
@@ -739,7 +739,7 @@ const socket = io.connect();
 
 &lt;h2 id=&#34;express-js&#34;&gt;Express.js&lt;/h2&gt;
 
-&lt;p&gt;We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my initial interest in learning back-end development&lt;/a&gt;, so I was somewhat familiar with the basic concepts of starting a server and setting routes.&lt;/p&gt;
+&lt;p&gt;We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;my initial interest in learning back-end development&lt;/a&gt;, so I was somewhat familiar with the basic concepts of starting a server and setting routes.&lt;/p&gt;
 
 &lt;p&gt;A few main points from the lecture that I found useful and/or funny:&lt;/p&gt;
 
@@ -779,10 +779,10 @@ router.get(&#39;/important&#39;, function(req, res) {
     
     <item>
       <title>Week 1, Day 5: Game of Life and Introductory Node.js</title>
-      <link>http://bethqiang.com/post/game-of-life-and-introductory-nodejs/</link>
+      <link>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</link>
       <pubDate>Fri, 04 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/game-of-life-and-introductory-nodejs/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</guid>
       <description>
 
 &lt;p&gt;We spent the first half of the day working on &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34; target=&#34;_blank&#34;&gt;Conway’s Game of Life&lt;/a&gt;, which is probably one of the more widely known examples of cellular automaton. In this “game,” the player’s only interaction with the game is at the very beginning, when the board is first set. (It can also be set randomly, requiring no user input at all.) Each round after, cells “live” or “die” according to predetermined rules.&lt;/p&gt;

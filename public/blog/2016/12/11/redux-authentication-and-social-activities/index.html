@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Rest of Week 6: Redux, Authentication, and Social Activities</title>
+
+  <meta name="author" content="" />
+  <meta name="keywords" content="">
+
+  
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.comcss/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.comcss/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.comimg/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.comimg/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="The Rest of Week 6: Redux, Authentication, and Social Activities" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2016/12/11/redux-authentication-and-social-activities//" />
+  <meta property="og:image" content="" />
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>The Rest of Week 6: Redux, Authentication, and Social Activities</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">December 11, 2016</p>
+              <div id="post-content">
+                
+
+<p>So, I’ve kind of fallen off the face of this blog for the past week. Apologies for that – it’s been an incredibly busy week. Tomorrow is our Senior Checkpoint; it’s kind of like our final exam to make sure that we’re sufficiently prepared to move on to Senior Phase. I’ve spent the pretty much all of my free time (of which we have little to begin with) this past week gearing up for that and attempting to review everything we’ve learned in the past six weeks, which isn’t really an easy feat by any means, given the amount of material we’ve covered!</p>
+
+<p>Since my last blog post, we’ve covered Redux, Redux with React, and authentication. It took me a little more time and effort to wrap my head around Redux and how everything is working than it has for the other topics we’ve covered, but after completely re-doing the entirety of the 5-day workshop we did in class, I think I have a decent grasp of it now. (If you’re interested, you can see the result of my solo work in <a href="https://github.com/bethqiang/juke" target="_blank">this GitHub repo</a>.)</p>
+
+<p>With Redux and the help of one of my fellows, I’ve formed a little workflow and mental checklist for myself for handling Redux:</p>
+
+<ol>
+<li><p>Create constants for action types. (It’s been suggested to us, instead of using strings for action types, to use variables that have values of strings instead – our linter can pick up on spelling mistakes if they happen, which has been super useful when my tired brain forgets how to spell “receive.”)</p></li>
+
+<li><p>Create synchronous action creators. Synchronous action creators are functions that return objects, called actions, that are formatted to be sent into the Redux state. These typically have a type, which will be the action type that we created in the previous step, and sometimes a payload.</p></li>
+
+<li><p>Create asynchronous action creators, or dispatchers, or “thunks” using <code>thunkMiddleware</code> from <code>redux-thunk</code>. Instead of dispatching an action object, this allows us to dispatch a new function! Basically, it says, “Oh, it looks like this person is trying to do something asynchronous. Instead of giving it to the reducer, let me invoke it and pass the store’s dispatch method on it, so whenever the side effect completes or the action resolves, they can use it to dispatch a new action with the data they get.”</p></li>
+
+<li><p>Create reducers. We pass an <code>action</code> to the store&rsquo;s <code>dispatch</code> method, and the store executes its <code>reducer</code> function. Typically, the reducer consists of a <code>switch</code> statement that describes a different update depending on the action&rsquo;s type. It&rsquo;s super important that the reducer is a pure function, which means that there&rsquo;s no side effects like AJAX calls. (That&rsquo;s what #3 is for!)</p></li>
+
+<li><p>Create the actual components and containers needed. Set local state, pass down props, and create functions as needed. If we’re using <code>react-redux</code>, we can use <code>mapStateToProps</code> and <code>mapStateToDispatch</code> and <code>connect</code> to do this in a less boilerplate-y fashion. If we need a local state (for forms and stuff) as well as access to the global store, we can create a container and put a container inside of that that will then render the presentational component. Also in <code>react-redux</code>, if we need to access a component’s own props, we can use <code>ownProps</code> in either or both of those functions as the second argument. <code>connect</code> also does a couple of other super useful things for us, which I won’t repeat here in the interest of typing and space and not being repetitive, but needless to say that I’m a big fan.</p></li>
+
+<li><p>Fix up your routes if you need to.</p></li>
+</ol>
+
+<p>I still haven’t yet implemented Redux or <code>react-redux</code> straight out of the box. I&rsquo;ve so far just built out a normal React app and then refactored to use Redux/<code>react-redux</code>. One of my to-dos over break will be to try to get the hang of doing it from scratch without an existing React component.</p>
+
+<p>We also talked about and used the <code>Provider</code> component and initial/route-specific loading, where we can use React Router’s <code>&lt;Route&gt;</code> element prop <code>onEnter</code>. This allows us to set the next router state and do things like load data from an AJAX call upon entering a route.</p>
+
+<p>We spent about a day on authentication, but to be honest, most of my group&rsquo;s attempt at implementing authentication was stymied because we were still trying to wrap our heads around Redux. Learning more about and understanding authentication to at least some degree has been put on the to-do list for winter break!</p>
+
+<h2 id="other-things">Other Things</h2>
+
+<h3 id="review-month-game-night-and-the-reign-of-dj-rumba-and-hot-seat">Review Month, Game Night (and the Reign of DJ Rumba), and Hot Seat</h3>
+
+<p>Speaking of which, we also talked about Review “Month” (for most cohorts, there’s only a week, but we have all of winter break as well!) and what we should be doing during that time – not only should we go through some of the material that we may be shaky on, but it’ll be a good time to explore the programming world and start some projects and start our tech talks, as well. I’ve been putting together a list of things I want to do over break and prioritizing them (because I honestly don’t think three weeks is enough to do everything I want to do!). I’ll post that soon&hellip;once I have it figured out for myself. (Creating the list of things I want to do isn’t terribly difficult. It’s prioritizing them that will be&hellip;)</p>
+
+<p>Sometime in the middle of the week (days blur together after a while), we also did a short little Game Night. We played <a href="http://agamari.herokuapp.com/" target="_blank">Agamari</a>, which is a game developed by a group from the recently graduated cohort at Fullstack. Everyone&rsquo;s a ball and you roll around a spherical world eating other balls, which makes you bigger. You can also eat other players, which, depending on their size, can make you <em>a lot</em> bigger. One of our fellows became absolutely massive and was basically taking over our world.</p>
+
+<p><img src="/img/posts/2016-12/agamari.png" alt="Agamari Game"/></p>
+
+<p>She was so big that she couldn&rsquo;t really see where she was rolling, and kept eating us by accident, even when she was trying to avoid eating people! I had a lot of fun and the game itself is quite impressive, both graphically and the amount of thought and work that was put into it. (They even took physics laws into account!)</p>
+
+<p>We also finished up with our Hot Seat in our cohort and learned about one of our fellow’s previous lives, which included going door-to-door selling $3500 vacuums. I think we’re going to be doing Hot Seat Round 2 in Senior Phase, as a way to just find out more about each other, because how else do you find out that one of your fellows once was a vacuum salesman?</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=The%20Rest%20of%20Week%206%3a%20Redux%2c%20Authentication%2c%20and%20Social%20Activities&url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f12%2f11%2fredux-authentication-and-social-activities%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f12%2f11%2fredux-authentication-and-social-activities%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f12%2f11%2fredux-authentication-and-social-activities%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2016\/12\/11\/redux-authentication-and-social-activities\/';
+    var disqus_title = 'The Rest of Week 6: Redux, Authentication, and Social Activities';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2016\/12\/11\/redux-authentication-and-social-activities\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.comtags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/node.js"><i class="fa fa-tags"></i> node.js</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.comjs/intro-header.js"></script>
+
+
+  </body>
+</html>

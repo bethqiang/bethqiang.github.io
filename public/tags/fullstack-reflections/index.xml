@@ -10,10 +10,10 @@
     
     <item>
       <title>Junior Phase in Review</title>
-      <link>http://bethqiang.com/post/fullstack-academy-junior-phase-in-review/</link>
+      <link>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</link>
       <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-junior-phase-in-review/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</guid>
       <description>
 
 &lt;p&gt;We&amp;rsquo;re six and a half weeks in, which also means we&amp;rsquo;re halfway done with Fullstack Academy. It&amp;rsquo;s still a little crazy to think about, and I&amp;rsquo;ve been having a little bit of trouble processing this in its entirety. In some ways, I feel like it was a week ago that we started, fresh-eyed, strangers to each other and the enormous world of programming, and eager to absorb the firehose of information that was about to be thrown at us. In other ways, I feel like it&amp;rsquo;s been many months – we&amp;rsquo;ve learned and done so much, we&amp;rsquo;ve gotten to know each other and each other&amp;rsquo;s pets very well, we&amp;rsquo;ve settled into a little bit of a routine, and we&amp;rsquo;re all a little tired and very ready for a break.&lt;/p&gt;
@@ -62,13 +62,13 @@
     
     <item>
       <title>Week 5: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-5/</link>
+      <link>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</link>
       <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-week-5/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</guid>
       <description>
 
-&lt;p&gt;It&amp;rsquo;s been a slightly crazy week. I missed two days of class to attend &lt;a href=&#34;http://bethqiang.com/post/nodejs-interactive-north-america-2016/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been a slightly crazy week. I missed two days of class to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve spent most of this weekend doing some preliminary review for our upcoming Junior Phase checkpoint. (Basically, our &amp;ldquo;final&amp;rdquo; exam. It determines whether or not we get to move on to Senior Phase. You know, just a wee thing.) This has reinforced to me two things:&lt;/p&gt;
 
@@ -84,7 +84,7 @@
 
 &lt;p&gt;(Speaking of which, one of those podcasts led me to &lt;a href=&#34;https://youtu.be/txxKx_I39a8&#34; target=&#34;_blank&#34;&gt;this talk&lt;/a&gt; by Jamison Dance from React.js Conf earlier this year about some of the flaws in JavaScript that React sort-of addresses and that Elm &lt;em&gt;actually&lt;/em&gt; addresses. It&amp;rsquo;s amazing and hilarious and insightful and one of my favorite talks I&amp;rsquo;ve discovered so far.)&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m honestly a little surprised by how much I&amp;rsquo;m enjoying React. I don&amp;rsquo;t know if I should have been that surprised, considering I&amp;rsquo;ve been looking forward to learning it ever since sort-of-but-not-really learning it at the &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;Austin Diversity Hackathon&lt;/a&gt;, and I&amp;rsquo;ve had an inexplicable propensity towards functional programming. I&amp;rsquo;ve been having a lot of fun with it, and I can&amp;rsquo;t wait to build a personal project or two over the break with it!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m honestly a little surprised by how much I&amp;rsquo;m enjoying React. I don&amp;rsquo;t know if I should have been that surprised, considering I&amp;rsquo;ve been looking forward to learning it ever since sort-of-but-not-really learning it at the &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;Austin Diversity Hackathon&lt;/a&gt;, and I&amp;rsquo;ve had an inexplicable propensity towards functional programming. I&amp;rsquo;ve been having a lot of fun with it, and I can&amp;rsquo;t wait to build a personal project or two over the break with it!&lt;/p&gt;
 
 &lt;h2 id=&#34;so-what-do-you-want-to-be-when-you-grow-up&#34;&gt;&amp;ldquo;So, what do you want to be when you grow up?&amp;rdquo;&lt;/h2&gt;
 
@@ -104,10 +104,10 @@
     
     <item>
       <title>Week 3: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-3/</link>
+      <link>http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/</link>
       <pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-week-3/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/</guid>
       <description>
 
 &lt;p&gt;With a CS Saturday about functional programming, immutability, and Git under our belts, we&amp;rsquo;re officially halfway through Junior Phase.&lt;/p&gt;
@@ -130,7 +130,7 @@
 
 &lt;p&gt;For most of the immersive so far, I felt like I was at least sort of staying on top of things – I may have been struggling to tread water, but my head was still above the surface.&lt;/p&gt;
 
-&lt;p&gt;Until Tuesday, when &lt;a href=&#34;http://bethqiang.com/post/on-feeling-completely-overwhelmed/&#34; target=&#34;_blank&#34;&gt;I felt like I was going &lt;em&gt;down&lt;/em&gt; and I had no idea how to stop it&lt;/a&gt;. Then during lunch on Wednesday, I stepped away from my computer, and just took some time to appreciate the outdoors and the food I was eating and the moment that I was in. Eventually, I was able to reassure myself that I am a capable human being, and that with enough time, effort, and conscious practice, everything that I was confused about would start to make sense. Eventually.&lt;/p&gt;
+&lt;p&gt;Until Tuesday, when &lt;a href=&#34;http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/&#34; target=&#34;_blank&#34;&gt;I felt like I was going &lt;em&gt;down&lt;/em&gt; and I had no idea how to stop it&lt;/a&gt;. Then during lunch on Wednesday, I stepped away from my computer, and just took some time to appreciate the outdoors and the food I was eating and the moment that I was in. Eventually, I was able to reassure myself that I am a capable human being, and that with enough time, effort, and conscious practice, everything that I was confused about would start to make sense. Eventually.&lt;/p&gt;
 
 &lt;p&gt;It was also nice to hear in the end-of-week reflection among our cohort that I was far from the only one who had had an off day or two. One of our instructors mentioned that this journey is a rollercoaster: you can feel on top of the world and everything just clicks one day, and like everything&amp;rsquo;s falling apart the very next. It&amp;rsquo;s definitely a marathon, not a sprint, and we&amp;rsquo;re all getting there together.&lt;/p&gt;
 
@@ -160,10 +160,10 @@
     
     <item>
       <title>Week 3, Days 2 and 3: On Feeling Completely Overwhelmed</title>
-      <link>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</link>
+      <link>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/on-feeling-completely-overwhelmed/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</guid>
       <description>
 
 &lt;p&gt;Let’s talk about feelings for a second. I’m generally a very optimistic person with a decent amount of confidence in myself, my critical-thinking and problem-solving abilities, and my ability to stick with something when it’s challenging. I don’t like to dwell on the negatives, and I generally try not to let myself get too down.&lt;/p&gt;
@@ -178,7 +178,7 @@
 
 &lt;p&gt;Once I had an opportunity to calm down and reassure myself that I did in fact, know how to code and solve problems with some degree of competency, and that yes, I could do this, I knew I needed to change something. I needed more time. Time for me to do thorough concept reviews in the evenings, and do fun Code Wars problems, and go to meetups, and work on personal projects, and do more functional programming because for some reason that really excites me. I needed time do things that I find fun that aren&amp;rsquo;t directly related to class. And also, you know, sleep. But more importantly, I &lt;em&gt;also&lt;/em&gt; needed some time every day to do things like go for 45 minute walks or watch cute puppy videos or get dinner with a friend once in a blue moon. And run. Running helps. (That&amp;rsquo;s a long list, I know.)&lt;/p&gt;
 
-&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
+&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/blog/2016/11/13/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
 
 &lt;p&gt;Outside of class and evening reviewing (which, in and of itself, I need to find a way to optimze), writing these posts have by far taken the largest chunk of my time. Daily 1,500-word blog posts are great, and I’m sure I’ll thank myself for them later. But, I’m starting to realize with the schedule that we have and the time I need outside of class, they’re unsustainable. Frankly, they take too much time to write, and even just saving an hour a day will give me an hour to start doing other things. That definitely doesn&amp;rsquo;t mean I&amp;rsquo;m going to abandon writing about each day. I just have to choose more wisely what I want to write, and cap the length of and detail in each post, thereby lessening the time that they take.&lt;/p&gt;
 
@@ -240,7 +240,7 @@
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/post/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
+&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;// in models &amp;gt; index.js, set associations:
 Page.belongsTo(User);
@@ -300,10 +300,10 @@ User.create({
     
     <item>
       <title>Week 2: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-2/</link>
+      <link>http://bethqiang.com/blog/2016/11/13/fullstack-academy-week-2/</link>
       <pubDate>Sun, 13 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-week-2/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/13/fullstack-academy-week-2/</guid>
       <description>
 
 &lt;h2 id=&#34;the-week-by-the-numbers&#34;&gt;The Week By the Numbers:&lt;/h2&gt;
@@ -316,7 +316,7 @@ User.create({
 
 &lt;p&gt;Hours spent in front of a computer: more than I&amp;rsquo;d like to admit (I didn&amp;rsquo;t actually keep track of this, but I think it&amp;rsquo;d be interesting and/or possibly slightly terrifying)&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/post/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;Number of times I fell off the world or died in Minecraft&lt;/a&gt;: 0&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;Number of times I fell off the world or died in Minecraft&lt;/a&gt;: 0&lt;/p&gt;
 
 &lt;h2 id=&#34;overall-thoughts&#34;&gt;Overall Thoughts&lt;/h2&gt;
 
@@ -336,16 +336,16 @@ User.create({
 
 &lt;p&gt;In other news, Pieter DePree, Recruiting Lead at Stack Overflow, came to campus to talk about how Stack Overflow hires developers, and more specifically, what we can do to start preparing ourselves and our online presence for the job hunt in a couple of months. Though some of his points didn&amp;rsquo;t necessarily apply at this point in time, it did make us aware of what we need to start doing when, and gave us the knowledge of how to prepare ourselves for when it did. It was also really interesting to get a detailed look into the hiring process at company like Stack Overflow.&lt;/p&gt;
 
-&lt;p&gt;And lastly, who could forget about our Minecraft adventure on Friday? &lt;a href=&#34;http://bethqiang.com/post/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve written a bit on it before&lt;/a&gt;, so I&amp;rsquo;m not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack&amp;rsquo;s co-founders. I haven&amp;rsquo;t yet been back into our server to see if people have built anything this weekend, but I&amp;rsquo;m excited to check in later tonight and see what&amp;rsquo;s been happening.&lt;/p&gt;
+&lt;p&gt;And lastly, who could forget about our Minecraft adventure on Friday? &lt;a href=&#34;http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve written a bit on it before&lt;/a&gt;, so I&amp;rsquo;m not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack&amp;rsquo;s co-founders. I haven&amp;rsquo;t yet been back into our server to see if people have built anything this weekend, but I&amp;rsquo;m excited to check in later tonight and see what&amp;rsquo;s been happening.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Week 1: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-1/</link>
+      <link>http://bethqiang.com/blog/2016/11/06/fullstack-academy-week-1/</link>
       <pubDate>Sun, 06 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-week-1/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/06/fullstack-academy-week-1/</guid>
       <description>
 
 &lt;p&gt;With a day on compiler theory and building our own parsers on Saturday, week 1 of my immersive experience at Fullstack (and of the junior phase) is officially over!&lt;/p&gt;
@@ -362,7 +362,7 @@ User.create({
 
 &lt;h2 id=&#34;pair-programming&#34;&gt;Pair Programming&lt;/h2&gt;
 
-&lt;p&gt;I’ve realized that pair programming isn’t necessarily the same as talking to my teddy bear (which was a strategy I used to prepare for &lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;my bootcamp interviews&lt;/a&gt;, as I didn’t possess &lt;a href=&#34;https://en.wikipedia.org/wiki/Rubber_duck_debugging&#34; target=&#34;_blank&#34;&gt;a rubber duck&lt;/a&gt;). I love the fact that we can bounce ideas off of each other, and that I often gain a different perspective on whatever we’re working on just by having someone else on the same problem.&lt;/p&gt;
+&lt;p&gt;I’ve realized that pair programming isn’t necessarily the same as talking to my teddy bear (which was a strategy I used to prepare for &lt;a href=&#34;http://bethqiang.com/blog/2016/10/17/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;my bootcamp interviews&lt;/a&gt;, as I didn’t possess &lt;a href=&#34;https://en.wikipedia.org/wiki/Rubber_duck_debugging&#34; target=&#34;_blank&#34;&gt;a rubber duck&lt;/a&gt;). I love the fact that we can bounce ideas off of each other, and that I often gain a different perspective on whatever we’re working on just by having someone else on the same problem.&lt;/p&gt;
 
 &lt;p&gt;I somewhat dislike the fact that if both of us are confused, sometimes we end up confusing each other even more than either one of us may be if we were working alone. I also consider myself an introvert, which occasionally makes constantly pairing hard—sometimes I just want to retreat into my own head for a little bit, and that doesn’t really happen that often.&lt;/p&gt;
 
@@ -378,7 +378,7 @@ User.create({
 
 &lt;p&gt;Those who are in-person, both staff and students, are doing their utmost to include our cohort in activities as well. As an example, there’s a “Ladies of Fullstack” group that, as you can probably tell by the name, consists of all of the women in all of Fullstack’s programs. The New York group meets once a week during lunch to chat, eat, and hang out, and our fellow helped us to join via Google hangouts. It was occasionally hard to hear everyone in the room, but everyone was incredibly inclusive and interested in what our experience had been like thus far. As another example, this past CS Saturday, we were in a live stream of the lecture in New York, with the ability to ask questions in real-time through our electronic system. They even procured a mic to be passed around the in-person students so that we could hear their questions as well!&lt;/p&gt;
 
-&lt;p&gt;In terms of bonding with each other, I’ve talked about &lt;a href=&#34;http://bethqiang.com/post/introductions-make-your-own-adventure-game-and-data-structures/&#34; target=&#34;_blank&#34;&gt;Hot Seat&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/post/big-o-algorithms-and-game-of-life/&#34; target=&#34;_blank&#34;&gt;learning groups&lt;/a&gt; before, both of which have helped enormously in bonding with and feeling more connected to my cohort. Everyone, including our instructors and fellows, have a great sense of humor, and laughing even during lectures isn’t a rare occurrence at all. I think we have a great group dynamic as well; while there are definitely the more outspoken ones and the shier ones, everyone seems to get along really well.&lt;/p&gt;
+&lt;p&gt;In terms of bonding with each other, I’ve talked about &lt;a href=&#34;http://bethqiang.com/blog/2016/11/01/introductions-make-your-own-adventure-game-and-data-structures/&#34; target=&#34;_blank&#34;&gt;Hot Seat&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/blog/2016/11/03/big-o-algorithms-and-game-of-life/&#34; target=&#34;_blank&#34;&gt;learning groups&lt;/a&gt; before, both of which have helped enormously in bonding with and feeling more connected to my cohort. Everyone, including our instructors and fellows, have a great sense of humor, and laughing even during lectures isn’t a rare occurrence at all. I think we have a great group dynamic as well; while there are definitely the more outspoken ones and the shier ones, everyone seems to get along really well.&lt;/p&gt;
 
 &lt;p&gt;There’s a really unique element that comes with everyone being in their own homes, too — we get to see little snippets of what our classmates and their lives are like outside of class, sooner and on a different level than we might have if we were in person. We’ve seen classmates’ kids and cats and dogs, and have heard each other when we forget to put ourselves on mute, talking to significant others or singing to ourselves or swearing to ourselves after a particularly challenging workshop.&lt;/p&gt;
 

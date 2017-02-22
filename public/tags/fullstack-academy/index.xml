@@ -10,10 +10,10 @@
     
     <item>
       <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
-      <link>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</link>
+      <link>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/capstone-part-3-teleportation-and-wrapping-up/</guid>
+      <guid>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</guid>
       <description>
 
 &lt;p&gt;Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&amp;rsquo;s avatar to that intersection point. Sounds simple enough, right?&lt;/p&gt;
@@ -46,13 +46,15 @@
 
 &lt;p&gt;We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!&lt;/p&gt;
 
-&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s our presentation, featuring all of the goodies I&amp;rsquo;ve talked about over the &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;past&lt;/a&gt; &lt;a href=&#34;http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/&#34; target=&#34;_blank&#34;&gt;three&lt;/a&gt; posts.&lt;/p&gt;
 
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
   &lt;iframe src=&#34;//www.youtube.com/embed/I5ND_1PI77c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;And &lt;a href=&#34;https://youtu.be/_M0p3UwNhB8&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; a link to the entire hour of presentations, in case you want to see what my classmates have been up to!&lt;/p&gt;
 
@@ -62,17 +64,17 @@
     
     <item>
       <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
-      <link>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</link>
+      <link>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
+      <guid>http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/</guid>
       <description>
 
 &lt;p&gt;So, it&amp;rsquo;s been a while. In the past couple of weeks, our project has gone from a scaffolded foundation to a thing with different rooms and avatar skins and couches, and it&amp;rsquo;s been really cool to see!&lt;/p&gt;
 
 &lt;h2 id=&#34;logging-in&#34;&gt;Logging In&lt;/h2&gt;
 
-&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/post/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
+&lt;p&gt;One of the first things we did following &lt;a href=&#34;http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/&#34; target=&#34;_blank&#34;&gt;my last post&lt;/a&gt; was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&amp;rsquo;t refer to the &lt;code&gt;user&lt;/code&gt; model with its filepath; instead, we had to import it into our file using &lt;code&gt;const User = require(&#39;../db&#39;).model(&#39;users&#39;)&lt;/code&gt;. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a &lt;code&gt;user_id&lt;/code&gt; field was only being put on the &lt;code&gt;session&lt;/code&gt; table, and a &lt;code&gt;session_id&lt;/code&gt; wasn&amp;rsquo;t being put on the &lt;code&gt;user&lt;/code&gt; table. Silly me, &lt;code&gt;Session.belongsTo(User)&lt;/code&gt; and &lt;code&gt;User.hasOne(Session)&lt;/code&gt; will both put a &lt;code&gt;user_id&lt;/code&gt; field on the &lt;code&gt;session&lt;/code&gt; table. Definitely something I should have known, but at least I figured it out in the end?&lt;/p&gt;
 
 &lt;p&gt;I also had my first encounter with React inline styling while creating the Login component! I haven&amp;rsquo;t come to a firm conclusion on how I feel about it yet, but some part of me seems to prefer it. It seems&amp;hellip;like less mental overhead somehow. I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; like the fact that I wasn&amp;rsquo;t able to use things like &lt;code&gt;:focus&lt;/code&gt;, &lt;code&gt;:hover&lt;/code&gt;, &lt;code&gt;:before&lt;/code&gt;, and &lt;code&gt;:after&lt;/code&gt;, which my initial styling had depended on. For the first two, I ended up installing Radium, which effectively replicated them. I also learned about syntax decorators, and sprinkled that into our Babel configuration. For the last two, I resorted to just creating two &lt;code&gt;div&lt;/code&gt;s.&lt;/p&gt;
 
@@ -110,7 +112,7 @@
 
 &lt;p&gt;Once we had our singular React-ified chair, we passed in an array of positions. Each position was passed down to each chair via props. And voila, we had chairs on chairs on chairs!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; class=&#34;center-img&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/the-chair-reactifying-aframe-entities.png&#34; alt=&#34;The chair, a demonstration in React-ifying A-Frame Entities&#34;/&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;link-traversal&#34;&gt;Link Traversal&lt;/h2&gt;
 
@@ -122,7 +124,7 @@
 
 &lt;p&gt;Our links take the form of fancy magical floating orbs that glow a certain shade of blue when you hover over them.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-02/aframe-hyperlink-orbs.png&#34; class=&#34;center-img&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-02/aframe-hyperlink-orbs.png&#34; alt=&#34;A-Frame Hyperlink Orbs&#34;/&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -132,13 +134,13 @@
     
     <item>
       <title>A Story of React, Redux, Race Conditions, and Real-Time Communication</title>
-      <link>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</link>
+      <link>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</link>
       <pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/react-redux-race-conditions-webrtc/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/</guid>
       <description>
 
-&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
+&lt;p&gt;Most of our work on our Capstone project this past week has been trying to set up the base for what we&amp;rsquo;ll be building the super cool features off of. So far, I ported &lt;a href=&#34;http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/&#34; target=&#34;_blank&#34;&gt;my prototype&lt;/a&gt; over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about &lt;code&gt;querySelector&lt;/code&gt;. I&amp;rsquo;ve also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.&lt;/p&gt;
 
 &lt;h2 id=&#34;react-and-a-frame&#34;&gt;React and A-Frame&lt;/h2&gt;
 
@@ -202,11 +204,11 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>How to Develop a VR App Prototype, in 26 Steps</title>
-      <link>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</link>
+      <link>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</guid>
-      <description>&lt;p&gt;Step 1: Come up with an idea. &lt;a href=&#34;http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/&#34; target=&#34;_blank&#34;&gt;Decide upon attempting to prototype a social VR app&lt;/a&gt; that would support many users, as there isn&amp;rsquo;t one that exists today that does so, and ideally (if time permits) implement real-time audio.&lt;/p&gt;
+      <guid>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</guid>
+      <description>&lt;p&gt;Step 1: Come up with an idea. &lt;a href=&#34;http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/&#34; target=&#34;_blank&#34;&gt;Decide upon attempting to prototype a social VR app&lt;/a&gt; that would support many users, as there isn&amp;rsquo;t one that exists today that does so, and ideally (if time permits) implement real-time audio.&lt;/p&gt;
 
 &lt;p&gt;Step 2: Notice that &lt;a href=&#34;https://aframe.io/&#34; target=&#34;_blank&#34;&gt;A-Frame&lt;/a&gt; is supposedly easy to get up-and-running. Do some digging into creating multiuser experiences in A-Frame. Discover that someone has created a &lt;a href=&#34;https://github.com/ngokevin/kframe/tree/master/components/firebase&#34; target=&#34;_blank&#34;&gt;Firebase component in A-Frame&lt;/a&gt;, making the multiuser part &lt;em&gt;very&lt;/em&gt; easy.&lt;/p&gt;
 
@@ -284,17 +286,17 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture</title>
-      <link>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</link>
+      <link>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</link>
       <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</guid>
       <description>
 
-&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
+&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
 
 &lt;p&gt;One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package &lt;code&gt;nodemailer&lt;/code&gt; to our checkout process, so that when a user places an order, they&amp;rsquo;ll immediately be sent an email with their confirmation number.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-01/alfred-pennyworth.png&#34; class=&#34;center-img&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-01/alfred-pennyworth.png&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;My teammates made fun of me a little bit for being so excited about this, and I can&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; articulate why I was, except for that it was just a moment for me when I realized &lt;em&gt;how incredible programming can be&lt;/em&gt;. Which I realize still sounds a little weird, because, at its core, I just sent myself an email. But, a lot of seemingly disparate things came together at that moment for me, I think. (And let&amp;rsquo;s be real, who doesn&amp;rsquo;t want an email from Alfred Pennyworth?!)&lt;/p&gt;
 
@@ -344,13 +346,13 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>Shopping Carts &amp; Being Seniors</title>
-      <link>http://bethqiang.com/post/shopping-carts-and-being-seniors/</link>
+      <link>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/shopping-carts-and-being-seniors/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/15/shopping-carts-and-being-seniors/</guid>
       <description>
 
-&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
+&lt;p&gt;In the past few days, we&amp;rsquo;ve moved on from working primarily on the back-end of &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt; to actually rendering the data our back-end is feeding to us. We&amp;rsquo;ve also started putting together an overall theme and look.&lt;/p&gt;
 
 &lt;p&gt;The features I&amp;rsquo;ve primarily been working on have been the Orders History page for a logged in user, and I just started working on our cart. Relatively early on in the process, we decided we were just going to have our cart saved on the session, and never actually persisted in the database. One of the main challenges I&amp;rsquo;ve faced while doing this was coming to terms with the fact that we weren&amp;rsquo;t actually going to the database in our back-end route to fetch and update and delete items in our cart; we were just setting an array on the &lt;code&gt;req.session&lt;/code&gt; object. Though the premise was the same — the front-end would dispatch an action, that would send an AJAX request to our back-end, which would manipulate that array, then send the resulting array back to the front-end — it just felt a little strange doing it.&lt;/p&gt;
 
@@ -368,18 +370,18 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
 
 &lt;p&gt;I met with Career Services for the first time on Friday! Like most things in life, it was both wonderful and terrifying — wonderful because the future is always an exciting thing. Terrifying because, well, no one &lt;em&gt;really&lt;/em&gt; likes the job hunt, do they?! We talked mostly about what I&amp;rsquo;m looking for, where I&amp;rsquo;m looking for it, and in general things I should be thinking about. I took some time over the weekend to research some companies to put on my &amp;ldquo;Companies I&amp;rsquo;d Love to Work For&amp;rdquo; list, which I&amp;rsquo;ll be building out over the next few weeks.&lt;/p&gt;
 
-&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/post/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
+&lt;p&gt;We also had our first Fullstack social with the new Remote cohort. First of all, it was a little weird (not in a bad way, just different&amp;hellip;) to see people who were not in our cohort in our video classroom! It was cool getting to meet and talk to the new class though, and we played some games together — &lt;a href=&#34;http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, &lt;a href=&#34;https://pathparadox.com/&#34; target=&#34;_blank&#34;&gt;Path Paradox&lt;/a&gt; (which was &lt;em&gt;also&lt;/em&gt; built by a Fullstack group for their Capstone Project), and then I fought some zombies in Fullstack&amp;rsquo;s Minecraft world before calling it a night.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/post/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve volunteered to be on the Senior Panel for this class this week — &lt;a href=&#34;http://bethqiang.com/blog/2016/11/08/node-shell-expressjs-and-senior-panel/&#34; target=&#34;_blank&#34;&gt;remember when my cohort was the one listening to the Senior Panel&lt;/a&gt;?! It&amp;rsquo;s crazy to think about. It&amp;rsquo;s also a little weird thinking about the fact that people are actually looking to us for guidance now, because I still often feel like I have no idea what I&amp;rsquo;m doing. (I&amp;rsquo;m told that this never really changes.)&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
-      <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
+      <link>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</link>
       <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
@@ -387,7 +389,7 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
 &lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/post/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
 &lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
 &lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
 &lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;
@@ -439,10 +441,10 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>Junior Phase in Review</title>
-      <link>http://bethqiang.com/post/fullstack-academy-junior-phase-in-review/</link>
+      <link>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</link>
       <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-junior-phase-in-review/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/</guid>
       <description>
 
 &lt;p&gt;We&amp;rsquo;re six and a half weeks in, which also means we&amp;rsquo;re halfway done with Fullstack Academy. It&amp;rsquo;s still a little crazy to think about, and I&amp;rsquo;ve been having a little bit of trouble processing this in its entirety. In some ways, I feel like it was a week ago that we started, fresh-eyed, strangers to each other and the enormous world of programming, and eager to absorb the firehose of information that was about to be thrown at us. In other ways, I feel like it&amp;rsquo;s been many months – we&amp;rsquo;ve learned and done so much, we&amp;rsquo;ve gotten to know each other and each other&amp;rsquo;s pets very well, we&amp;rsquo;ve settled into a little bit of a routine, and we&amp;rsquo;re all a little tired and very ready for a break.&lt;/p&gt;
@@ -491,10 +493,10 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>The Rest of Week 6: Redux, Authentication, and Social Activities</title>
-      <link>http://bethqiang.com/post/redux-authentication-and-social-activities/</link>
+      <link>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</link>
       <pubDate>Sun, 11 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/redux-authentication-and-social-activities/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/11/redux-authentication-and-social-activities/</guid>
       <description>
 
 &lt;p&gt;So, I’ve kind of fallen off the face of this blog for the past week. Apologies for that – it’s been an incredibly busy week. Tomorrow is our Senior Checkpoint; it’s kind of like our final exam to make sure that we’re sufficiently prepared to move on to Senior Phase. I’ve spent the pretty much all of my free time (of which we have little to begin with) this past week gearing up for that and attempting to review everything we’ve learned in the past six weeks, which isn’t really an easy feat by any means, given the amount of material we’ve covered!&lt;/p&gt;
@@ -531,7 +533,7 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
 
 &lt;p&gt;Sometime in the middle of the week (days blur together after a while), we also did a short little Game Night. We played &lt;a href=&#34;http://agamari.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;Agamari&lt;/a&gt;, which is a game developed by a group from the recently graduated cohort at Fullstack. Everyone&amp;rsquo;s a ball and you roll around a spherical world eating other balls, which makes you bigger. You can also eat other players, which, depending on their size, can make you &lt;em&gt;a lot&lt;/em&gt; bigger. One of our fellows became absolutely massive and was basically taking over our world.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-12/agamari.png&#34; class=&#34;center-img&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/agamari.png&#34; alt=&#34;Agamari Game&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;She was so big that she couldn&amp;rsquo;t really see where she was rolling, and kept eating us by accident, even when she was trying to avoid eating people! I had a lot of fun and the game itself is quite impressive, both graphically and the amount of thought and work that was put into it. (They even took physics laws into account!)&lt;/p&gt;
 
@@ -541,10 +543,10 @@ socket.on(&#39;usersUpdated&#39;, users =&amp;gt; {
     
     <item>
       <title>Week 6, Day 1: Do One Thing Every Day That Scares You</title>
-      <link>http://bethqiang.com/post/do-one-thing-every-day-that-scares-you/</link>
+      <link>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</link>
       <pubDate>Mon, 05 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/do-one-thing-every-day-that-scares-you/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/05/do-one-thing-every-day-that-scares-you/</guid>
       <description>&lt;p&gt;Today, we talked about forms in React. And practiced more React-y stuff. The more important part of the day was that I stood up in front of people, talked, and was slightly less terrified than I am when I see a spider! But we&amp;rsquo;ll get to that in a second. First, the React stuff:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -604,13 +606,13 @@ this.setState({ inputValue: event.target.value }
     
     <item>
       <title>Week 5: Thoughts and Reflections</title>
-      <link>http://bethqiang.com/post/fullstack-academy-week-5/</link>
+      <link>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</link>
       <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/fullstack-academy-week-5/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/04/fullstack-academy-week-5/</guid>
       <description>
 
-&lt;p&gt;It&amp;rsquo;s been a slightly crazy week. I missed two days of class to attend &lt;a href=&#34;http://bethqiang.com/post/nodejs-interactive-north-america-2016/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been a slightly crazy week. I missed two days of class to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve spent most of this weekend doing some preliminary review for our upcoming Junior Phase checkpoint. (Basically, our &amp;ldquo;final&amp;rdquo; exam. It determines whether or not we get to move on to Senior Phase. You know, just a wee thing.) This has reinforced to me two things:&lt;/p&gt;
 
@@ -626,7 +628,7 @@ this.setState({ inputValue: event.target.value }
 
 &lt;p&gt;(Speaking of which, one of those podcasts led me to &lt;a href=&#34;https://youtu.be/txxKx_I39a8&#34; target=&#34;_blank&#34;&gt;this talk&lt;/a&gt; by Jamison Dance from React.js Conf earlier this year about some of the flaws in JavaScript that React sort-of addresses and that Elm &lt;em&gt;actually&lt;/em&gt; addresses. It&amp;rsquo;s amazing and hilarious and insightful and one of my favorite talks I&amp;rsquo;ve discovered so far.)&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m honestly a little surprised by how much I&amp;rsquo;m enjoying React. I don&amp;rsquo;t know if I should have been that surprised, considering I&amp;rsquo;ve been looking forward to learning it ever since sort-of-but-not-really learning it at the &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;Austin Diversity Hackathon&lt;/a&gt;, and I&amp;rsquo;ve had an inexplicable propensity towards functional programming. I&amp;rsquo;ve been having a lot of fun with it, and I can&amp;rsquo;t wait to build a personal project or two over the break with it!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m honestly a little surprised by how much I&amp;rsquo;m enjoying React. I don&amp;rsquo;t know if I should have been that surprised, considering I&amp;rsquo;ve been looking forward to learning it ever since sort-of-but-not-really learning it at the &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;Austin Diversity Hackathon&lt;/a&gt;, and I&amp;rsquo;ve had an inexplicable propensity towards functional programming. I&amp;rsquo;ve been having a lot of fun with it, and I can&amp;rsquo;t wait to build a personal project or two over the break with it!&lt;/p&gt;
 
 &lt;h2 id=&#34;so-what-do-you-want-to-be-when-you-grow-up&#34;&gt;&amp;ldquo;So, what do you want to be when you grow up?&amp;rdquo;&lt;/h2&gt;
 
@@ -646,10 +648,10 @@ this.setState({ inputValue: event.target.value }
     
     <item>
       <title>Week 5, Days 3.5-5: React and React Router</title>
-      <link>http://bethqiang.com/post/react-and-react-router/</link>
+      <link>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</link>
       <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/react-and-react-router/</guid>
+      <guid>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</guid>
       <description>
 
 &lt;p&gt;We&amp;rsquo;ve now entered the wonderful but occasionally odd and confusing world of React. It&amp;rsquo;s a super cool piece of technology and I&amp;rsquo;m very quickly falling head-over-heels for it, but it&amp;rsquo;s also&amp;hellip;weird. It&amp;rsquo;ll take a little bit of time to get used to. To learn and practice React, we&amp;rsquo;ve been building a Spotify clone, which Fullstack has affectionately dubbed &amp;ldquo;Juke.&amp;rdquo; We started by building probably one of the simplest apps ever (and a prerequsite to learning anything new in the programming world):&lt;/p&gt;
@@ -758,7 +760,7 @@ const Stateless = (props) =&amp;gt; {
 
 &lt;p&gt;At some point, we eventually got to this view:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-12/react-juke-single-album-view.png&#34; class=&#34;center-img&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/react-juke-single-album-view.png&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;Where we could click on any album, and then we&amp;rsquo;d be given details of the album below it. To do this, we had to:&lt;/p&gt;
 
@@ -941,11 +943,11 @@ this.handleClick = this.handleClick.bind(this);
     
     <item>
       <title>Week 5, Day 1: I Never Thought JQuery Could Be So Confusing</title>
-      <link>http://bethqiang.com/post/i-never-thought-jquery-could-be-so-confusing/</link>
+      <link>http://bethqiang.com/blog/2016/11/28/i-never-thought-jquery-could-be-so-confusing/</link>
       <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/i-never-thought-jquery-could-be-so-confusing/</guid>
-      <description>&lt;p&gt;We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: &lt;a href=&#34;http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/post/more-jquery-websockets-and-react/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, this time with the goal of making it persistent – that is, making the user&amp;rsquo;s trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.&lt;/p&gt;
+      <guid>http://bethqiang.com/blog/2016/11/28/i-never-thought-jquery-could-be-so-confusing/</guid>
+      <description>&lt;p&gt;We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: &lt;a href=&#34;http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, this time with the goal of making it persistent – that is, making the user&amp;rsquo;s trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.&lt;/p&gt;
 
 &lt;p&gt;First, we reconfigured a &lt;code&gt;get&lt;/code&gt; route so that it would serve up all of our attraction information.&lt;/p&gt;
 
@@ -982,7 +984,7 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 
 &lt;p&gt;We then mounted a &lt;code&gt;/api/days&lt;/code&gt; route to our app, which would route things like creating a new day, deleting a day, adding attractions, and removing attractions.&lt;/p&gt;
 
-&lt;p&gt;We got to use our &lt;a href=&#34;http://bethqiang.com/post/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;new-found eager loading skills&lt;/a&gt; to get all of the activities for all of the days:&lt;/p&gt;
+&lt;p&gt;We got to use our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;new-found eager loading skills&lt;/a&gt; to get all of the activities for all of the days:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;router.get(&#39;/&#39;, (req, res, next) =&amp;gt; {
   Day.findAll({
@@ -1091,10 +1093,10 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
     
     <item>
       <title>Week 4, Day 3 and Break: More JQuery, WebSockets, and React</title>
-      <link>http://bethqiang.com/post/more-jquery-websockets-and-react/</link>
+      <link>http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/</link>
       <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/more-jquery-websockets-and-react/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/</guid>
       <description>&lt;p&gt;We ended class early on Wednesday because of the holiday. Given the couple of hours that we had, my pair and I primarily worked on figuring out how to &amp;ldquo;persist&amp;rdquo; (at least until the server is reset) the hotels, restaurants, and activities that the user chooses on the days that they add them to – so, for example, if the user chooses a hotel and three restaurants on Day 2, that hotel and those restaurants will populate the itinerary every time the user switches to Day 2. We ended up doing this using arrays inside of objects inside of an object:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var days = {
@@ -1121,11 +1123,11 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 
 &lt;hr /&gt;
 
-&lt;p&gt;We&amp;rsquo;ve subsequently had the last four days off, although I&amp;rsquo;ve been working ahead in an effort to not fall behind in the two days I&amp;rsquo;ll be missing this week for &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve subsequently had the last four days off, although I&amp;rsquo;ve been working ahead in an effort to not fall behind in the two days I&amp;rsquo;ll be missing this week for &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I learned about TCP vs. IP protocols, event emitters, websockets, and rooms and namespaces, and then built a &amp;ldquo;World Wide Whiteboard&amp;rdquo; – an app that allows a user to &amp;ldquo;draw&amp;rdquo; something on a Microsoft Paint-like interface, and the drawing appears in real-time for all of the other users connected to the server. After the basic functionality was built, I added in the ability to join rooms, so that you could go into a specific room and whatever was drawn would only be broadcasted to other users in that room.&lt;/p&gt;
 
-&lt;p&gt;I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I&amp;rsquo;ve been really excited about this part of the curriculum, as &lt;a href=&#34;http://bethqiang.com/post/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve used React before at a hackathon&lt;/a&gt; but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn&amp;rsquo;t any kind of depth happening. I&amp;rsquo;m excited to get actually learn how and why things work, and how powerful it can be when you&amp;rsquo;re not constricted to only 36 hours!&lt;/p&gt;
+&lt;p&gt;I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I&amp;rsquo;ve been really excited about this part of the curriculum, as &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve used React before at a hackathon&lt;/a&gt; but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn&amp;rsquo;t any kind of depth happening. I&amp;rsquo;m excited to get actually learn how and why things work, and how powerful it can be when you&amp;rsquo;re not constricted to only 36 hours!&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1135,15 +1137,15 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
     
     <item>
       <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
-      <link>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</link>
+      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
       <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
       <description>
 
 &lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
 
-&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/post/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
 
 &lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
 
@@ -1155,7 +1157,7 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 
 &lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/scriptcraft-hackathon-game.png&#34; class=&#34;center-img&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
 
@@ -1167,7 +1169,7 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 
 &lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/trip-planner-app-jquery.png&#34; class=&#34;center-img&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
 
@@ -1182,7 +1184,10 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
     }
   })
   var hotelLocation = hotels[hotelIndex].place.location;
-  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex + &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; + selectedOption + &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
+    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
+    selectedOption +
+    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
   $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
   var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
   $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);

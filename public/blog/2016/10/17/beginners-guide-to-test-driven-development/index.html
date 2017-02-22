@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Absolute Beginner’s Guide to Test Driven Development</title>
+
+  <meta name="author" content="" />
+  <meta name="keywords" content="">
+
+  
+  <meta name="description" content="So I know what it is...but what exactly is it?">
+  
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.comcss/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.comcss/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.comimg/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.comimg/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="The Absolute Beginner’s Guide to Test Driven Development" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2016/10/17/beginners-guide-to-test-driven-development//" />
+  <meta property="og:image" content="" />
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:you@example.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>The Absolute Beginner’s Guide to Test Driven Development</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">October 17, 2016</p>
+              <div id="post-content">
+                
+
+<p>Test Driven Development (TDD) and testing were always terms that people would casually talk about and debate the merits of, but I never actually knew what it was. The furthest I ever managed to get was the understanding that it was “a way to make sure that what your code is doing what it should be doing,” which, while true, isn’t very descriptive or helpful in actually understanding what it was or how to do it.</p>
+
+<p>Then, people would start throwing around words like stubbing, mocking, and doubles, and I had even less of an idea of what was going on. That is, until my bootcamp’s Foundations phase, during which I was introduced to the idea in a relatively non-threatening way.</p>
+
+<p>For those of you who know sort-of kind-of what it is but don’t actually know what it is, I hope this helps in allowing you to at least grasp the fundamentals. Here’s what I’ve learned of what TDD actually means and how to use it in practice.</p>
+
+<p>The traditional coding process would be something like this: write code, see what happens, does it do what we want it to do? No &ndash;&gt; rewrite code. Yes &ndash;&gt; move on with life.</p>
+
+<p>Whereas, a TDD workflow would look like this:</p>
+
+<p><img src="/img/posts/2016-10/test-driven-development.png" alt="Test Driven Development Workflow"/></p>
+
+<p>Essentially, you want to write tests, then write the simplest code possible to make those tests pass (they should be failing initially, because you haven’t written anything!). Once you’ve made all of the tests pass, go back and refactor your code to make it prettier and/or more efficient.</p>
+
+<p>Okay, that’s cool, I get that. But what are these “tests,” you ask? What do they contain? What does it mean “to make a test pass”? <strong>I didn’t understand how you could write code to make sure other code worked…because once you wrote it, wouldn’t you be able to tell if it worked or not?</strong></p>
+
+<p>Let’s say that you want to write a program that will say, “Hello, [name]!”, where name is whatever name you give it. (Ex. If your name was Bob, and you wanted your program to say hello to you using your name: “Hello, Bob!”) If you don’t give your program a name, then you want it to say, “Hello, world!”</p>
+
+<p>So let’s try this TDD thing out. The idea is to write your tests first, before you write a single line of code. Your tests for this program could look like this:</p>
+
+<pre><code>describe(&quot;Hello&quot;, function() {
+  it(&quot;says hello&quot;, function() {
+    expect(hello()).toEqual(&quot;Hello, world!&quot;);
+  });
+
+  it(&quot;says hello to someone&quot;, function() {
+    expect(hello(&quot;Fred&quot;)).toEqual(&quot;Hello, Fred!&quot;);
+  });
+});
+</code></pre>
+
+<p>(Different testing frameworks have different syntax for actually writing tests; we’ll be ignoring the actual syntax for now and focusing on the content.)</p>
+
+<p>Basically, what this test is saying is:</p>
+
+<ul>
+<li>There is a function called <code>hello</code></li>
+<li>When you call <code>hello()</code>, you should get the string, “Hello, world!”</li>
+<li>When you call <code>hello()</code> with a parameter, you could get the string, “Hello, + parameter!”</li>
+</ul>
+
+<p>As we can see in our testing framework (we’ve been using Jasmine and the test runner Test’em), both of our tests are currently failing. That’s good; that’s expected!</p>
+
+<p><img src="/img/posts/2016-10/jasmine-testing-screenshot-1.png" alt="Jasmine Screenshot 1"/></p>
+
+<p>It’s our job now to go through our tests, one by one, and write the simplest code we can to make each test pass. Our two tests are, “Hello says hello,” and “Hello says hello to someone.” The number of lines here may seem scary at first, but the key parts to pay attention to are the ones that are in light blue boxes - these tell us why our tests aren’t passing, and by extension, what we can do to fix it.</p>
+
+<p>Let’s focus on the first test for now. Jasmine’s reason for why this specific test didn’t pass is that hello is not defined. So, let’s try defining hello!</p>
+
+<pre><code>function hello() {};
+</code></pre>
+
+<p>And if we look back at our tests:</p>
+
+<p><img src="/img/posts/2016-10/jasmine-testing-screenshot-2.png" alt="Jasmine Screenshot 2"/></p>
+
+<p>Great! We now have a different error, which means something different is happening. Now, our first test’s feedback says, “Expected undefined to equal ‘Hello, world!’.” Jasmine is telling us that we’re expecting the output of <code>hello()</code> to equal “Hello, world!”, but instead, we’re getting <code>undefined</code>. Let’s try putting something in our function that will output “Hello, world!” when the function is run.</p>
+
+<pre><code>function hello() {
+  return &quot;Hello, world!&quot;;
+};
+</code></pre>
+
+<p>Okay, let’s see what happened.</p>
+
+<p><img src="/img/posts/2016-10/jasmine-testing-screenshot-3.png" alt="Jasmine Screenshot 3"/></p>
+
+<p>One test disappeared! We can see at the top that of the 2 specs we started with, only 1 is failing now! If we switch into our spec list:</p>
+
+<p><img src="/img/posts/2016-10/jasmine-testing-screenshot-4.png" alt="Jasmine Screenshot 4"/></p>
+
+<p>We can see that “says hello” is now green, which means it passed. Congratulations! Now onto the second one.</p>
+
+<p>If you also notice, our error message has changed to “Expected ‘Hello, world!’ to equal ‘Hello, Fred!’”. So this lets us know that even when we specify a name, our program is still giving us, “Hello, world!” (Which isn’t what we want it to do!)</p>
+
+<p>We want a way to input a name, and have it spit it back to us. So, let’s add name as a parameter. And it seems like we only want “Hello, world!” to be returned <strong><em>if</em></strong> we don’t specify a name - so, let’s try using an if statement!</p>
+
+<pre><code>function hello(name) {
+  if (name === undefined) {
+    return &quot;Hello, world!&quot;;
+  } else {
+    return &quot;Hello, &quot; + name + &quot;!&quot;;
+  };
+};
+</code></pre>
+
+<p>And if we go back to our test specs:</p>
+
+<p><img src="/img/posts/2016-10/jasmine-testing-screenshot-5.png" alt="Jasmine Screenshot 5"/></p>
+
+<p>Woo, they’re both passing! Our program works exactly as it should.</p>
+
+<h2 id="the-benefits-of-tdd">The Benefits of TDD</h2>
+
+<p>For the past four weeks in my bootcamp, we’ve been given test specs and then tasked to write code that makes those tests pass. Some of the benefits that I’ve personally experienced from this approach, rather than the “traditional” approach are:</p>
+
+<ul>
+<li>It forces you to thoroughly think of what you actually need to do, rather than willy nilly writing a bunch of functions and seeing what happens. (Which I’ve done before, and I don’t recommend it!)</li>
+<li>I occasionally have the bad habit of trying to dive into everything at once, and end up confused and frustrated because some problems are way too big for that to work! TDD forces you to break down the problem before you try to solve it. It’s easy to say, “okay, my program just needs to do this one thing.” And once you have that one thing, then you add on the next thing.</li>
+<li>It allows you to pinpoint where your code is breaking. If something didn&rsquo;t work in a program that was a couple hundred lines of code long, it often took going through all couple hundred of those lines and console logging almost everything to figure out what the problem was.</li>
+<li>It makes your code flexible, streamlined, and extensible. You’re never writing code you don’t need, and the code you do write is as straightforward and simple as possible. You always have the freedom to add to your existing code without fear that you’ll break your existing code and won’t be able to figure out why.</li>
+</ul>
+
+<h2 id="the-drawback-s-of-tdd">The Drawback(s?) of TDD</h2>
+
+<p>The only drawback I’ve personally experienced so far has been that you need to choose your test cases wisely. If you leave out certain elements to test, those parts of your program may not work as you intended them to. Or, sometimes your test case has multiple ways of getting to the end result, but you only want one of those ways to be the right one.</p>
+
+<p>For example, I once had a test case that started with the array <code>[0, 1, 2]</code>, and wanted me to write a function that would mutate that array and output <code>[0, 3, 6]</code>. Now, you might think the obvious way to do this would be to multiply each element by three. However, I made a mistake in my code and ended up multiplying each of the indices of the array by 3, rather than each number itself - but the test still passed because in this case, the indices were the same as the actual numbers in the array. If a different starting array had been chosen, I could have seen that mistake immediately.</p>
+
+<p>*That’s not to say there aren’t any other drawbacks; I just haven’t had enough experience yet to know first-hand what the others are.</p>
+
+<h2 id="how-do-i-actually-write-tests">How do I actually write tests?</h2>
+
+<p>So&hellip;I haven’t gotten to that point yet. I’ve started some preliminary experiments with writing my own tests for a small back-end application that I’m trying to build, but am far from being confident in my ability to do so.</p>
+
+<p>(Also, on second thought, maybe I should have tried to just write tests for an existing app that I have instead of trying to figure out Node and Express and MongoDB AND writing tests, all for the first time, but hindsight is 20–20, right?)</p>
+
+<h2 id="what-should-i-do-if-i-want-to-start-practicing-tdd">What should I do if I want to start practicing TDD?</h2>
+
+<p>One of the best resources I’ve come across has been <a href="http://exercism.io/" target="_blank">Exercism.io</a>. It’s similar to <a href="https://www.codewars.com/" target="_blank">Code Wars</a> or <a href="https://www.hackerrank.com/" target="_blank">Hacker Rank</a> or any other coding challenge website, in that you choose a language and there’s a repository of problems available to you to solve. However, unlike Code Wars or Hacker Rank or anything else I’ve come across, instead of having a word problem, you get test specs instead, and your solution passes when all of your tests pass. There’s a little bit of system set-up involved to do this, but it’s a great platform!</p>
+
+<p>I’d also recommend just choosing a testing framework and learning the basics and syntax, then finding super easy problems and writing tests for those.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p>If you’re looking for more resources, here are some that I’ve found to be helpful in understanding what it is, why you should do it, and a small tidbit of how to do it:</p>
+
+<p><a href="http://testfirst.org/" target="_blank">TestFirst.org</a></p>
+
+<p><a href="https://code.tutsplus.com/tutorials/the-newbies-guide-to-test-driven-development--net-13835" target="_blank">The Newbie’s Guide to Test Driven Development</a></p>
+
+<p><a href="http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/" target="_blank">Kata — The Only Way to Learn TDD</a></p>
+
+<p><a href="http://jrsinclair.com/articles/2016/one-weird-trick-that-will-change-the-way-you-code-forever-javascript-tdd/" target="_blank">One Weird Trick that Will Change the Way You Code Forever: JavaScript TDD</a> (Clickbait-y title aside, it’s a great resource and has links to many others!)</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=The%20Absolute%20Beginner%e2%80%99s%20Guide%20to%20Test%20Driven%20Development&url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f10%2f17%2fbeginners-guide-to-test-driven-development%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f10%2f17%2fbeginners-guide-to-test-driven-development%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f10%2f17%2fbeginners-guide-to-test-driven-development%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2016\/10\/17\/beginners-guide-to-test-driven-development\/';
+    var disqus_title = 'The Absolute Beginner’s Guide to Test Driven Development';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2016\/10\/17\/beginners-guide-to-test-driven-development\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.comtags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/node.js"><i class="fa fa-tags"></i> node.js</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.comtags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.comjs/intro-header.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      {{ with .Site.Params.twitter }}
+      <a href="//twitter.com/{{ . }}" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      {{ end }}
+      {{ with .Site.Params.github }}
+      <a href="//github.com/{{ . }}" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      {{ end }}
+      {{ with .Site.Params.linkedin }}
+      <a href="//www.linkedin.com/in/{{ . }}" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      {{ end }}
+      {{ with .Site.Params.email }}
+      <a href="mailto:{{ . }}" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      {{ end }}
+      {{ with .RSSLink }}
+      <a href="{{ . }}" target="_blank" title="RSS" class="contact-icon"><i class="fa fa-rss"></i></a>
+      {{ end }}
+    </div>
+
+    <!-- Content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        {{ range .Site.Params.menu }}
+        <li class="dropdown">
+          <a href="{{ .url }}">{{ .name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

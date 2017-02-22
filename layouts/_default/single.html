@@ -1,37 +1,59 @@
-{{ define "main" }}
-  <article class="post">
-    <header>
-      <h1 class="post-title">{{ .Title }}</h1>
-      <div class="post-meta">
-        {{ if .Type | eq "post" }}
-          <time datetime="{{ .Date.Format "January 2, 2006" }}">
-            {{ .Date.Format "January 2, 2006" }}
-          </time>
-        {{ end }}
-      </div>
-    </header>
+<!DOCTYPE html>
+<html lang="en">
 
-    <section class="post-content">
-      {{ .Content }}
-    </section>
+  {{ partial "head.html" . }}
 
-    {{ if .Type | eq "post" }}
-      <section class="post-tags" style="padding-bottom:60px;">
-        <div class="post-meta tags">
-          <i class="fa fa-fw fa-tag"></i>
-          {{ range .Params.tags }}
-            {{ $url := printf "tags/%s" ( . | urlize) }}
-            <a href="{{ $url | absURL }}" class="tag-comma-separate">{{ . }}</a>
-          {{ end }}
+  <body>
+    <div id="all">
+
+      <header>
+        {{ partial "nav.html" . }}
+      </header>
+
+      {{ partial "breadcrumbs.html" . }}
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            <!-- *** LEFT COLUMN *** -->
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">{{ .Date.Format .Site.Params.date_format }}</p>
+              <div id="post-content">
+                {{ .Content }}
+              </div>
+              <!-- /#post-content -->
+              {{ partial "share" . }}
+              {{ if .Site.DisqusShortname }}
+              <div id="comments">
+                {{ template "_internal/disqus.html" . }}
+              </div>
+              {{ end }}
+            </div>
+            <!-- /#blog-post -->
+            <!-- *** LEFT COLUMN END *** -->
+
+            <!-- *** RIGHT COLUMN *** -->
+
+            <div class="col-sm-3">
+              <!-- *** MENUS AND WIDGETS *** -->
+              {{ partial "sidebar.html" . }}
+              <!-- *** MENUS AND FILTERS END *** -->
+            </div>
+            <!-- /.col-sm-3 -->
+            <!-- *** RIGHT COLUMN END *** -->
+
+          </div>
+          <!-- /.row -->
         </div>
-      </section>
+        <!-- /.container -->
+      </div>
+      <!-- /#content -->
+      {{ partial "footer.html" . }}
+    </div>
+    <!-- /#all -->
 
-      {{ template "_internal/disqus.html" . }}
-      {{ partial "share" . }}
+    {{ partial "scripts.html" . }}
 
-      <footer class="post-footer">
-        {{ partial "author" . }}
-      </footer>
-    {{ end }}
-  </article>
-{{ end }}
+  </body>
+</html>

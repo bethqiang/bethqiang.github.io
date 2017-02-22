@@ -10,17 +10,17 @@
     
     <item>
       <title>Week 3, Days 4 and 5: CSS Fundamentals</title>
-      <link>http://bethqiang.com/post/css-fundamentals/</link>
+      <link>http://bethqiang.com/blog/2016/11/16/css-fundamentals/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/css-fundamentals/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/16/css-fundamentals/</guid>
       <description>&lt;p&gt;A couple of good changes have been made over the past couple of days. First, I&amp;rsquo;ve been making it a priority to get outside every day – even if it&amp;rsquo;s just for 15 minutes, it&amp;rsquo;s been great to just step away from a screen for a bit. Second, I&amp;rsquo;ve rearranged my desk setup so that my second monitor (which is actually just a 42-inch TV, but anyway) is at eye-level behind my laptop (which is below eye-level, often meaning I would be hunched over), and it&amp;rsquo;s been a game-changer. Thirdly, and probably most importantly because it has to actually do with coding and this whole bootcamp thing, is that we&amp;rsquo;ve completely switched gears.&lt;/p&gt;
 
 &lt;p&gt;We&amp;rsquo;ve now spent the better part of the past two days focusing on CSS, which is simultaneously fantastic and terrible. Fantastic, because CSS is something I consistently struggle with and never really learned how to do properly (there are so many other things to learn!). But, if learned properly, I&amp;rsquo;ve always known it can do wonders for both my apps as well as my sanity. Terrible, for the exact same reason. (I now have a myriad of CSS articles and tutorials to read once I get a semblance of free time.)&lt;/p&gt;
 
 &lt;p&gt;We started off with a lecture about CSS &amp;amp; SASS &amp;amp; SCSS, and then did a workshop where we basically built some of the Bootstrap library. Most of what we talked about and did, I had used or tried to use before, without really understanding them or what they were doing, and therefore never had much success.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2016-11/css-family-guy.gif&#34; class=&#34;center-img&#34; alt=&#34;Family Guy CSS Comparison&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/css-family-guy.gif&#34; alt=&#34;Family Guy CSS Comparison&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;Exactly like that. You can&amp;rsquo;t write a post about CSS and not include this gif, right?&lt;/p&gt;
 

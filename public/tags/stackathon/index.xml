@@ -10,11 +10,11 @@
     
     <item>
       <title>How to Develop a VR App Prototype, in 26 Steps</title>
-      <link>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</link>
+      <link>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/how-to-develop-a-vr-app-prototype/</guid>
-      <description>&lt;p&gt;Step 1: Come up with an idea. &lt;a href=&#34;http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/&#34; target=&#34;_blank&#34;&gt;Decide upon attempting to prototype a social VR app&lt;/a&gt; that would support many users, as there isn&amp;rsquo;t one that exists today that does so, and ideally (if time permits) implement real-time audio.&lt;/p&gt;
+      <guid>http://bethqiang.com/blog/2017/01/23/how-to-develop-a-vr-app-prototype/</guid>
+      <description>&lt;p&gt;Step 1: Come up with an idea. &lt;a href=&#34;http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/&#34; target=&#34;_blank&#34;&gt;Decide upon attempting to prototype a social VR app&lt;/a&gt; that would support many users, as there isn&amp;rsquo;t one that exists today that does so, and ideally (if time permits) implement real-time audio.&lt;/p&gt;
 
 &lt;p&gt;Step 2: Notice that &lt;a href=&#34;https://aframe.io/&#34; target=&#34;_blank&#34;&gt;A-Frame&lt;/a&gt; is supposedly easy to get up-and-running. Do some digging into creating multiuser experiences in A-Frame. Discover that someone has created a &lt;a href=&#34;https://github.com/ngokevin/kframe/tree/master/components/firebase&#34; target=&#34;_blank&#34;&gt;Firebase component in A-Frame&lt;/a&gt;, making the multiuser part &lt;em&gt;very&lt;/em&gt; easy.&lt;/p&gt;
 
@@ -92,17 +92,17 @@
     
     <item>
       <title>The End of Codsworth Robotics, the Beginning of Stackathon, and a Design Lecture</title>
-      <link>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</link>
+      <link>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</link>
       <pubDate>Wed, 18 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/codsworth-robotics-stackathon-design-lecture/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/18/codsworth-robotics-stackathon-design-lecture/</guid>
       <description>
 
-&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
+&lt;p&gt;We presented &lt;a href=&#34;http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/&#34; target=&#34;_blank&#34;&gt;Codsworth Robotics&lt;/a&gt;, your one and only source for robot butlers, today in class. It&amp;rsquo;s officially live &lt;a href=&#34;http://codsworth-robotics.herokuapp.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, and you can view the code &lt;a href=&#34;https://github.com/Codsworth-Robotics/codsworth-robotics&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Although it still may be far from a production-ready app, it&amp;rsquo;s basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.&lt;/p&gt;
 
 &lt;p&gt;One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package &lt;code&gt;nodemailer&lt;/code&gt; to our checkout process, so that when a user places an order, they&amp;rsquo;ll immediately be sent an email with their confirmation number.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/images/posts/2017-01/alfred-pennyworth.png&#34; class=&#34;center-img&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-01/alfred-pennyworth.png&#34; alt=&#34;Email from Alfred Pennyworth&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;My teammates made fun of me a little bit for being so excited about this, and I can&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; articulate why I was, except for that it was just a moment for me when I realized &lt;em&gt;how incredible programming can be&lt;/em&gt;. Which I realize still sounds a little weird, because, at its core, I just sent myself an email. But, a lot of seemingly disparate things came together at that moment for me, I think. (And let&amp;rsquo;s be real, who doesn&amp;rsquo;t want an email from Alfred Pennyworth?!)&lt;/p&gt;
 
@@ -152,10 +152,10 @@
     
     <item>
       <title>What I&#39;ve Been Up To For The Past 4 Weeks</title>
-      <link>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</link>
+      <link>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</link>
       <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/what-ive-been-up-to-for-4-weeks/</guid>
+      <guid>http://bethqiang.com/blog/2017/01/12/what-ive-been-up-to-for-4-weeks/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m alive, I promise. Mostly. I&amp;rsquo;m just running on very little sleep. Also, can we talk about the fact that this is the first post I get to tag with &amp;ldquo;senior phase&amp;rdquo;?!&lt;/p&gt;
@@ -163,7 +163,7 @@
 &lt;p&gt;So, let&amp;rsquo;s talk about everything I&amp;rsquo;ve been doing since the last time I wrote about something that wasn&amp;rsquo;t me accidentally deleting my master branch of my blog. Over winter break, I:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/post/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
+&lt;li&gt;Re-did, in its entirety, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;Game of Life&lt;/a&gt; using React and Redux. (&lt;a href=&#34;http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/&#34; target=&#34;_blank&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; the post I wrote about the first half of it.)&lt;/li&gt;
 &lt;li&gt;Created &lt;a href=&#34;https://github.com/bethqiang/vr-winter-wonderland&#34; target=&#34;_blank&#34;&gt;a baby WebVR + three.js app&lt;/a&gt;. It&amp;rsquo;s a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it&amp;rsquo;s pretty rad. Also a cool and slightly surreal experience to view it in VR!&lt;/li&gt;
 &lt;li&gt;Watched Guardians of the Galaxy for the first time and it was absolutely amazing.&lt;/li&gt;
 &lt;li&gt;Re-did our &lt;a href=&#34;https://github.com/bethqiang/authentication-data-flow&#34; target=&#34;_blank&#34;&gt;Junior Phase workshop on authentication &amp;amp; OAuth&lt;/a&gt;. I felt like I definitely didn&amp;rsquo;t understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.&lt;/li&gt;

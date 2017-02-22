@@ -10,10 +10,10 @@
     
     <item>
       <title>Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library</title>
-      <link>http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/</link>
+      <link>http://bethqiang.com/blog/2016/11/02/binary-search-trees-and-creating-a-javascript-library/</link>
       <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/02/binary-search-trees-and-creating-a-javascript-library/</guid>
       <description>
 
 &lt;p&gt;We started off the day attempting to implement binary search trees and hash tables. We implemented our binary search tree with a linked list. We started by creating two constructor functions, one called &lt;code&gt;BinarySearchTree&lt;/code&gt; and one called &lt;code&gt;Node&lt;/code&gt; - our original approach was to create the root node as an instance of &lt;code&gt;BinarySearchTree&lt;/code&gt;, and then for each node off of it to be an instance of &lt;code&gt;Node&lt;/code&gt;. However, we didn’t realize that each node of the tree should also effectively its own tree, so we were getting errors left and write about how things couldn’t be found. Our test specs were looking for instances of the &lt;code&gt;BinarySearchTree&lt;/code&gt;, and we were trying to give it objects that had completely different properties.&lt;/p&gt;
@@ -77,10 +77,10 @@
     
     <item>
       <title>Week 1, Days 1 and 2: Introductions, Make Your Own Adventure Game, Data Structures, and Hot Seat</title>
-      <link>http://bethqiang.com/post/introductions-make-your-own-adventure-game-and-data-structures/</link>
+      <link>http://bethqiang.com/blog/2016/11/01/introductions-make-your-own-adventure-game-and-data-structures/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/introductions-make-your-own-adventure-game-and-data-structures/</guid>
+      <guid>http://bethqiang.com/blog/2016/11/01/introductions-make-your-own-adventure-game-and-data-structures/</guid>
       <description>
 
 &lt;p&gt;Though our cohort technically started at the end of September with 4 weeks of Foundations, October 31, 2016, marks my first day of Fullstack Academy&amp;rsquo;s Remote Immersive.&lt;/p&gt;
@@ -89,7 +89,7 @@
 
 &lt;p&gt;David, one of the founders of Fullstack, was our primary instructor today, although we did get to meet our actual full-time instructors. We also have two fellows, who can be likened to teaching assistants. They&amp;rsquo;re students who have gone through the program previously, succeeded, and elected to stay on for another 13 weeks to mentor and help us navigate both the world of coding and the world of Fullstack.&lt;/p&gt;
 
-&lt;p&gt;The second half of the day, we split into pairs work on a simple Make Your Own Adventure Game in the command line. The only pair programming experience I had previously was in &lt;a href=&#34;http://bethqiang.com/post/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;my bootcamp interviews&lt;/a&gt;, so it was a completely new experience for me, but I was a huge fan - after months of coding on my own, it was really nice to have someone to bounce ideas off of and gain a different perspective from.&lt;/p&gt;
+&lt;p&gt;The second half of the day, we split into pairs work on a simple Make Your Own Adventure Game in the command line. The only pair programming experience I had previously was in &lt;a href=&#34;http://bethqiang.com/blog/2016/10/17/the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/&#34; target=&#34;_blank&#34;&gt;my bootcamp interviews&lt;/a&gt;, so it was a completely new experience for me, but I was a huge fan - after months of coding on my own, it was really nice to have someone to bounce ideas off of and gain a different perspective from.&lt;/p&gt;
 
 &lt;p&gt;After spending a few hours on that, we dove right into abstract data types and data structures. Nimit, Fullstack&amp;rsquo;s other co-founder, led the evening&amp;rsquo;s session. We talked about information theory and hardware when it comes to the storage of physical bits, as well as abstraction and encoding with text (morse code, the binary system, hexadecimal notation, UTF-8), images, and audio.&lt;/p&gt;
 

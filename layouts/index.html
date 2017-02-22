@@ -1,25 +1,22 @@
-{{ define "main" }}
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="site-head">
-    <h1>I'm Beth.</h1>
-    <div class="description">
-      <h2>I'm a </h2>
-      <h2 id="description">developer</h2>
+  {{ partial "head.html" . }}
+
+  <body>
+    <div id="all">
+      <header>
+        {{ partial "nav.html" . }}
+      </header>
+
+      {{ partial "home-about.html" . }}
+      {{ partial "home-skills.html" . }}
+      {{ partial "home-portfolio.html" . }}
+      {{ partial "footer.html" . }}
     </div>
-    <h2>trying to change the world.</h2>
-  </div>
+    <!-- /#all -->
 
-  {{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
-  {{ range $paginator.Pages }}
-    {{ if not .Params.hide }}
-      {{ .Render "summary" }}
-    {{ end }}
-  {{ end }}
+    {{ partial "scripts.html" . }}
 
-  {{ partial "pagination" . }}
-
-<div class="center">
-  <a href="{{ .Site.BaseURL }}/tags/" class="archive-link">Post Archives</a>
-</div>
-
-{{ end }}
+  </body>
+</html>

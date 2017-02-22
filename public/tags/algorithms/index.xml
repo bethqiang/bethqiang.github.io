@@ -10,11 +10,11 @@
     
     <item>
       <title>Week 1, Day 4: Big O, Algorithms, and Game of Life</title>
-      <link>http://bethqiang.com/post/big-o-algorithms-and-game-of-life/</link>
+      <link>http://bethqiang.com/blog/2016/11/03/big-o-algorithms-and-game-of-life/</link>
       <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://bethqiang.com/post/big-o-algorithms-and-game-of-life/</guid>
-      <description>&lt;p&gt;Today, we went over our &lt;a href=&#34;http://bethqiang.com/post/binary-search-trees-and-creating-a-javascript-library/&#34; target=&#34;_blank&#34;&gt;selector/DOM traversal exercise from yesterday&lt;/a&gt;, and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:&lt;/p&gt;
+      <guid>http://bethqiang.com/blog/2016/11/03/big-o-algorithms-and-game-of-life/</guid>
+      <description>&lt;p&gt;Today, we went over our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/02/binary-search-trees-and-creating-a-javascript-library/&#34; target=&#34;_blank&#34;&gt;selector/DOM traversal exercise from yesterday&lt;/a&gt;, and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;arrayOfVals = [1, 2, 3];
 x = arrayOfVals[0];

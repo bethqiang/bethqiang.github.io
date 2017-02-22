@@ -1,36 +1,72 @@
 baseurl = "http://bethqiang.com"
-languageCode = "en-us"
 title = "Beth Qiang"
+languageCode = "en-us"
 disqusShortname = "bethqiang"
 googleAnalytics = "UA-85574806-1"
+
+# Number of posts per page
 paginate = 10
-favicon = "favicon.ico"
+
+[blackfriday]
+  hrefTargetBlank = true
 
 [params]
-  # General info
-  title = "Beth Qiang"
-  subtitle = "A developer's thoughts on life, code, and the pursuit of happiness."
-
-  # Theme color
-  themecolor = "blue"
-
-  # Search engine metadata & about section in footer
-  name = "Beth Qiang"
-  bio = "developer - runner - animal lover - food enthusiast"
+  viewMorePostLink = "/blog/"
+  author = "Beth Qiang"
   description = "A developer's thoughts on life, code, and the pursuit of happiness."
 
-  # Social networks
-  location = "Austin, TX"
+  # Social
   twitter = "bethqiang"
   linkedin = "bethqiang08"
   github = "bethqiang"
   email = "you@example.com"
 
-  # Site-wide strings
-  keepReadingStr = "Keep reading"
-  backtotopStr = "Back to top"
-  shareStr = "Share"
-  pageNotFoundTitle = "404 - Page not found"
+  # Format dates with Go's time formatting
+  date_format = "January 2, 2006"
 
-[blackfriday]
-  hrefTargetBlank = true
+[Permalinks]
+  blog = "/blog/:year/:month/:day/:filename/"
+
+[[params.menu]]
+  name = "Home"
+  url  = "/"
+  weight = 1
+
+[[params.menu]]
+  name = "About"
+  url  = "/about/"
+  weight = 2
+
+[[params.menu]]
+  name = "Blog"
+  url  = "/blog/"
+  weight = 3
+
+# Widgets for the right sidebar
+[params.widgets]
+  categories = true
+  tags = true
+  search = true
+
+[params.carousel]
+  enable = true
+
+[params.features]
+  enable = true
+
+[params.testimonials]
+  enable = true
+  title = "Testimonials"
+  subtitle = "We have worked with many clients and we always like to hear they come out from the cooperation happy and satisfied. Have a look what our clients said about us."
+
+[params.see_more]
+  enable = true
+  icon = "fa fa-file-code-o"
+  title = "Do you want to see more?"
+  subtitle = "We have prepared for you more than 40 different HTML pages, including 5 variations of homepage."
+  link_url = "#"
+  link_text = "Check other homepages"
+
+[params.recent_posts]
+  enable = true
+  title = "From the Blog"

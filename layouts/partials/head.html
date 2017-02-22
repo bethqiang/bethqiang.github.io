@@ -22,10 +22,10 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- CSS animations -->
-  <link href="{{ .Site.BaseURL }}css/animate.css" rel="stylesheet">
+  <link href="{{ "/css/animate.css" | absURL }}" rel="stylesheet">
 
   <!-- Main stylesheet  -->
-  <link href="{{ .Site.BaseURL }}css/main.css" rel="stylesheet">
+  <link href="{{ "/css/main.css" | absURL }}" rel="stylesheet">
 
   <!-- Responsivity for older IE -->
     <!--[if lt IE 9]>
@@ -34,8 +34,7 @@
     <![endif]-->
 
   <!-- Favicon and apple touch icons-->
-  <link rel="shortcut icon" href="{{ .Site.BaseURL }}img/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="{{ .Site.BaseURL }}img/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="{{ "/img/favicon.ico" | absURL }}" type="image/x-icon" />
 
   <link rel="alternate" href="{{ "/index.xml" | absURL }}" type="application/rss+xml" title="{{ .Site.Title }}">
 
@@ -43,5 +42,4 @@
   <meta property="og:title" content="{{ .Title }}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{ .URL }}/" />
-  <meta property="og:image" content="{{ .Site.Params.logo }}" />
 </head>

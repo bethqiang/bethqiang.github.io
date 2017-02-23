@@ -9,6 +9,56 @@
     <atom:link href="http://bethqiang.com/tags/fullstack-academy/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Every New Beginning Comes from Some Other Beginning&#39;s End</title>
+      <link>http://bethqiang.com/blog/2017/02/23/every-new-beginning-comes-from-some-other-beginnings-end/</link>
+      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/02/23/every-new-beginning-comes-from-some-other-beginnings-end/</guid>
+      <description>
+
+&lt;p&gt;Well, folks. Fullstack&amp;rsquo;s officially over. (In fairness, it&amp;rsquo;s been over for almost a week now, and I just haven&amp;rsquo;t quite gotten around to writing about it.)&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s&amp;hellip;weird. You do this thing for 60+ hours a week for almost five months straight, and you see the same 15 other faces in little squares on your computer every day. And then you drink some wine and sit around with your classmates for a few hours and then on Monday you wake up and realize that you have all the time in the world. (And simultaneously somehow, no time at all.)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve waxed poetic and sentimental about my experience at Fullstack &lt;a href=&#34;http://bethqiang.com/tags/fullstack-reflections/&#34; target=&#34;_blank&#34;&gt;many times before&lt;/a&gt;, so I&amp;rsquo;ll follow the principle of DRY and briefly just reiterate that my cohort was amazing, the instructors and fellows and staff and David and Nimit (the co-founders) are amazing, the curriculum was hard and rigorous and challenging and I sometimes wanted to cry but it was also amazing. The project phase definitely had its ups and downs, but I was able to work with some incredible developers, and produce what I&amp;rsquo;m pretty sure is the world&amp;rsquo;s first &lt;a href=&#34;http://bethqiang.com/tags/capstone-project/&#34; target=&#34;_blank&#34;&gt;browser-based VR classroom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Basically, everything was amazing! Which sounds disingenuous, but everything was legitimately incredible. I was a little nervous about joining the first Remote Immersive cohort (it&amp;rsquo;s always scary being the first!), but having come out on the other side, I can most definitely say it is and will always be one of the best decisions I&amp;rsquo;ve ever made. I&amp;rsquo;ve made lifelong friends and mentors, I learned an incredible amount, and I definitely grew as a developer, a teammate, and a person.&lt;/p&gt;
+
+&lt;h2 id=&#34;some-of-the-more-abstract-takeaways&#34;&gt;Some of the More Abstract Takeaways&lt;/h2&gt;
+
+&lt;p&gt;We learned a lot about software engineering. We learned all about &lt;a href=&#34;http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/&#34; target=&#34;_blank&#34;&gt;JavaScript, Node, Express, jQuery, React, and Redux&lt;/a&gt;. In our &lt;a href=&#34;http://bethqiang.com/tags/fullstack-reflections/&#34; target=&#34;_blank&#34;&gt;Grace Shopper&lt;/a&gt; project, we learned how to work with a team, how to use Git, and how to create something substantial from end-to-end. During our final &lt;a href=&#34;http://bethqiang.com/tags/capstone-project/&#34; target=&#34;_blank&#34;&gt;Capstone project&lt;/a&gt;, we learned about WebRTC and race conditions and using the entity-component-system and how to use a technology that&amp;rsquo;s on version 0.4.0.&lt;/p&gt;
+
+&lt;p&gt;But beyond the technical details, I&amp;rsquo;ve also learned:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Programming is about so much more than the code. It&amp;rsquo;s about the people that you&amp;rsquo;re working with, and the people whose lives could be affected by your code. The code may be a way to accomplish something, but in the end, your goal should always be help the people who will be working with it and using it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On a similar vein, connecting with people is one of the most important things you can do. One of my favorite moments from the program was a Friday afternoon towards the end of Capstone, when we were all a little antsy and tired and overwhelmed, and we decided to have our own team happy hour. We grabbed our respective drinks, and sort of did work but mostly talked about our lives and our hopes and our dreams and our view on politics and controversial issues. As a cohort, we also had a few spontaneous late-night conversations after the day was done, and I always enjoyed those thoroughly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Positive feedback is extremely important. When I gave code reviews, I had a habit of glossing over the positives, even though I thought them in my head, and focused instead on what I thought could be improved. When people spend hours grinding away at something and then are courageous enough to show the world (or at least, the other people working on the project), it can be a very vulnerable thing for them. Make those people feel welcomed, and valued, and point out the good things they did, &lt;em&gt;along with&lt;/em&gt; the things that you think could be improved.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a great environment and a great program, and people will come, and they will want to stay. David and Nimit, by virtue of who they are and their efforts, have created something very special. Fullstack is one of the most inclusive, friendly, supportive, and fun environments I&amp;rsquo;ve ever been in, and in light of the tech industry&amp;rsquo;s ongoing issues with diversity and inclusiveness, that&amp;rsquo;s always an amazing thing to find and to be able to come back to.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;so-what-s-next&#34;&gt;So&amp;hellip;what&amp;rsquo;s next?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m officially on the job hunt! My primary focus will be in the Austin area, but I&amp;rsquo;m definitely not opposed to moving for the right opportunity. If you know anyone looking for junior devs, I&amp;rsquo;d love to chat! And if you don&amp;rsquo;t have or know someone who has jobs, but have advice that you want to offer, I&amp;rsquo;m all ears. :)&lt;/p&gt;
+
+&lt;p&gt;More importantly, I have a few fun things in the pipeline:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A few personal projects — first up will probably be a rich-text-with-spell-check-to-markdown app that I was considering doing for my Fullstack hackathon project, but decided not to. More details TBD. I also really want to finally actually learn Elm and C#/Unity (I know, those are two very different things)&amp;hellip;but the whole 24-hours-in-a-day thing is inconvenient.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I&amp;rsquo;d like to get more involved in an organization like &lt;a href=&#34;https://www.codeforamerica.org/&#34; target=&#34;_blank&#34;&gt;Code for America&lt;/a&gt; or &lt;a href=&#34;https://www.techforcampaigns.org/&#34; target=&#34;_blank&#34;&gt;Tech for Campaigns&lt;/a&gt; or something where I can use my technical skills to enable civic engagement. I still need to do slightly more research and see how I want to proceed with this, but it&amp;rsquo;s most definitely a prominent part of my agenda.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Continuing to be a part of Women Who Code, giving talks, and mentoring women who are just getting their feet into the coding waters. Come join me at a Women Who Code event around Austin! I&amp;rsquo;m also in the process of expanding my meetup scene a bit, so if you have suggestions, I&amp;rsquo;d be happy to hear them! I&amp;rsquo;m not looking for anything in particular; mostly just an easy-going community who likes to geek out about code.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I&amp;rsquo;ve signed on to help a classmate, &lt;a href=&#34;http://rachelbird.com/&#34; target=&#34;_blank&#34;&gt;Rachel&lt;/a&gt;, with a project she started at Fullstack that she&amp;rsquo;s now turning into a legitimate non-profit. It&amp;rsquo;s called &lt;a href=&#34;http://workingwomenadvocates.org/&#34; target=&#34;_blank&#34;&gt;Working Women Advocates&lt;/a&gt;. We hope it&amp;rsquo;ll serve as a place for women to find and connect with advocates and allies to help them through being a woman in the workplace, whether they&amp;rsquo;re actively facing challenges like discrimination or harassment, or they just need a woman&amp;rsquo;s ear to vent to. While doing research for this project, Rachel was suprised to find out that nothing like this really existed — so here we are! I&amp;rsquo;ll be focused primarily on the dev/tech side, and we have other people who are better than me at other things to do those other things, but we&amp;rsquo;re definitely still looking for more help. Come check us out, and let us know if you&amp;rsquo;re interested in offering your skills or a small donation! (We&amp;rsquo;re in the process of setting up a legitimate non-profit, but unfortunately we can&amp;rsquo;t offer tax-deductible donations at the time!) We&amp;rsquo;ve received a lot of positive feedback so far, as well as a lot of interest in helping us, and we&amp;rsquo;d love for you to be a part of it!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
       <link>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
@@ -1132,93 +1182,6 @@ Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
 &lt;hr /&gt;
 
 &lt;p&gt;I also did fun things like make around 10 pounds of macaroni and cheese (including, but not limited to, 12 cups of dry pasta + 3 pounds of cheese + an entire half gallon of whole milk + a stick and a half of butter), attend my boyfriend&amp;rsquo;s giant Thanksgiving dinner (and ate so much delicious food), saw Fantastic Beasts and Where to Find Them and allowed my inner Harry Potter nerd geek out for a bit, went out with friends, caught up on West World (GREAT show), and watched some old Office episodes. Though I did do a fair amount of work, it was a nice break from the 12-ish-hour-per-day grind that our days typically are.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
-      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
-      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
-      <description>
-
-&lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
-
-&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
-
-&lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
-
-&lt;p&gt;In the afternoon, we had our first Fullstack Hackathon. We worked among our learning groups to create something in Minecraft using &lt;a href=&#34;http://scriptcraftjs.org&#34; target=&#34;_blank&#34;&gt;ScriptCraft&lt;/a&gt;, a Minecraft plugin that lets you extend the game and build using JavaScript. Our team ended up building what we originally called &amp;ldquo;The Hunger Games&amp;rdquo; – we could specify the size of a maze to be built, and how many animals (we tested with chickens, to not have to worry about randomizing animals and such) would be placed in the maze. The maze would then programmatically be built in real-time, the chickens were placed, and then players would enter the maze and try to kill as many chickens as they could. The game would keep track of how many chickens each player killed.&lt;/p&gt;
-
-&lt;p&gt;(We later re-named it to &amp;ldquo;Chicken Rain&amp;rdquo; after a comment from a classmate, because we released all of the chickens at once from the sky, thereby making it rain chickens for a small period of time.)&lt;/p&gt;
-
-&lt;p&gt;Though it sounds relatively simple and we don&amp;rsquo;t have a huge amount of code (minus comments and failed attempts and whitespaces, it&amp;rsquo;s only about 40 lines), it took a lot of effort and researching to figure out how to do each baby step. The hardest part for us was attempting to place chickens where there aren&amp;rsquo;t already blocks from the maze so that the chickens would actually be in the maze, and not on top of it. We weren&amp;rsquo;t able to solve this issue in the time that was given to us – apparently, ScriptCraft has really weird object structures, so you can&amp;rsquo;t just pull out a property like you could in JavaScript.&lt;/p&gt;
-
-&lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
-
-&lt;p&gt;Despite the learning curve, it was a lot of fun, and it was a great way to destress from the checkpoint. It was also really cool to apply our JavaScript knowledge to a &lt;em&gt;completely&lt;/em&gt; different context.&lt;/p&gt;
-
-&lt;h2 id=&#34;discovering-the-hidden-side-of-jquery&#34;&gt;Discovering the Hidden Side of JQuery&lt;/h2&gt;
-
-&lt;p&gt;Today was spent entirely on JQuery. I thought this would be a &amp;ldquo;oh, let&amp;rsquo;s catch up with a good friend&amp;rdquo; kinda day – JQuery and I have spent a lot of time together throughout the my earning of Free Code Camp&amp;rsquo;s Front-End Certification, but it turns out, there&amp;rsquo;s &lt;em&gt;a lot&lt;/em&gt; I don&amp;rsquo;t know about JQuery.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
-
-&lt;p&gt;When we started the &amp;ldquo;add&amp;rdquo; functionality, we weren&amp;rsquo;t really thinking about how to make our code reusable, so we ended up writing basically the same 13 lines of code for all three sections. (We&amp;rsquo;re totally violating DRY in probably every way possible.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(&#39;#hotels&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
-  var selectedOption = $(&amp;quot;#hotel-choices option:selected&amp;quot;).text();
-  var hotelIndex;
-  hotels.forEach(function(hotel, index) {
-    if (hotel.name === selectedOption) {
-      hotelIndex = index;
-    }
-  })
-  var hotelLocation = hotels[hotelIndex].place.location;
-  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
-    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
-    selectedOption +
-    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
-  $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
-  var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
-  $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;drawMarker&lt;/code&gt; function on the second-to-last line was originally part of our &lt;code&gt;maps.js&lt;/code&gt; inside of another function, but because we needed to access it here, we ended up making it a global function. Our instructor brought up the idea of using a &amp;ldquo;fake&amp;rdquo; &lt;code&gt;module.exports&lt;/code&gt;/&lt;code&gt;require&lt;/code&gt; for the front-end as an alternative, so that&amp;rsquo;s definitely something I want to look into once we&amp;rsquo;re able to get the functionality down.&lt;/p&gt;
-
-&lt;p&gt;The thing that we hands-down struggled with the most was trying to connect the marker to the item that was added, so that when we deleted the item, the marker would be deleted along with it. The solution we ended up coming up with is also a little bit of a mess, but we were &lt;em&gt;so happy&lt;/em&gt; when we finally got it working.&lt;/p&gt;
-
-&lt;p&gt;In the second-to-last line of the code above, we saved the marker in the (unfortunately also global) variable &lt;code&gt;markerTest&lt;/code&gt;. Then, we used JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method on the &lt;code&gt;#hotel-itinerary&lt;/code&gt; div with the corresponding database &lt;code&gt;id&lt;/code&gt; of the item to store the name of the hotel/restaurant/activity, and the marker that was just added. Then, to remove both:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(&#39;#itinerary&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
-  var name = $(this).siblings()[0].textContent;
-  var index = $(this).parent().attr(&#39;id&#39;);
-  var parent = $(this).parent().parent().attr(&#39;id&#39;);
-  var marker = $(&amp;quot;#&amp;quot; + parent + &amp;quot; #&amp;quot; + index).data(name);
-  marker.setMap(null);
-  $(this).parent().remove();
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Essentially, we jumped through several hoops to find the corresponding &lt;code&gt;div&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; of the text next to the &amp;ldquo;X&amp;rdquo; button that was clicked, and then used that to look up the marker that was stored with the name. &lt;code&gt;marker.setMap(null)&lt;/code&gt; removes that specific marker, and then we finally remove the actual div containing the text and the button.&lt;/p&gt;
-
-&lt;p&gt;We were able to figure out how to add a day with slightly less headaches, and our challenge for tomorrow will be to figure out how to switch between days.&lt;/p&gt;
-
-&lt;h2 id=&#34;intro-to-es6&#34;&gt;Intro to ES6&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
-
-&lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
 </description>
     </item>
     

@@ -6,8 +6,58 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Every New Beginning Comes from Some Other Beginning&#39;s End</title>
+      <link>http://bethqiang.com/blog/2017/02/23/every-new-beginning-comes-from-some-other-beginnings-end/</link>
+      <pubDate>Thu, 23 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/02/23/every-new-beginning-comes-from-some-other-beginnings-end/</guid>
+      <description>
+
+&lt;p&gt;Well, folks. Fullstack&amp;rsquo;s officially over. (In fairness, it&amp;rsquo;s been over for almost a week now, and I just haven&amp;rsquo;t quite gotten around to writing about it.)&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s&amp;hellip;weird. You do this thing for 60+ hours a week for almost five months straight, and you see the same 15 other faces in little squares on your computer every day. And then you drink some wine and sit around with your classmates for a few hours and then on Monday you wake up and realize that you have all the time in the world. (And simultaneously somehow, no time at all.)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve waxed poetic and sentimental about my experience at Fullstack &lt;a href=&#34;http://bethqiang.com/tags/fullstack-reflections/&#34; target=&#34;_blank&#34;&gt;many times before&lt;/a&gt;, so I&amp;rsquo;ll follow the principle of DRY and briefly just reiterate that my cohort was amazing, the instructors and fellows and staff and David and Nimit (the co-founders) are amazing, the curriculum was hard and rigorous and challenging and I sometimes wanted to cry but it was also amazing. The project phase definitely had its ups and downs, but I was able to work with some incredible developers, and produce what I&amp;rsquo;m pretty sure is the world&amp;rsquo;s first &lt;a href=&#34;http://bethqiang.com/tags/capstone-project/&#34; target=&#34;_blank&#34;&gt;browser-based VR classroom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Basically, everything was amazing! Which sounds disingenuous, but everything was legitimately incredible. I was a little nervous about joining the first Remote Immersive cohort (it&amp;rsquo;s always scary being the first!), but having come out on the other side, I can most definitely say it is and will always be one of the best decisions I&amp;rsquo;ve ever made. I&amp;rsquo;ve made lifelong friends and mentors, I learned an incredible amount, and I definitely grew as a developer, a teammate, and a person.&lt;/p&gt;
+
+&lt;h2 id=&#34;some-of-the-more-abstract-takeaways&#34;&gt;Some of the More Abstract Takeaways&lt;/h2&gt;
+
+&lt;p&gt;We learned a lot about software engineering. We learned all about &lt;a href=&#34;http://bethqiang.com/blog/2016/12/14/fullstack-academy-junior-phase-in-review/&#34; target=&#34;_blank&#34;&gt;JavaScript, Node, Express, jQuery, React, and Redux&lt;/a&gt;. In our &lt;a href=&#34;http://bethqiang.com/tags/fullstack-reflections/&#34; target=&#34;_blank&#34;&gt;Grace Shopper&lt;/a&gt; project, we learned how to work with a team, how to use Git, and how to create something substantial from end-to-end. During our final &lt;a href=&#34;http://bethqiang.com/tags/capstone-project/&#34; target=&#34;_blank&#34;&gt;Capstone project&lt;/a&gt;, we learned about WebRTC and race conditions and using the entity-component-system and how to use a technology that&amp;rsquo;s on version 0.4.0.&lt;/p&gt;
+
+&lt;p&gt;But beyond the technical details, I&amp;rsquo;ve also learned:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Programming is about so much more than the code. It&amp;rsquo;s about the people that you&amp;rsquo;re working with, and the people whose lives could be affected by your code. The code may be a way to accomplish something, but in the end, your goal should always be help the people who will be working with it and using it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On a similar vein, connecting with people is one of the most important things you can do. One of my favorite moments from the program was a Friday afternoon towards the end of Capstone, when we were all a little antsy and tired and overwhelmed, and we decided to have our own team happy hour. We grabbed our respective drinks, and sort of did work but mostly talked about our lives and our hopes and our dreams and our view on politics and controversial issues. As a cohort, we also had a few spontaneous late-night conversations after the day was done, and I always enjoyed those thoroughly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Positive feedback is extremely important. When I gave code reviews, I had a habit of glossing over the positives, even though I thought them in my head, and focused instead on what I thought could be improved. When people spend hours grinding away at something and then are courageous enough to show the world (or at least, the other people working on the project), it can be a very vulnerable thing for them. Make those people feel welcomed, and valued, and point out the good things they did, &lt;em&gt;along with&lt;/em&gt; the things that you think could be improved.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a great environment and a great program, and people will come, and they will want to stay. David and Nimit, by virtue of who they are and their efforts, have created something very special. Fullstack is one of the most inclusive, friendly, supportive, and fun environments I&amp;rsquo;ve ever been in, and in light of the tech industry&amp;rsquo;s ongoing issues with diversity and inclusiveness, that&amp;rsquo;s always an amazing thing to find and to be able to come back to.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;so-what-s-next&#34;&gt;So&amp;hellip;what&amp;rsquo;s next?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m officially on the job hunt! My primary focus will be in the Austin area, but I&amp;rsquo;m definitely not opposed to moving for the right opportunity. If you know anyone looking for junior devs, I&amp;rsquo;d love to chat! And if you don&amp;rsquo;t have or know someone who has jobs, but have advice that you want to offer, I&amp;rsquo;m all ears. :)&lt;/p&gt;
+
+&lt;p&gt;More importantly, I have a few fun things in the pipeline:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A few personal projects — first up will probably be a rich-text-with-spell-check-to-markdown app that I was considering doing for my Fullstack hackathon project, but decided not to. More details TBD. I also really want to finally actually learn Elm and C#/Unity (I know, those are two very different things)&amp;hellip;but the whole 24-hours-in-a-day thing is inconvenient.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I&amp;rsquo;d like to get more involved in an organization like &lt;a href=&#34;https://www.codeforamerica.org/&#34; target=&#34;_blank&#34;&gt;Code for America&lt;/a&gt; or &lt;a href=&#34;https://www.techforcampaigns.org/&#34; target=&#34;_blank&#34;&gt;Tech for Campaigns&lt;/a&gt; or something where I can use my technical skills to enable civic engagement. I still need to do slightly more research and see how I want to proceed with this, but it&amp;rsquo;s most definitely a prominent part of my agenda.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Continuing to be a part of Women Who Code, giving talks, and mentoring women who are just getting their feet into the coding waters. Come join me at a Women Who Code event around Austin! I&amp;rsquo;m also in the process of expanding my meetup scene a bit, so if you have suggestions, I&amp;rsquo;d be happy to hear them! I&amp;rsquo;m not looking for anything in particular; mostly just an easy-going community who likes to geek out about code.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I&amp;rsquo;ve signed on to help a classmate, &lt;a href=&#34;http://rachelbird.com/&#34; target=&#34;_blank&#34;&gt;Rachel&lt;/a&gt;, with a project she started at Fullstack that she&amp;rsquo;s now turning into a legitimate non-profit. It&amp;rsquo;s called &lt;a href=&#34;http://workingwomenadvocates.org/&#34; target=&#34;_blank&#34;&gt;Working Women Advocates&lt;/a&gt;. We hope it&amp;rsquo;ll serve as a place for women to find and connect with advocates and allies to help them through being a woman in the workplace, whether they&amp;rsquo;re actively facing challenges like discrimination or harassment, or they just need a woman&amp;rsquo;s ear to vent to. While doing research for this project, Rachel was suprised to find out that nothing like this really existed — so here we are! I&amp;rsquo;ll be focused primarily on the dev/tech side, and we have other people who are better than me at other things to do those other things, but we&amp;rsquo;re definitely still looking for more help. Come check us out, and let us know if you&amp;rsquo;re interested in offering your skills or a small donation! (We&amp;rsquo;re in the process of setting up a legitimate non-profit, but unfortunately we can&amp;rsquo;t offer tax-deductible donations at the time!) We&amp;rsquo;ve received a lot of positive feedback so far, as well as a lot of interest in helping us, and we&amp;rsquo;d love for you to be a part of it!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
@@ -1180,91 +1230,6 @@ this.handleClick = this.handleClick.bind(this);
 &lt;p&gt;At the end of a slightly painful journey, we discovered that the DOM was actually rendering twice; once properly the first time with the properties on &lt;code&gt;this.props&lt;/code&gt; that had the information we wanted, but the second time, no information was being passed to the properties on &lt;code&gt;this.props&lt;/code&gt; and we got a happy slew of errors.&lt;/p&gt;
 
 &lt;p&gt;Needless to say, that&amp;rsquo;s not a mistake we&amp;rsquo;ll be making again!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Node.js Interactive North America 2016</title>
-      <link>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</link>
-      <pubDate>Wed, 30 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/blog/2016/11/30/nodejs-interactive-north-america-2016/</guid>
-      <description>
-
-&lt;p&gt;Thanks to &lt;a href=&#34;https://www.womenwhocode.com/&#34; target=&#34;_blank&#34;&gt;Women Who Code&lt;/a&gt;, I was given a ticket to &lt;a href=&#34;http://events.linuxfoundation.org/events/node-interactive&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;, “the marquee event for JavaScript developers, companies that rely on Node.js, and the vendors that support both of these constituents.” The two days covered a wide spectrum of aspects and use cases for Node.js and its ecosystem.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-registration.JPG&#34; alt=&#34;Node.js Interactive North America Registration&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;In the opening keynotes alone, we heard from a wide variety of speakers and corresponding organizations. (The following list is not completely inclusive.) &lt;a href=&#34;https://twitter.com/mikeal&#34; target=&#34;_blank&#34;&gt;Mikeal Rogers&lt;/a&gt; of the Node Foundation started off, talking about the state of Node.js, the world’s fastest growing open-source platform with over 400 packages being published to npm &lt;strong&gt;&lt;em&gt;per day&lt;/em&gt;&lt;/strong&gt;. (What.) Next, &lt;a href=&#34;https://twitter.com/blipsofadoug&#34; target=&#34;_blank&#34;&gt;Doug Wilson&lt;/a&gt; spoke on the state of Express and Express 5.0, which will have cool features like native promise support in routing. &lt;a href=&#34;https://twitter.com/joemccann&#34; target=&#34;_blank&#34;&gt;Joe McCann&lt;/a&gt; from Node Source talked about enterprise organizations like NASA, Master Card, and Condé Nast that used a mission-critical, enterprise version of Node.js with an emphasis on security, reliability, and extensibility. &lt;a href=&#34;https://twitter.com/andrew_j_hoyt&#34; target=&#34;_blank&#34;&gt;Andy Hoyt&lt;/a&gt; of IBM talked about Node.js’s role in the digital revolution, the API economy, the rise of serverless environments, and demo’ed a Slackbot operating on serverless Node.js.&lt;/p&gt;
-
-&lt;h2 id=&#34;contributing-to-node-js-core&#34;&gt;Contributing to Node.js Core&lt;/h2&gt;
-
-&lt;p&gt;Two of the first morning’s talks, one of which was also a keynote, were about contributing to the Node.js core code. The first of these was from &lt;a href=&#34;https://twitter.com/williamkapke&#34; target=&#34;_blank&#34;&gt;William Kapke&lt;/a&gt;, a Node.js contributor who had quite the bumpy journey through the ecosystem. In addition to telling his story, Kapke also provided tips for interacting and contributing to the community. They didn’t necessarily paint the rosiest picture, but seemed like very down-to-earth and realistic advice. These were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Don’t assume that you’re right.&lt;/li&gt;
-&lt;li&gt;Research and offer solutions; don’t just go into an issue and say “I want to contribute, what can I do?”.&lt;/li&gt;
-&lt;li&gt;Your work &lt;strong&gt;&lt;em&gt;will&lt;/em&gt;&lt;/strong&gt; be scrutinized, and you need to be okay with that.&lt;/li&gt;
-&lt;li&gt;BE PATIENT! And persistent. Also, champion your own cause. You may not be able to figure something out or get an answer the first time around, but if you keep at it, you will eventually.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The second was &lt;em&gt;A Beginner’s Guide to Reading the Node.js Core Source&lt;/em&gt;, by &lt;a href=&#34;https://twitter.com/trott&#34; target=&#34;_blank&#34;&gt;Rich Trott&lt;/a&gt;, another contributor and a member of the Node.js Core Technical Committee.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-contributing.JPG&#34; alt=&#34;Reading the Node.js Core Source&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;His steps:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Step 0: If you&amp;rsquo;re not familiar with JavaScript, familiarize yourself with it. Maybe try writing a &amp;ldquo;Hello World!&amp;rdquo; program, if you&amp;rsquo;re feeling particularly adventurous.&lt;/li&gt;
-&lt;li&gt;Step 1: Pick an API (or multiple) and read the documentation. API usage often provides clues to implementation. Also, merged PRs/closed issues count as documentation!&lt;/li&gt;
-&lt;li&gt;Step 2: Look at some code. Some modules are short and digestible and some are longer and slightly less digestible.&lt;/li&gt;
-&lt;li&gt;Step 3: Find tests for that module and read those. Sometimes, there’s behavior that’s only documented in tests.&lt;/li&gt;
-&lt;li&gt;Step 4 (optional, but encouraged): Contribute! If you’re intimidated or don’t know where to start, Trott started &lt;a href=&#34;http://nodetodo.org/&#34; target=&#34;_blank&#34;&gt;Node Todo&lt;/a&gt; just for you: follow his initial instructions, and then reach out to him via email or Twitter (info in the instructions) and he/his team will help you find something worthwhile that you can personally do to contribute given your ability level/skillset.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Both of these talks were really useful to me because I’ve sort-of-attempted to dip my toes into the world of open source before, but every time I go through GitHub issues in attempt to find something I want to fix and make a pull request for, I find it really hard to accurately judge whether I have the ability/skillset to do so or if I’m throwing myself into the deep end without being able to get out. And then I get slightly disillusioned, and don&amp;rsquo;t think about it for a period of time, and then decide that maybe I want to try this open source thing again. And repeat.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-rest-of-the-first-day&#34;&gt;The Rest of the First Day&lt;/h2&gt;
-
-&lt;p&gt;Some of the other talks I found particularly interesting from the first day were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The different types of bots and how to build one with &lt;a href=&#34;https://twitter.com/ohhoe&#34; target=&#34;_blank&#34;&gt;Rachel White&lt;/a&gt;. I recently discovered that &lt;a href=&#34;https://www.open-austin.org/&#34; target=&#34;_blank&#34;&gt;Open Austin&lt;/a&gt; built &lt;a href=&#34;https://github.com/open-austin/CutePetsAustin&#34; target=&#34;_blank&#34;&gt;a Twitter bot&lt;/a&gt; that randomly pulls pictures of adoptable animals at the Austin Animal Center, and this got me thinking that maybe I’d be able to do the same with the shelter that I volunteer with&amp;hellip;or create a different, similarly semi-useful one. Or just do something completely ridiculous. I haven’t quite thought it out fully yet&amp;hellip;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Full stack testing and test automation, the different tools available (and there are a lot!), best practices, and the &lt;sup&gt;80&lt;/sup&gt;&amp;frasl;&lt;sub&gt;20&lt;/sub&gt; rule (you can do 80% of your testing with a very small number of commands – focus on those first, and add in the fancy stuff later) with &lt;a href=&#34;https://twitter.com/queenofagileqa&#34; target=&#34;_blank&#34;&gt;Stacy Kirk&lt;/a&gt;. Testing is still something I need a lot of practice with, and this was a great overview of the ecosystem and the high-level things I should be keeping in mind.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://nodegame.org/&#34; target=&#34;_blank&#34;&gt;nodeGame&lt;/a&gt;, an open source JavaScript framework for online, multiplayer, real-time games and experiments directly in the browser, with &lt;a href=&#34;https://twitter.com/balietti&#34; target=&#34;_blank&#34;&gt;Stefano Balietti&lt;/a&gt;, a computational social scientist. I majored in psychology in college and a large part of my four years was spent doing psychological research, so this talk brought out that part of my inner nerd. It was really cool to see the combination of behavioral sciences and tech like sockets and Node.js as a way to to find out just how weirdly people behave.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-nodegame.JPG&#34; alt=&#34;nodeGame at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;security&#34;&gt;Security&lt;/h2&gt;
-
-&lt;p&gt;There were quite a lot of security talks on the second day. Though it’s arguably one of the most important parts of the tech world, security has always been a little bit of a black box to me. I haven’t really ever investigated it on my own (mostly because I just haven’t needed it yet), and we haven’t gotten to that portion of Fullstack’s curriculum yet.&lt;/p&gt;
-
-&lt;p&gt;The first security-related talk I attended was &lt;em&gt;Writing Secure Node Code: Understanding and Avoiding the Most Common Node.js Security Mistakes&lt;/em&gt; with &lt;a href=&#34;https://twitter.com/guypod&#34; target=&#34;_blank&#34;&gt;Guy Podjarny&lt;/a&gt;. One of his key messages was that the things that make JavaScript awesome, like the event loop, are also the things that make JavaScript vulnerable.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/nodejs-interactive-2016-security.JPG&#34; alt=&#34;Writing Secure Node Code at Node.js Interactive North America&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;Vulnerabilities aren’t always in your code either – most of your app’s code probably comes from npm, which also means that most of your vulnerability comes from npm. Podjarny then did some live hacking, in which he was able to exploit vulnerabilities in some very widely-used packages: &lt;a href=&#34;https://www.npmjs.com/package/st&#34; target=&#34;_blank&#34;&gt;st&lt;/a&gt; using different HTML &amp;amp; URL encodings, &lt;a href=&#34;https://www.npmjs.com/package/marked&#34; target=&#34;_blank&#34;&gt;marked&lt;/a&gt; using long algorithm runs*, &lt;a href=&#34;https://www.npmjs.com/package/ms&#34; target=&#34;_blank&#34;&gt;ms&lt;/a&gt; using type manipulation, and &lt;a href=&#34;https://www.npmjs.com/package/mongoose&#34; target=&#34;_blank&#34;&gt;mongoose&lt;/a&gt; using Buffers. (I’d also like to give his company, Snyk, the “best sticker” award: it’s a dog with sunglasses with code in them. [Anything with dogs can win over my heart pretty easily.])&lt;/p&gt;
-
-&lt;p&gt;*Something really cool that was related to the long algorithm runs/uncontrolled regexes happened later in the day, when I was working on a React workshop with two of my classmates. When I ran &lt;code&gt;npm install&lt;/code&gt; on the project, I was informed that I should upgrade one of the dependencies of the app we were building, because our version was vulnerable to “Regex DoS,” and I knew exactly what that meant, thanks to this talk!&lt;/p&gt;
-
-&lt;p&gt;I learned the basics of cryptography with &lt;a href=&#34;https://twitter.com/adam_englander&#34; target=&#34;_blank&#34;&gt;Adam Englander&lt;/a&gt; – what it is, what makes good cryptography, the different types, and some best practices. I also learned about data validation with &lt;a href=&#34;https://www.linkedin.com/in/paul-milham-6693a810&#34; target=&#34;_blank&#34;&gt;Paul Milham&lt;/a&gt;, why it’s important (we’ve all seen &lt;a href=&#34;https://xkcd.com/327/&#34; target=&#34;_blank&#34;&gt;the XKCD comic&lt;/a&gt;, right?), tools that you can use to do it (&lt;a href=&#34;https://github.com/hapijs/joi&#34; target=&#34;_blank&#34;&gt;Joi&lt;/a&gt;, &lt;a href=&#34;https://github.com/continuationlabs/celebrate&#34; target=&#34;_blank&#34;&gt;Celebrate&lt;/a&gt;, &lt;a href=&#34;https://www.npmjs.com/package/tean&#34; target=&#34;_blank&#34;&gt;Tean&lt;/a&gt;), and how to make sure that data validation is coded into your app, and that it isn’t tossed off to the wayside.&lt;/p&gt;
-
-&lt;h2 id=&#34;other-not-strictly-technical-things&#34;&gt;Other, Not-Strictly-Technical Things&lt;/h2&gt;
-
-&lt;h3 id=&#34;including-some-very-necessary-thank-yous&#34;&gt;Including some very necessary thank yous&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;There was a distinct lack of women. Someone in passing told me that only about 10% of the attendees were women. Regardless of the actual proportion, I often found myself one of a few women in a room at any given time. And, all of the opening keynote speakers were white men. I wasn’t really surprised at all, but it was just another reminder of tech’s diversity problem.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;On a different, but related-to-diversity-and-inclusion, note, the conference provided onsite childcare. I don’t have a child, but I think it’s awesome that they provided it! Also, the JW Marriott, where the conference was held, had both gender-neutral and gender-specific bathrooms on opposite sides of the floor. So, if you were uncomfortable with one, you had the option of the other.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I’ve been meaning to get myself a Raspberry Pi and start tooling around with it, and just hadn’t gotten around to it. So, when I discovered that I could get one for free by doing a few Google Cloud coding challenges, I was all about it! I learned how to use the Cloud Shell &amp;amp; gcloud, I deployed a basic Node.js Express application in the App Engine, I used the Cloud Vision API to detect objects, faces, and landmarks in photos, and translated a small speech sample to text using the Cloud Speech API. I also learned how to use vim – or at least, I was able to Google my way through using it while doing all of these! After these, &lt;a href=&#34;https://twitter.com/BethQiang/status/803717252755419136&#34; target=&#34;_blank&#34;&gt;I earned my Raspberry Pi – and got a Cardboard as a bonus&lt;/a&gt;!&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I have two groups of people to give enormous thanks to. The first is Women Who Code, without whom I never would have been able to attend due to cost. The second is my amazing instructors at Fullstack, for working with me on giving me early access to workshops and previous cohorts’ lectures, which allowed me to work ahead so that I could take two days away from class without missing out on too much!&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

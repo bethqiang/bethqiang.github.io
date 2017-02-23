@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bethqiang.com/blog/2017/02/23/every-new-beginning-comes-from-some-other-beginnings-end/</loc>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bethqiang.com/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up/</loc>
     <lastmod>2017-02-20T00:00:00+00:00</lastmod>
   </url>
@@ -204,7 +209,7 @@
   
   <url>
     <loc>http://bethqiang.com/</loc>
-    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -216,7 +221,7 @@
   
   <url>
     <loc>http://bethqiang.com/blog/</loc>
-    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -270,13 +275,13 @@
   
   <url>
     <loc>http://bethqiang.com/tags/fullstack-academy/</loc>
-    <lastmod>2017-02-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bethqiang.com/tags/fullstack-reflections/</loc>
-    <lastmod>2016-12-14T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -402,6 +407,12 @@
   <url>
     <loc>http://bethqiang.com/tags/women-who-code/</loc>
     <lastmod>2016-12-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bethqiang.com/tags/working-women-advocates/</loc>
+    <lastmod>2017-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

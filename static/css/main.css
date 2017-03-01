@@ -227,7 +227,6 @@ section.skills p {
 
 section.portfolio {
   background-color: #3F51B5;
-  padding-bottom: 0;
 }
 
 section.portfolio .portfolio-card-container {
@@ -282,6 +281,41 @@ section.portfolio .portfolio-card-container {
 
 .card .links a {
   font-weight: 500;
+}
+
+/* ---------- Homepage - Community ---------- */
+
+section.community {
+  background-color: #303F9F;
+}
+
+section.community .community-container {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #FFFFFF;
+  border-radius: 2px;
+  height: 100%;
+  max-width: 35em;
+  display: table;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+section.community .community-container .row {
+  height: 100%;
+  display: table-row;
+}
+
+section.community .community-container .vertical-center {
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+}
+
+section.community .community-container img {
+  width: 100%;
 }
 
 

@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minecraft on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/minecraft/index.xml</link>
+    <description>Recent content in Minecraft on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/minecraft/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
+      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <description>
+
+&lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
+
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+
+&lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
+
+&lt;p&gt;In the afternoon, we had our first Fullstack Hackathon. We worked among our learning groups to create something in Minecraft using &lt;a href=&#34;http://scriptcraftjs.org&#34; target=&#34;_blank&#34;&gt;ScriptCraft&lt;/a&gt;, a Minecraft plugin that lets you extend the game and build using JavaScript. Our team ended up building what we originally called &amp;ldquo;The Hunger Games&amp;rdquo; – we could specify the size of a maze to be built, and how many animals (we tested with chickens, to not have to worry about randomizing animals and such) would be placed in the maze. The maze would then programmatically be built in real-time, the chickens were placed, and then players would enter the maze and try to kill as many chickens as they could. The game would keep track of how many chickens each player killed.&lt;/p&gt;
+
+&lt;p&gt;(We later re-named it to &amp;ldquo;Chicken Rain&amp;rdquo; after a comment from a classmate, because we released all of the chickens at once from the sky, thereby making it rain chickens for a small period of time.)&lt;/p&gt;
+
+&lt;p&gt;Though it sounds relatively simple and we don&amp;rsquo;t have a huge amount of code (minus comments and failed attempts and whitespaces, it&amp;rsquo;s only about 40 lines), it took a lot of effort and researching to figure out how to do each baby step. The hardest part for us was attempting to place chickens where there aren&amp;rsquo;t already blocks from the maze so that the chickens would actually be in the maze, and not on top of it. We weren&amp;rsquo;t able to solve this issue in the time that was given to us – apparently, ScriptCraft has really weird object structures, so you can&amp;rsquo;t just pull out a property like you could in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
+
+&lt;p&gt;Despite the learning curve, it was a lot of fun, and it was a great way to destress from the checkpoint. It was also really cool to apply our JavaScript knowledge to a &lt;em&gt;completely&lt;/em&gt; different context.&lt;/p&gt;
+
+&lt;h2 id=&#34;discovering-the-hidden-side-of-jquery&#34;&gt;Discovering the Hidden Side of JQuery&lt;/h2&gt;
+
+&lt;p&gt;Today was spent entirely on JQuery. I thought this would be a &amp;ldquo;oh, let&amp;rsquo;s catch up with a good friend&amp;rdquo; kinda day – JQuery and I have spent a lot of time together throughout the my earning of Free Code Camp&amp;rsquo;s Front-End Certification, but it turns out, there&amp;rsquo;s &lt;em&gt;a lot&lt;/em&gt; I don&amp;rsquo;t know about JQuery.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
+
+&lt;p&gt;When we started the &amp;ldquo;add&amp;rdquo; functionality, we weren&amp;rsquo;t really thinking about how to make our code reusable, so we ended up writing basically the same 13 lines of code for all three sections. (We&amp;rsquo;re totally violating DRY in probably every way possible.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#hotels&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var selectedOption = $(&amp;quot;#hotel-choices option:selected&amp;quot;).text();
+  var hotelIndex;
+  hotels.forEach(function(hotel, index) {
+    if (hotel.name === selectedOption) {
+      hotelIndex = index;
+    }
+  })
+  var hotelLocation = hotels[hotelIndex].place.location;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
+    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
+    selectedOption +
+    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
+  var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
+  $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;drawMarker&lt;/code&gt; function on the second-to-last line was originally part of our &lt;code&gt;maps.js&lt;/code&gt; inside of another function, but because we needed to access it here, we ended up making it a global function. Our instructor brought up the idea of using a &amp;ldquo;fake&amp;rdquo; &lt;code&gt;module.exports&lt;/code&gt;/&lt;code&gt;require&lt;/code&gt; for the front-end as an alternative, so that&amp;rsquo;s definitely something I want to look into once we&amp;rsquo;re able to get the functionality down.&lt;/p&gt;
+
+&lt;p&gt;The thing that we hands-down struggled with the most was trying to connect the marker to the item that was added, so that when we deleted the item, the marker would be deleted along with it. The solution we ended up coming up with is also a little bit of a mess, but we were &lt;em&gt;so happy&lt;/em&gt; when we finally got it working.&lt;/p&gt;
+
+&lt;p&gt;In the second-to-last line of the code above, we saved the marker in the (unfortunately also global) variable &lt;code&gt;markerTest&lt;/code&gt;. Then, we used JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method on the &lt;code&gt;#hotel-itinerary&lt;/code&gt; div with the corresponding database &lt;code&gt;id&lt;/code&gt; of the item to store the name of the hotel/restaurant/activity, and the marker that was just added. Then, to remove both:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#itinerary&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var name = $(this).siblings()[0].textContent;
+  var index = $(this).parent().attr(&#39;id&#39;);
+  var parent = $(this).parent().parent().attr(&#39;id&#39;);
+  var marker = $(&amp;quot;#&amp;quot; + parent + &amp;quot; #&amp;quot; + index).data(name);
+  marker.setMap(null);
+  $(this).parent().remove();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Essentially, we jumped through several hoops to find the corresponding &lt;code&gt;div&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; of the text next to the &amp;ldquo;X&amp;rdquo; button that was clicked, and then used that to look up the marker that was stored with the name. &lt;code&gt;marker.setMap(null)&lt;/code&gt; removes that specific marker, and then we finally remove the actual div containing the text and the button.&lt;/p&gt;
+
+&lt;p&gt;We were able to figure out how to add a day with slightly less headaches, and our challenge for tomorrow will be to figure out how to switch between days.&lt;/p&gt;
+
+&lt;h2 id=&#34;intro-to-es6&#34;&gt;Intro to ES6&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
+
+&lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 3, Days 2 and 3: On Feeling Completely Overwhelmed</title>
+      <link>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</link>
+      <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/16/on-feeling-completely-overwhelmed/</guid>
+      <description>
+
+&lt;p&gt;Let’s talk about feelings for a second. I’m generally a very optimistic person with a decent amount of confidence in myself, my critical-thinking and problem-solving abilities, and my ability to stick with something when it’s challenging. I don’t like to dwell on the negatives, and I generally try not to let myself get too down.&lt;/p&gt;
+
+&lt;p&gt;But today was kind of a sucky day. It didn’t start off that way. I woke up after six hours of sleep feeling a little sleepy, but feeling pretty good about most of the material we had covered in the past couple of days. I knew that my blog post from yesterday needed editing, and set out to do that before class.&lt;/p&gt;
+
+&lt;p&gt;As I was editing, I realized that maybe I didn’t understand some of the things we did as much as I thought I did. My post didn’t really make sense in a lot of places, and I couldn’t figure out how to &lt;em&gt;make&lt;/em&gt; it make sense. Then, we reviewed the solution to the workshop we did yesterday, and I quickly started getting overwhelmed – I knew generally how to write decent tests, and I thought I had a pretty good grasp of promises, but I was having a really hard time seeing how everything was connecting.&lt;/p&gt;
+
+&lt;p&gt;Then, we talked more in-depth about promises, and my brain was still a little boggled and twisted from the session before, and I wasn’t able to follow as much as I maybe could have otherwise. By the end of the morning, I was completely overwhelmed, stressed, and my confidence was at the lowest point it’s been since Fullstack began. My brain was running in circles around itself, and even things I knew that I knew started to not make any sense.&lt;/p&gt;
+
+&lt;p&gt;During lunch, when I usually take some time to read programming blogs or review what we covered during the morning or a variety of related things, my sole goal was to get out of the house and do something unrelated to coding for the entire hour and a half. I took a 45 minute walk while listening to a new podcast by Stephen Dubner, of Freaknomics fame, called &lt;a href=&#34;http://freakonomics.com/tmsidk/&#34; target=&#34;_blank&#34;&gt;Tell Me Something I Don’t Know&lt;/a&gt;. (It was literally a podcast about random facts. It was pretty interesting, though I don’t know if I’ll be a regular listener.) I then ate lunch, watched some cute puppy videos, and read about politics.&lt;/p&gt;
+
+&lt;p&gt;Once I had an opportunity to calm down and reassure myself that I did in fact, know how to code and solve problems with some degree of competency, and that yes, I could do this, I knew I needed to change something. I needed more time. Time for me to do thorough concept reviews in the evenings, and do fun Code Wars problems, and go to meetups, and work on personal projects, and do more functional programming because for some reason that really excites me. I needed time do things that I find fun that aren&amp;rsquo;t directly related to class. And also, you know, sleep. But more importantly, I &lt;em&gt;also&lt;/em&gt; needed some time every day to do things like go for 45 minute walks or watch cute puppy videos or get dinner with a friend once in a blue moon. And run. Running helps. (That&amp;rsquo;s a long list, I know.)&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in &lt;a href=&#34;http://bethqiang.com/blog/2016/11/13/fullstack-academy-week-2/&#34; target=&#34;_blank&#34;&gt;last week&amp;rsquo;s reflection post&lt;/a&gt;. I knew, at the time of writing that, that I needed to change &lt;em&gt;something&lt;/em&gt;. But I didn&amp;rsquo;t realize that I couldn&amp;rsquo;t keep doing what I was doing, and still stay sane.&lt;/p&gt;
+
+&lt;p&gt;Outside of class and evening reviewing (which, in and of itself, I need to find a way to optimze), writing these posts have by far taken the largest chunk of my time. Daily 1,500-word blog posts are great, and I’m sure I’ll thank myself for them later. But, I’m starting to realize with the schedule that we have and the time I need outside of class, they’re unsustainable. Frankly, they take too much time to write, and even just saving an hour a day will give me an hour to start doing other things. That definitely doesn&amp;rsquo;t mean I&amp;rsquo;m going to abandon writing about each day. I just have to choose more wisely what I want to write, and cap the length of and detail in each post, thereby lessening the time that they take.&lt;/p&gt;
+
+&lt;p&gt;In the interest of keeping some kind of record of what we’ve been doing and learning the past two days, here’s a (sort of) quick-and-dirty summary.&lt;/p&gt;
+
+&lt;h2 id=&#34;back-end-testing-and-sequelize-magic&#34;&gt;Back-End Testing and Sequelize Magic&lt;/h2&gt;
+
+&lt;p&gt;We learned all about testing on the back-end. Some of the key takeaways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It’s generally preferable to use a different database to test your code than when you’re developing or when your app is in production, so that you can stick stuff in and take stuff out and completely reset your database freely. This can be done pretty easily by creating a process environment variable, and then setting a conditional for that variable when you’re setting your database.&lt;/li&gt;
+&lt;li&gt;Constantly talking about Mocha and Chai made me constantly want a hot, creamy, caffeine- and sugar-laden beverages.&lt;/li&gt;
+&lt;li&gt;When we’re using promises in our tests, which is often because much of what we’re testing is asynchronous, we need to include either &lt;code&gt;return&lt;/code&gt; or &lt;code&gt;done&lt;/code&gt;. If neither are included, Mocha reads our tests, and passes them, &lt;em&gt;before our async functions finish doing what they’re supposed to do&lt;/em&gt;. And once our async functions are done, we&amp;rsquo;ll get an error – but the tests have already passed and Mocha&amp;rsquo;s over it. So that’s not good.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Done&lt;/code&gt; is passed into our test function, and then we can invoke it at the end (and in our &lt;code&gt;catch&lt;/code&gt;) to signal to Mocha that it’s good to go and can move on to the next test. If we don’t want to use &lt;code&gt;done&lt;/code&gt;, we can use &lt;code&gt;return&lt;/code&gt; instead, and to Mocha, it’ll almost be like an implied &lt;code&gt;then&lt;/code&gt; after.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If we&amp;rsquo;re creating 3 pages to test if our &lt;code&gt;findByTag&lt;/code&gt; function works, with &lt;code&gt;done&lt;/code&gt;, this would look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;describe(&#39;findByTag&#39;, function () {
+  beforeEach(function(done) { // done is passed in
+    Promise.all([
+      Page.create({ new page info }),
+      Page.create({ new page info }),
+      Page.create({ new page info })
+    ])
+    .then(function() { // our success/error functions
+      done();
+    }, done)
+  })
+  it(&#39;gets pages with the search tag&#39;, function(done) { // done is passed in here as well
+    Page.findByTag(&#39;tag&#39;)
+    .then(function(pages) {
+      expect(pages).to.equal(something)
+      expect(pages).to.equal(somethingelse)
+      done(); // this indicates the end of the async
+    })
+    .catch(done); // error-handling
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With &lt;code&gt;return&lt;/code&gt;, the same code would look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;describe(&#39;findByTag&#39;, function () { // no done being passed
+  beforeEach(function() {
+    return Promise.all([ // return this
+      Page.create({ info }),
+      Page.create({ info }),
+      Page.create({ info })
+    ]) // no need for success/error functions using done
+  })
+  it(&#39;gets pages with the search tag&#39;, function() { // no done being passed
+    return Page.findByTag(&#39;tag&#39;) // return this
+    .then(function(pages) {
+      expect(pages).to.equal(something)
+      expect(pages).to.equal(somethingelse) // no done after this
+    })
+  }); // and no need for a catch(done) statement here
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On Tuesday, my pair and I were working on tests for our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;Wikipedia clone&lt;/a&gt;, and for one of them, we were creating an instance that pulled from two models, &lt;code&gt;User&lt;/code&gt; and &lt;code&gt;Page&lt;/code&gt;. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// in models &amp;gt; index.js, set associations:
+Page.belongsTo(User);
+User.hasMany(Page);
+
+// in our test specs, creating a new instance:
+beforeEach(function(done) {
+User.create({
+  name: &#39;Spock&#39;,
+  email: &#39;spock@starfleet.gov&#39;,
+  pages: [{
+    title: &#39;Science Officer\&#39;s Log #7&#39;,
+    content: &#39;Humans are emotional.&#39;,
+    status: &#39;open&#39;,
+    tags: [&#39;Sci-fi&#39;, &#39;TV&#39;]
+    }]
+    },
+    {
+      include: [ Page ]
+    })
+    .then(newInfo =&amp;gt; {
+      newPageInfo = newInfo.pages; // our pages data can now be accessed via the pages property
+      done();
+    })
+    .catch(done);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also learned that Sequelize is way too smart and picky for its own good. For an entire hour, we tried an incredible number of ways and syntaxes to create a &lt;code&gt;page&lt;/code&gt; property, but every time, we’d get an empty array back. The fact that we got an array back showed us that Sequelize was trying to give us something, just not what we wanted. Our fellow had a sudden realization – Sequelize was looking for a &lt;code&gt;pages&lt;/code&gt; property, and we were trying to give it a &lt;code&gt;page&lt;/code&gt; property. He also told us a funny (or not, if you were him) story about how he was once trying to do something similar with a property that ended in a “y” – which, in the English language, the plural becomes “ies.” For an entire day or two, he was trying to figure out why Sequelize was putting up a fit, before realizing he had specified the plural as “ys.”&lt;/p&gt;
+
+&lt;h2 id=&#34;promise-mechanics-and-building-a-promise-library&#34;&gt;Promise Mechanics and Building a Promise Library&lt;/h2&gt;
+
+&lt;p&gt;Today, we spent a good deal of time talking about the mechanics of promises, and we spent the afternoon building a deferral-style promise library similar to &lt;a href=&#34;https://docs.angularjs.org/api/ng/service/$q&#34; target=&#34;_blank&#34;&gt;AngularJS’s $q service&lt;/a&gt;. We created &lt;code&gt;$Promise&lt;/code&gt; and &lt;code&gt;Deferral&lt;/code&gt; classes, with the &lt;code&gt;then&lt;/code&gt; method on the &lt;code&gt;$Promise&lt;/code&gt; prototype that took two callback functions and the &lt;code&gt;resolve&lt;/code&gt; and &lt;code&gt;reject&lt;/code&gt; methods on the &lt;code&gt;Deferral&lt;/code&gt; prototype.&lt;/p&gt;
+
+&lt;p&gt;The first roadblock we faced was figuring out how to trigger the &lt;code&gt;then&lt;/code&gt; and the callback functions, which was stored in the &lt;code&gt;$promise&lt;/code&gt; instance, when the promise was resolved. Our first idea was to include it in the &lt;code&gt;resolve&lt;/code&gt; and &lt;code&gt;reject&lt;/code&gt; methods, but then they’d be triggered right after a promise was fulfilled – not when the &lt;code&gt;then&lt;/code&gt; was called. We ended up creating an intermediate function, whose job was solely to take the callback function off of the array it was stored in and run it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$Promise.prototype.callHandlers = function(data) {
+  if (this._state !== &#39;pending&#39;) {
+    let fn = this._handlerGroups.shift();
+    // handlerGroups was an array of objects containing success and failure functions
+    fn.successCb(data);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The second challenge we faced was to ensure that, even if events occurred in the opposite order – if the promise is resolved after the &lt;code&gt;then&lt;/code&gt; – that the &lt;code&gt;then&lt;/code&gt; would still run. We contemplated a myriad of options, including recursion, a while loop, a &lt;code&gt;setInterval&lt;/code&gt; to check the state of the promise, and ended up going down a rabbit hole trying to research &lt;code&gt;setImmediate&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We later learned that the answer was &lt;em&gt;incredibly&lt;/em&gt; easy – we could just call our &lt;code&gt;callHandlers&lt;/code&gt; function in the same function that fulfilled the promise. When the &lt;code&gt;then&lt;/code&gt; is run initially (before the promise is fulfilled), it’ll add its callback functions to the storage array, and even though it calls the &lt;code&gt;callHandlers&lt;/code&gt; method, the &lt;code&gt;callHandlers&lt;/code&gt; method won’t invoke the callback because the state is still pending. When the promise is resolved, then we just need to call the &lt;code&gt;callHandlers&lt;/code&gt; method to run the callback functions that were already stored.&lt;/p&gt;
+
+&lt;h2 id=&#34;game-night-round-2&#34;&gt;Game Night, Round 2&lt;/h2&gt;
+
+&lt;p&gt;We also had another Game Night, where I finally got to see some of the things my fellow classmates have been building. Someone created a pool surrounded by lava. Someone else claimed an enormous plot of land – our theory is that he&amp;rsquo;s trying to build a subdivision and drive up rent. One of our instructors decided to cover his entire plot in glass blocks (because, why not, I guess?), and the other instructor built a cute little cabin. Apparently, someone built an absolutely frightening house – I can’t tell you what that means or what it looks like, because I was too absorbed in building my treehouse to venture over there. We’re having a Minecraft hackathon on Monday afternoon, and I have very little idea of what that involves, but I’m really excited!&lt;/p&gt;
+
+&lt;p&gt;And on another note, it&amp;rsquo;s both hilarious and not how half of this post built up into “I need to write shorter posts”&amp;hellip;and this is over 1600 words, not including the code blocks. C’mon, Beth.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 2, Day 5: JavaScript Promises and Minecraft</title>
+      <link>http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/</link>
+      <pubDate>Sat, 12 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/12/javascript-promises-and-minecraft/</guid>
+      <description>
+
+&lt;p&gt;After the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone/&#34; target=&#34;_blank&#34;&gt;callback hell we experienced yesterday&lt;/a&gt;, we learned about promises today. A promise, according to my instructor and &lt;a href=&#34;https://promisesaplus.com/&#34; target=&#34;_blank&#34;&gt;the Promises/A+ Spec&lt;/a&gt; and basically any other legitimate source, represents the &lt;strong&gt;eventual result of an asynchronous operation&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s bring back our (slightly refactored, with the &lt;code&gt;insertIntoTable&lt;/code&gt; function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.post(&#39;/tweets&#39;, function(req, res, next){
+  let userName, name = req.body.name, content = req.body.content;
+    client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
+      if (err) return next(err);
+      if (result.rows.length === 0) {
+        client.query(&#39;INSERT INTO users (name) VALUES ($1)&#39;, [name], function(err, result) {
+          if (err) return next(err);
+          client.query(&#39;SELECT id FROM users WHERE name = $1&#39;, [name], function(err, result) {
+            if (err) return next(err);
+            insertIntoTable(result.rows[0].id, content);
+          });
+        });
+      } else {
+        insertIntoTable(result.rows[0].id, content);
+      }
+    });
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I don’t know what you’re talking about, it’s perfect.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Just kidding. For real this time:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It’s not very portable – you’d be hard-pressed to reuse parts of this code anywhere else.&lt;/li&gt;
+&lt;li&gt;You can’t perform concurrent callback functions if you wanted to.&lt;/li&gt;
+&lt;li&gt;Our code isn’t any kind of linear, and it can be hard to read and figure out what, when, and where things are happening and variables are passed through.&lt;/li&gt;
+&lt;li&gt;We’re constantly repeating the error handler, although we need to if we want any error that happens to be registered – we can’t just omit it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;basics-of-promises&#34;&gt;Basics of Promises&lt;/h2&gt;
+
+&lt;p&gt;We were given a &lt;code&gt;promisifiedReadFile&lt;/code&gt; function, which returned a new &lt;code&gt;Promise&lt;/code&gt; with a &lt;code&gt;fs.readFile&lt;/code&gt; function inside of it. We did various exercises in the context of reading and subsequently logging stanzas of a poem, where each stanza was its own text file. So, to read and log stanzas one and two, in any order:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1) {
+  console.log(stanza1);
+});
+
+promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
+.then(function(stanza2) {
+  console.log(stanza2);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These two read processes would occur in parallel. However, one of the powerful thing about promises is that we can chain them in a specified order, so one thing always happens after another has completed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
+})
+.then(function(stanza2) {
+    console.log(stanza2);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;We need to return the promise at the end of the first &lt;code&gt;then&lt;/code&gt;&lt;/strong&gt; – otherwise, the second &lt;code&gt;then&lt;/code&gt; wouldn’t know to wait for the file to be read before logging stanza 2, and then our order wouldn’t be guaranteed.&lt;/p&gt;
+
+&lt;h2 id=&#34;multiple-handlers&#34;&gt;Multiple Handlers&lt;/h2&gt;
+
+&lt;p&gt;We can also handle two promises concurrently using multiple handlers. Let’s say we don’t care in which order stanzas 2 and 3 are read and printed, we just want them to be read and printed &lt;em&gt;after&lt;/em&gt; stanza 1 is read.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const stanza1 = promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+
+stanza1
+.then(function() {
+return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+
+stanza1
+.then(function() {
+return promisifiedReadFile(&#39;poem-one/stanza-03.txt&#39;);
+})
+.then(function(stanza3) {
+  console.log(stanza3);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;error-handling&#34;&gt;Error Handling&lt;/h2&gt;
+
+&lt;p&gt;Another one of the advantages of using promises is error handling. Let’s see what our promise chain would look like if we included an error handler. We can do this one of three ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new &lt;code&gt;then&lt;/code&gt; statement with the first argument as null and the second being the error function&lt;/li&gt;
+&lt;li&gt;Attach our error handler to our last &lt;code&gt;then&lt;/code&gt; statement&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;catch&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+.then(null, function(err) { // the first argument is always the success function, the second is the failure function
+  console.log(err);
+})
+
+// is equivalent to
+
+promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
+})
+.then(function(stanza2) { // success function
+  console.log(stanza2);
+},
+function(err) { // failure function
+  console.log(err);
+};
+)
+// is equivalent to
+
+promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1) {
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;)
+})
+.then(function(stanza2) {
+  console.log(stanza2);
+})
+.catch(function(err) { // use catch instead
+  console.log(err);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Either stanza 1 or stanza 2 could have failed, and in both cases, the promise chain would end and the closest error handler after the promise would run. This means we don’t need to create an error handler for each part of the function; we can just include a unified error at the end. If any one of the parts before it fail, it will look for the closest error handler after it, and use that to handle the error. The promise chain is only followed if &lt;em&gt;everything&lt;/em&gt; successful.&lt;/p&gt;
+
+&lt;p&gt;However, something to be aware of is that &lt;strong&gt;if an error is successfully handled, that promise will have succeeded&lt;/strong&gt;. What this means is that if we have a promise chain that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1){
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
+})
+.then(function(stanza2) {
+  console.log(stanza2)
+})
+.then(null, function(err) {
+  console.log(err);
+})
+.then(function() {
+  console.log(&#39;successfully done&#39;);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If there is an error in reading stanza 1, we&amp;rsquo;ll skip past the second &lt;code&gt;then&lt;/code&gt; and go directly to the error handler. If our error handler is successful in handling that error (e.g. if another error doesn’t arise when it’s running the function inside of it), then we’ll see “everything successfully done” in the console – even though it wasn’t.&lt;/p&gt;
+
+&lt;p&gt;If we &lt;em&gt;only&lt;/em&gt; wanted to see “everything successfully done” if the reading of both stanzas 1 and 2 were successful, we’d have to either force another error to be thrown in our error handler (which seems a bit silly), or we could just move the &lt;code&gt;console.log&lt;/code&gt; of the success message before the error handler, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;promisifiedReadFile(&#39;poem-one/stanza-01.txt&#39;)
+.then(function(stanza1){
+  console.log(stanza1);
+  return promisifiedReadFile(&#39;poem-one/stanza-02.txt&#39;);
+})
+.then(function(stanza2) {
+  console.log(stanza2)
+})
+.then(function() {
+  console.log(&#39;everything successfully done&#39;);
+})
+.then(null, function(err) {
+  console.log(err);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If no errors occur, the entire promise chain will be followed and we’ll get a “everything successfully done” console logged at the end. If an error is thrown somewhere, our message won’t be logged.&lt;/p&gt;
+
+&lt;h2 id=&#34;promise-all-and-promise-each&#34;&gt;Promise.all and Promise.each&lt;/h2&gt;
+
+&lt;p&gt;Finally, we also used &lt;code&gt;Promise.all&lt;/code&gt; and &lt;code&gt;Promise.each&lt;/code&gt;, the last of which is fairly specific to the bluebird library, but very useful in certain cases.&lt;/p&gt;
+
+&lt;p&gt;Instead of having to manually write out eight &lt;code&gt;then&lt;/code&gt; statements for each of eight stanzas, we can use &lt;code&gt;Promise.all&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// create an array that contains filenames for each of the stanzas
+let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+  return &#39;poem-one/&#39; + &#39;stanza-0&#39; + n + &#39;.txt&#39;;
+});
+
+let promiseArr = [];
+// create an array of promises corresponding to each file
+filenames.map(function(filename) {
+  promiseArr.push(promisifiedReadFile(filename)
+  .then(function(filename) {
+    console.log(filename);
+    })
+  )
+});
+
+Promise.all(promiseArr)
+.then(function() {
+  console.log(&#39;everything succesfully done&#39;);
+})
+.then(null, function(err) {
+  console.log(err);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First, we create an array that contains filenames for each of the stanzas. Then, we create an array of promises corresponding to the reading and printing of each file. Lastly, we pass our promise array as an argument into &lt;code&gt;Promise.all&lt;/code&gt;, and when all of the stanzas are successfully read and printed, log a success message. If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.&lt;/p&gt;
+
+&lt;p&gt;An important thing to note is that &lt;code&gt;Promise.all&lt;/code&gt; logs the result of promises in the order that files are done being read – not necessarily sequentially. If we wanted them in order, we’d have to use &lt;code&gt;Promise.each&lt;/code&gt; instead.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let filenames = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) {
+  return &#39;poem-one/&#39; + &#39;stanza-0&#39; + n + &#39;.txt&#39;;
+});
+
+let promiseArr = [];
+
+Promise.each(filenames, function(filename) {
+  return promisifiedReadFile(filename)
+  .then(function(stanza) {
+    console.log(stanza);
+  });
+})
+.then(function() {
+  console.log(&#39;everything successfully done&#39;);
+})
+.then(null, function(err) {
+  console.error(err);
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After we have our array of filenames, we pass the filename and a callback function into &lt;code&gt;Promise.each&lt;/code&gt;. The callback function returns a new promise for the first file, then prints it, then returns a new promise for the second file, then prints it, and so on until it runs through all eight files. Once it does, then it console.logs “everything successfully done.” If an error occurs anywhere in reading or printing those eight stanzas, the promise chain will be stopped and the error handler at the bottom will catch it.&lt;/p&gt;
+
+&lt;p&gt;So, in summary, promises allow for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Portable code/functions&lt;/li&gt;
+&lt;li&gt;“Linear”/“flat” chains&lt;/li&gt;
+&lt;li&gt;Multiple handlers&lt;/li&gt;
+&lt;li&gt;Unified error handling&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;minecraft&#34;&gt;Minecraft&lt;/h2&gt;
+
+&lt;p&gt;Friday evening, we had our first Game Night. Because hacking and using VR in Minecraft will both be a part the upcoming weeks, we used Game Night this week to start learning how to play. Fullstack actually built their New York campuses (Fullstack and Grace Hopper) in Minecraft – the end result is seriously impressive. We were also each given a plot of land in front of the building to build whatever we wanted to.&lt;/p&gt;
+
+&lt;p&gt;A lot of mishaps were had, but a lot of fun was as well. A few of our more notable events include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We didn’t quite get the settings right for people to be able to build or destroy or do anything except walk/fly around and whack each other&amp;hellip; so that’s what we did for 45 minutes, until staff did a hack to work around the issue.&lt;/li&gt;
+&lt;li&gt;A few of our cohort kept getting lost in the forest, or stuck outside, and more than a few fell off of the world multiple times.&lt;/li&gt;
+&lt;li&gt;A classmate was building a lava moat around his plot (because you know, why not?) and at one point, his lava spilled over to someone else’s plot. It was quite the effort to contain the lava before it spread.&lt;/li&gt;
+&lt;li&gt;One of Fullstack’s co-founders attempted to build &lt;a href=&#34;http://www.panynj.gov/wtcprogress/transportation-hub.html&#34; target=&#34;_blank&#34;&gt;the Oculus structure at the World Trade Center transportation hub&lt;/a&gt;. And once he got bored of that (the partial thing was actually quite impressive!), he started continuously teleporting one of our instructors to him and then blowing him up with TNT.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And if you’re curious, here’s a small snippet of video that our Product Manager, Mark Davis, recorded:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/jzLrYTZ47sc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had a lot of fun, and I’m kind of obsessed with my cohort and our staff and instructors. I’m &lt;em&gt;really&lt;/em&gt; looking forward to getting our VR headsets and trying them out in our virtual world, as well as just getting to spend more time with all of these people, both in front of a code editor and not!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

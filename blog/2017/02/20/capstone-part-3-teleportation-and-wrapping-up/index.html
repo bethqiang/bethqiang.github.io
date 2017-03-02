@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Capstone, Part 3: Teleportation and Wrapping Up</title>
+  <meta name="author" content="Beth Qiang" />
+  <meta name="description" content="A developer's thoughts on life, code, and the pursuit of happiness.">
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.com/css/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.com/css/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.com/img/icon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.com/img/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="Capstone, Part 3: Teleportation and Wrapping Up" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2017/02/20/capstone-part-3-teleportation-and-wrapping-up//" />
+
+  
+  <script src="//load.sumome.com/" data-sumo-site-id="06bc5d9f34c83911fcc208aed68dbbddb75e8ed9b9b190fa3e380b398ab5d80f" async="async"></script>
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:beth@bethqiang.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Capstone, Part 3: Teleportation and Wrapping Up</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">February 20, 2017</p>
+              <div id="post-content">
+                
+
+<p>Teleportation was something I ended up working on for basically a week straight, during which I produced multiple iterations of how to accomplish it with the Daydream controller. The plan was to shoot a raycaster into the ground, find where it intersected with the ground, and then move the user&rsquo;s avatar to that intersection point. Sounds simple enough, right?</p>
+
+<p>The <a href="https://github.com/ryanbetts/aframe-daydream-controller-component" target="_blank">aframe-daydream-controller-component</a> comes with a built-in A-Frame raycaster, so setting up a simple scene with the controller and configuring it so that you&rsquo;d move where your controller was pointing wasn&rsquo;t terribly difficult. (<a href="https://github.com/bethqiang/aframe-daydream-controller" target="_blank">Here&rsquo;s</a> a lil baby thing I created to test it in an isolated environment, if you&rsquo;re curious.)</p>
+
+<p>At first, I was getting wildly different coordinates when clicking the same place over and over, and was confused about why that was. I reached out on the <a href="https://aframevr-slack.herokuapp.com/" target="_blank">A-Frame Slack</a> (which, sidenote, is a great place if you&rsquo;re interested in or working with A-Frame), and learned that raycasters, at least the way they&rsquo;re set up in A-Frame right now, typically will only give accurate coordinates when you&rsquo;re detecting an intersection with something with depth — so instead of planes as our grounds, we had to use boxes with significant depth and then re-position them so that their top face was at <code>y=0</code>. Just one of those A-Frame oddities that still haven&rsquo;t quite been ironed out, it seems.</p>
+
+<p>Once I got that working successfully on a little baby app, I then attempted to implement that into our full app, and ran into a pretty big wall. With all of the assets we were loading and the other demands we were making of the browser, the browser refused to also correctly load the controller and its corresponding raycaster. Raycasters are generally pretty computationally heavy, and it seems we hit the limits of what a mobile browser could do.</p>
+
+<p>So, I needed a way to bring down the expense of using a raycaster, but a raycaster was also my best bet in terms of relatively easily and accurately getting an intersection point. Thus, after talking to our fellow and another team who was also using A-Frame for their Capstone Project, we decided to create a &ldquo;temporary&rdquo; raycaster — when the controller&rsquo;s <code>button down</code> event fired, we&rsquo;d create our raycaster, shoot it out with the direction vector that our controller had, and find the intersection with the ground. Then, it&rsquo;d cease to exist until the next time the <code>button down</code> event was fired.</p>
+
+<p>In attempt to reduce the load even further, as well as skip over some of the bugs with A-Frame&rsquo;s built-in raycaster, I ended up using three.js and its raycaster to do this, and placing the logic in an A-Frame component.</p>
+
+<p>To find the direction vector, I found the top and bottom vertices of the physical <code>ray</code> (really, just a cyan-colored cylinder that was attached to and came out of the controller model), and found the vector between those two points. After most of a day of debugging smaller issues with the other team, we finally got this to work! (And, I had a nice little refresher with the vector math I had learned once upon a time in linear algebra.)</p>
+
+<p>In our debugging session, I learned two primary lessons:</p>
+
+<ol>
+<li><p>A-Frame and three.js can render elements with either buffer geometries or &ldquo;regular&rdquo; geometries. Buffer geometries are more performant and reduce memory usage, but are harder to manipulate because you don&rsquo;t have access to properties like their vertices. A-Frame, by default, converts all geometries to buffer geometries, but this was a no-go because that meant we couldn&rsquo;t do what we needed to do.</p></li>
+
+<li><p>three.js&rsquo;s raycaster&rsquo;s <code>intersectObjects</code> method takes two arguments, an array of objects you want to detect an intersection with, and an optional recursive flag that&rsquo;s set to false by default if not specified. According to the documentation, <code>If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is false.</code> Because we were explicitly telling it to check for the ground, and not any of its descendants, we left this as false. After many rounds of not getting intersections when we were clearly intersecting with the ground, we changed this to <code>true</code> on the offhand that that was the issue — and what do you know, it was! We&rsquo;re still not certain why we need this recursive flag, so more investigation on this matter will definitely be happening.</p></li>
+</ol>
+
+<h2 id="the-gap">&ldquo;The Gap&rdquo;</h2>
+
+<p>One of my teammates added a really cool feature — the Gap! It&rsquo;s another room that you can access with a number of Minecraft skins, including, among many others, Admiral Grace Hopper, Princess Belle, Robocop, the Pink Power Ranger, Mario, and Woody. Clicking on a Minecraft skin changes your avatar, with a fun little &ldquo;Changed skin to [skin name]&rdquo; voiceover. It&rsquo;s super nifty!</p>
+
+<h2 id="presentation-demo-day">Presentation &amp; Demo Day!</h2>
+
+<p>We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!</p>
+
+<p>Here&rsquo;s our presentation, featuring all of the goodies I&rsquo;ve talked about over the <a href="http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/" target="_blank">past</a> <a href="http://bethqiang.com/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal/" target="_blank">three</a> posts.</p>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/I5ND_1PI77c" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0"></iframe>
+ </div>
+
+
+<p><br /></p>
+
+<p>And <a href="https://youtu.be/_M0p3UwNhB8" target="_blank">here&rsquo;s</a> a link to the entire hour of presentations, in case you want to see what my classmates have been up to!</p>
+
+<p>After that, a few more workshops, and a graduation, my Fullstack experience was over. It&rsquo;s still weird to think about, and not logging into our Zoom classroom this morning was a slightly disorienting and also mildly sad experience, but I&rsquo;m excited to continue on this journey and see what the next adventure has in store!</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=Capstone%2c%20Part%203%3a%20Teleportation%20and%20Wrapping%20Up&url=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f20%2fcapstone-part-3-teleportation-and-wrapping-up%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f20%2fcapstone-part-3-teleportation-and-wrapping-up%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f20%2fcapstone-part-3-teleportation-and-wrapping-up%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2017\/02\/20\/capstone-part-3-teleportation-and-wrapping-up\/';
+    var disqus_title = 'Capstone, Part 3: Teleportation and Wrapping Up';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2017\/02\/20\/capstone-part-3-teleportation-and-wrapping-up\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com/">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.com/tags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/design"><i class="fa fa-tags"></i> design</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/nodejs"><i class="fa fa-tags"></i> nodejs</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/working-women-advocates"><i class="fa fa-tags"></i> working-women-advocates</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.com/js/intro-header.js"></script>
+
+
+  </body>
+</html>

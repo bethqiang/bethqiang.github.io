@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Capstone, Part 2: Logging In, The Chair, and Link Traversal</title>
+  <meta name="author" content="Beth Qiang" />
+  <meta name="description" content="A developer's thoughts on life, code, and the pursuit of happiness.">
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.com/css/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.com/css/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.com/img/icon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.com/img/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="Capstone, Part 2: Logging In, The Chair, and Link Traversal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2017/02/13/capstone-part-2-logging-in-the-chair-link-traversal//" />
+
+  
+  <script src="//load.sumome.com/" data-sumo-site-id="06bc5d9f34c83911fcc208aed68dbbddb75e8ed9b9b190fa3e380b398ab5d80f" async="async"></script>
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:beth@bethqiang.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Capstone, Part 2: Logging In, The Chair, and Link Traversal</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">February 13, 2017</p>
+              <div id="post-content">
+                
+
+<p>So, it&rsquo;s been a while. In the past couple of weeks, our project has gone from a scaffolded foundation to a thing with different rooms and avatar skins and couches, and it&rsquo;s been really cool to see!</p>
+
+<h2 id="logging-in">Logging In</h2>
+
+<p>One of the first things we did following <a href="http://bethqiang.com/blog/2017/01/30/react-redux-race-conditions-webrtc/" target="_blank">my last post</a> was implement Login and OAuth. At one point, we were encountering a Sequelize race condition, where we couldn&rsquo;t refer to the <code>user</code> model with its filepath; instead, we had to import it into our file using <code>const User = require('../db').model('users')</code>. I also spent a good few hours being puzzled over the fact that, despite forming a one-to-one association, a <code>user_id</code> field was only being put on the <code>session</code> table, and a <code>session_id</code> wasn&rsquo;t being put on the <code>user</code> table. Silly me, <code>Session.belongsTo(User)</code> and <code>User.hasOne(Session)</code> will both put a <code>user_id</code> field on the <code>session</code> table. Definitely something I should have known, but at least I figured it out in the end?</p>
+
+<p>I also had my first encounter with React inline styling while creating the Login component! I haven&rsquo;t come to a firm conclusion on how I feel about it yet, but some part of me seems to prefer it. It seems&hellip;like less mental overhead somehow. I <em>didn&rsquo;t</em> like the fact that I wasn&rsquo;t able to use things like <code>:focus</code>, <code>:hover</code>, <code>:before</code>, and <code>:after</code>, which my initial styling had depended on. For the first two, I ended up installing Radium, which effectively replicated them. I also learned about syntax decorators, and sprinkled that into our Babel configuration. For the last two, I resorted to just creating two <code>div</code>s.</p>
+
+<h2 id="the-chair">THE CHAIR!!!!</h2>
+
+<p>As I mentioned in my previous post, A-Frame and React don&rsquo;t really like each other very much. They&rsquo;re fundamentally built on different programming paradigms, and there&rsquo;s a lot of smaller issues that crop up (e.g. the words <code>height</code> and <code>width</code> are apparently React-specific words and we can&rsquo;t use them as HTML attributes, or the fact that <code>a-sphere</code>s will render fine, <code>a-cylinder</code>s will render but throw wanrings, and <code>a-box</code>es won&rsquo;t render at all). Because of this, the moment we React-ified what we&rsquo;ve now dubbed &ldquo;the chair&rdquo; was a pretty epic moment for us. It was the first time that it felt like A-Frame and React played nicely with each other!</p>
+
+<p>A-Frame HTML, like normal HTML, will ignore things it doesn&rsquo;t understand. Apparently, A-Frame HTML has no concept of a <code>div</code>. Therefore, in order to render different elements, we had to wrap them in <code>a-entity</code> tags. Creating a singular chair was mostly a matter of some basic shapes and positioning.</p>
+
+<pre><code>export default (props) =&gt; (
+  &lt;a-entity id=&quot;chair&quot; position={`${props.x} ${props.y} ${props.z}`} rotation=&quot;0 180 0&quot;&gt;
+    &lt;a-entity mixin=&quot;chair-part&quot;
+              geometry=&quot;height: 1; depth: 0.05; width: 0.05&quot;
+              position=&quot;-0.25 0.5 0&quot;&gt;&lt;/a-entity&gt;
+    &lt;a-entity mixin=&quot;chair-part&quot;
+              geometry=&quot;height: 1; depth: 0.05; width: 0.05&quot;
+              position=&quot;0.25 0.5 0&quot;&gt;&lt;/a-entity&gt;
+    &lt;a-entity mixin=&quot;chair-part&quot;
+              geometry=&quot;height: 0.5; depth: 0.05; width: 0.05&quot;
+              position=&quot;-0.25 0.25 0.5&quot;&gt;&lt;/a-entity&gt;
+    &lt;a-entity mixin=&quot;chair-part&quot;
+              geometry=&quot;height: 0.5; depth: 0.05; width: 0.05&quot;
+              position=&quot;0.25 0.25 0.5&quot;&gt;&lt;/a-entity&gt;
+    &lt;a-entity mixin=&quot;chair-part&quot;
+              geometry=&quot;height: 0.05; depth: 0.05; width: 0.55&quot;
+              position=&quot;0 1 0&quot;&gt;&lt;/a-entity&gt;
+    &lt;a-entity material=&quot;color: black&quot;
+              geometry=&quot;primitive: box; depth: 0.55; height: 0.05; width: 0.55&quot;
+              position=&quot;0 0.5 0.25&quot;&gt;&lt;/a-entity&gt;
+  &lt;/a-entity&gt;
+);
+</code></pre>
+
+<p>(If an entity is a child of another entity, the parent element takes on what is analogous to absolute positioning, and its child elements take on what is analogous to relative positioning with relation to its parent element.)</p>
+
+<p>Once we had our singular React-ified chair, we passed in an array of positions. Each position was passed down to each chair via props. And voila, we had chairs on chairs on chairs!</p>
+
+<p><img src="/img/posts/2017-02/the-chair-reactifying-aframe-entities.png" alt="The chair, a demonstration in React-ifying A-Frame Entities"/></p>
+
+<h2 id="link-traversal">Link Traversal</h2>
+
+<p>Early on, it was always an idea that we&rsquo;d have different rooms &ldquo;branching off&rdquo; of our main room, where people could go to have private conversations. Our initial idea was to have one scene with interconnecting rooms literally branching off of it; almost like a real building would. However, as time went on, we realized that it might be easier for us to program the switching of rooms if we just had one room per scene, and switched out the scenes when a user entered or left a room.</p>
+
+<p>So, the next natural step would be to figure out how to get a user from one scene to another. We started off with the idea of hyperlinks, where each hyperlink would render a different component that contained a full <code>a-scene</code> and everything in it. But, once we implemented them, we realized that Chromium would knock us out of VR mode to traverse links, so that was a no-go. Mozilla has apparently worked out a fix for this, but because VR mode doesn&rsquo;t work on the Daydream with Firefox Nightly, we had to find a different workaround.</p>
+
+<p>Instead, we ended up with a single <code>a-scene</code> tag in our main React component, and switching components wrapped in <code>a-entity</code> tags in and out of it accordingly. It&rsquo;s not the most ideal solution, but as of this point in time, there doesn&rsquo;t seem to be a better way to accomplish this given the current state of the technology and Chrome&rsquo;s security measures that prevent us from using a lot of WebVR APIs.</p>
+
+<p>Our links take the form of fancy magical floating orbs that glow a certain shade of blue when you hover over them.</p>
+
+<p><img src="/img/posts/2017-02/aframe-hyperlink-orbs.png" alt="A-Frame Hyperlink Orbs"/></p>
+
+<hr />
+
+<p>Coming soon, to a blog near you: how a frog caused us a lot of mental anguish, how we solved (sort of) the teleportation/everything-else-is-eating-our-browser-resources problem, and how these two topics are very related.</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=Capstone%2c%20Part%202%3a%20Logging%20In%2c%20The%20Chair%2c%20and%20Link%20Traversal&url=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f13%2fcapstone-part-2-logging-in-the-chair-link-traversal%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f13%2fcapstone-part-2-logging-in-the-chair-link-traversal%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2017%2f02%2f13%2fcapstone-part-2-logging-in-the-chair-link-traversal%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2017\/02\/13\/capstone-part-2-logging-in-the-chair-link-traversal\/';
+    var disqus_title = 'Capstone, Part 2: Logging In, The Chair, and Link Traversal';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2017\/02\/13\/capstone-part-2-logging-in-the-chair-link-traversal\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com/">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.com/tags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/design"><i class="fa fa-tags"></i> design</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/nodejs"><i class="fa fa-tags"></i> nodejs</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/working-women-advocates"><i class="fa fa-tags"></i> working-women-advocates</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.com/js/intro-header.js"></script>
+
+
+  </body>
+</html>

@@ -6,8 +6,95 @@
     <description>Recent content on Beth Qiang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Mar 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://bethqiang.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Developer&#39;s Introduction to Design Thinking</title>
+      <link>http://bethqiang.com/blog/2017/03/02/a-developers-introduction-to-design-thinking/</link>
+      <pubDate>Thu, 02 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/03/02/a-developers-introduction-to-design-thinking/</guid>
+      <description>
+
+&lt;p&gt;A few weeks ago, a friend sent me a link to an event dubbed &amp;ldquo;The Social Impact Create-A-Thon,&amp;rdquo; mentioning that it might be something that might interest me. (It very much did.) Part workshop, part competition, the idea of the event was to learn how to use design thinking processes and principles and then apply them to tackle social challenges in Austin.&lt;/p&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t &lt;em&gt;really&lt;/em&gt; know what any of that meant, but I figured that I&amp;rsquo;m interested in design, and thinking, and solving problems, and attempting to fix the world, so why not? (As a bonus, free dinner, beer, and the chance to win a very expensive dinner and mentorship from members of &lt;a href=&#34;https://verb.net/&#34; target=&#34;_blank&#34;&gt;Verb&lt;/a&gt;, a pretty cool social entrepreneurship company in town. Why &lt;em&gt;wouldn&amp;rsquo;t&lt;/em&gt; I go?)&lt;/p&gt;
+
+&lt;p&gt;So, I made my way to the heart of Austin to &lt;a href=&#34;https://generalassemb.ly/&#34; target=&#34;_blank&#34;&gt;General Assembly&lt;/a&gt;&amp;rsquo;s space downtown, got my dinner and beer, and took a seat. After intros and goals and other normal we&amp;rsquo;re-a-group-of-strangers-here&amp;rsquo;s-some-interesting-things-to-know, we got down to business. We learned that we were going to be split up into teams and go through an abridged version of the design world&amp;rsquo;s design thinking process. Each team was assigned a facilitator, most of whom worked at IBM Design as actual designers, to help us out along the way.&lt;/p&gt;
+
+&lt;p&gt;Broadly speaking, there were two challenges that we were given the choice between:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a way for constructive political discussion.&lt;/li&gt;
+&lt;li&gt;Help engaged citizens with ideas to put their ideas into action.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We chose to tackle the second one, although our final solution had a few elements of the first in it as well!&lt;/p&gt;
+
+&lt;h2 id=&#34;user-research-persona-creation&#34;&gt;User Research &amp;amp; Persona Creation&lt;/h2&gt;
+
+&lt;p&gt;We started with user research. Due to time constraints, we only interviewed one other person, and we had five minutes to ask them whatever we wanted. We recorded each individual answer on an individual sticky note.&lt;/p&gt;
+
+&lt;p&gt;Then, we broke into our teams, and collectively stuck all of our sticky notes on a giant glass window. We organized our sticky notes into &amp;ldquo;clusters&amp;rdquo; based on patterns – e.g., &amp;ldquo;background &amp;amp; family&amp;rdquo; for answers of where people were born and how many siblings they had, &amp;ldquo;hobbies&amp;rdquo; for things like hiking and brunch (that legitimately appeared multiple times&amp;hellip;oh Austin.), and &amp;ldquo;dislikes&amp;rdquo; for things like watching the news and salads.&lt;/p&gt;
+
+&lt;p&gt;Based on these clusters, we created a persona – what sort of the &amp;ldquo;average&amp;rdquo; of our user base was. Meet Sarah.&lt;/p&gt;
+
+&lt;p style=&#34;text-align: center&#34;&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-03/social-impact-create-a-thon-sarah.jpg&#34; alt=&#34;Sarah, our persona&#34; style=&#34;width: 15em&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Sarah is a 28-year-old white woman who grew up in the Southwestern United States, likes NPR, hiking, and brunch, and hates watching the news and salads. She&amp;rsquo;s super social and has a good network of friends. She&amp;rsquo;s a little annoyed and irritated with the state of the world, but isn&amp;rsquo;t actively doing anything about it. She&amp;rsquo;s interested and willing in getting involved, but is unsure of where or how to start.&lt;/p&gt;
+
+&lt;p&gt;Sarah&amp;rsquo;s Uncle Bob aggressively posts political articles on Facebook that are starkly different from what she believes, and this tends to cause her to avoid talking to her family about politics altogether. It doesn&amp;rsquo;t help that her friends are more or less exactly like her, so she&amp;rsquo;s sort of in an echo chamber. Furthermore, whenever she tries to talk to her friends about social issues or bring up ideas, they&amp;rsquo;re not really interested in engaging.&lt;/p&gt;
+
+&lt;h2 id=&#34;as-is-identifying-pain-points&#34;&gt;As-Is &amp;amp; Identifying Pain Points&lt;/h2&gt;
+
+&lt;p&gt;The next step was to pick a definitive timeframe, and map out what Sarah&amp;rsquo;s journey within that timeframe looks like. What does she do, think, and feel throughout that timeframe?&lt;/p&gt;
+
+&lt;p&gt;We used sticky notes again. (This is a recurring theme.) Two of the cardinal rules throughout this phase and every other was write before you speak, and no matter how wacky, put down your idea. By extension, we weren&amp;rsquo;t allowed to make fun of or criticize anyone for their idea, and instead of saying &amp;ldquo;but, &amp;hellip;&amp;rdquo;, we should say, &amp;ldquo;yes, and&amp;hellip;&amp;rdquo; and build upon it in some way.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-03/social-impact-create-a-thon-as-is.jpg&#34; alt=&#34;Our &#39;as is&#39;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Sarah&amp;rsquo;s journey, summarized, was: she starts off the week by going hiking with her friends, enjoying the beauty of nature and picking up a piece of trash or two along the way. (She feels good about this.) During the week, she goes to work every day and listens to NPR on her commute. (She&amp;rsquo;s interested in what&amp;rsquo;s going on around her.) Somewhere in the middle of the week, when she gets home, she sees her Uncle Bob&amp;rsquo;s aggressive posts, and she withdraws and avoids looking at anything related to civic engagement (aka, spends hours on Reddit&amp;rsquo;s &lt;a href=&#34;https://www.reddit.com/r/aww/&#34; target=&#34;_blank&#34;&gt;/r/aww&lt;/a&gt;). The weekend rolls around again, and she goes to brunch with her friends, when she tries to engage with them on a social impact level, and they don&amp;rsquo;t really &lt;em&gt;get&lt;/em&gt; it, so she figures she&amp;rsquo;s better off just talking about more superficial things with them.&lt;/p&gt;
+
+&lt;p&gt;Once we had mapped her journey, identified the pain points and places of opportunity that we could create solutions to solve or take advantage of, and voted on which one we wanted to focus on. Our winner was Sarah feeling great while hiking and doing her part to keep the trails clean.&lt;/p&gt;
+
+&lt;h2 id=&#34;big-ideas&#34;&gt;Big Ideas&lt;/h2&gt;
+
+&lt;p&gt;The next step was to come up with big ideas. Our goal was to come up with ideas that could help Sarah turn her love of nature and hiking into a positive force that benefitted her community, and also gave her an outlet to have constructive conversations with people about what was going on around her.&lt;/p&gt;
+
+&lt;p style=&#34;text-align: center&#34;&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-03/social-impact-create-a-thon-big-ideas.jpg&#34; alt=&#34;Our big ideas&#34; style=&#34;width: 20em&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;The leads and our facilitators drew a distinct line between &lt;em&gt;features&lt;/em&gt;, which would be something like a community bulletin where Sarah could gather people to go on hikes with her, and &lt;em&gt;ideas&lt;/em&gt;, which would be something like incentivizing doing good.&lt;/p&gt;
+
+&lt;p&gt;At the end of this stage, we also voted on which big idea we wanted to implement in the next stage, and on a high level, how we&amp;rsquo;d do it. The big idea we decided upon was &amp;ldquo;Trash Talk&amp;rdquo; – scheduled walks or hikes around the community (in different places each time!) in teams with the gamification of waste management.&lt;/p&gt;
+
+&lt;h2 id=&#34;future-state&#34;&gt;Future State&lt;/h2&gt;
+
+&lt;p&gt;The last step we went through was to define the same timeframe, but in the future – with our big idea, what would Sarah do, think, and feel?&lt;/p&gt;
+
+&lt;p&gt;Sarah can sign up individually and be placed on a team, or sign up with her friends as a team. During her walk or hike, she and her teammates can pick up trash for various amounts of points, or if there&amp;rsquo;s something that she and her teammates are unable to do (e.g. dispose of a couch sitting on the side of the road), they can take a geotagged picture and upload it to the app, which then puts that object up for anyone to get points to get rid of. This also goes to the city, so if no one steps up, the city is aware that it needs to be removed. She can also share the event and her progress via social media channels and challenge friends to join her or step up their game.&lt;/p&gt;
+
+&lt;p&gt;We wanted to start with something small that Sarah cares about to help her make a larger impact on her community. In addition, we wanted to give participants something that everyone basically agrees on (trash is bad) to be able to unite them under a common goal to provide an opening for other, deeper conversations to happen.&lt;/p&gt;
+
+&lt;p style=&#34;text-align: center&#34;&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2017-03/social-impact-create-a-thon-sarah-after.jpg&#34; alt=&#34;Sarah&#39;s pleased&#34; style=&#34;width: 13em&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-result&#34;&gt;The Result&lt;/h2&gt;
+
+&lt;p&gt;It was awesome to see the ideas that everyone else had come up with, from mentor bots to a device that would allow you to more easily connect with politicians.&lt;/p&gt;
+
+&lt;p&gt;After all of the teams had pitched their ideas, the judges deliberated, and to our great surprise, we ended up winning!&lt;/p&gt;
+
+&lt;h2 id=&#34;takeaways&#34;&gt;Takeaways&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve had very little experience with any kind of UX design (and quite honestly, I wasn&amp;rsquo;t actually sure &lt;em&gt;what&lt;/em&gt; UX design was prior to this), but this was a really cool way to get to learn what goes into bringing an idea to your users in a relevant, usable, somewhat organized, and iterative way. Being able to put yourself in your users&amp;rsquo; mind and really think about their journey and what you want it to be gives you a very different outlook. I think it&amp;rsquo;s an extremely useful tool for us developers, who sometimes get caught up in the code and the technologies and aren&amp;rsquo;t as concerned with how people may use the things we build.&lt;/p&gt;
+
+&lt;p&gt;Within our team, we actually argued more than I thought we would – everyone felt pretty strongly about various aspects of our idea. I was informed later that this process was intentionally designed so that arguments arise early before anything is implemented, which makes the implementation process itself much smoother. It also saves the pain of implementing a feature, and once you&amp;rsquo;ve slaved over it, to have your designer tell you, &amp;ldquo;um, that&amp;rsquo;s not going to work.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;I also really liked that this meetup was geared towards interacting with people, because I&amp;rsquo;ve definitely been in the kinds of meetups where everyone sits in rows facing the front of the room listening to someone talk but you don&amp;rsquo;t really get to do anything or interact with anyone. Overall, it was an awesome way to connect with some friendly, creative, different people, all interested in bettering their community. I was also able to chat with some of the IBM Design folks afterwards, and they showed me some neat visual design features that were all around me that I&amp;rsquo;ve never really taken notice of!&lt;/p&gt;
+
+&lt;p&gt;In the future, I&amp;rsquo;d love to go through this process with the teams I work with to develop apps and platforms, which actually gave me another app idea – because the whole putting-sticky-notes-on-a-wall-and-rearranging-them thing is really difficult when you&amp;rsquo;re not all within five feet of each other, it would be awesome if an app existed to do this as a remote or distributed team! (Inspiration is everywhere! Anyone have ideas for a clever name?)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Every New Beginning Comes from Some Other Beginning&#39;s End</title>
@@ -927,301 +1014,6 @@ this.setState({ inputValue: event.target.value }
 &lt;p&gt;And on a &lt;em&gt;completely&lt;/em&gt; different note, if you&amp;rsquo;re in Austin, I&amp;rsquo;m giving a lightning talk tomorrow at &lt;a href=&#34;https://www.meetup.com/Women-Who-Code-Austin/events/232301799/&#34; target=&#34;_blank&#34;&gt;Women Who Code Austin&amp;rsquo;s meetup&lt;/a&gt;! Come join us for food and camraderie and to hear about my conference experience and count how many times I say &amp;ldquo;um.&amp;rdquo; (In college, I actually sought out people who were willing to tally the number of times I said &amp;ldquo;um&amp;rdquo; to practice speaking with because that&amp;rsquo;s a habit I&amp;rsquo;ve been working on breaking.)&lt;/p&gt;
 
 &lt;p&gt;I also forgot how much public speaking occasionally terrifies me. It&amp;rsquo;ll be fine, right? Right. It&amp;rsquo;ll be fine. Probably.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Week 5, Days 3.5-5: React and React Router</title>
-      <link>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</link>
-      <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://bethqiang.com/blog/2016/12/03/react-and-react-router/</guid>
-      <description>
-
-&lt;p&gt;We&amp;rsquo;ve now entered the wonderful but occasionally odd and confusing world of React. It&amp;rsquo;s a super cool piece of technology and I&amp;rsquo;m very quickly falling head-over-heels for it, but it&amp;rsquo;s also&amp;hellip;weird. It&amp;rsquo;ll take a little bit of time to get used to. To learn and practice React, we&amp;rsquo;ve been building a Spotify clone, which Fullstack has affectionately dubbed &amp;ldquo;Juke.&amp;rdquo; We started by building probably one of the simplest apps ever (and a prerequsite to learning anything new in the programming world):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function App() {
-  return &amp;lt;h1&amp;gt;Hello React&amp;lt;/h1&amp;gt;;
-}
-
-ReactDOM.render(&amp;lt;App /&amp;gt;, document.getElementById(&#39;app&#39;));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yeah, we&amp;rsquo;ve struggled for the two and a half to create that. Ain&amp;rsquo;t she a beaut?&lt;/p&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Tooootally kidding.&lt;/p&gt;
-
-&lt;h2 id=&#34;react&#34;&gt;React&lt;/h2&gt;
-
-&lt;h3 id=&#34;stateful-and-stateless-components&#34;&gt;Stateful and Stateless Components&lt;/h3&gt;
-
-&lt;p&gt;Components can either be stateful or stateless. A stateful component looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Stateful extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: &#39;Yay!&#39;
-    }
-  }
-  render() {
-    return (
-      &amp;lt;h1&amp;gt;Woo, I&#39;m stateful!&amp;lt;/h1&amp;gt;
-      &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
-    );
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And a stateless component looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function Stateless(props) {
-  return (
-    &amp;lt;h1&amp;gt;Hey ma, look, no state!&amp;lt;/h1&amp;gt;
-    &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
-  );
-}
-
-// or, ES6-ified:
-
-const Stateless = (props) =&amp;gt; {
-  return (
-    &amp;lt;h1&amp;gt;Hey ma, look, no state!&amp;lt;/h1&amp;gt;
-    &amp;lt;p&amp;gt;{this.props.text}&amp;lt;/p&amp;gt;
-  );
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Separating our stateful components from our stateless components, and therefore separating our state management from our view logic, can free up our stateless components to be moved around and resused, and they&amp;rsquo;ll work regardless of what component is managing their state.&lt;/p&gt;
-
-&lt;h3 id=&#34;state&#34;&gt;State&lt;/h3&gt;
-
-&lt;p&gt;State should include the minimum amount of data necessary to render our UI. Unlike &lt;code&gt;props&lt;/code&gt;, it can be mutated. State can be passed down from parent to child via &lt;code&gt;props&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;this.setState({key: value})&lt;/code&gt; sets the state. The only way to cause the render method to execute again is by using &lt;code&gt;setState&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Tom&amp;rsquo;s First Law is that state must always be initialized with the appropriate data type. So, if the &lt;code&gt;albums&lt;/code&gt; property will eventually be an array, it should be initialized with &lt;code&gt;[]&lt;/code&gt; (or an actual array, if you know what the value will be) – not null, not undefined, not anything else you can think of. (In case you were wondering, I don&amp;rsquo;t know who Tom is, although I&amp;rsquo;ve been meaning to ask.)&lt;/p&gt;
-
-&lt;h3 id=&#34;component-lifecycle&#34;&gt;Component Lifecycle&lt;/h3&gt;
-
-&lt;p&gt;All of &lt;code&gt;get&lt;/code&gt; requests and &lt;code&gt;setState&lt;/code&gt;s should be inside of a &lt;code&gt;componentDidMount&lt;/code&gt; lifecycle method. What&amp;rsquo;s the difference between using &lt;code&gt;componentDidMount&lt;/code&gt; and &lt;code&gt;componentWillMount&lt;/code&gt;, you ask? &lt;code&gt;componentWillMount&lt;/code&gt; occurs before the component is actually rendered (as opposed to after, in &lt;code&gt;componentDidMount&lt;/code&gt;), but if the response happens to take a long time and the user does something else that takes the component out of the DOM, when the response comes back, the callback will try to invoke &lt;code&gt;setState&lt;/code&gt; on the unmounted component&amp;hellip;and that doesn&amp;rsquo;t sound like it ends very well.&lt;/p&gt;
-
-&lt;h3 id=&#34;mapping-over-an-array-with-a-key&#34;&gt;Mapping Over an Array with a Key&lt;/h3&gt;
-
-&lt;p&gt;When we&amp;rsquo;re creating a loop in JSX, it can be hard for React to keep track of the DOM structure. To help React boost its lookup time for these elements, we can give the parent of each set of JSX we return from the loop a value called a &lt;code&gt;key&lt;/code&gt; that is unique within the loop.&lt;/p&gt;
-
-&lt;p&gt;For Juke, we needed to render a component called &lt;code&gt;Albums&lt;/code&gt;, which was essentially the same album information displayed for 5 different albums:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;render() {
-  return (
-    &amp;lt;div className=&amp;quot;col-xs-10&amp;quot;&amp;gt;
-      &amp;lt;h3&amp;gt;Albums&amp;lt;/h3&amp;gt;
-      &amp;lt;div className=&amp;quot;row&amp;quot;&amp;gt;
-        {this.props.albums.map(album =&amp;gt; (
-          &amp;lt;div key={album.id} className=&amp;quot;col-xs-4&amp;quot;&amp;gt;
-            &amp;lt;a className=&amp;quot;thumbnail&amp;quot; href=&amp;quot;#&amp;quot;&amp;gt;
-              &amp;lt;img src={album.imageUrl} /&amp;gt;
-              &amp;lt;div className=&amp;quot;caption&amp;quot;&amp;gt;
-                &amp;lt;h5&amp;gt;
-                  &amp;lt;span&amp;gt;{album.name}&amp;lt;/span&amp;gt;
-                &amp;lt;/h5&amp;gt;
-                &amp;lt;small&amp;gt;{album.songs.length}&amp;lt;/small&amp;gt;
-              &amp;lt;/div&amp;gt;
-            &amp;lt;/a&amp;gt;
-          &amp;lt;/div&amp;gt;
-        ))}
-      &amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;
-  );
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We used &lt;code&gt;album.id&lt;/code&gt; as our &lt;code&gt;key&lt;/code&gt;, placed it in the &lt;code&gt;div&lt;/code&gt; that we were creating for each album, and then extracted the information for each album.&lt;/p&gt;
-
-&lt;h3 id=&#34;passing-down-props-and-click-handlers&#34;&gt;Passing Down Props and Click Handlers&lt;/h3&gt;
-
-&lt;p&gt;At some point, we eventually got to this view:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-12/react-juke-single-album-view.png&#34; alt=&#34;React Juke Single Album View&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;Where we could click on any album, and then we&amp;rsquo;d be given details of the album below it. To do this, we had to:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create a method on our stateful &lt;code&gt;Main&lt;/code&gt; component, that would receive the album we selected as a parameter:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;handleClick(album) {
-  console.log(album.id);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bind the method to our constructor to preserve the &lt;code&gt;this&lt;/code&gt; context of the &lt;code&gt;Main&lt;/code&gt; class:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;// in constructor of Main
-this.handleClick = this.handleClick.bind(this);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Pass the method down as a prop to our &lt;code&gt;Albums&lt;/code&gt; component:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Albums albums={this.state.albums} handleClick={this.handleClick} /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Pass the prop to our click handler, and also make sure we pass along the album we want as the argument. (We won&amp;rsquo;t always need an anonymous function in the click listener, but in this case, it&amp;rsquo;s necessary because we wanted to send back the album).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;a className=&amp;quot;thumbnail&amp;quot; href=&amp;quot;#&amp;quot; onClick={() =&amp;gt; this.props.handleClick(album)}&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Edit our &lt;code&gt;handleClick&lt;/code&gt; function so that it does more than &lt;code&gt;console.log&lt;/code&gt; and forces a re-render:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;handleClick(album) {
-  this.setState({
-    selectedAlbum: album,
-  });
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add the &lt;code&gt;Album&lt;/code&gt; component as a child to the &lt;code&gt;Main&lt;/code&gt; component, and pass our album in as &lt;code&gt;props&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Album selectedAlbum={this.state.selectedAlbum} /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, we could change our JSX in our &lt;code&gt;Album&lt;/code&gt; component to reflect the properties we were passing down.&lt;/p&gt;
-
-&lt;p&gt;All of this became MUCH easier when we used React Router, which we&amp;rsquo;ll get to in a bit.&lt;/p&gt;
-
-&lt;h3 id=&#34;actually-changing-the-view&#34;&gt;Actually Changing the View&lt;/h3&gt;
-
-&lt;p&gt;But we didn&amp;rsquo;t want both of these components on the page at the same time; we wanted to be able to click on an album on the homepage, and to be taken to a page with that album&amp;rsquo;s information.&lt;/p&gt;
-
-&lt;p&gt;We could tell from our state whether or not we have a chosen album – our selected album will either be an empty object if no album is selected or an object representing an album, so we checked the truthiness of &lt;code&gt;album.id&lt;/code&gt; to determine whether one was selected. Then, we needed to conditionally switch between whether we rendered the &lt;code&gt;Albums&lt;/code&gt; component or the &lt;code&gt;Album&lt;/code&gt; component, so we used a ternary control operator:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  this.state.selectedAlbum.id ?
-  &amp;lt;Album album={this.state.selectedAlbum}/&amp;gt; :
-  &amp;lt;Albums albums={this.state.albums}/&amp;gt;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This also gets a little easier with React Router.&lt;/p&gt;
-
-&lt;h2 id=&#34;react-router&#34;&gt;React Router&lt;/h2&gt;
-
-&lt;p&gt;Not going to lie, we struggled a fair bit at first to figure out what was going on with React Router.&lt;/p&gt;
-
-&lt;h3 id=&#34;router-basics&#34;&gt;Router Basics&lt;/h3&gt;
-
-&lt;p&gt;React Router is a handy way to keep your UI in sync with your URL. It ties into URL and history to allow for easy navigation to and between different parts of your application, and it easily integrates the nesting of components.&lt;/p&gt;
-
-&lt;p&gt;A route is composed of a URL and a React component. When the URL bar matches the one specified in the route, React Router causes the specific component&amp;rsquo;s render function to execute.&lt;/p&gt;
-
-&lt;p&gt;So, if we had a route that looked like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Route path=&amp;quot;/specificstuff&amp;quot; component={SpecificStuff}&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And someone entered &lt;code&gt;www.domain.com/specificstuff&lt;/code&gt; into the URL, the component &lt;code&gt;SpecificStuff&lt;/code&gt; would be rendered.&lt;/p&gt;
-
-&lt;h3 id=&#34;children-and-cloneelement&#34;&gt;Children and cloneElement&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;this.props.children&lt;/code&gt; is a special prop that every component receives, which references the child components of that component. If we wanted to pass props from our parent component to its children component, we can use one of React&amp;rsquo;s static methods – &lt;code&gt;cloneElement&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, if we had a Router hierarchy that looked like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ReactDOM.render(
-  &amp;lt;Router history={browserHistory}&amp;gt;
-    &amp;lt;Route path=&amp;quot;/&amp;quot; component={Main}&amp;gt;
-      &amp;lt;Route path=&amp;quot;/albums&amp;quot; component={Albums} /&amp;gt;
-      &amp;lt;Route path=&amp;quot;:albumId&amp;quot; component={Album} /&amp;gt;
-    &amp;lt;/Router&amp;gt;
-  &amp;lt;/Router&amp;gt;,
-  document.getElementById(&#39;app&#39;)
-);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And a &lt;code&gt;Main&lt;/code&gt; component render that looked like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;render() {
-  return (
-    &amp;lt;Sidebar /&amp;gt;
-    {
-      this.props.children ?
-        React.cloneElement(this.props.children, {
-          albums: this.state.albums,
-          album: this.state.selectedAlbum
-        })
-      : null
-    }
-  )
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;this.props.children&lt;/code&gt; would refer to the components &lt;code&gt;Album&lt;/code&gt; and &lt;code&gt;Albums&lt;/code&gt;, and we&amp;rsquo;re passing &lt;code&gt;this.props.albums&lt;/code&gt; and &lt;code&gt;this.props.album&lt;/code&gt; to both of them.&lt;/p&gt;
-
-&lt;p&gt;We need to check that &lt;code&gt;this.props.children&lt;/code&gt; exists first, or else &lt;code&gt;React.cloneElement&lt;/code&gt; will throw a fun little error. We also need to &amp;ldquo;clone&amp;rdquo; the element to keep our render method pure – we don&amp;rsquo;t want to mutate anything. It&amp;rsquo;s the same idea as using &lt;code&gt;Array.prototype.map&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Notice that this is basically doing the same thing as the code with the ternary operator from above – conditionally rendering &lt;code&gt;Album&lt;/code&gt; or &lt;code&gt;Albums&lt;/code&gt; depending on what information we want to see, except that we don&amp;rsquo;t actually have to use a ternary operator! Whichever URL it matches on will be the component that is rendered.&lt;/p&gt;
-
-&lt;h3 id=&#34;params&#34;&gt;Params&lt;/h3&gt;
-
-&lt;p&gt;For a dynamic route like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Route path=&amp;quot;albums/:albumId&amp;quot; component={Album} /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In addition to whatever props we pass down to it, it&amp;rsquo;ll also have a whole lot of other props attached to it like location, router, routeParams, etc. These are all being passed by the Route component. We can use the &lt;code&gt;params&lt;/code&gt; prop to get the appropriate album ID.&lt;/p&gt;
-
-&lt;h3 id=&#34;link&#34;&gt;Link&lt;/h3&gt;
-
-&lt;p&gt;The Link component is a thin wrapper around the &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; element that we can pass a prop called &lt;code&gt;to&lt;/code&gt; that will tell it how to change the URL.&lt;/p&gt;
-
-&lt;p&gt;Remember the sort-of complicated &lt;code&gt;handleClick&lt;/code&gt; and &lt;code&gt;onClick&lt;/code&gt; steps we had to do above to pass the album that was clicked to our &lt;code&gt;Main&lt;/code&gt; component so that we could render our single album view? Well, turns out, instead of doing all of that, we can do:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Link to={`/albums/${album.id}`} className=&amp;quot;thumbnail&amp;quot;&amp;gt;
-  &amp;lt;img src={album.imageUrl} /&amp;gt;
-  &amp;lt;div className=&amp;quot;caption&amp;quot;&amp;gt;
-    &amp;lt;h5&amp;gt;
-      &amp;lt;span&amp;gt;{album.name}&amp;lt;/span&amp;gt;
-    &amp;lt;/h5&amp;gt;
-    &amp;lt;small&amp;gt;{album.songs.length}songs&amp;lt;/small&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/Link&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;No &lt;code&gt;handleClick&lt;/code&gt; method, no binding, and no passing methods down as props or having to pass props to our click handler!&lt;/p&gt;
-
-&lt;h3 id=&#34;a-fun-little-aside&#34;&gt;A Fun Little Aside&lt;/h3&gt;
-
-&lt;p&gt;It&amp;rsquo;s an interesting, but maybe frustrating, result when you attempt to nest a component inside of the same component. For a very long time, we were attempting to do something similar to this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ReactDOM.render(
-  &amp;lt;Router history={hashHistory}&amp;gt;
-    &amp;lt;Route path=&amp;quot;/artist&amp;quot; component={Artist}&amp;gt;
-      &amp;lt;Route path=&amp;quot;artist/:artistId/albums&amp;quot; component={Artist} /&amp;gt;
-    &amp;lt;/Router&amp;gt;
-  &amp;lt;/Router&amp;gt;,
-  document.getElementById(&#39;app&#39;)
-);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;(Let&amp;rsquo;s just say you wanted to try some album inception.)&lt;/p&gt;
-
-&lt;p&gt;What we ended up with was errors that properties on our &lt;code&gt;props&lt;/code&gt; were undefined, and we struggled along for an hour, changing distant parts of our code attempting to figure out what was going on and why.&lt;/p&gt;
-
-&lt;p&gt;At the end of a slightly painful journey, we discovered that the DOM was actually rendering twice; once properly the first time with the properties on &lt;code&gt;this.props&lt;/code&gt; that had the information we wanted, but the second time, no information was being passed to the properties on &lt;code&gt;this.props&lt;/code&gt; and we got a happy slew of errors.&lt;/p&gt;
-
-&lt;p&gt;Needless to say, that&amp;rsquo;s not a mistake we&amp;rsquo;ll be making again!&lt;/p&gt;
 </description>
     </item>
     

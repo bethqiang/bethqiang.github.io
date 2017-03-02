@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/git/index.xml</link>
+    <description>Recent content in Git on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New Year, New Blog, Same Git Bewilderment</title>
+      <link>http://bethqiang.com/blog/2017/01/09/new-year-new-blog-same-git-bewilderment/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2017/01/09/new-year-new-blog-same-git-bewilderment/</guid>
+      <description>
+
+&lt;p&gt;Big things have been happening in the past three weeks!&lt;/p&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s talk about this site. I started getting annoyed a while ago because my Jekyll site would build somewhat slowly — it&amp;rsquo;d take about two seconds each time. Now, two seconds isn&amp;rsquo;t a huge amount. But, in the larger scheme of things, I &lt;em&gt;only&lt;/em&gt; have about 30 posts so far, and it would take two seconds &lt;em&gt;every time I made any kind of change and wanted to see it&lt;/em&gt;. Jekyll&amp;rsquo;s speed (or lack thereof) once posts start accumulating is something that&amp;rsquo;s pretty well-documented, and I wanted to give this space a little bit of a facelift anyway, so I decided to explore a few alternatives and see what I could find. Plus, playing with new technology is always fun!&lt;/p&gt;
+
+&lt;p&gt;I first considered &lt;a href=&#34;https://github.com/gatsbyjs/gatsby&#34; target=&#34;_blank&#34;&gt;Gatsby&lt;/a&gt;, a React-based static site generator. It&amp;rsquo;s no secret that I&amp;rsquo;m a huge fan of React, but I was a little put off by this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Gatsby is not yet stable. APIs will break. Functionality is missing. It&amp;rsquo;s usable but if you plan on building with it, expect a rocky road for some time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;ll definitely be following Gatsby along its journey, but I figured I might as well try to not make my life too much harder right now.&lt;/p&gt;
+
+&lt;p&gt;I meandered around the static site generator world for a short period of time, but nothing really stuck out to me. Until a few days ago, when I stumbled upon a post about migrating from Jekyll to &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt;. I remembered, in some distant part of my brain, what I thought Hugo was (&lt;em&gt;&amp;ldquo;just another static site generator&amp;rdquo;&lt;/em&gt;). But hey, this site actually looked kinda nifty. And it could be fun to learn Go (templates, not the real thing, but still). And it&amp;rsquo;s supposed to be &lt;em&gt;WILDLY BLAZING FAST&lt;/em&gt;?!&lt;/p&gt;
+
+&lt;p&gt;After perusing themes and others&amp;rsquo; sites, I was convinced. I coded a &lt;em&gt;super&lt;/em&gt; basic &amp;ldquo;theme&amp;rdquo; (I&amp;rsquo;m not sure I can even call it that) from scratch to get a sense of the overall structure, the templating engine, and how the pieces worked together. Then, I found &lt;a href=&#34;https://github.com/digitalcraftsman/hugo-steam-theme&#34; target=&#34;_blank&#34;&gt;a theme I liked&lt;/a&gt; and set about customizing it and incorporating my own elements, like the navigation bar, the post summaries, the back to top button, the tag cloud/archives page, etc.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-git-rabbit-hole&#34;&gt;The Git Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;Everything was going rather swimmingly — I struggled a little bit with figuring out the nested-loop structure of the archives page, and it took me way too long to remember that VSCode has a handy &amp;ldquo;replace all&amp;rdquo; feature, but overall, it wasn&amp;rsquo;t terribly painful.&lt;/p&gt;
+
+&lt;p&gt;Until I attempted to deploy this to my GitHub User Page. That went a little something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So&amp;hellip;in order for GitHub pages to do anything, it needs an &lt;code&gt;index.html&lt;/code&gt; in the root directory. But when Hugo builds my site, my &lt;code&gt;index.html&lt;/code&gt; is sent to the public directory.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The documentation, and most of the (admittedly limited) tutorials out there say that I should create two different repositories — one for the source code, and one that would just serve the compiled &lt;code&gt;public&lt;/code&gt; directory. Worst comes to worst, I can deal with that, but there has to be a better way&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;[Insert furious Googling here.]&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Oh look, &lt;a href=&#34;https://hjdskes.github.io/blog/deploying-hugo-on-personal-gh-pages/&#34; target=&#34;_blank&#34;&gt;this guy&lt;/a&gt; created separate branches, and is just serving the &lt;code&gt;public&lt;/code&gt; folder on the &lt;code&gt;master&lt;/code&gt; branch! I can do that.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I made sure to make at least four copies of everything I had, just in case something went terribly wrong. Then, I started taking trips down various git rabbit holes — first, not having the correct access rights, then subtrees and submodules, and then updates being rejected for various reasons. I learned the hard way what &lt;code&gt;git push origin &#39;git subtree split --prefix public master&#39;:master --force&lt;/code&gt; does. (Spoiler alert: it deletes your &lt;code&gt;master&lt;/code&gt; branch.)&lt;/p&gt;
+
+&lt;p&gt;Luckily, my &lt;code&gt;hugo&lt;/code&gt; branch still has my entire commit history, so if in the future, I want a &lt;code&gt;master&lt;/code&gt; branch with the history, I think I could just rename that branch. One more &lt;code&gt;git subtree push --prefix public origin master&lt;/code&gt; command later, my &lt;code&gt;master&lt;/code&gt; branch was populated with my &lt;code&gt;public&lt;/code&gt; directory, and everything seemed to be working as it should!&lt;/p&gt;
+
+&lt;p&gt;I want to eventually create a script to automate these pushes, but given that Fullstack is starting again after a long and relaxing break, I suppose those will have to wait until I manage to get some free time again. At the very least, the site is up and running, it looks a little snazzier, and I learned some Go and Git!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

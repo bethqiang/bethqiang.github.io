@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jquery on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/jquery/index.xml</link>
+    <description>Recent content in Jquery on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Week 5, Day 1: I Never Thought JQuery Could Be So Confusing</title>
+      <link>http://bethqiang.com/blog/2016/11/28/i-never-thought-jquery-could-be-so-confusing/</link>
+      <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/28/i-never-thought-jquery-could-be-so-confusing/</guid>
+      <description>&lt;p&gt;We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: &lt;a href=&#34;http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;, this time with the goal of making it persistent – that is, making the user&amp;rsquo;s trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.&lt;/p&gt;
+
+&lt;p&gt;First, we reconfigured a &lt;code&gt;get&lt;/code&gt; route so that it would serve up all of our attraction information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/options&#39;, (req, res, next) =&amp;gt; {
+  Promise.all([
+    Hotel.findAll(),
+    Restaurant.findAll(),
+    Activity.findAll()
+  ])
+  .spread((hotels, restaurants, activities) =&amp;gt; {
+    res.send({hotels, restaurants, activities})
+  })
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, in our front-end, we made an AJAX request to get the data from our new &lt;code&gt;/options&lt;/code&gt; URL to make our list of available options in the dropdown menu. My pair and I did this step in a separate file and therefore ended up exposing more functions and variable to the global scope, although our class solution did it directly in one of the existing files. Though it required a little more configuration later in the workshop, there&amp;rsquo;s definitely something to be said for not polluting the global scope.&lt;/p&gt;
+
+&lt;p&gt;We then created a &lt;code&gt;Day&lt;/code&gt; model, which held only the day number but we connected it to the rest of our data using Sequelize associations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var Day = db.define(&#39;day&#39;, {
+  number: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
+});
+// associations
+Day.belongsTo(Hotel);
+Day.belongsToMany(Restaurant, {through: &#39;day_restaurants&#39;});
+Day.belongsToMany(Activity, {through: &#39;day_activities&#39;});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can only stay at one hotel per day, but the same hotel on multiple days, so that was a one-to-many relationship. For both restaurants and activities, you could eat/do multiple things in the same day, and you could eat/do the same thing over multiple days, so those were many-to-many relationships.&lt;/p&gt;
+
+&lt;p&gt;We then mounted a &lt;code&gt;/api/days&lt;/code&gt; route to our app, which would route things like creating a new day, deleting a day, adding attractions, and removing attractions.&lt;/p&gt;
+
+&lt;p&gt;We got to use our &lt;a href=&#34;http://bethqiang.com/blog/2016/11/14/building-a-wikipedia-clone/&#34; target=&#34;_blank&#34;&gt;new-found eager loading skills&lt;/a&gt; to get all of the activities for all of the days:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.get(&#39;/&#39;, (req, res, next) =&amp;gt; {
+  Day.findAll({
+    include: [Hotel, Restaurant, Activity],
+    order: &#39;number ASC&#39;
+  })
+  .then(days =&amp;gt; res.send(days))
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the things that we had to ensure that we did was manage the many-to-many relationship when adding and removing restaurants and activities. We added our hotel by doing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/hotel&#39;, (req, res, next) =&amp;gt; {
+  Day.findById(req.params.dayId)
+  .then(day =&amp;gt; day.setHotel(req.body.hotelId))
+  .then(() =&amp;gt; res.status(204))
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But in order to add a restaurant, because you could have many restaurants, we had to do the following instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/restaurants/&#39;, (req, res, next) =&amp;gt; {
+  Day.findById(req.params.dayId)
+  .then(day =&amp;gt; day.addRestaurant(req.body.restaurantId))
+  // if we setRestaurants, we&#39;d be replacing whatever restaurants are currently there and not adding to
+  .then(() =&amp;gt; res.status(204))
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There was a pretty consistent theme among a lot of these routes – we&amp;rsquo;d find our day, then do something with the day. To clean up our code a little bit via DRY, we used &lt;code&gt;router.param&lt;/code&gt; to configure this &lt;code&gt;findById&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.param(&#39;dayId&#39;, (req, res, next, theDayId) =&amp;gt; {
+  Day.findById(theDayId)
+  .then(foundDay =&amp;gt; {
+    req.day = foundDay;
+    next();
+  })
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then we could delete a lot of the beginning of our routes, and instead do:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.put(&#39;/:dayId/hotel&#39;, (req, res, next) =&amp;gt; {
+  req.day.setHotel(req.body.hotelId)
+  .then(() =&amp;gt; res.status(204))
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another thing I didn&amp;rsquo;t realize we could dictate while we were actually working on it was whether we wanted to pass the information from our front-end through actually posting an object using the AJAX &lt;code&gt;data&lt;/code&gt; field, and therefore using &lt;code&gt;req.body&lt;/code&gt; on the back-end, or through the URL, and therefore using &lt;code&gt;req.params&lt;/code&gt; on the back-end. We did all of ours the latter way (simply because we just didn&amp;rsquo;t think of the former), although I&amp;rsquo;m not sure if one is necessarily better than the other.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Re-configuring our front-end I found more challenging for two reasons:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;We at first weren&amp;rsquo;t entirely sure what we could move to the back-end and what we needed to move to the front-end. (We learned the hard way that you can&amp;rsquo;t &lt;code&gt;module.exports&lt;/code&gt; and &lt;code&gt;require&lt;/code&gt; front-end files into the back-end, because the back-end files don&amp;rsquo;t have access to the module&amp;rsquo;s dependencies, including JQuery! [And by the hard way, I mean lots of commenting out things and maybe some hair-pulling.])&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;There&amp;rsquo;s not really any separation of functions with JQuery – we found ourselves with functions that did a million and one things at a time, and it wasn&amp;rsquo;t the easiest to keep them straight in our heads, but it was also pretty much unavoidable.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Most of our re-configuration was just removing references to the global variables that used to hold our hotels, restaurants, and activities and instead used AJAX requests to populate those fields. When we clicked a button to add a day or an attraction or remove a day or an attraction, we needed to write AJAX requests for each of those as well, so our changes not only showed up in the front-end but also would change the data in our database.&lt;/p&gt;
+
+&lt;p&gt;One of the last things we had to do was create a &lt;code&gt;beforeDestroy&lt;/code&gt; hook so that when a day was deleted, all of the following days&amp;rsquo; numbers would be decremented by one.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hooks: {
+  beforeDestroy: function(dayBeingDestroyed) {
+    return Day.findAll({
+    // the return ensures it will wait for everything to happen before deleting
+      where: {
+        number: {
+          $gt: dayBeingDestroyed.number
+        }
+      }
+    })
+    .then(daysAfter =&amp;gt; {
+      var updatingDayNumbers = daysAfter.map(day =&amp;gt; {
+        day.number --;
+        return day.save();
+      });
+      return Promise.all(updatingDayNumbers);
+    })
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And because our &lt;code&gt;Day.destroy&lt;/code&gt; method that we were using with a &lt;code&gt;where&lt;/code&gt; to find our exact day won&amp;rsquo;t trigger the &lt;code&gt;beforeDestroy&lt;/code&gt; hook, we had to reconfigure that so that we were destroying a single instance of Day instead.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;router.delete(&#39;/:id&#39;, (req, res, next) =&amp;gt; {
+  Day.findById(req.params.id)
+  .then(day =&amp;gt; day.destroy())
+  .then(() =&amp;gt; res.status(204))
+  .catch(next);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This was definitely one of the more frustrating workshops to figure out, and one of our instructors even said that he&amp;rsquo;d argue it was the most frustrating out of all of them. While JQuery can be extremely powerful, it definitely has its drawbacks when creating a large application, which I hadn&amp;rsquo;t experienced before this. One of them is that it doesn&amp;rsquo;t really tell us where to put anything – should AJAX requests be in a separate part of our app from our DOM manipulation? We can&amp;rsquo;t match up a template to some kind of dataset, and thereby avoid having to manually make DOM manipulations. We also can&amp;rsquo;t just loop over objects and re-render – we have to add them piece by piece.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been interesting over the past few days to watch our code spiral out of control, but I&amp;rsquo;m now very ready to enter a realm where at least some structure exists. Bring on React!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 4, Day 3 and Break: More JQuery, WebSockets, and React</title>
+      <link>http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/</link>
+      <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/27/more-jquery-websockets-and-react/</guid>
+      <description>&lt;p&gt;We ended class early on Wednesday because of the holiday. Given the couple of hours that we had, my pair and I primarily worked on figuring out how to &amp;ldquo;persist&amp;rdquo; (at least until the server is reset) the hotels, restaurants, and activities that the user chooses on the days that they add them to – so, for example, if the user chooses a hotel and three restaurants on Day 2, that hotel and those restaurants will populate the itinerary every time the user switches to Day 2. We ended up doing this using arrays inside of objects inside of an object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var days = {
+  day1: {
+    hotel: [],
+    restaurant: [],
+    activity: []
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The review and solution code implemented this with arrays of hotels, restaurants, and activities as &lt;em&gt;properties&lt;/em&gt; on a &lt;code&gt;Day&lt;/code&gt; constructor, and then built &lt;code&gt;show/hideButton&lt;/code&gt;, &lt;code&gt;add/removeAttraction&lt;/code&gt;, etc. functions on the prototype. I basically completely forgot things like classes and prototypes existed while we were working through the workshop, but it makes much more sense than the way we did it. It&amp;rsquo;s a lot cleaner and modular (as opposed to our way, in which we were doing everything somewhat haphazardly and very discordantly).&lt;/p&gt;
+
+&lt;p&gt;A couple of other JQuery practices that I saw in the review that I definitely want to keep in mind and implement going forward are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Saving parts of the DOM as variables so JQuery doesn&amp;rsquo;t have to go looking for the element every single time you call it, as well as for better readability.&lt;/li&gt;
+&lt;li&gt;Let&amp;rsquo;s say you have a &lt;code&gt;div&lt;/code&gt; with an &lt;code&gt;id&lt;/code&gt; of &lt;code&gt;optionsPanel&lt;/code&gt;, saved as a JQuery variable with the same name. Inside that div, you have an element with the id &lt;code&gt;hotel-choices&lt;/code&gt;. Instead of getting the latter element with &lt;code&gt;$hotelSelect = $(&amp;quot;#hotel-choices&amp;quot;)&lt;/code&gt; and forcing JQuery to start searching from the top of the DOM every time, you can utilize the &lt;code&gt;optionsPanel&lt;/code&gt; div, and get that element with &lt;code&gt;$hotelSelect = $optionsPanel.find(&#39;#hotel-choices&#39;)&lt;/code&gt;. It doesn&amp;rsquo;t make a huge difference in terms of performance for a small app like this, but I can see how it could be useful when you&amp;rsquo;re building out things on a larger scale.&lt;/li&gt;
+&lt;li&gt;Using HTML5 &lt;code&gt;data&lt;/code&gt; attributes in certain situations instead of using classes. An extra bonus of doing this is that you can use JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method to easily access the value.&lt;/li&gt;
+&lt;li&gt;The revealing module pattern – using IIFEs to do everything that you don&amp;rsquo;t want polluting the global space, and then returning an object containing a very small subset of the module to reveal globally.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This workshop also made me realize that I need to get better at architecting and designing the code itself – how to make code modular instead of one giant file with global variables everywhere, when should you use prototypes, how to create sensible connections between different elements and data, etc.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;We&amp;rsquo;ve subsequently had the last four days off, although I&amp;rsquo;ve been working ahead in an effort to not fall behind in the two days I&amp;rsquo;ll be missing this week for &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive North America&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I learned about TCP vs. IP protocols, event emitters, websockets, and rooms and namespaces, and then built a &amp;ldquo;World Wide Whiteboard&amp;rdquo; – an app that allows a user to &amp;ldquo;draw&amp;rdquo; something on a Microsoft Paint-like interface, and the drawing appears in real-time for all of the other users connected to the server. After the basic functionality was built, I added in the ability to join rooms, so that you could go into a specific room and whatever was drawn would only be broadcasted to other users in that room.&lt;/p&gt;
+
+&lt;p&gt;I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I&amp;rsquo;ve been really excited about this part of the curriculum, as &lt;a href=&#34;http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/&#34; target=&#34;_blank&#34;&gt;I&amp;rsquo;ve used React before at a hackathon&lt;/a&gt; but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn&amp;rsquo;t any kind of depth happening. I&amp;rsquo;m excited to get actually learn how and why things work, and how powerful it can be when you&amp;rsquo;re not constricted to only 36 hours!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I also did fun things like make around 10 pounds of macaroni and cheese (including, but not limited to, 12 cups of dry pasta + 3 pounds of cheese + an entire half gallon of whole milk + a stick and a half of butter), attend my boyfriend&amp;rsquo;s giant Thanksgiving dinner (and ate so much delicious food), saw Fantastic Beasts and Where to Find Them and allowed my inner Harry Potter nerd geek out for a bit, went out with friends, caught up on West World (GREAT show), and watched some old Office episodes. Though I did do a fair amount of work, it was a nice break from the 12-ish-hour-per-day grind that our days typically are.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 4, Days 1 and 2: ScriptCraft Hackathon, JQuery, and an ES6 Intro</title>
+      <link>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/22/scriptcraft-hackathon-jquery-and-es6/</guid>
+      <description>
+
+&lt;p&gt;Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!&lt;/p&gt;
+
+&lt;p&gt;I want to use what we&amp;rsquo;ve learned to work on at least one or two of &lt;a href=&#34;https://www.freecodecamp.com&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;&amp;rsquo;s Back-End or full-stack projects over this coming Thanksgiving break. I&amp;rsquo;m not sure how much time I&amp;rsquo;ll have given the fact that I&amp;rsquo;ll have to do some working ahead to attend &lt;a href=&#34;http://bethqiang.com/blog/2016/11/20/fullstack-academy-week-3/&#34; target=&#34;_blank&#34;&gt;Node.js Interactive&lt;/a&gt; the week after, but I think it&amp;rsquo;d be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.&lt;/p&gt;
+
+&lt;h2 id=&#34;scriptcraft-hackathon&#34;&gt;ScriptCraft Hackathon&lt;/h2&gt;
+
+&lt;p&gt;In the afternoon, we had our first Fullstack Hackathon. We worked among our learning groups to create something in Minecraft using &lt;a href=&#34;http://scriptcraftjs.org&#34; target=&#34;_blank&#34;&gt;ScriptCraft&lt;/a&gt;, a Minecraft plugin that lets you extend the game and build using JavaScript. Our team ended up building what we originally called &amp;ldquo;The Hunger Games&amp;rdquo; – we could specify the size of a maze to be built, and how many animals (we tested with chickens, to not have to worry about randomizing animals and such) would be placed in the maze. The maze would then programmatically be built in real-time, the chickens were placed, and then players would enter the maze and try to kill as many chickens as they could. The game would keep track of how many chickens each player killed.&lt;/p&gt;
+
+&lt;p&gt;(We later re-named it to &amp;ldquo;Chicken Rain&amp;rdquo; after a comment from a classmate, because we released all of the chickens at once from the sky, thereby making it rain chickens for a small period of time.)&lt;/p&gt;
+
+&lt;p&gt;Though it sounds relatively simple and we don&amp;rsquo;t have a huge amount of code (minus comments and failed attempts and whitespaces, it&amp;rsquo;s only about 40 lines), it took a lot of effort and researching to figure out how to do each baby step. The hardest part for us was attempting to place chickens where there aren&amp;rsquo;t already blocks from the maze so that the chickens would actually be in the maze, and not on top of it. We weren&amp;rsquo;t able to solve this issue in the time that was given to us – apparently, ScriptCraft has really weird object structures, so you can&amp;rsquo;t just pull out a property like you could in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Our instructors recorded a video of us presenting it, although I forgot to ask about it today during class&amp;hellip;so here&amp;rsquo;s a pretty picture of an example maze with the chickens instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/scriptcraft-hackathon-game.png&#34; alt=&#34;ScriptCraft Hackathon Game&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;(You can also see a random pig that&amp;rsquo;s just kind of moseying around our world.)&lt;/p&gt;
+
+&lt;p&gt;Despite the learning curve, it was a lot of fun, and it was a great way to destress from the checkpoint. It was also really cool to apply our JavaScript knowledge to a &lt;em&gt;completely&lt;/em&gt; different context.&lt;/p&gt;
+
+&lt;h2 id=&#34;discovering-the-hidden-side-of-jquery&#34;&gt;Discovering the Hidden Side of JQuery&lt;/h2&gt;
+
+&lt;p&gt;Today was spent entirely on JQuery. I thought this would be a &amp;ldquo;oh, let&amp;rsquo;s catch up with a good friend&amp;rdquo; kinda day – JQuery and I have spent a lot of time together throughout the my earning of Free Code Camp&amp;rsquo;s Front-End Certification, but it turns out, there&amp;rsquo;s &lt;em&gt;a lot&lt;/em&gt; I don&amp;rsquo;t know about JQuery.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been creating a Trip Planner app, which currently looks something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://bethqiang.com/img/posts/2016-11/trip-planner-app-jquery.png&#34; alt=&#34;Trip Planner App&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;The user has the ability to select hotels, restaurants, and activities from the drop down menus, and add them to their itinerary. When added, a marker on the map will also be added. The user should be able to remove a hotel, restaurant, or activity from their itinerary (and by extension, the marker), as well as add a day, remove a day, and switch between days.&lt;/p&gt;
+
+&lt;p&gt;When we started the &amp;ldquo;add&amp;rdquo; functionality, we weren&amp;rsquo;t really thinking about how to make our code reusable, so we ended up writing basically the same 13 lines of code for all three sections. (We&amp;rsquo;re totally violating DRY in probably every way possible.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#hotels&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var selectedOption = $(&amp;quot;#hotel-choices option:selected&amp;quot;).text();
+  var hotelIndex;
+  hotels.forEach(function(hotel, index) {
+    if (hotel.name === selectedOption) {
+      hotelIndex = index;
+    }
+  })
+  var hotelLocation = hotels[hotelIndex].place.location;
+  var newHtml = &#39;&amp;lt;div id=&#39; + hotelIndex +
+    &#39; class=&amp;quot;itinerary-item&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;title&amp;quot;&amp;gt;&#39; +
+    selectedOption +
+    &#39;&amp;lt;/span&amp;gt;&amp;lt;button class=&amp;quot;btn btn-xs btn-danger remove btn-circle&amp;quot;&amp;gt;x&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;&#39;
+  $(&amp;quot;#hotel-itinerary&amp;quot;).append(newHtml);
+  var markerTest = drawMarker(&#39;hotel&#39;, hotelLocation);
+  $(&amp;quot;#hotel-itinerary #&amp;quot; + hotelIndex).data(selectedOption, markerTest);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;drawMarker&lt;/code&gt; function on the second-to-last line was originally part of our &lt;code&gt;maps.js&lt;/code&gt; inside of another function, but because we needed to access it here, we ended up making it a global function. Our instructor brought up the idea of using a &amp;ldquo;fake&amp;rdquo; &lt;code&gt;module.exports&lt;/code&gt;/&lt;code&gt;require&lt;/code&gt; for the front-end as an alternative, so that&amp;rsquo;s definitely something I want to look into once we&amp;rsquo;re able to get the functionality down.&lt;/p&gt;
+
+&lt;p&gt;The thing that we hands-down struggled with the most was trying to connect the marker to the item that was added, so that when we deleted the item, the marker would be deleted along with it. The solution we ended up coming up with is also a little bit of a mess, but we were &lt;em&gt;so happy&lt;/em&gt; when we finally got it working.&lt;/p&gt;
+
+&lt;p&gt;In the second-to-last line of the code above, we saved the marker in the (unfortunately also global) variable &lt;code&gt;markerTest&lt;/code&gt;. Then, we used JQuery&amp;rsquo;s &lt;code&gt;data&lt;/code&gt; method on the &lt;code&gt;#hotel-itinerary&lt;/code&gt; div with the corresponding database &lt;code&gt;id&lt;/code&gt; of the item to store the name of the hotel/restaurant/activity, and the marker that was just added. Then, to remove both:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;#itinerary&#39;).on(&#39;click&#39;, &#39;button&#39;, function() {
+  var name = $(this).siblings()[0].textContent;
+  var index = $(this).parent().attr(&#39;id&#39;);
+  var parent = $(this).parent().parent().attr(&#39;id&#39;);
+  var marker = $(&amp;quot;#&amp;quot; + parent + &amp;quot; #&amp;quot; + index).data(name);
+  marker.setMap(null);
+  $(this).parent().remove();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Essentially, we jumped through several hoops to find the corresponding &lt;code&gt;div&lt;/code&gt; and &lt;code&gt;id&lt;/code&gt; of the text next to the &amp;ldquo;X&amp;rdquo; button that was clicked, and then used that to look up the marker that was stored with the name. &lt;code&gt;marker.setMap(null)&lt;/code&gt; removes that specific marker, and then we finally remove the actual div containing the text and the button.&lt;/p&gt;
+
+&lt;p&gt;We were able to figure out how to add a day with slightly less headaches, and our challenge for tomorrow will be to figure out how to switch between days.&lt;/p&gt;
+
+&lt;h2 id=&#34;intro-to-es6&#34;&gt;Intro to ES6&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also been doing some ES6 on the side, in attempt to start working ahead for the days I&amp;rsquo;ll be missing for the Node conference. I was already pretty familiar with &lt;code&gt;let&lt;/code&gt;/&lt;code&gt;const&lt;/code&gt;, arrow functions, classes, and template literals, and have been using them whenever I remember that they exist. Other concepts, like destructuring and rest parameters, I&amp;rsquo;ve heard about and have demonstrated to me, but I haven&amp;rsquo;t made or come across opportunities to practice yet. I watched the entirety of &lt;a href=&#34;https://egghead.io/courses/learn-es6-ecmascript-2015&#34; target=&#34;_blank&#34;&gt;Egghead.io&amp;rsquo;s Learn ES6 course&lt;/a&gt; and have also now been made aware of features like importing and exporting, &lt;code&gt;Array.from&lt;/code&gt;, generators, maps and weak maps, &lt;code&gt;for-of&lt;/code&gt; loops, and method definitions in object literals.&lt;/p&gt;
+
+&lt;p&gt;I definitely need to do more reading and practicing with all of these, and there&amp;rsquo;s a workshop that&amp;rsquo;s entirely devoted to ES6 that I&amp;rsquo;ll be doing over break, so I&amp;rsquo;ll report back when I do! :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

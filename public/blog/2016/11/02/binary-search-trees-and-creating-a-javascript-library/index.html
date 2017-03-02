@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library</title>
+  <meta name="author" content="Beth Qiang" />
+  <meta name="description" content="A developer's thoughts on life, code, and the pursuit of happiness.">
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.com/css/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.com/css/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.com/img/icon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.com/img/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2016/11/02/binary-search-trees-and-creating-a-javascript-library//" />
+
+  
+  <script src="//load.sumome.com/" data-sumo-site-id="06bc5d9f34c83911fcc208aed68dbbddb75e8ed9b9b190fa3e380b398ab5d80f" async="async"></script>
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:beth@bethqiang.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">November 2, 2016</p>
+              <div id="post-content">
+                
+
+<p>We started off the day attempting to implement binary search trees and hash tables. We implemented our binary search tree with a linked list. We started by creating two constructor functions, one called <code>BinarySearchTree</code> and one called <code>Node</code> - our original approach was to create the root node as an instance of <code>BinarySearchTree</code>, and then for each node off of it to be an instance of <code>Node</code>. However, we didn’t realize that each node of the tree should also effectively its own tree, so we were getting errors left and write about how things couldn’t be found. Our test specs were looking for instances of the <code>BinarySearchTree</code>, and we were trying to give it objects that had completely different properties.</p>
+
+<p>With recursion, we implemented a method on the tree prototype to insert a value into our tree, and then to check if the tree already contained a given value. It was with the latter that we were enlightened to a fundamental principle of recursion.</p>
+
+<pre><code>BinarySearchTree.prototype.contains = function(value) {
+  if (value === this.value){
+    return true;
+  } else {
+    if (value &lt; this.value) {
+      if (this.left === null) {
+        return false;
+      }
+      this.left.contains(value);
+    } else {
+      if (this.right === null) {
+        return false;
+      }
+      this.right.contains(value);
+    }
+  }
+  return false;
+};
+</code></pre>
+
+<p>Our function was continually returning false, even when we put in test cases that used the numbers we knew we had added to the tree. We then changed our final return statement to <code>return foo</code>, and we’d always get foo. So, we needed to figure out why our function seemed to completely disregard, well, everything that was in it.</p>
+
+<p>We started by console logging each number as it was compared, and found that our program was finding matches — but still seemed to be skipping straight down to the bottom. After much struggling and finally asking for help, our instructor gave us a simple example to demonstrate what was happening.</p>
+
+<p>If we have a simple tree that looks like:</p>
+
+<pre><code>  1 &lt;=a
+2 3 &lt;= b, c
+</code></pre>
+
+<p>Where 1, 2, and 3 are the values of each node and a, b, and c are the names of each node. If we’re trying to find the number “3,” and we called <code>a.contains(3)</code>, the program would first check a to see if it was 3. It’s not, and 3 is greater than 1, so it’ll check c. <code>c.contains(3)</code> IS 3, so it would return true — except we never returned that value, so the program skips directly to the bottom and returns <code>a.contains(3)</code> instead (which is false!).</p>
+
+<p>After a small adjustment in the form of adding return statements and a lesson in recursion principles, we had a working program!</p>
+
+<p>We didn’t have time to complete the breadth-first and depth-first search methods in our tree, nor did we get to the part about hash tables. There’s also an entire world of other data structures out there that we didn’t cover, so I’m definitely planning on looking into those on my own!</p>
+
+<h2 id="dom-traversal">DOM Traversal</h2>
+
+<p>We also created our own mini JavaScript library of sorts, in which we wrote three functions:
+* The first would take in a selector (ex. an ID like <code>#pagetitle</code>, a class like <code>.image</code>, a tag.class like <code>img.thumbnail</code>, or a tag like <code>div</code>) and return what kind of selector it was.
+* The second would test an element to see if it matches the user’s selector.
+* The third would traverse the entire DOM tree and collect the elements that had the selector specified.</p>
+
+<p>It was during the last part that my partner and I learned two more fundamental facts.</p>
+
+<p>We learned that the <code>childNodes</code> attribute (vs. <code>children</code>) gives you text nodes, comment nodes, and whitespaces, in addition to actual HTML elements. And those text nodes, comment nodes, and whitespaces don’t have attributes like ID and class. And that was interfering with our ability to get the HTML nodes.</p>
+
+<p>We also learned that the <code>concat</code> method on the array prototype doesn’t work how we thought it did. We were trying to use recursion in the third function — if an element had children, to run through the same function on the children as well. Because we wanted to ultimately return an array with all of the elements that matched the input selector, we wanted to concatenate the children results with the primary node results, but the concat method we were using just wasn’t working.</p>
+
+<p>After an hour and a half of going in circles and trying everything we could think of and Google (including using the <code>childNodes</code> attribute — that’s how we ended up down that rabbit hole&hellip;), we were informed that the <code>concat</code> method on the array prototype returns a new array&hellip;but the original array remains unchanged.</p>
+
+<p>Sigh. Isn’t programming great?</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=Week%201%2c%20Day%203%3a%20Binary%20Search%20Trees%20and%20Creating%20a%20JavaScript%20Library&url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f02%2fbinary-search-trees-and-creating-a-javascript-library%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f02%2fbinary-search-trees-and-creating-a-javascript-library%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f02%2fbinary-search-trees-and-creating-a-javascript-library%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2016\/11\/02\/binary-search-trees-and-creating-a-javascript-library\/';
+    var disqus_title = 'Week 1, Day 3: Binary Search Trees and Creating a JavaScript Library';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2016\/11\/02\/binary-search-trees-and-creating-a-javascript-library\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com/">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.com/tags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/design"><i class="fa fa-tags"></i> design</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/nodejs"><i class="fa fa-tags"></i> nodejs</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/working-women-advocates"><i class="fa fa-tags"></i> working-women-advocates</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.com/js/intro-header.js"></script>
+
+
+  </body>
+</html>

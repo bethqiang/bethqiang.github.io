@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</title>
+  <meta name="author" content="Beth Qiang" />
+  <meta name="description" content="A developer's thoughts on life, code, and the pursuit of happiness.">
+
+  <meta name="generator" content="Hugo 0.18.1" />
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,800" rel="stylesheet" type="text/css">
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  
+  <link href="http://bethqiang.com/css/animate.css" rel="stylesheet">
+
+  
+  <link href="http://bethqiang.com/css/main.css" rel="stylesheet">
+
+  
+    
+
+  
+  <link rel="shortcut icon" href="http://bethqiang.com/img/icon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://bethqiang.com/img/apple-touch-icon.png" />
+
+  <link rel="alternate" href="http://bethqiang.com/index.xml" type="application/rss+xml" title="Beth Qiang">
+
+  
+  <meta property="og:title" content="Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/blog/2016/11/10/sql-election-chat-and-revisiting-twitter-clone//" />
+
+  
+  <script src="//load.sumome.com/" data-sumo-site-id="06bc5d9f34c83911fcc208aed68dbbddb75e8ed9b9b190fa3e380b398ab5d80f" async="async"></script>
+</head>
+
+
+  <body>
+    <div id="all">
+
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button"class="navbar-toggle collapsed btn-main" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="social">
+      
+      <a href="//twitter.com/bethqiang" target="_blank" title="Twitter" class="contact-icon"><i class="fa fa-twitter"></i></a>
+      
+      
+      <a href="//github.com/bethqiang" target="_blank" title="GitHub" class="contact-icon"><i class="fa fa-github"></i></a>
+      
+      
+      <a href="//www.linkedin.com/in/bethqiang08" target="_blank" title="linkedIn" class="contact-icon"><i class="fa fa-linkedin"></i></a>
+      
+      
+      <a href="mailto:beth@bethqiang.com" target="_blank" title="Email" class="contact-icon"><i class="fa fa-envelope"></i></a>
+      
+      
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        
+        <li class="dropdown">
+          <a href="/">Home</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/about/">About</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="/blog/">Blog</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </header>
+
+      <div id="heading-breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div id="content">
+        <div class="container">
+          <div class="row">
+
+            
+            <div class="col-sm-9" id="blog-post">
+              <p class="post-date text-muted text-uppercase mb-small text-right">November 10, 2016</p>
+              <div id="post-content">
+                <p>I don’t understand how it’s almost the end of the week already. Time is literally flying. We&rsquo;ve spent the entirety of the past two days focused on databases, which has been a nice blast to the past – as a relatively recent data analtyics consultant, it&rsquo;s been nice working with SQL again, albeit in a slightly different manner. We started Wednesday with manipulating the IMDB database with SQLite. We did a lot of selecting, counting, joining, grouping, and sorting. We spent a fair amount of time on indexing, as well, and learned:</p>
+
+<ul>
+<li>what indexing was: a data structure that stores the values for a specific column in a table</li>
+<li>why we should care about it: it makes searching much faster if you have a lot of data, as the database software no longer has to look at literally every single row in the table</li>
+<li>how it works: it uses data structures like B-trees or hash tables</li>
+<li>and why and when we wouldn’t want to use them willy nilly: they take up space, and are slightly less ideal for applications that require more frequent insert/delete/update operations because the indexes also have to be inserted/deleted/updated every time the tables are</li>
+</ul>
+
+<p>Right before lunch, President Obama was set to speak about the election results, and we took a break from anything code-related to listen to him, then had an hour-long conversation about what had happened the night before as a cohort and as a community.</p>
+
+<p>Though I’m pretty sure I never actually said anything, and no one was pressured by any means to stay in the chat (and some people did leave), I really appreciated the open communication, the vulnerability that was shown, and Fullstack’s continued dedication to making sure that Fullstack was a safe environment for everyone to express their views and feel what they feel without fear of being judged, harassed, or a variety of other terrible things that happen in the real world. As a group of extremely different people from a variety of walks of life, our cohort didn’t necessarily agree on some points, but it was enlightening to hear everyone’s opinions and experiences.</p>
+
+<p>In the afternoon, we learned about schema design. Most of my past work with databases was just querying from them, and I learned a little bit from our back-end teammate during <a href="http://bethqiang.com/blog/2016/10/24/first-hackathon-react-git-and-working-with-developers/" target="_blank">my first hackathon</a>, but I’ve never had hands-on experience with design. After the lecture, we then were put into groups to attempt to figure out how we would go about designing database schemas for some of the most popular apps: Gmail, Facebook, Instagram, Twitter, etc. I thought it was incredibly interesting, and mildly confusing, and it made me realize how large and how complicated these databases must be.</p>
+
+<hr />
+
+<p>I started today with about a half an hour of Code Wars, and I forgot how much I like doing these coding challenges. (I also signed up for <a href="https://www.hackerrank.com/womens-codesprint-2" target="_blank">HackerRank’s Women’s CodeSprint</a> that’s coming up, which I imagine will be something similar, and I’m very excited.) (I also forgot the difference between <code>forEach</code> and <code>map</code> for probably the fourteenth time&hellip;it’ll sink in eventually, right?!)</p>
+
+<p>We spent most of the rest of the day with PostgreSQL. I didn’t realize we were going to be working on our <a href="http://bethqiang.com/blog/2016/11/09/twitter-clone-with-nodejs-and-expressjs/" target="_blank">Twitter clone</a> again, but was pleasantly surprised when I discovered we were going to be creating and integrating a PostgreSQL database with it – I was a pretty big fan of the project the first time around.</p>
+
+<p>First, we created a new database module, where we used the <a href="https://github.com/brianc/node-postgres" target="_blank">node-postgres</a> library to create and connect to our database. Then, we reconfigured our routes so that instead of pulling from our <code>tweetBank.js</code> module and accompanying simple-array database, we were querying our database for the information that we wanted.</p>
+
+<p>One of the biggest sources of confusion came when we were testing our Socket.io real-time updates via two incognito Chrome browsers – when we posted a tweet via one of the browsers, the browser that <em>didn’t</em> post the tweet would be updated in real-time, but the browser that posted the tweet wouldn’t show the tweet until we manually refreshed the page.</p>
+
+<p>This was our original code:</p>
+
+<pre><code>router.post('/tweets', function(req, res, next){
+  let userName;
+  let name = req.body.name;
+  let content = req.body.content;
+  client.query('SELECT id FROM users WHERE name = $1', [name], function(err, result) {
+    if (err) return next(err);
+
+    if (result.rows.length === 0) {
+      client.query('INSERT INTO users (name) VALUES ($1)', [name], function(err, result) {
+        if (err) return next(err);
+        client.query('SELECT id FROM users WHERE name = $1', [name], function(err, result) {
+          if (err) return next(err);
+          userName = result.rows[0].id;
+          client.query('INSERT INTO tweets (userid, content) VALUES ($1, $2)', [userName, content], function(err, result) {
+            if (err) return next(err);
+            client.query('SELECT id FROM tweets WHERE userid = $1 AND content = $2', [userName, content], function(err, result) {
+              if (err) return next(err);
+            });
+          });
+        });
+      });
+
+    } else {
+      userName = result.rows[0].id;
+      client.query('INSERT INTO tweets (userid, content) VALUES ($1, $2)', [userName, content], function(err, result) {
+        if (err) return next(err);
+        client.query('SELECT id FROM tweets WHERE userid = $1 AND content = $2', [userName, content], function(err, result) {
+          if (err) return next(err);
+        });
+      });
+    }
+  });
+
+  let newTweet = {
+      name: name,
+      content: content,
+      id: result.rows[0].id
+    };
+
+    io.sockets.emit('new_tweet', newTweet);
+    res.redirect('/');
+
+});
+</code></pre>
+
+<p>Can we just take a moment to appreciate how much of a hot mess that code is? We’ll be learning how to make this not such a mess tomorrow, or so we’ve been <em>promised</em>. (Geddit?! Promises? &hellip;well, I thought it was clever.)</p>
+
+<p>Anyway, what was happening was that Node was being typical Node and its asynchronous nature was starting the first <code>query</code>, then jumping straight down to our <code>newTweet</code> object and the <code>res.redirect</code> that would automatically reload the page. So, the page would actually redirect and reload before the tweet was in the database. We didn’t realize this initially, as the <code>newTweet</code> object wasn’t pulling from the database at all, and most of it (the <code>name</code> and <code>content</code>) could be populated without the database. (We didn’t realize our <code>id</code> link, which required information from the database, wasn’t working until after fixing this issue.) We put the creation of the newTweet object, the Socket.io <code>emit</code> event, and the <code>redirect</code> inside the innermost callback functions, did some refactoring, and everything in our fake Twitter world was peaceful again, albeit a bit messy.</p>
+
+<p>I also had an office hour/1-on-1 check-in with one of our fellows, Dani, during lunch. I was able to get her advice on how to start on a project that had been an idea floating around in my brain for a while now that I just haven’t really had the time to put into place, but I’m going to try to start carving out at least 30 minutes each day for it. I also realized today, while thinking about different ways to go about it, that I feel <strong>a lot</strong> more confident in my coding ability than I did a week and a half ago. Which is a little crazy to say, because it’s literally only been a week and a half, but we’ve also learned and done so much in that time.</p>
+
+              </div>
+              
+              <section class="share">
+  <p class="prompt">Share this post via</p>
+  <a href="http://twitter.com/share?text=Week%202%2c%20Days%203%20and%204%3a%20SQL%2c%20Election%20Chat%2c%20and%20Revisiting%20Our%20Twitter%20Clone&url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f10%2fsql-election-chat-and-revisiting-twitter-clone%2f" title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+    <i class="fa fa-2x fa-fw fa-twitter-square"></i> <span class="hidden">Twitter</span>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f10%2fsql-election-chat-and-revisiting-twitter-clone%2f" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+    <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px"></i> <span class="hidden">Facebook</span>
+  </a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2fbethqiang.com%2fblog%2f2016%2f11%2f10%2fsql-election-chat-and-revisiting-twitter-clone%2f" title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+    <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px"></i> <span class="hidden">Google+</span>
+  </a>
+</section>
+
+              
+              <div id="comments">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'bethqiang';
+    var disqus_identifier = 'http:\/\/bethqiang.com\/blog\/2016\/11\/10\/sql-election-chat-and-revisiting-twitter-clone\/';
+    var disqus_title = 'Week 2, Days 3 and 4: SQL, Election Chat, and Revisiting Our Twitter Clone';
+    var disqus_url = 'http:\/\/bethqiang.com\/blog\/2016\/11\/10\/sql-election-chat-and-revisiting-twitter-clone\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+              </div>
+              
+            </div>
+            
+            
+
+            
+
+            <div class="col-sm-3">
+              
+              
+
+<div class="panel sidebar-menu">
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Search</h3>
+  </div>
+
+  <div class="panel-body">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" role="search">
+      <div class="input-group">
+        <input type="search" name="q" results="0" class="form-control" placeholder="Search">
+        <input type="hidden" name="q" value="site:http://bethqiang.com/">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-main"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel sidebar-menu">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="tag-cloud">
+      
+      <li><a href="http://bethqiang.com/tags/algorithms"><i class="fa fa-tags"></i> algorithms</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/authentication"><i class="fa fa-tags"></i> authentication</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/blogging"><i class="fa fa-tags"></i> blogging</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/capstone-project"><i class="fa fa-tags"></i> capstone-project</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/coding-bootcamps"><i class="fa fa-tags"></i> coding-bootcamps</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/conferences"><i class="fa fa-tags"></i> conferences</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/css"><i class="fa fa-tags"></i> css</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/cto-lectures"><i class="fa fa-tags"></i> cto-lectures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/data-structures"><i class="fa fa-tags"></i> data-structures</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/design"><i class="fa fa-tags"></i> design</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/es6"><i class="fa fa-tags"></i> es6</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/express"><i class="fa fa-tags"></i> express</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-academy"><i class="fa fa-tags"></i> fullstack-academy</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/fullstack-reflections"><i class="fa fa-tags"></i> fullstack-reflections</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/game-of-life"><i class="fa fa-tags"></i> game-of-life</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/git"><i class="fa fa-tags"></i> git</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/grace-shopper"><i class="fa fa-tags"></i> grace-shopper</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hackathons"><i class="fa fa-tags"></i> hackathons</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/hugo"><i class="fa fa-tags"></i> hugo</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/jquery"><i class="fa fa-tags"></i> jquery</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/junior-phase"><i class="fa fa-tags"></i> junior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/minecraft"><i class="fa fa-tags"></i> minecraft</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/nodejs"><i class="fa fa-tags"></i> nodejs</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/promises"><i class="fa fa-tags"></i> promises</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/react"><i class="fa fa-tags"></i> react</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/redux"><i class="fa fa-tags"></i> redux</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/senior-phase"><i class="fa fa-tags"></i> senior-phase</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sequelize"><i class="fa fa-tags"></i> sequelize</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/sql"><i class="fa fa-tags"></i> sql</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/stackathon"><i class="fa fa-tags"></i> stackathon</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/talks"><i class="fa fa-tags"></i> talks</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/testing"><i class="fa fa-tags"></i> testing</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/vr"><i class="fa fa-tags"></i> vr</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/women-who-code"><i class="fa fa-tags"></i> women-who-code</a>
+      </li>
+      
+      <li><a href="http://bethqiang.com/tags/working-women-advocates"><i class="fa fa-tags"></i> working-women-advocates</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+              
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <footer id="footer">
+  <div class="container">
+    <p>A developer&#39;s thoughts on life, code, and the pursuit of happiness.</p>
+  </div>
+</footer>
+
+    </div>
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-85574806-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="http://bethqiang.com/js/intro-header.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Game Of Life on Beth Qiang</title>
+    <link>http://bethqiang.com/tags/game-of-life/index.xml</link>
+    <description>Recent content in Game Of Life on Beth Qiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://bethqiang.com/tags/game-of-life/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Game of Life with React and Redux: The Hard Parts</title>
+      <link>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</link>
+      <pubDate>Thu, 22 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/12/22/game-of-life-with-react-and-redux/</guid>
+      <description>
+
+&lt;p&gt;For the past few days, I&amp;rsquo;ve spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There&amp;rsquo;s actually really not that much Sass – starting out, I wanted to practice it, although now that I&amp;rsquo;m halfway through, I&amp;rsquo;m realizing that I really don&amp;rsquo;t need it. I probably should have just saved it for another project – but anyway.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/&#34; target=&#34;_blank&#34;&gt;first week of Fullstack&lt;/a&gt;, we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn&amp;rsquo;t going to be &lt;em&gt;that&lt;/em&gt; hard. (Famous last words.)&lt;/p&gt;
+
+&lt;h2 id=&#34;the-webpack-rabbit-hole&#34;&gt;The Webpack Rabbit Hole&lt;/h2&gt;
+
+&lt;p&gt;The first roadblock I ran into was trying to run and deploy a front-end-only React app via GitHub Pages. (I didn&amp;rsquo;t want to bother with any kind of back-end, even a little mini server to serve static files, because I recently discovered that Heroku makes you give them your credit card information if you want to deploy more than five apps. Which is fine, and I&amp;rsquo;m sure I&amp;rsquo;ll do it eventually, but if I can avoid it, I totally will.) So, I couldn&amp;rsquo;t serve static files. Which meant that my main &lt;code&gt;index.html&lt;/code&gt; file had to be in my root directory. Okay, that&amp;rsquo;s annoying, but that&amp;rsquo;s not &lt;em&gt;too&lt;/em&gt; bad. (Yet.)&lt;/p&gt;
+
+&lt;p&gt;After pondering a couple of different possibilities, including just linking CDNs to React and Redux in the index.html, I decided to go the Webpack route. I&amp;rsquo;d then be able to throw Sass into the mixture. I set up a basic version of Webpack, along with React and Redux, coded a quick &amp;ldquo;Hello World,&amp;rdquo; and deployed it under a repo titled &amp;ldquo;experiment.&amp;rdquo; I told Webpack to output my &lt;code&gt;bundle.js&lt;/code&gt; in a &lt;code&gt;public&lt;/code&gt; folder. And&amp;hellip;then I realized I had no idea how to open my app locally.&lt;/p&gt;
+
+&lt;p&gt;As a result, I ended up diving into and spending hours in a Webpack rabbit hole learning how to set up the Webpack dev server and a production Webpack configuration. Webpack can do &lt;em&gt;a lot&lt;/em&gt; of things, and I&amp;rsquo;m sure I didn&amp;rsquo;t even come across half of them. After a few more rounds of experimentally uploading and deploying, I finally settled on a configuration that would deploy without errors, and had a colorful &amp;ldquo;Hello World!&amp;rdquo; to prove it!&lt;/p&gt;
+
+&lt;p&gt;So, that was a fun day 1 of this project.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-beginning-aka-the-starting-grid&#34;&gt;The Beginning (aka, the Starting Grid)&lt;/h2&gt;
+
+&lt;p&gt;My next major hurdle came when I started adding files I thought I&amp;rsquo;d need (action creators, reducers, components, containers, etc.). I started by trying to create rough outlines of the components, and then I&amp;rsquo;d think about everything I&amp;rsquo;d need the component&amp;rsquo;s containers to do, and then I tried writing functions in containers, and then I forgot entirely how Redux worked, and then I got really overwhelmed.&lt;/p&gt;
+
+&lt;p&gt;So. Deep breath.&lt;/p&gt;
+
+&lt;p&gt;I deleted my rough outlines in attempt to start from a clean slate. I started again, this time with the &lt;em&gt;sole goal&lt;/em&gt; of just getting some kind of grid to show up. I wasn&amp;rsquo;t sure where to put this magical &lt;code&gt;makeGrid&lt;/code&gt; function, and stuck it in a &lt;code&gt;utils.js&lt;/code&gt; file for the moment, figuring I could move it later. I needed to represent the board&amp;rsquo;s cells and their status in some way. I made a giant array of objects, each of which would have properties like an &lt;code&gt;id&lt;/code&gt; and a &lt;code&gt;status&lt;/code&gt;, which is what my pair and I did when we did this in vanilla JavaScript.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (width, height) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; width; yCoord++) {
+    for (let xCoord = 0; xCoord &amp;lt; height; xCoord++) {
+      grid.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      })
+    }
+  }
+  return grid;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I passed this through the &lt;code&gt;BoardContainer&lt;/code&gt; down to the &lt;code&gt;Board&lt;/code&gt; component, I didn&amp;rsquo;t see a way I could easily map over the array in a way that would give me a board with a certain number of rows and columns, instead of a board that consisted of one row with many, many columns. I revisited my &lt;code&gt;makeGrid&lt;/code&gt; function and instead, made an array that had rows that were also arrays that held objects, that were each of the individual cells.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const makeGrid = (height, width) =&amp;gt; {
+  let grid = [];
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let row = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      row.push({
+        xCoord,
+        yCoord,
+        status: &#39;dead&#39;
+      });
+    }
+    grid.push(row);
+  }
+  return grid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later. Anyway, in my &lt;code&gt;Board&lt;/code&gt; component, I could map over each row, and within each row, map over each cell, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const Board = props =&amp;gt; {
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;table&amp;gt;
+        &amp;lt;tbody&amp;gt;
+          {props.board.grid.map((row, yCoord) =&amp;gt; (
+            &amp;lt;tr key={yCoord}&amp;gt;
+              {row.map((cell, xCoord) =&amp;gt; (
+                &amp;lt;Cell key={xCoord}
+                  id={props.id}
+                  status={props.board.grid[xCoord][yCoord].status}
+                  handleClick={() =&amp;gt; props.toggleCell(xCoord, yCoord)} /&amp;gt;
+              ))}
+            &amp;lt;/tr&amp;gt;
+          ))}
+        &amp;lt;/tbody&amp;gt;
+      &amp;lt;/table&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I then set up a very basic cell component, added in some styling, and voila, I had a grid!&lt;/p&gt;
+
+&lt;p&gt;Making the board have a random configuration upon the initial render wasn&amp;rsquo;t difficult; I just added a &lt;code&gt;randomize&lt;/code&gt; parameter with a default value of &lt;code&gt;true&lt;/code&gt; to the &lt;code&gt;makeGrid&lt;/code&gt; function and a conditional:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (randomize) {
+  if (Math.random() &amp;gt; 0.75) status = &#39;alive&#39;;
+  else status = &#39;dead&#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;counting-living-neighbors&#34;&gt;Counting Living Neighbors&lt;/h2&gt;
+
+&lt;p&gt;Cool! Next goal: advance to the next generation, given the number of dead or alive neighbors around each cell.&lt;/p&gt;
+
+&lt;p&gt;After creating actions, I needed to create a new function that would &amp;ldquo;calculate&amp;rdquo; the new statuses of each cell. This ended up looking like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export const stepForward = (grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+  const newGrid = [];
+  let status;
+
+  for (let yCoord = 0; yCoord &amp;lt; height; yCoord++) {
+    let newRow = [];
+    for (let xCoord = 0; xCoord &amp;lt; width; xCoord++) {
+      let currStatus = grid[xCoord][yCoord].status;
+      let count = getLivingNeighbors(xCoord, yCoord, grid);
+      if (currStatus === &#39;alive&#39; &amp;amp;&amp;amp; (count === 2 || count === 3)) {
+        status = &#39;alive&#39;;
+      } else if (currStatus === &#39;dead&#39; &amp;amp;&amp;amp; count === 3) {
+        status = &#39;alive&#39;;
+      } else {
+        status = &#39;dead&#39;;
+      }
+      newRow.push({
+        xCoord,
+        yCoord,
+        status
+      });
+    }
+    newGrid.push(newRow);
+  }
+  return newGrid;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yes, there&amp;rsquo;s a lot of repetition in there&amp;hellip;I&amp;rsquo;m essentially recreating the &lt;code&gt;makeGrid&lt;/code&gt; function, with some extra stuff in between. Refactoring these huge functions is definitely on the to-do list.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;getLivingNeighbors&lt;/code&gt; was a function that consisted of nested &lt;code&gt;for&lt;/code&gt; loops, to loop through each cell that surrounded the current cell, checked if the &lt;code&gt;className&lt;/code&gt; on the cell DOM element was &lt;code&gt;&#39;alive&#39;&lt;/code&gt;, and if so, incremented the &lt;code&gt;count&lt;/code&gt;.
+I was quite proud of myself for figuring out all of this, and ran my code&amp;hellip;only to realize that all of the cells would immediately die on the first &amp;ldquo;step.&amp;rdquo; After puzzling and Googling, it turns out, &lt;code&gt;document.getElementById&lt;/code&gt; doesn&amp;rsquo;t work in React – you can&amp;rsquo;t directly manipulate the DOM! Well, that&amp;rsquo;s something. A few Stack Overflow answers suggested trying the &lt;code&gt;ref&lt;/code&gt; property that React provides, but even though it was a possibility, it didn&amp;rsquo;t seem like what the &lt;code&gt;ref&lt;/code&gt; property was intended for. (I didn&amp;rsquo;t have a callback function to provide within it; I just wanted to access the DOM element&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Instead, I took a somewhat roundabout way of getting the surrounding cells and their status. To make this work, I also had to change the values of the &lt;code&gt;status&lt;/code&gt; field from &lt;code&gt;&#39;alive&#39;&lt;/code&gt; or &lt;code&gt;&#39;dead&#39;&lt;/code&gt; to 1s and 0s so that I could just increment the count based on neighboring statuses instead of trying to deal with conditionals for each neighbor.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const getLivingNeighbors = (xCoord, yCoord, grid = []) =&amp;gt; {
+
+  const height = grid.length;
+  const width = grid[0].length;
+
+  // If a cell is at the edge of the grid, the cell on the opposite edge will be its neighbor
+  const left = xCoord - 1 &amp;lt; 0 ? (width - 1) : (xCoord - 1);
+  const right = xCoord + 1 === width ? 0 : (xCoord + 1);
+  const up = yCoord - 1 &amp;lt; 0 ? (height - 1) : (yCoord - 1);
+  const down = yCoord + 1 === height ? 0 : (yCoord + 1);
+
+  let count = 0;
+
+  count += grid[left][up].status;
+  count += grid[xCoord][up].status;
+  count += grid[right][up].status;
+  count += grid[left][yCoord].status;
+  count += grid[right][yCoord].status;
+  count += grid[left][down].status;
+  count += grid[xCoord][down].status;
+  count += grid[right][down].status;
+
+  return count;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;non-intuitive-grid-positioning&#34;&gt;Non-Intuitive Grid Positioning&lt;/h2&gt;
+
+&lt;p&gt;So, remember when I said, &amp;ldquo;I wanted the &lt;code&gt;yCoord&lt;/code&gt; to refer to the vertical axes and the &lt;code&gt;xCoord&lt;/code&gt; to refer to the horizontal axes, as that seemed like the most intuitive path to me. Little did I know that this would cause me a slight headache later.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Well, once I had the &lt;code&gt;stepForward&lt;/code&gt; function coded out and triggering with a click on the corresponding button, I discovered that though my Game of Life was doing &lt;em&gt;something&lt;/em&gt; in the next generation, the common patterns weren&amp;rsquo;t behaving quite as expected. (Although, they weren&amp;rsquo;t disappearing, at least.)&lt;/p&gt;
+
+&lt;p&gt;After a lot of state-examining (thanks, &lt;code&gt;redux-logger&lt;/code&gt;!) and clicking around on boxes, I discovered that there was a conflict between the way I had set up my grid and the way I was referencing positions in it. Because I set it up so that each row is its own array and the rows were the y coordinates, this actually meant that whenever I wanted to reference a position on the grid, I&amp;rsquo;d have to specify the y coordinate first. (e.g. &lt;code&gt;grid[y][x]&lt;/code&gt; – until this point, I had been doing the opposite.)&lt;/p&gt;
+
+&lt;p&gt;After changing this in every place I was referencing a grid position, everything worked as expected! I could now advance generations on the click of a button, as well as click to toggle a cell to be &lt;code&gt;alive&lt;/code&gt; or &lt;code&gt;dead&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;Now that I have at least the basic core functionality down of moving from generation to generation, I have a couple of smaller things to add:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;setInterval&lt;/code&gt; or &lt;code&gt;requestAnimationFrame&lt;/code&gt; so that the game will automatically advance generations on initial render or on the press of the play button&lt;/li&gt;
+&lt;li&gt;A counter to show the number of generations that have passed&lt;/li&gt;
+&lt;li&gt;Functionality of the rest of the buttons (play, stop, random)&lt;/li&gt;
+&lt;li&gt;Some styling and pretty colors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Possibly one the more intensive and time-consuming things will be refactoring – right now, most of my core functionality is in a massive &lt;code&gt;utils.js&lt;/code&gt; file with two large and repetitive functions. It&amp;rsquo;d be nice to see if I could also make it so that when I&amp;rsquo;m referencing positions in the grid, I can specify the x coordinate first instead of the y.&lt;/p&gt;
+
+&lt;p&gt;In case you&amp;rsquo;re curious, &lt;a href=&#34;https://github.com/bethqiang/game-of-life&#34; target=&#34;_blank&#34;&gt;here&amp;rsquo;s&lt;/a&gt; the GitHub repo for this project. It&amp;rsquo;s not deployed yet, but I do plan on it after I&amp;rsquo;m done!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 1, Day 5: Game of Life and Introductory Node.js</title>
+      <link>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</link>
+      <pubDate>Fri, 04 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://bethqiang.com/blog/2016/11/04/game-of-life-and-introductory-nodejs/</guid>
+      <description>
+
+&lt;p&gt;We spent the first half of the day working on &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34; target=&#34;_blank&#34;&gt;Conway’s Game of Life&lt;/a&gt;, which is probably one of the more widely known examples of cellular automaton. In this “game,” the player’s only interaction with the game is at the very beginning, when the board is first set. (It can also be set randomly, requiring no user input at all.) Each round after, cells “live” or “die” according to predetermined rules.&lt;/p&gt;
+
+&lt;p&gt;My first introduction to the Game of Life was actually through &lt;a href=&#34;https://www.freecodecamp.com/&#34; target=&#34;_blank&#34;&gt;Free Code Camp&lt;/a&gt;, as it’s one of their “Data Visualization” projects to be implemented via React. So, I had seen it before and knew generally what it did, but I had never thought before of how to actually create it.&lt;/p&gt;
+
+&lt;p&gt;We were given a hint that a &lt;code&gt;forEachCell&lt;/code&gt; function would be useful, as we would be iterating through the board (we started with a 12x12 board) multiple times. It was set up to take an iterator function, and my partner and I had some trouble understanding how to implement it, which meant we put it off, which meant that we didn’t use it quite as much as we should have.&lt;/p&gt;
+
+&lt;p&gt;We knew the biggest challenge was going to be a function that stores the number of alive neighbors around each cell, then is able to correlate that number with a future state, without changing its present state. Then, once the next state for each cell was determined, and only then, we’d change the state of every cell at once. If we changed the state at the same time we determined it (and not after every cell was determined), we would have a board that didn’t have distinct states and would literally always be in flux.&lt;/p&gt;
+
+&lt;p&gt;We brainstormed two primary ways to solve this: either create a 2-D array, or store states in objects. (When we reviewed this with our instructor, we also learned that we could have stored the next state by adding an attribute on the HTML element.) We also briefly debated attempting promises, but in the end, went with storing them in objects and creating separate functions. This would allow us to attach any number of properties we wanted to our cells, and seemed a little simpler.&lt;/p&gt;
+
+&lt;p&gt;Each of our objects had three properties: the cell (the HTML element ID), the count of that cell’s alive neighbors, and an array of the cell’s neighbors. (The array of its neighbors was introduced during the debugging process; it won’t be in the final version.) Each cell had an object, and all 144 objects were pushed into an array.&lt;/p&gt;
+
+&lt;p&gt;We ended up using nested &lt;code&gt;for&lt;/code&gt; loops to find the number of alive neighbors — this would have been a great place to use our &lt;code&gt;forEachCell&lt;/code&gt; function, but again, we hadn’t written it yet. (Another thing to go back and do in the refactoring/cleaning up process!)&lt;/p&gt;
+
+&lt;p&gt;We also had some difficulty getting the number of alive cells for all of the cells surrounding a cell without taking into consideration the cell itself. We attempted to use an if statement, but we were doing &lt;code&gt;if (i !== xcoordinate &amp;amp;&amp;amp; j !== ycoordinate)&lt;/code&gt; — and we figured out that it was only counting the diagonals, which makes sense. However, we couldn’t figure out how to structure our if statement so that it would exclude the current cell, so we created a hack and if the cell was alive at the time, decrement the number of alive cells by one before storing it in the object. (Another thing to go back and actually do properly!)&lt;/p&gt;
+
+&lt;p&gt;We ran the &lt;code&gt;forEach&lt;/code&gt; method (again, a great place for that &lt;code&gt;forEachCell&lt;/code&gt; function!) on our game array containing all of the objects to then set its class and attribute to alive or dead based on the rules given.&lt;/p&gt;
+
+&lt;p&gt;The last step that we attempted to work on was enabling autoplay — that is, at the press of a button, change the state every pre-specified time interval. In order for the &lt;code&gt;setInterval&lt;/code&gt; method to be called on the game itself and not the button that it was clicked on, we needed to bind (literally by using the &lt;code&gt;bind&lt;/code&gt; method) the function to our game.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var playButton = document.getElementById(&amp;quot;play_btn&amp;quot;);
+    playButton.onclick = function() {
+      var autoplay = setInterval(
+      gameOfLife.step.bind(gameOfLife)
+}, 1000);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We were able to get it working without much trouble, but then quickly realized we didn’t have a way to stop it once it started. Our attempt at implementing the &lt;code&gt;clearInterval&lt;/code&gt; method ended up completely breaking our play button, so that’s still a work in progress.&lt;/p&gt;
+
+&lt;p&gt;There’s still a lot of work to be done on this project, including, but definitely not limited to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixing our autoplay function, and being able to stop it.&lt;/li&gt;
+&lt;li&gt;Allowing the user to specify a width and height for the board.&lt;/li&gt;
+&lt;li&gt;Creating a random pattern on the board to start, in case the user doesn’t want to initially click a bunch of boxes.&lt;/li&gt;
+&lt;li&gt;Possibly creating pre-determined patterns?&lt;/li&gt;
+&lt;li&gt;Refactoring and cleaning up. Lots and lots and lots of both.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m excited to continue working on it independent of the program. I’ve wanted to create a vanilla JavaScript app for a while now, and just haven’t gotten around to it, so this gave me some great practice with that. Eventually, I want to re-implement it using React to submit to Free Code Camp. (Even though I am in a full-time, immersive program, I’d still like to complete Free Code Camp’s curriculum.)&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction-to-node-js&#34;&gt;Introduction to Node.js&lt;/h2&gt;
+
+&lt;p&gt;We also did a brief introduction to Node.js, where we talked about what it was and what it did, came up with a pretty great analogy between JavaScript/Node.js and cooking, and talked about concurrency, asynchronicity, and callback functions. Having done a little bit of self-learning about Node.js and some of its intricacies, not all of it was entirely new to me, but I was able to learn nuggets like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var start = new Date;
+setTimeout(function() {
+  var end = new Date;
+  console.log(&amp;quot;Time elapsed:&amp;quot;, end - start, &amp;quot;ms&amp;quot;);
+}, 500);
+
+while (new Date - start &amp;lt; 1000) {};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What does this print out?  Various answers included &lt;code&gt;Time elapsed: 500 ms&lt;/code&gt;, &lt;code&gt;Time elapsed: 1000 ms&lt;/code&gt;, &lt;code&gt;Time elapsed: 1500 ms&lt;/code&gt;, among a few others. The answer was 1000ms — what happens in this block of code is that the &lt;code&gt;start&lt;/code&gt; variable will be set with a date and time. The &lt;code&gt;setTimeout&lt;/code&gt; function will begin, and wait for 500 ms. While it’s waiting (before it completes), it’ll jump straight down to the &lt;code&gt;while&lt;/code&gt; loop. The loop is blocking, which means that even though the &lt;code&gt;setTimeout&lt;/code&gt; function is yelling at Node because it’s done at 500ms, Node won’t interrupt the &lt;code&gt;while&lt;/code&gt; loop. So, 1000 ms after the start, the loop will complete, and then Node will complete the &lt;code&gt;setTimeout&lt;/code&gt; and console log &lt;code&gt;Time elapsed: 1000 ms&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We ran into an interesting problem while starting our Node.js workshop today that was related to this, but we weren’t able to find an answer yet — I’ll report back on Monday with what we’ve found!&lt;/p&gt;
+
+&lt;p&gt;We also heard about what’s planned in our VR Lab and I’m SO excited. Part of our homework for next week consists of learning how to play Minecraft, and we’ll eventually be using ScriptCraft to hack in VR as well as building out VR projects. I have very little experience with VR, but I&amp;rsquo;m excited to explore the possibilities!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

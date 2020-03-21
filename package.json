@@ -1,0 +1,24 @@
+{
+  "name": "bethqiang.github.io",
+  "version": "2.0.0",
+  "description": "Life, code, and the pursuit of happiness.",
+  "main": "./src/pages/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bethqiang/bethqiang.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bethqiang/bethqiang.github.io/issues"
+  },
+  "homepage": "https://github.com/bethqiang/bethqiang.github.io#readme",
+  "dependencies": {
+    "gatsby": "^2.20.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

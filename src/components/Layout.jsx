@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
 
+import theme from '../theme';
+import GlobalStyles from './GlobalStyles';
 import Header from './Header';
 
 function Layout({ children }) {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <Header />
       <div>
         {children}
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

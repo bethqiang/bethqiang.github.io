@@ -20,10 +20,14 @@
   },
   "homepage": "https://github.com/bethqiang/bethqiang.github.io#readme",
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.20.2",
+    "gatsby-plugin-styled-components": "^3.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.0.1",
+    "typeface-lora": "0.0.72"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

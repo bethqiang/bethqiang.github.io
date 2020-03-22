@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 function IndexPage() {
   return (
     <Layout>
-      <h1>New Gatsby site!</h1>
+      <p>Under construction - check back soon!</p>
     </Layout>
   );
 }

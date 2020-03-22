@@ -1,9 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   body {
-    font-family: ${(props) => props.theme.fonts}
+    font-family: ${(props) => props.theme.fonts};
+    font-size: 15px;
   }
 `;
 
-export default GlobalStyle;
+export default GlobalStyles;

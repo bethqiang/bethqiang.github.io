@@ -10,6 +10,10 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  h1 {
+    font-size: 30px;
+  }
 `;
 
 export default GlobalStyles;

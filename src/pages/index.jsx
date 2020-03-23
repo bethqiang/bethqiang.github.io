@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import indexImg from '../../data/index-page.jpg';
+import indexImg from '../../static/index-page-photo.jpg';
 import Layout from '../components/Layout';
 
 const ImgContainer = styled.div`

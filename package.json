@@ -1,41 +1,22 @@
 {
   "name": "bethqiang.github.io",
-  "version": "2.0.0",
-  "description": "Life, code, and the pursuit of happiness.",
-  "main": "./src/pages/index.jsx",
+  "version": "0.1.0",
   "scripts": {
-    "build": "gatsby build",
-    "deploy": "npm run build && node ./scripts/deploy.js",
-    "dev": "gatsby develop",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bethqiang/bethqiang.github.io.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bethqiang/bethqiang.github.io/issues"
-  },
-  "homepage": "https://github.com/bethqiang/bethqiang.github.io#readme",
   "dependencies": {
-    "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.20.2",
-    "gatsby-plugin-styled-components": "^3.2.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "styled-components": "^5.0.1",
-    "typeface-lora": "0.0.72"
+    "next": "9.5.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "gh-pages": "^2.2.0"
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.0.0"
   }
 }

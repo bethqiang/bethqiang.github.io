@@ -1,0 +1,107 @@
+@import '../variables';
+
+.container {
+  @include sm {
+    border: none;
+  }
+}
+
+.headingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nameHeading{
+  font-family: Vesterbro Poster, serif;
+  font-size: 40px;
+  color: $blue;
+  letter-spacing: -1.5px;
+  @include sm {
+    font-size: 48px;
+  }
+}
+
+.menuBtn {
+  color: $black;
+  font-weight: 700;
+  font-size: 18px;
+  @include gradient-underline;
+  @include sm {
+    display: none;
+  }
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding: 100px 50px;
+}
+
+.closeBtn {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  color: $white;
+  font-weight: 700;
+  font-size: 18px;
+  &:hover {
+    border-bottom: 2px solid $white;
+  }
+}
+
+.mobileLinkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .navLink {
+    margin-bottom: 25px;
+    padding-bottom: 4px;
+    font-size: 24px;
+    color: $white;
+    &:hover:not(.linkActive) {
+      border-bottom: 2px solid $white;
+    }
+  }
+}
+
+.desktopLinkContainer {
+  display: none;
+  @include sm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: static;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .navLink {
+    color: $black;
+    &:hover:not(.linkActive) {
+      border-bottom: 2px solid $black;
+    }
+  }
+}
+
+.navLink {
+  font-weight: 700;
+  text-decoration: none;
+  &:hover {
+    padding-bottom: 2px;
+  }
+}
+
+.linkActive {
+  @include gradient-underline;
+  &:hover {
+    padding-bottom: 4px;
+    border-bottom: none;
+  }
+}

@@ -1,16 +1,11 @@
-import Head from 'next/head';
+import Layout from '../components/layout';
 
 export default function Home() {
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
+    <Layout>
+      <main className="mainContent">
         <h1 className="title">Oh, hello</h1>
       </main>
-    </div>
+    </Layout>
   );
 }

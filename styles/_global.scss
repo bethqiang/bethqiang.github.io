@@ -1,0 +1,35 @@
+@import 'variables';
+
+@font-face {
+  font-family: Vesterbro Poster;
+  font-weight: 400;
+  font-style: normal;
+  src: url("../public/fonts/Vesterbro/Vesterbro-Poster.woff2") format("woff2"),
+  url("../public/fonts/Vesterbro/Vesterbro-Poster.woff") format("woff");
+  font-display: swap;
+}
+
+body {
+  background-color: $white;
+  font-family: Proxima Nova, sans-serif;
+}
+
+button {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.mainContent {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

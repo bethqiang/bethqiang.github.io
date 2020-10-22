@@ -1,0 +1,55 @@
+// Colors
+$pink: #FC95C5;
+$purple: #C375E5;
+$blue: #6670B2;
+$black: #404040;
+$white: #FAFAFA;
+
+// Breakpoints
+$screen-sm-min: 576px;
+$screen-md-min: 768px;
+$screen-lg-min: 992px;
+$screen-xl-min: 1200px;
+
+// Mixins for Breakpoints
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+      @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+      @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+      @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+      @content;
+  }
+}
+
+// Custom devices
+@mixin rwd($screen) {
+  @media (min-width: $screen+'px') {
+      @content;
+  }
+}
+
+// Other Mixins
+@mixin gradient-underline {
+  padding-bottom: 4px;
+  background-image: linear-gradient(to right, $pink, $purple);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-color: inherit;
+  background-size: 100% 4px;
+  border-bottom: none;
+}

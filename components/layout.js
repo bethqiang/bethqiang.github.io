@@ -11,8 +11,8 @@ export default function Layout({ children }) {
         <title>Beth Qiang</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://use.typekit.net/foh8ntp.css" />
-        <link rel="preload" href="../public/fonts/Vesterbro/Vesterbro-Poster.woff2" as="font" crossOrigin="" />
-        <link rel="preload" href="../public/fonts/Vesterbro/Vesterbro-Poster.woff" as="font" crossOrigin="" />
+        <link rel="preload" href="/fonts/Vesterbro-Poster.woff2" as="font" crossOrigin="" />
+        <link rel="preload" href="/fonts/Vesterbro-Poster.woff" as="font" crossOrigin="" />
       </Head>
       <div className={styles.container}>
         <Nav />

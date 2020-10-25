@@ -44,12 +44,23 @@ export default function LinkContainer({ navOpen, className }) {
       animate={navOpen ? 'open' : 'closed'}
       className={`${styles.menuList} ${className}`}
     >
-      { links.map((link) => <CustomLink href={link.href}>{link.label}</CustomLink>)}
+      { links.map((link) => (
+        <CustomLink
+          href={link.href}
+          key={link.label}
+        >
+          {link.label}
+        </CustomLink>
+      ))}
     </motion.ul>
   );
 }
 
 LinkContainer.propTypes = {
-  navOpen: PropTypes.bool.isRequired,
+  navOpen: PropTypes.bool,
   className: PropTypes.string.isRequired,
+};
+
+LinkContainer.defaultProps = {
+  navOpen: false,
 };

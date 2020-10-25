@@ -1,8 +1,28 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import LinkContainer from './linkContainer';
+import MobileLinkContainer from './mobileLinkContainer';
+import DesktopLinkContainer from './desktopLinkContainer';
 import styles from '../../styles/components/nav.module.scss';
+
+const links = [
+  {
+    label: 'home',
+    href: '/',
+  },
+  {
+    label: 'work',
+    href: '/work',
+  },
+  {
+    label: 'blog',
+    href: '/blog',
+  },
+  {
+    label: 'photography',
+    href: '/photography',
+  },
+];
 
 const variants = {
   open: {
@@ -46,12 +66,16 @@ export default function Nav() {
         >
           close
         </button>
-        <LinkContainer
+        <MobileLinkContainer
+          links={links}
           navOpen={navOpen}
           className={styles.mobileLinkContainer}
         />
       </motion.div>
-      <LinkContainer className={styles.desktopLinkContainer} />
+      <DesktopLinkContainer
+        links={links}
+        className={styles.desktopLinkContainer}
+      />
     </div>
   );
 }

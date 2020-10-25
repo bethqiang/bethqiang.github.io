@@ -4,25 +4,6 @@ import { motion } from 'framer-motion';
 import CustomLink from './link';
 import styles from '../../styles/components/nav.module.scss';
 
-const links = [
-  {
-    label: 'home',
-    href: '/',
-  },
-  {
-    label: 'work',
-    href: '/work',
-  },
-  {
-    label: 'blog',
-    href: '/blog',
-  },
-  {
-    label: 'photography',
-    href: '/photography',
-  },
-];
-
 const variants = {
   open: {
     transition: {
@@ -37,7 +18,7 @@ const variants = {
   },
 };
 
-export default function LinkContainer({ navOpen, className }) {
+export default function MobileLinkContainer({ links, navOpen, className }) {
   return (
     <motion.ul
       variants={variants}
@@ -56,11 +37,12 @@ export default function LinkContainer({ navOpen, className }) {
   );
 }
 
-LinkContainer.propTypes = {
+MobileLinkContainer.propTypes = {
+  links: PropTypes.arrayOf(PropTypes.object).isRequired,
   navOpen: PropTypes.bool,
   className: PropTypes.string.isRequired,
 };
 
-LinkContainer.defaultProps = {
+MobileLinkContainer.defaultProps = {
   navOpen: false,
 };

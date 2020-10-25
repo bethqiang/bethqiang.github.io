@@ -1,0 +1,26 @@
+@import '../variables';
+
+.aboutContainer {
+  @include md {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mainImg {
+  width: 90%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  display: block;
+}
+
+.aboutTextContainer {
+  margin-top: 50px;
+  @include md {
+    margin-top: 0;
+    margin-left: 50px;
+  }
+}

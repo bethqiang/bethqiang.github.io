@@ -1,22 +1,21 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 
-import CustomLink from './link';
+import LinkContainer from './linkContainer';
 import styles from '../../styles/components/nav.module.scss';
 
-function LinkContainer({ className }) {
-  return (
-    <div className={className}>
-      <CustomLink href="/">home</CustomLink>
-      <CustomLink href="/work">work</CustomLink>
-      <CustomLink href="/blog">blog</CustomLink>
-      <CustomLink href="/photography">photography</CustomLink>
-    </div>
-  );
-}
-
-LinkContainer.propTypes = {
-  className: PropTypes.string.isRequired,
+const variants = {
+  open: {
+    opacity: 1,
+    x: 0,
+  },
+  closed: {
+    opacity: 0,
+    x: '-100%',
+    transition: {
+      delay: 0.8,
+    },
+  },
 };
 
 export default function Nav() {
@@ -25,18 +24,33 @@ export default function Nav() {
     <div className={styles.container}>
       <div className={styles.headingContainer}>
         <h1 className={styles.nameHeading}>beth qiang</h1>
-        <button type="button" className={styles.menuBtn} onClick={() => toggleNav(!navOpen)}>
+        <button
+          type="button"
+          onClick={() => toggleNav(true)}
+          className={styles.menuBtn}
+        >
           menu
         </button>
       </div>
-      { navOpen && (
-        <div className={styles.modal}>
-          <button type="button" className={styles.closeBtn} onClick={() => toggleNav(!navOpen)}>
-            close
-          </button>
-          <LinkContainer className={styles.mobileLinkContainer} />
-        </div>
-      )}
+      <motion.div
+        variants={variants}
+        initial="closed"
+        animate={navOpen ? 'open' : 'closed'}
+        transition={{ damping: 50 }}
+        className={styles.modal}
+      >
+        <button
+          type="button"
+          onClick={() => toggleNav(false)}
+          className={styles.closeBtn}
+        >
+          close
+        </button>
+        <LinkContainer
+          navOpen={navOpen}
+          className={styles.mobileLinkContainer}
+        />
+      </motion.div>
       <LinkContainer className={styles.desktopLinkContainer} />
     </div>
   );

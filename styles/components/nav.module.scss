@@ -40,13 +40,20 @@
   z-index: 1;
   top: 0;
   left: 0;
-  padding: 100px 50px;
+  padding: 150px 50px;
+}
+
+.menuList,
+.menuList .menuItem {
+   margin:0;
+   padding: 0;
+   text-indent: 0;
+   list-style-type: none;
 }
 
 .closeBtn {
   position: fixed;
   top: 40px;
-  right: 50px;
   color: $white;
   font-weight: 700;
   font-size: 18px;
@@ -60,13 +67,15 @@
   flex-direction: column;
   align-items: flex-start;
   .navLink {
-    margin-bottom: 25px;
     padding-bottom: 4px;
     font-size: 24px;
     color: $white;
     &:hover:not(.linkActive) {
       border-bottom: 2px solid $white;
     }
+  }
+  .menuItem {
+    margin-bottom: 25px;
   }
 }
 

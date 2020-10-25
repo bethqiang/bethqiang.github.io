@@ -1,8 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 import styles from '../../styles/components/nav.module.scss';
+
+const variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+  },
+  closed: {
+    opacity: 0,
+    y: -20,
+  },
+};
 
 export default function CustomLink({ href, children }) {
   const router = useRouter();
@@ -12,7 +24,16 @@ export default function CustomLink({ href, children }) {
     classes = `${classes} ${styles.linkActive}`;
   }
 
-  return <a href={href} className={classes}>{children}</a>;
+  return (
+    <motion.li
+      variants={variants}
+      className={styles.menuItem}
+    >
+      <a href={href} className={classes}>
+        {children}
+      </a>
+    </motion.li>
+  );
 }
 
 CustomLink.propTypes = {

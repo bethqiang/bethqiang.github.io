@@ -1,0 +1,54 @@
+@import '../variables';
+
+.projectContainer {
+  display: flex;
+  flex-direction: column;
+  &:not(:last-child) {
+    @include gradient-underline;
+    margin-bottom: 10px;
+    padding-bottom: 50px;
+  }
+  h2 {
+    font-family: vesterbro-poster, serif;
+    color: $blue;
+    font-size: 36px;
+  }
+  .imgContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+    @include lg {
+      flex: 0 0 1;
+      max-width: 400px;
+    }
+  }
+  @include lg {
+    flex-direction: row;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  ul {
+    padding-left: 15px;
+  }
+  @include lg {
+    flex: 0 0 1;
+    margin-left: 50px;
+  }
+}
+
+.subHeading {
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+.text {
+  margin-bottom: 0;
+}

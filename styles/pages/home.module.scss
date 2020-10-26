@@ -24,3 +24,18 @@
     margin-left: 50px;
   }
 }
+
+.socialContainer {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  @include sm {
+    margin-top: 100px;
+  }
+}
+
+.socialIcon {
+  width: 25px;
+  margin-right: 15px;
+  color: $blue;
+}

@@ -1,5 +1,13 @@
-import Layout from '../components/layout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faGithubSquare,
+  faInstagramSquare,
+  faLinkedin,
+  faTwitterSquare,
+} from '@fortawesome/free-brands-svg-icons';
+import { faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons';
 
+import Layout from '../components/layout';
 import styles from '../styles/pages/home.module.scss';
 
 export default function Home() {
@@ -58,6 +66,38 @@ export default function Home() {
           </p>
         </div>
       </main>
+      <div className={styles.socialContainer}>
+        <a href="mailto:beth@bethqiang.com">
+          <FontAwesomeIcon
+            icon={faEnvelopeSquare}
+            className={styles.socialIcon}
+          />
+        </a>
+        <a href="https://github.com/bethqiang" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faGithubSquare}
+            className={styles.socialIcon}
+          />
+        </a>
+        <a href="https://www.linkedin.com/in/bethqiang08/" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faLinkedin}
+            className={styles.socialIcon}
+          />
+        </a>
+        <a href="https://twitter.com/beth_qiang" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faTwitterSquare}
+            className={styles.socialIcon}
+          />
+        </a>
+        <a href="https://www.instagram.com/babsy.23/" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faInstagramSquare}
+            className={styles.socialIcon}
+          />
+        </a>
+      </div>
     </Layout>
   );
 }

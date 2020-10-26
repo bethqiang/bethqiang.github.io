@@ -21,7 +21,7 @@ export default function Home() {
         />
         <div className={styles.aboutTextContainer}>
           <p>
-            Hi! I’m Beth.
+            Hi, I’m Beth!
           </p>
           <p>
             {'Currently based in Durham, NC, via Austin, Houston, and Cleveland. Alumna of '}

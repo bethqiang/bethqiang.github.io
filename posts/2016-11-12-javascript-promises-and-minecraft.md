@@ -267,7 +267,7 @@ A lot of mishaps were had, but a lot of fun was as well. A few of our more notab
 
 And if you’re curious, here’s a small snippet of video that our Product Manager, Mark Davis, recorded:
 
-{{< youtube jzLrYTZ47sc
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jzLrYTZ47sc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <br />
 

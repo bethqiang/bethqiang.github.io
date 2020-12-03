@@ -1,7 +1,11 @@
 @import '../variables';
 
 .postContainer {
-  margin-bottom: 60px;
+  &:not(:last-child) {
+    @include gradient-underline;
+    padding-bottom: 50px;
+  }
+  margin-bottom: 50px;
   a {
     font-family: vesterbro-poster, serif;
     text-transform: lowercase;

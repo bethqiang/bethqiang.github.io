@@ -35,7 +35,7 @@ We then spent our last week prepping for our final presentation of this project 
 
 Here's our presentation, featuring all of the goodies I've talked about over the [past](/blog/2017-01-30-react-redux-race-conditions-webrtc/) [three](/blog/2017-02-13-capstone-part-2-logging-in-the-chair-link-traversal/) posts.
 
-{{< youtube I5ND_1PI77c
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I5ND_1PI77c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <br />
 

@@ -64,10 +64,20 @@ export default function Home() {
             Seeking to make the world a more inclusive, accessible,
             representative, empowering, and compassionate place.
           </p>
+          <p>
+            <strong>I&apos;m open to mentorships! </strong>
+            If you&apos;re:
+            <ul>
+              <li>from an underrepresented and/or marginalized group and</li>
+              <li>a junior engineer or a recent bootcamp grad and</li>
+              <li>looking for mentorship, advice, project/resume/interview help</li>
+            </ul>
+            Send me a message and let&apos;s chat!
+          </p>
         </div>
       </main>
       <div className={styles.socialContainer}>
-        <a href="mailto:beth@bethqiang.com">
+        <a href="mailto:bqiang08@gmail.com">
           <FontAwesomeIcon
             icon={faEnvelopeSquare}
             className={styles.socialIcon}

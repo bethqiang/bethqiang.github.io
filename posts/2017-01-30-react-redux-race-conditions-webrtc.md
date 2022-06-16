@@ -5,7 +5,7 @@ date: "2017-01-30"
 excerpt: "Most of our work on our Capstone project this past week has been trying to set up the base for what we'll be building the super cool features off of. So far, I ported my prototype over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions, and learned an important lesson about querySelector."
 ---
 
-Most of our work on our Capstone project this past week has been trying to set up the base for what we'll be building the super cool features off of. So far, I ported [my prototype](/blog/2017-01-23-how-to-develop-a-vr-app-prototype/) over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about `querySelector`. I've also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.
+Most of our work on our Capstone project this past week has been trying to set up the base for what we'll be building the super cool features off of. So far, I ported [my prototype](/writing/2017-01-23-how-to-develop-a-vr-app-prototype/) over, put React in, took React out, put React in again, put Redux and Immutable.js in, fixed race conditions (race conditions and I have grown a little too familiar with each other for my liking), and learned an important lesson about `querySelector`. I've also attempted to aid in implementing WebRTC, which has turned out to be surprisingly frustrating.
 
 ## React and A-Frame
 

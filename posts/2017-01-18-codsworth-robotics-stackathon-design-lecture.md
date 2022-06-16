@@ -5,7 +5,7 @@ date: "2017-01-18"
 excerpt: "We presented Codsworth Robotics, your one and only source for robot butlers, today in class. It's officially live here, and you can view the code here. Although it still may be far from a production-ready app, it's basically a fully-functioning e-commerce store."
 ---
 
-We presented [Codsworth Robotics](/blog/2017-01-12-what-ive-been-up-to-for-4-weeks/), your one and only source for robot butlers, today in class. It's officially live [here](http://codsworth-robotics.herokuapp.com/), and you can view the code [here](https://github.com/Codsworth-Robotics/codsworth-robotics). Although it still may be far from a production-ready app, it's basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.
+We presented [Codsworth Robotics](/writing/2017-01-12-what-ive-been-up-to-for-4-weeks/), your one and only source for robot butlers, today in class. It's officially live [here](http://codsworth-robotics.herokuapp.com/), and you can view the code [here](https://github.com/Codsworth-Robotics/codsworth-robotics). Although it still may be far from a production-ready app, it's basically a fully-functioning e-commerce store, which is pretty impressive, if I do say so myself.
 
 One of the coolest moments of my young programming career so far happened on Monday night, when I hooked up the npm package `nodemailer` to our checkout process, so that when a user places an order, they'll immediately be sent an email with their confirmation number.
 
@@ -17,7 +17,7 @@ My teammates made fun of me a little bit for being so excited about this, and I 
 
 The end of one project means the beginning of another! Today was the first day of Stackathon, which essentially is a personal hackathon. We have until Monday to build something (anything) of our choosing, and there are a couple of awards on the line.
 
-After internally debating for basically the past month about what I've wanted to do, I finally decided to attempt an [AltSpace](https://altvr.com/) or [vTime](https://vtime.net/)-like app, but one that could support many more people than those currently do. As Mark Davis, Fullstack's Product Manager, [describes](https://www.fullstackacademy.com/blog/vr-lab-jan-2017):
+After internally debating for basically the past month about what I've wanted to do, I finally decided to attempt an [AltSpace](https://altvr.com/) or [vTime](https://vtime.net/)-like app, but one that could support many more people than those currently do. As Mark Davis, Fullstack's Product Manager, [describes](https://www.fullstackacademy.com/writing/vr-lab-jan-2017):
 
 > Here's what we wish existed, now: a simple VR environment where up to 25 avatars can interact with each other, with real-time voice chat, that's accessible on a Google Daydream headset as an MVP, but is also extensible to any WebVR enabled headset.
 

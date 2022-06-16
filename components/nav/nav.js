@@ -15,8 +15,8 @@ const links = [
     href: '/work',
   },
   {
-    label: 'blog',
-    href: '/blog',
+    label: 'writing',
+    href: '/writing',
   },
 ];
 

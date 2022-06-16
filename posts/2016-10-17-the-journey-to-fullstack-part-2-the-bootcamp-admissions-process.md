@@ -109,6 +109,6 @@ Then, I had an interview with Erik Trautman, the founder, CEO, and primary instr
 
 Read the other posts in this series:
 
-[Part 1: The Beginning](/blog/2016-10-12-the-journey-to-fullstack-part-1-the-beginning/)
+[Part 1: The Beginning](/writing/2016-10-12-the-journey-to-fullstack-part-1-the-beginning/)
 
-[Part 3: The Final Decision](/blog/2016-10-21-the-journey-to-fullstack-part-3-the-final-decision/)
+[Part 3: The Final Decision](/writing/2016-10-21-the-journey-to-fullstack-part-3-the-final-decision/)

@@ -15,7 +15,7 @@ Current length of to-do list: 32
 
 Hours spent in front of a computer: more than I'd like to admit (I didn't actually keep track of this, but I think it'd be interesting and/or possibly slightly terrifying)
 
-[Number of times I fell off the world or died in Minecraft](/blog/2016-11-12-javascript-promises-and-minecraft/): 0
+[Number of times I fell off the world or died in Minecraft](/writing/2016-11-12-javascript-promises-and-minecraft/): 0
 
 ## Overall Thoughts
 
@@ -35,4 +35,4 @@ To start, quite possibly one of the biggest events in our lives happened this we
 
 In other news, Pieter DePree, Recruiting Lead at Stack Overflow, came to campus to talk about how Stack Overflow hires developers, and more specifically, what we can do to start preparing ourselves and our online presence for the job hunt in a couple of months. Though some of his points didn't necessarily apply at this point in time, it did make us aware of what we need to start doing when, and gave us the knowledge of how to prepare ourselves for when it did. It was also really interesting to get a detailed look into the hiring process at company like Stack Overflow.
 
-And lastly, who could forget about our Minecraft adventure on Friday? [I've written a bit on it before](/blog/2016-11-12-javascript-promises-and-minecraft/), so I'm not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack's co-founders. I haven't yet been back into our server to see if people have built anything this weekend, but I'm excited to check in later tonight and see what's been happening.
+And lastly, who could forget about our Minecraft adventure on Friday? [I've written a bit on it before](/writing/2016-11-12-javascript-promises-and-minecraft/), so I'm not going to repeat any of it here, but I felt like that was a great bonding moment for our cohort and everyone associated with it — instructors, fellows, staff, and even one of Fullstack's co-founders. I haven't yet been back into our server to see if people have built anything this weekend, but I'm excited to check in later tonight and see what's been happening.

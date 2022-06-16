@@ -7,7 +7,7 @@ excerpt: "Yesterday morning, we had a checkpoint over Express and Sequelize – 
 
 Yesterday morning, we had a checkpoint over Express and Sequelize – a three-hour long evaluation of sorts to see where we were at in our understanding of the concepts and their usage. I spent the almost the past week reviewing and studying and ensuring I understood the ins-and-outs of things like setting up models with validations and getters and setters and class methods and instance methods and hooks, creating associations between models, handling routes, communicating with the database to create/update/read/destroy, and eager creation and loading. I found that the checkpoint was pretty fair, and making sure that I understood everything very well definitely paid off!
 
-I want to use what we've learned to work on at least one or two of [Free Code Camp](https://www.freecodecamp.com)'s Back-End or full-stack projects over this coming Thanksgiving break. I'm not sure how much time I'll have given the fact that I'll have to do some working ahead to attend [Node.js Interactive](/blog/2016-11-20-fullstack-academy-week-3/) the week after, but I think it'd be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.
+I want to use what we've learned to work on at least one or two of [Free Code Camp](https://www.freecodecamp.com)'s Back-End or full-stack projects over this coming Thanksgiving break. I'm not sure how much time I'll have given the fact that I'll have to do some working ahead to attend [Node.js Interactive](/writing/2016-11-20-fullstack-academy-week-3/) the week after, but I think it'd be nice (and super helpful!) to use our existing skills and knowledge and apply them in a new context.
 
 ## ScriptCraft Hackathon
 

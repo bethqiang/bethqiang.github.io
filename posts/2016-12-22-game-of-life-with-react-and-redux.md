@@ -7,7 +7,7 @@ excerpt: "For the past few days, I've spent most of my time slowly cobbling toge
 
 For the past few days, I've spent most of my time slowly cobbling together the Game of Life using React, Redux, and Sass. There's actually really not that much Sass – starting out, I wanted to practice it, although now that I'm halfway through, I'm realizing that I really don't need it. I probably should have just saved it for another project – but anyway.
 
-In the [first week of Fullstack](/blog/2016-11-4-game-of-life-and-introductory-nodejs/), we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn't going to be *that* hard. (Famous last words.)
+In the [first week of Fullstack](/writing/2016-11-4-game-of-life-and-introductory-nodejs/), we actually built Game of Life with vanilla JavaScript. My pair and I fought through some battles together, and so I anticipated that re-doing it using a few extra technologies wasn't going to be *that* hard. (Famous last words.)
 
 ## The Webpack Rabbit Hole
 

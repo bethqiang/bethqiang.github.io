@@ -31,11 +31,11 @@ This workshop also made me realize that I need to get better at architecting and
 
 ---
 
-We've subsequently had the last four days off, although I've been working ahead in an effort to not fall behind in the two days I'll be missing this week for [Node.js Interactive North America](/blog/2016-11-27-fullstack-academy-week-3/).
+We've subsequently had the last four days off, although I've been working ahead in an effort to not fall behind in the two days I'll be missing this week for [Node.js Interactive North America](/writing/2016-11-27-fullstack-academy-week-3/).
 
 I learned about TCP vs. IP protocols, event emitters, websockets, and rooms and namespaces, and then built a "World Wide Whiteboard" – an app that allows a user to "draw" something on a Microsoft Paint-like interface, and the drawing appears in real-time for all of the other users connected to the server. After the basic functionality was built, I added in the ability to join rooms, so that you could go into a specific room and whatever was drawn would only be broadcasted to other users in that room.
 
-I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I've been really excited about this part of the curriculum, as [I've used React before at a hackathon](/blog/2016-10-24-first-hackathon-react-git-and-working-with-developers/) but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn't any kind of depth happening. I'm excited to get actually learn how and why things work, and how powerful it can be when you're not constricted to only 36 hours!
+I also did a lot of ES6-ing and then started learning React, although I have yet to start the workshop or build anything substantial. I've been really excited about this part of the curriculum, as [I've used React before at a hackathon](/writing/2016-10-24-first-hackathon-react-git-and-working-with-developers/) but (1) the learning process was not any kind of smooth – it was very much learning on-the-fly and only what I absolutely needed to know at the specific moment I was building a feature, and (2) we were under a heavy time-crunch, so there wasn't any kind of depth happening. I'm excited to get actually learn how and why things work, and how powerful it can be when you're not constricted to only 36 hours!
 
 ---
 

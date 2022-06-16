@@ -25,7 +25,7 @@ Hours I've spent snuggling with/walking dogs: 3
 
 For most of the immersive so far, I felt like I was at least sort of staying on top of things – I may have been struggling to tread water, but my head was still above the surface.
 
-Until Tuesday, when [I felt like I was going *down* and I had no idea how to stop it](/blog/2016-11-16-on-feeling-completely-overwhelmed/). Then during lunch on Wednesday, I stepped away from my computer, and just took some time to appreciate the outdoors and the food I was eating and the moment that I was in. Eventually, I was able to reassure myself that I am a capable human being, and that with enough time, effort, and conscious practice, everything that I was confused about would start to make sense. Eventually.
+Until Tuesday, when [I felt like I was going *down* and I had no idea how to stop it](/writing/2016-11-16-on-feeling-completely-overwhelmed/). Then during lunch on Wednesday, I stepped away from my computer, and just took some time to appreciate the outdoors and the food I was eating and the moment that I was in. Eventually, I was able to reassure myself that I am a capable human being, and that with enough time, effort, and conscious practice, everything that I was confused about would start to make sense. Eventually.
 
 It was also nice to hear in the end-of-week reflection among our cohort that I was far from the only one who had had an off day or two. One of our instructors mentioned that this journey is a rollercoaster: you can feel on top of the world and everything just clicks one day, and like everything's falling apart the very next. It's definitely a marathon, not a sprint, and we're all getting there together.
 

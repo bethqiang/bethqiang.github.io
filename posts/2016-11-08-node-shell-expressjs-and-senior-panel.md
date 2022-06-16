@@ -31,7 +31,7 @@ One of the biggest challenges we faced, and I’m now starting to realize is a w
 
 ## Express.js
 
-We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after [my initial interest in learning back-end development](/blog/2016-10-24-first-hackathon-react-git-and-working-with-developers/), so I was somewhat familiar with the basic concepts of starting a server and setting routes.
+We then spent a very, very long time talking about Express.js. Turns out, there’s a lot to talk about. I did a very little bit of Express on my own right before the immersive started after [my initial interest in learning back-end development](/writing/2016-10-24-first-hackathon-react-git-and-working-with-developers/), so I was somewhat familiar with the basic concepts of starting a server and setting routes.
 
 A few main points from the lecture that I found useful and/or funny:
 

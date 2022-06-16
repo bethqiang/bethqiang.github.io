@@ -18,7 +18,7 @@ During lunch, when I usually take some time to read programming blogs or review 
 
 Once I had an opportunity to calm down and reassure myself that I did in fact, know how to code and solve problems with some degree of competency, and that yes, I could do this, I knew I needed to change something. I needed more time. Time for me to do thorough concept reviews in the evenings, and do fun Code Wars problems, and go to meetups, and work on personal projects, and do more functional programming because for some reason that really excites me. I needed time do things that I find fun that aren't directly related to class. And also, you know, sleep. But more importantly, I *also* needed some time every day to do things like go for 45 minute walks or watch cute puppy videos or get dinner with a friend once in a blue moon. And run. Running helps. (That's a long list, I know.)
 
-This isn't an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in [last week's reflection post](/blog/2016-11-13-fullstack-academy-week-2/). I knew, at the time of writing that, that I needed to change *something*. But I didn't realize that I couldn't keep doing what I was doing, and still stay sane.
+This isn't an uncommon theme; I mentioned that I needed to improve upon my time management and prioritization in [last week's reflection post](/writing/2016-11-13-fullstack-academy-week-2/). I knew, at the time of writing that, that I needed to change *something*. But I didn't realize that I couldn't keep doing what I was doing, and still stay sane.
 
 Outside of class and evening reviewing (which, in and of itself, I need to find a way to optimze), writing these posts have by far taken the largest chunk of my time. Daily 1,500-word blog posts are great, and I’m sure I’ll thank myself for them later. But, I’m starting to realize with the schedule that we have and the time I need outside of class, they’re unsustainable. Frankly, they take too much time to write, and even just saving an hour a day will give me an hour to start doing other things. That definitely doesn't mean I'm going to abandon writing about each day. I just have to choose more wisely what I want to write, and cap the length of and detail in each post, thereby lessening the time that they take.
 
@@ -80,7 +80,7 @@ describe('findByTag', function () { // no done being passed
 });
 ```
 
-On Tuesday, my pair and I were working on tests for our [Wikipedia clone](/blog/2016-11-14-building-a-wikipedia-clone/), and for one of them, we were creating an instance that pulled from two models, `User` and `Page`. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:
+On Tuesday, my pair and I were working on tests for our [Wikipedia clone](/writing/2016-11-14-building-a-wikipedia-clone/), and for one of them, we were creating an instance that pulled from two models, `User` and `Page`. After wrestling with it for an hour and a half and finally getting it to work the non-magical, slightly harder, and not as pretty way, our fellow then asked us if we wanted to try a little Sequelize magic to make this happen – a little something called eager creation. Here’s what we worked through to come up with:
 
 ```
 // in models > index.js, set associations:

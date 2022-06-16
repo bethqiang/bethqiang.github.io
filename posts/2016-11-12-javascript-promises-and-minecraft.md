@@ -5,7 +5,7 @@ date: "2016-11-12"
 excerpt: "After the callback hell we experienced yesterday, we learned about promises today. A promise, according to my instructor and the Promises/A+ Spec and basically any other legitimate source, represents the eventual result of an asynchronous operation."
 ---
 
-After the [callback hell we experienced yesterday](/blog/2016-11-10-sql-election-chat-and-revisiting-twitter-clone/), we learned about promises today. A promise, according to my instructor and [the Promises/A+ Spec](https://promisesaplus.com/) and basically any other legitimate source, represents the **eventual result of an asynchronous operation**.
+After the [callback hell we experienced yesterday](/writing/2016-11-10-sql-election-chat-and-revisiting-twitter-clone/), we learned about promises today. A promise, according to my instructor and [the Promises/A+ Spec](https://promisesaplus.com/) and basically any other legitimate source, represents the **eventual result of an asynchronous operation**.
 
 Let’s bring back our (slightly refactored, with the `insertIntoTable` function omitted, so it’s not 40+ lines long) gorgeous code from yesterday, and illustrate everything that’s wrong with it:
 

@@ -5,7 +5,7 @@ date: "2017-01-23"
 excerpt: "Step 1: Come up with an idea. Decide upon attempting to prototype a social VR app that would support many users, as there isn't one that exists today that does so, and ideally (if time permits) implement real-time audio."
 ---
 
-Step 1: Come up with an idea. [Decide upon attempting to prototype a social VR app](/blog/2017-01-18-codsworth-robotics-stackathon-design-lecture/) that would support many users, as there isn't one that exists today that does so, and ideally (if time permits) implement real-time audio.
+Step 1: Come up with an idea. [Decide upon attempting to prototype a social VR app](/writing/2017-01-18-codsworth-robotics-stackathon-design-lecture/) that would support many users, as there isn't one that exists today that does so, and ideally (if time permits) implement real-time audio.
 
 Step 2: Notice that [A-Frame](https://aframe.io/) is supposedly easy to get up-and-running. Do some digging into creating multiuser experiences in A-Frame. Discover that someone has created a [Firebase component in A-Frame](https://github.com/ngokevin/kframe/tree/master/components/firebase), making the multiuser part *very* easy.
 

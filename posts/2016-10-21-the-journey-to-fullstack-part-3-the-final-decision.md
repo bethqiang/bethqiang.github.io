@@ -48,6 +48,6 @@ Though I’d be a part of Fullstack’s Remote Immersive cohort (and therefore a
 
 Read the other posts in this series:
 
-[Part 1: The Beginning](/blog/2016-10-12-the-journey-to-fullstack-part-1-the-beginning/)
+[Part 1: The Beginning](/writing/2016-10-12-the-journey-to-fullstack-part-1-the-beginning/)
 
-[Part 2: The Bootcamp Admissions Process](/blog/2016-10-17-the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/)
+[Part 2: The Bootcamp Admissions Process](/writing/2016-10-17-the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/)

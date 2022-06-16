@@ -5,7 +5,7 @@ date: "2016-11-28"
 excerpt: "We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: here and here, this time with the goal of making it persistent – that is, making the user's trip data more permanent by saving it to and retrieving it from a database."
 ---
 
-We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: [here](/blog/2016-11-22-scriptcraft-hackathon-jquery-and-es6/) and [here](/blog/2016-11-22-more-jquery-websockets-and-react/), this time with the goal of making it persistent – that is, making the user's trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.
+We spent the day continuing to work with JQuery and AJAX on our Trip Planner app (previous posts: [here](/writing/2016-11-22-scriptcraft-hackathon-jquery-and-es6/) and [here](/writing/2016-11-22-more-jquery-websockets-and-react/), this time with the goal of making it persistent – that is, making the user's trip data more permanent by saving it to and retrieving it from a database, rather than an object that clears itself every time the page is refreshed or the server is reset.
 
 First, we reconfigured a `get` route so that it would serve up all of our attraction information.
 
@@ -44,7 +44,7 @@ You can only stay at one hotel per day, but the same hotel on multiple days, so 
 
 We then mounted a `/api/days` route to our app, which would route things like creating a new day, deleting a day, adding attractions, and removing attractions.
 
-We got to use our [new-found eager loading skills](/blog/2016-11-14-building-a-wikipedia-clone/) to get all of the activities for all of the days:
+We got to use our [new-found eager loading skills](/writing/2016-11-14-building-a-wikipedia-clone/) to get all of the activities for all of the days:
 
 ```
 router.get('/', (req, res, next) => {

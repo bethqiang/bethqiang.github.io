@@ -40,6 +40,6 @@ I knew it wasn’t going to be easy. I knew I would still have to put in long ho
 
 Read the other blog posts in this series:
 
-[Part 2: The Bootcamp Admissions Process](/blog/2016-10-17-the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/)
+[Part 2: The Bootcamp Admissions Process](/writing/2016-10-17-the-journey-to-fullstack-part-2-the-bootcamp-admissions-process/)
 
-[Part 3: The Final Decision](/blog/2016-10-21-the-journey-to-fullstack-part-3-the-final-decision/)
+[Part 3: The Final Decision](/writing/2016-10-21-the-journey-to-fullstack-part-3-the-final-decision/)

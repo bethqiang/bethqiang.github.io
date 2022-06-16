@@ -9,7 +9,7 @@ I'm alive, I promise. Mostly. I'm just running on very little sleep. Also, can w
 
 So, let's talk about everything I've been doing since the last time I wrote about something that wasn't me accidentally deleting my master branch of my blog. Over winter break, I:
 
-* Re-did, in its entirety, [Game of Life](https://github.com/bethqiang/game-of-life) using React and Redux. ([Here's](/blog/2016-12-22-game-of-life-with-react-and-redux/) the post I wrote about the first half of it.)
+* Re-did, in its entirety, [Game of Life](https://github.com/bethqiang/game-of-life) using React and Redux. ([Here's](/writing/2016-12-22-game-of-life-with-react-and-redux/) the post I wrote about the first half of it.)
 * Created [a baby WebVR + three.js app](https://github.com/bethqiang/vr-winter-wonderland). It's a snow scene with falling snow, like five trees, and a stationary penguin that I attempted to animate but would do weird things when I did. Weird penguin aside, it's pretty rad. Also a cool and slightly surreal experience to view it in VR!
 * Watched Guardians of the Galaxy for the first time and it was absolutely amazing.
 * Re-did our [Junior Phase workshop on authentication & OAuth](https://github.com/bethqiang/authentication-data-flow). I felt like I definitely didn't understand a lot of it the first time around, and going back a second time at least made me feel slightly better about it.

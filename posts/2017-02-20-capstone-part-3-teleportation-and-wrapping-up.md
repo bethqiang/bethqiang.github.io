@@ -33,7 +33,7 @@ One of my teammates added a really cool feature — the Gap! It's another room t
 
 We then spent our last week prepping for our final presentation of this project on Demo Day. This was broadcast to a ton of people via Facebook Live, including some of my friends who were watching from around the country!
 
-Here's our presentation, featuring all of the goodies I've talked about over the [past](/blog/2017-01-30-react-redux-race-conditions-webrtc/) [three](/blog/2017-02-13-capstone-part-2-logging-in-the-chair-link-traversal/) posts.
+Here's our presentation, featuring all of the goodies I've talked about over the [past](/writing/2017-01-30-react-redux-race-conditions-webrtc/) [three](/writing/2017-02-13-capstone-part-2-logging-in-the-chair-link-traversal/) posts.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/I5ND_1PI77c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

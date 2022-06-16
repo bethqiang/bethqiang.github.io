@@ -31,7 +31,7 @@ Until I attempted to deploy this to my GitHub User Page. That went a little some
 
 [Insert furious Googling here.]
 
-*Oh look, [this guy](https://hjdskes.github.io/blog/deploying-hugo-on-personal-gh-pages/) created separate branches, and is just serving the `public` folder on the `master` branch! I can do that.*
+*Oh look, [this guy](https://hjdskes.github.io/writing/deploying-hugo-on-personal-gh-pages/) created separate branches, and is just serving the `public` folder on the `master` branch! I can do that.*
 
 I made sure to make at least four copies of everything I had, just in case something went terribly wrong. Then, I started taking trips down various git rabbit holes — first, not having the correct access rights, then subtrees and submodules, and then updates being rejected for various reasons. I learned the hard way what `git push origin 'git subtree split --prefix public master':master --force` does. (Spoiler alert: it deletes your `master` branch.)
 

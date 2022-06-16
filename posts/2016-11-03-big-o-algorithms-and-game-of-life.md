@@ -5,7 +5,7 @@ date: "2016-11-03"
 excerpt: "Today, we went over our selector/DOM traversal exercise from yesterday, and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once."
 ---
 
-Today, we went over our [selector/DOM traversal exercise from yesterday](/blog/2016-11-02-binary-search-trees-and-creating-a-javascript-library/), and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:
+Today, we went over our [selector/DOM traversal exercise from yesterday](/writing/2016-11-02-binary-search-trees-and-creating-a-javascript-library/), and our instructors showed us some ES6 syntax. I thought the coolest one was array destructuring, which allows you to assign multiple variables to multiple array elements at once. For example, instead of doing this:
 
 ```
 arrayOfVals = [1, 2, 3];

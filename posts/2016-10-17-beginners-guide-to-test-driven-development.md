@@ -137,6 +137,6 @@ If you’re looking for more resources, here are some that I’ve found to be he
 
 [The Newbie’s Guide to Test Driven Development](https://code.tutsplus.com/tutorials/the-newbies-guide-to-test-driven-development--net-13835)
 
-[Kata — The Only Way to Learn TDD](http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/)
+[Kata — The Only Way to Learn TDD](http://www.peterprovost.org/writing/2012/05/02/kata-the-only-way-to-learn-tdd/)
 
 [One Weird Trick that Will Change the Way You Code Forever: JavaScript TDD](http://jrsinclair.com/articles/2016/one-weird-trick-that-will-change-the-way-you-code-forever-javascript-tdd/) (Clickbait-y title aside, it’s a great resource and has links to many others!)

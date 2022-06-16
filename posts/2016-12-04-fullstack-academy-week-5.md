@@ -5,7 +5,7 @@ date: "2016-12-04"
 excerpt: "It's been a slightly crazy week. I missed two days of class to attend Node.js Interactive North America, which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day."
 ---
 
-It's been a slightly crazy week. I missed two days of class to attend [Node.js Interactive North America](/blog/2016-11-30-nodejs-interactive-north-america-2016/), which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.
+It's been a slightly crazy week. I missed two days of class to attend [Node.js Interactive North America](/writing/2016-11-30-nodejs-interactive-north-america-2016/), which was enormously fun and educational but also meant that I had two days of class to catch up on, in addition to staying on top of what we were learning every day.
 
 I've spent most of this weekend doing some preliminary review for our upcoming Junior Phase checkpoint. (Basically, our "final" exam. It determines whether or not we get to move on to Senior Phase. You know, just a wee thing.) This has reinforced to me two things:
 
@@ -19,7 +19,7 @@ During Node.js Interactive, I learned about bots and image APIs that can pinpoin
 
 (Speaking of which, one of those podcasts led me to [this talk](https://youtu.be/txxKx_I39a8) by Jamison Dance from React.js Conf earlier this year about some of the flaws in JavaScript that React sort-of addresses and that Elm *actually* addresses. It's amazing and hilarious and insightful and one of my favorite talks I've discovered so far.)
 
-I'm honestly a little surprised by how much I'm enjoying React. I don't know if I should have been that surprised, considering I've been looking forward to learning it ever since sort-of-but-not-really learning it at the [Austin Diversity Hackathon](/blog/2016-10-24-first-hackathon-react-git-and-working-with-developers/), and I've had an inexplicable propensity towards functional programming. I've been having a lot of fun with it, and I can't wait to build a personal project or two over the break with it!
+I'm honestly a little surprised by how much I'm enjoying React. I don't know if I should have been that surprised, considering I've been looking forward to learning it ever since sort-of-but-not-really learning it at the [Austin Diversity Hackathon](/writing/2016-10-24-first-hackathon-react-git-and-working-with-developers/), and I've had an inexplicable propensity towards functional programming. I've been having a lot of fun with it, and I can't wait to build a personal project or two over the break with it!
 
 ## "So, what do you want to be when you grow up?"
 

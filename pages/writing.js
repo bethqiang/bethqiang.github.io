@@ -12,11 +12,11 @@ export default function Blog({ allPosts }) {
       <main className="mainContent">
         { allPosts.map((post) => (
           <div key={post.slug} className={styles.postContainer}>
-            <a href={`/blog/${post.slug}`}>{post.title}</a>
+            <a href={`/writing/${post.slug}`}>{post.title}</a>
             <h3>{post.subtitle}</h3>
             <h4>{convertDate(post.date)}</h4>
             <p>{post.excerpt}</p>
-            <a href={`/blog/${post.slug}`} className={styles.continueReadingBtn}>continue reading</a>
+            <a href={`/writing/${post.slug}`} className={styles.continueReadingBtn}>continue reading</a>
           </div>
         ))}
       </main>
@@ -43,5 +43,6 @@ Blog.propTypes = {
     excerpt: PropTypes.string,
     slug: PropTypes.string,
     title: PropTypes.string,
+    subtitle: PropTypes.string,
   })).isRequired,
 };

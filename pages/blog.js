@@ -38,5 +38,10 @@ export async function getStaticProps() {
 }
 
 Blog.propTypes = {
-  allPosts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allPosts: PropTypes.arrayOf(PropTypes.exact({
+    date: PropTypes.string,
+    excerpt: PropTypes.string,
+    slug: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
 };

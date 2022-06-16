@@ -14,6 +14,7 @@ export default function Post({ post }) {
         <div className={styles.postContainer}>
           <h1>{post.title}</h1>
           <h4>{convertDate(post.date)}</h4>
+          {/* eslint-disable-next-line react/no-danger */}
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </main>

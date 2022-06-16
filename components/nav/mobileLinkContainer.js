@@ -38,7 +38,10 @@ export default function MobileLinkContainer({ links, navOpen, className }) {
 }
 
 MobileLinkContainer.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.object).isRequired,
+  links: PropTypes.arrayOf(PropTypes.exact({
+    label: PropTypes.string,
+    href: PropTypes.string,
+  })).isRequired,
   navOpen: PropTypes.bool,
   className: PropTypes.string.isRequired,
 };

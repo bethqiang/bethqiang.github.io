@@ -19,6 +19,9 @@ export default function DesktopLinkContainer({ links, className }) {
 }
 
 DesktopLinkContainer.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.object).isRequired,
+  links: PropTypes.arrayOf(PropTypes.exact({
+    label: PropTypes.string,
+    href: PropTypes.string,
+  })).isRequired,
   className: PropTypes.string.isRequired,
 };

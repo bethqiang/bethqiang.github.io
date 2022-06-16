@@ -69,8 +69,8 @@ export default function Home() {
           </p>
           <ul>
             <li>from an underrepresented and/or marginalized group and</li>
-            <li>an early-career engineer or a recent bootcamp grad and</li>
-            <li>looking for mentorship, advice, project/resume/interview help</li>
+            <li>have a non-traditional background and</li>
+            <li>looking for advice, project/resume/interview help, or mentorship</li>
           </ul>
           <p>
             Send me a message and let&apos;s chat!

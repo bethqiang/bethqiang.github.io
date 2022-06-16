@@ -4,9 +4,9 @@ import { getAllPosts } from '../lib/api';
 import { convertDate } from '../lib/utils';
 import Layout from '../components/layout';
 
-import styles from '../styles/pages/blog.module.scss';
+import styles from '../styles/pages/writing.module.scss';
 
-export default function Blog({ allPosts }) {
+export default function Writing({ allPosts }) {
   return (
     <Layout>
       <main className="mainContent">
@@ -37,7 +37,7 @@ export async function getStaticProps() {
   };
 }
 
-Blog.propTypes = {
+Writing.propTypes = {
   allPosts: PropTypes.arrayOf(PropTypes.exact({
     date: PropTypes.string,
     excerpt: PropTypes.string,

@@ -37,6 +37,12 @@ export default function Work() {
   return (
     <Layout>
       <main className={`mainContent ${styles.workContainer}`}>
+        <p>Note: this page is a bit out of date. I&apos;m hoping to update this soon!</p>
+        {/* todo: add link to resume!! */}
+        <p>
+          In the meantime, feel free to take a look at the most recent version of my resume here
+          and the projects I worked on while at NextGen America below.
+        </p>
         { projects.map((project) => (
           <div className={styles.projectContainer}>
             <div className={styles.imgContainer}>

@@ -21,10 +21,15 @@ export default function Home() {
         />
         <div className={styles.aboutTextContainer}>
           <p>
-            Hi, I’m Beth!
+            Hi, I&apos;m Beth!
           </p>
           <p>
-            {'Currently based in Durham, NC, via Austin, Houston, and Cleveland. Alumna of '}
+            Senior Software Engineer and Tech/Team Lead by day.
+            Lean front end and
+            have an affinity for creating beautiful and functional user experiences.
+          </p>
+          <p>
+            {'Based in the Denver metro area. Alumna of '}
             <a
               href="https://www.rice.edu/"
               target="_blank"
@@ -51,27 +56,23 @@ export default function Home() {
             .
           </p>
           <p>
-            Software engineer dabbling in design by day.
-          </p>
-          <p>
-            Powerlifter, rock climber, outdoor enthusiast, dog mom,
-            and shelter animal advocate otherwise.
-          </p>
-          <p>
-            Intrigued by nature, photography, art, and making and eating good food.
+            Rock climber, hiker, skier, general outdoor enthusiast,
+            dog mom, shelter animal advocate in my free time.
           </p>
           <p>
             Seeking to make the world a more inclusive, accessible,
             representative, empowering, and compassionate place.
           </p>
           <p>
-            <strong>I&apos;m open to mentorships! </strong>
+            I really love and care deeply about helping folks get into and stay in tech.
             If you&apos;re:
-            <ul>
-              <li>from an underrepresented and/or marginalized group and</li>
-              <li>a junior engineer or a recent bootcamp grad and</li>
-              <li>looking for mentorship, advice, project/resume/interview help</li>
-            </ul>
+          </p>
+          <ul>
+            <li>from an underrepresented and/or marginalized group and</li>
+            <li>an early-career engineer or a recent bootcamp grad and</li>
+            <li>looking for mentorship, advice, project/resume/interview help</li>
+          </ul>
+          <p>
             Send me a message and let&apos;s chat!
           </p>
         </div>

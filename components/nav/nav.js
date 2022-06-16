@@ -18,10 +18,6 @@ const links = [
     label: 'blog',
     href: '/blog',
   },
-  {
-    label: 'photography',
-    href: '/photography',
-  },
 ];
 
 const variants = {

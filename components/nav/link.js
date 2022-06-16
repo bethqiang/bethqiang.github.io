@@ -20,7 +20,9 @@ export default function CustomLink({ href, children }) {
   const router = useRouter();
 
   let classes = styles.navLink;
-  if (router.pathname === href) {
+  // this vaguely wonky thing is needed to make the writing nav item
+  // still have the active class when the user is on an individual post
+  if (`/${router.pathname.split('/')[1]}` === href) {
     classes = `${classes} ${styles.linkActive}`;
   }
 

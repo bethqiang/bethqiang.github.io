@@ -1,0 +1,28 @@
+@import '../variables';
+
+.talkContainer {
+  &:not(:last-child) {
+    @include gradient-underline;
+    padding-bottom: 50px;
+  }
+  margin-bottom: 50px;
+  h2 {
+    font-family: vesterbro-poster, serif;
+    color: $blue;
+    font-size: 30px;
+    margin-block-end: 15px;
+    @include md {
+      font-size: 36px;
+    }
+  }
+  .subheading {
+    font-weight: bold;
+  }
+  .link {
+    font-family: proxima-nova, sans-serif;
+    color: $blue;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+  }
+}

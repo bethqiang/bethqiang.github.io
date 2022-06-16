@@ -18,6 +18,10 @@ const links = [
     label: 'writing',
     href: '/writing',
   },
+  {
+    label: 'speaking',
+    href: '/speaking',
+  },
 ];
 
 const variants = {

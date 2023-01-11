@@ -10,6 +10,7 @@ const talks = [{
   linkToSlides: 'https://docs.google.com/presentation/d/1qr0JXF78UbXPmp0thK2uqgxRwU0kXzE0zykAPC0rQsE/edit?usp=sharing',
   linkToDemoApp: 'https://vueconf-2022-demo-app.vercel.app/',
   linkToCode: 'https://github.com/bethqiang/vueconf-2022-demo-app',
+  linkToRecording: 'https://www.vuemastery.com/conferences/vueconf-us-2022/unit-testing-vue-apps-tips-tricks-and-best-practices',
 }, {
   title: 'How a Developer Can Break Your UI Component Library\'s Accessibility, and What to Do About It',
   date: 'March 2022',

@@ -41,7 +41,7 @@ export default function Work() {
         <p>
           In the meantime, feel free to take a look at&nbsp;
           <a
-            href="https://bethqiang-public.s3.us-west-2.amazonaws.com/Resume+-+June+2022+-+public.pdf"
+            href="https://bethqiang-public.s3.us-west-2.amazonaws.com/Resume+-+March+2023+-+public.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >

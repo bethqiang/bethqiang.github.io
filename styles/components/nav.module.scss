@@ -13,12 +13,11 @@
 }
 
 .nameHeading{
-  font-family: vesterbro-poster, serif;
+  font-family: 'Abril Fatface', serif;
   font-size: 40px;
   color: $blue;
-  letter-spacing: -1.5px;
   @include sm {
-    font-size: 48px;
+    font-size: 56px;
   }
 }
 

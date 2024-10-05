@@ -37,18 +37,8 @@ export default function Work() {
   return (
     <Layout>
       <main className={`mainContent ${styles.workContainer}`}>
-        <p>Note: this page is a bit out of date. I&apos;m hoping to update this soon!</p>
-        <p>
-          In the meantime, feel free to take a look at&nbsp;
-          <a
-            href="https://bethqiang-public.s3.us-west-2.amazonaws.com/Resume+-+March+2023+-+public.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            the most recent version of my resume
-          </a>
-          &nbsp;and the projects I worked on while at NextGen America below.
-        </p>
+        <p>This page is out of date, but serves as a historical record of my work at NextGen America.</p>
+        <p>Please reach out if you&apos;re looking for an updated version of my resume.</p>
         { projects.map((project) => (
           <div className={styles.projectContainer}>
             <div className={styles.imgContainer}>

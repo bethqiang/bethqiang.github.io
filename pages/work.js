@@ -37,7 +37,7 @@ export default function Work() {
   return (
     <Layout>
       <main className={`mainContent ${styles.workContainer}`}>
-        <p>This page is out of date, but serves as a historical record of my work at NextGen America.</p>
+        <p>This page is out of date, but is a historical record of my work at NextGen America.</p>
         <p>Please reach out if you&apos;re looking for an updated version of my resume.</p>
         { projects.map((project) => (
           <div className={styles.projectContainer}>
